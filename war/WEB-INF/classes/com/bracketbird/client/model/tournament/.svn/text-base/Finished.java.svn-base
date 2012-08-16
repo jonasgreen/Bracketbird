@@ -1,0 +1,12 @@
+package com.moveit.client.model.tournament;
+
+/**
+ *
+ */
+public class Finished extends TournamentState{
+    private static final long serialVersionUID = 6653089429626326914L;
+
+    public Finished() {
+        super("finished");
+    }
+}

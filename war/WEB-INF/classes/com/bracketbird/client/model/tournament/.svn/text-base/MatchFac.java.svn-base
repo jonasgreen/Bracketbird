@@ -1,0 +1,23 @@
+package com.moveit.client.model.tournament;
+
+import com.moveit.client.SystemException;
+import com.moveit.client.constants.FindingRankingConstant;
+import com.moveit.client.constants.TournamentLevelConstant;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ *
+ */
+public class MatchFac {
+
+    public static Match create(TournamentLevel level, long round, int order){
+        Match m = new Match();
+        m.setLevel(level);
+        m.setRound(round);
+        m.setOrder(order);
+        return m;
+
+    }
+}

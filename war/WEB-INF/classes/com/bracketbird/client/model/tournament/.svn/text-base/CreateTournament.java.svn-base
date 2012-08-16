@@ -1,0 +1,66 @@
+package com.moveit.client.model.tournament;
+
+import com.moveit.client.model.Creater;
+import com.moveit.client.model.keys.ClubId;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ *
+ */
+public class CreateTournament extends Creater {
+
+    private static final long serialVersionUID = 2658776839782397621L;
+
+    private ClubId clubId;
+    private Boolean template;
+    private String nameOfTournament;
+
+    private List<TournamentLevel> tournamentLevels = new ArrayList<TournamentLevel>();
+
+
+    public CreateTournament() {
+    }
+
+    public ClubId getClubId() {
+        return clubId;
+    }
+
+    public void setClubId(ClubId clubId) {
+        this.clubId = clubId;
+    }
+
+    public Boolean getTemplate() {
+        return template;
+    }
+
+    public void setTemplate(Boolean template) {
+        this.template = template;
+    }
+
+    public List<TournamentLevel> getSubtournaments() {
+        return tournamentLevels;
+    }
+
+    public void setSubtournaments(List<TournamentLevel> tournamentLevels) {
+        this.tournamentLevels = tournamentLevels;
+    }
+
+    public String getNameOfTournament() {
+        return nameOfTournament;
+    }
+
+    public void setNameOfTournament(String nameOfTournament) {
+        this.nameOfTournament = nameOfTournament;
+    }
+
+    @Override
+    public String toString() {
+        return "CreateTournament{" +
+                "clubId=" + clubId +
+                ", template=" + template +
+                ", subtournaments=" + tournamentLevels +
+                '}';
+    }
+}

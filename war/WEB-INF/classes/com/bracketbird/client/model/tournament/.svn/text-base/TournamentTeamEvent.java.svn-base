@@ -1,0 +1,33 @@
+package com.moveit.client.model.tournament;
+
+import com.moveit.client.model.PlayingTeam;
+
+
+/**
+ *
+ */
+public class TournamentTeamEvent extends TournamentEvent {
+
+    public static enum Action {
+        create,
+        delete,
+        update
+    }
+
+    private PlayingTeam team;
+    private Action action;
+
+    public TournamentTeamEvent(boolean fromClient, PlayingTeam pt, Action a) {
+        super(fromClient);
+        this.team = pt;
+        this.action = a;
+    }
+
+    public PlayingTeam getTeam() {
+        return team;
+    }
+
+    public Action getAction() {
+        return action;
+    }
+}

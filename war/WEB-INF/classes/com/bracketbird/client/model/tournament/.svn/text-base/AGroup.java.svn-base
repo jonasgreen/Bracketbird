@@ -1,0 +1,65 @@
+package com.moveit.client.model.tournament;
+
+import com.moveit.client.model.PlayingTeam;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ *
+ */
+public class AGroup implements Serializable{
+    private static final long serialVersionUID = -7946599332097281558L;
+
+    private String name;
+    private List<PlayingTeam> teams = new ArrayList<PlayingTeam>();
+    private List<Round> rounds = new ArrayList<Round>();
+
+    public AGroup(String name) {
+        super();
+        this.name = name;
+    }
+
+    public void add(PlayingTeam pt){
+        teams.add(pt);
+    }
+
+    public List<PlayingTeam> getTeams() {
+        return teams;
+    }
+
+    public List<Round> getRounds() {
+        return rounds;
+    }
+
+    public void setRounds(List<Round> rounds) {
+        this.rounds = rounds;
+    }
+
+    @Override
+    public String toString() {
+        return "AGroup{" +
+                "teamsSize=" + teams.size() +
+                '}';
+    }
+
+    public List<Match> getMatches() {
+        List<Match> list = new ArrayList<Match>();
+        for (Round round : rounds) {
+            list.addAll(round.getMatches());
+        }
+        return list;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
+}
+

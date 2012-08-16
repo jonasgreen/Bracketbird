@@ -1,0 +1,25 @@
+package com.moveit.client.model.tournament;
+
+
+/**
+ *
+ */
+public class LevelStateEvent extends TournamentEvent {
+
+    private TournamentLevelState oldState;
+    private TournamentLevelState newState;
+
+    public LevelStateEvent(TournamentLevelState oldState, TournamentLevelState newState, boolean fromClient) {
+        super(fromClient);
+        this.oldState = oldState;
+        this.newState = newState;
+    }
+
+    public TournamentLevelState getOldState() {
+        return oldState;
+    }
+
+    public TournamentLevelState getNewState() {
+        return newState;
+    }
+}

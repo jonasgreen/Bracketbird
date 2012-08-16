@@ -1,0 +1,401 @@
+package com.moveit.client.model.tournament;
+
+import com.moveit.client.model.Model;
+import com.moveit.client.model.PlayingTeam;
+import com.moveit.client.model.PlayingTeamVO;
+import com.moveit.client.model.keys.ClubId;
+import com.moveit.client.model.keys.MemberId;
+import com.moveit.client.model.keys.TournamentId;
+import com.moveit.client.service.rtc.RTCEvent;
+import com.moveit.client.util.CollectionUtil;
+import com.moveit.client.util.StringUtil;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+/**
+ *
+ */
+public class Tournament extends Model<TournamentId> {
+    private static final long serialVersionUID = 5951730875833184507L;
+
+    private transient List<TournamentListener<TournamentStateChangedEvent>> stateListener = new ArrayList<TournamentListener<TournamentStateChangedEvent>>();
+    private transient List<TournamentListener<TournamentNameChangedEvent>> nameListener = new ArrayList<TournamentListener<TournamentNameChangedEvent>>();
+    private transient List<TournamentListener<TournamentLevelEvent>> levelListener = new ArrayList<TournamentListener<TournamentLevelEvent>>();
+    private transient List<TournamentListener<TournamentTeamEvent>> teamListener = new ArrayList<TournamentListener<TournamentTeamEvent>>();
+
+    private transient TournamentState state = new NotReady();
+
+    private ClubId clubId;
+    private String name;
+
+    private List<TournamentLevel> levels = new ArrayList<TournamentLevel>();
+    private List<PlayingTeam> playingTeams = new ArrayList<PlayingTeam>();
+
+    private Date createdDate;
+
+    private Date lastChangeDate;
+    private RTCEvent lastEvent;
+
+
+    public Tournament() {
+    }
+
+
+    public ClubId getClubId() {
+        return clubId;
+    }
+
+    public void setClubId(ClubId clubId) {
+        this.clubId = clubId;
+    }
+
+    public List<TournamentLevel> getLevels() {
+        return levels;
+    }
+
+    public void setLevels(List<TournamentLevel> tournamentLevels) {
+        this.levels = tournamentLevels;
+    }
+
+    public TournamentState getState() {
+        return state;
+    }
+
+    public void setState(TournamentState state) {
+        this.state = state;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public Date getLastChangeDate() {
+        return lastChangeDate;
+    }
+
+    public void setLastChangeDate(Date lastChangeDate) {
+        this.lastChangeDate = lastChangeDate;
+    }
+
+
+    public void replace(int index, TournamentLevel st) {
+        getLevels().remove(index);
+        getLevels().add(index, st);
+
+    }
+
+    public int getIndexOf(TournamentLevel st) {
+        int index = 0;
+        for (TournamentLevel stTemp : levels) {
+            if (stTemp.equals(st)) {
+                return index;
+            }
+            index++;
+        }
+        return -1;
+    }
+
+    public List<PlayingTeam> getPlayingTeams() {
+        return playingTeams;
+    }
+
+    public void setPlayingTeams(List<PlayingTeam> playingTeams) {
+        this.playingTeams = playingTeams;
+    }
+
+    public RTCEvent getLastEvent() {
+        return lastEvent;
+    }
+
+    public void setLastEvent(RTCEvent lastEvent) {
+        this.lastEvent = lastEvent;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void updateName(String name, boolean fromClient){
+        this.name = name;
+        fireNameChanged(new TournamentNameChangedEvent(name, fromClient));
+
+    }
+
+
+    public boolean isSettingUp() {
+        return state instanceof NotReady || state instanceof Ready;
+    }
+
+
+    public boolean hasTeams() {
+        List<PlayingTeam> playingTeams = getPlayingTeams();
+        if (playingTeams == null || playingTeams.size() == 0 || playingTeams.size() == 1) {
+            return false;
+        }
+        int countNonEmpty = 0;
+        for (PlayingTeam team : playingTeams) {
+            if (countNonEmpty > 1) {
+                return true;
+            }
+            if (!team.isEmpty()) {
+                countNonEmpty++;
+            }
+        }
+        return countNonEmpty > 1;
+    }
+
+    public boolean hasLevels() {
+        List<TournamentLevel> list = getLevels();
+        return list != null && !list.isEmpty();
+    }
+
+    public void updateState(boolean fromClient) {
+        TournamentState newState = calculateState();
+        if (newState.equals(state)) {
+            return;
+        }
+        TournamentStateChangedEvent event = new TournamentStateChangedEvent(state, newState, fromClient);
+        state = newState;
+        fireStateChanged(event);
+    }
+
+    private TournamentState calculateState() {
+        if (hasLevels()) {
+            if (!hasTeams()) {
+                return new NotReady(false, true);
+            }
+            int countEmpty = 0;
+            int countFinish = 0;
+            for (TournamentLevel l : levels) {
+                if (l.isFinish()) {
+                    countFinish++;
+                }
+                else if (l.isEmpty()) {
+                    countEmpty++;
+                }
+            }
+            if (countFinish == levels.size()) {//all levels are finished
+                return new Finished();
+            }
+            else if (countEmpty == levels.size()) {//all levels are empty
+                return new Ready();
+            }
+            else {
+                return new InProgress();
+            }
+        }
+        else {
+            return new NotReady(hasTeams(), false);
+        }
+    }
+
+
+    public boolean isFinish() {
+        return state instanceof Finished;
+    }
+
+    public boolean isNotReady() {
+        return state instanceof NotReady;
+    }
+
+    public boolean isReady() {
+        return state instanceof Ready;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Tournament{" +
+                "\n  subtournaments=" + StringUtil.toString(levels) +
+                "  Teams=" + StringUtil.toString(playingTeams) +
+                "}\n";
+    }
+
+    public void addTeam(PlayingTeam pt, boolean fromClient) {
+        playingTeams.add(pt);
+        fireTeamsChanged(new TournamentTeamEvent(fromClient, pt, TournamentTeamEvent.Action.create));
+        clearAllLevels(fromClient);
+        updateState(fromClient);
+    }
+
+
+    public void deleteTeam(PlayingTeam pt, boolean fromClient) {
+        CollectionUtil.remove(playingTeams, pt);
+        clearAllLevels(fromClient);
+        fireTeamsChanged(new TournamentTeamEvent(fromClient, pt, TournamentTeamEvent.Action.delete));
+        updateState(fromClient);
+
+    }
+
+    private void clearAllLevels(boolean fromClient) {
+        for (TournamentLevel l : levels) {
+            l.clear(false, fromClient);
+        }
+    }
+
+
+    public boolean allowDeleteTeam() {
+        return true;
+    }
+
+    public void addLevel(final TournamentLevel level, boolean fromClient) {
+        levels.add(level);
+        fireLevelEvent(new TournamentLevelEvent(level, TournamentLevelEvent.LevelAction.create, fromClient));
+        updateState(fromClient);
+    }
+
+    public void deleteLevel(TournamentLevel level, boolean fromClient) {
+        levels.remove(CollectionUtil.indexOf(levels, level));
+        fireLevelEvent(new TournamentLevelEvent(level, TournamentLevelEvent.LevelAction.delete, fromClient));
+        updateState(fromClient);
+    }
+
+    public void updateLevel(TournamentLevel l, LevelSettings lu, boolean fromClient) {
+        l.updateStageSettings(lu, fromClient);
+        int index = CollectionUtil.indexOf(levels, l) + 1;
+        while (index < levels.size()) {
+            levels.get(index).clear(false, fromClient);
+            index++;
+        }
+        updateState(fromClient);
+    }
+
+    public boolean updateLevelAllowed(TournamentLevel l){
+        return l.isEmpty();
+    }
+
+
+    public TournamentLevel getPrevious(TournamentLevel level) {
+        int index = 0;
+        int count = 0;
+        for (TournamentLevel tournamentLevel : levels) {
+            if (tournamentLevel == level) {
+                index = count;
+                break;
+            }
+            count++;
+        }
+        return index == 0 ? null : levels.get(index - 1);
+
+    }
+
+
+    public void addPlayer(PlayingTeam pt, MemberId id, boolean fromClient) {
+        pt.addMember(id);
+        clearAllLevels(fromClient);
+    }
+
+
+    public void updateTeam(PlayingTeam pt, PlayingTeamVO upt, boolean fromClient) {
+        //done this way because pt can be a team from server.
+        playingTeams.get(playingTeams.indexOf(pt)).update(upt, fromClient);
+        clearAllLevels(fromClient);
+        updateState(fromClient);
+    }
+
+    public void addPlayer(PlayingTeam pt, String nonMember, boolean fromClient) {
+        pt.addNonMember(nonMember);
+        clearAllLevels(fromClient);
+    }
+
+    //LISTENERS
+
+    public void addStateListener(TournamentListener<TournamentStateChangedEvent> l) {
+        stateListener.add(l);
+    }
+
+    public void addLevelListener(TournamentListener<TournamentLevelEvent> l) {
+        levelListener.add(l);
+    }
+
+
+    public void addNameListener(TournamentListener<TournamentNameChangedEvent> l) {
+        nameListener.add(l);
+    }
+
+
+
+    public void addTeamsListener(TournamentListener<TournamentTeamEvent> l) {
+        teamListener.add(l);
+    }
+
+
+    private void fireTeamsChanged(TournamentTeamEvent event) {
+        for (TournamentListener<TournamentTeamEvent> listener : teamListener) {
+            listener.onChange(event);
+        }
+    }
+
+
+    private void fireStateChanged(TournamentStateChangedEvent event) {
+        for (TournamentListener<TournamentStateChangedEvent> listener : stateListener) {
+            listener.onChange(event);
+        }
+    }
+
+    private void fireLevelEvent(TournamentLevelEvent event) {
+        for (TournamentListener<TournamentLevelEvent> listener : levelListener) {
+            listener.onChange(event);
+        }
+    }
+
+
+    private void fireNameChanged(TournamentNameChangedEvent event) {
+        for (TournamentListener<TournamentNameChangedEvent> listener : nameListener) {
+            listener.onChange(event);
+        }
+    }
+
+    public int getMaxNumberOfTeams(TournamentLevel tournamentLevel) {
+        int min = getPlayingTeams().size();
+        for (TournamentLevel l : levels) {
+            Integer maxTeams = l.getStageSettings().getMaxNumberOfTeams();
+            if (maxTeams != null && maxTeams < min) {
+                min = maxTeams;
+            }
+            if (l == tournamentLevel) {
+                return min;
+            }
+        }
+        return min;
+    }
+
+
+
+    void finished(TournamentLevel fLevel, boolean fromClient) {
+        int index = getIndexOf(fLevel);
+        if(isLastLevel(index)){
+            finished();
+        }
+        else{
+            TournamentLevel l = levels.get(index + 1);
+            l.updateStartingTeams(fLevel.getEndingTeams());
+            l.layoutMatches(fromClient);
+
+        }
+    }
+
+    public TournamentVO createVO(){
+        TournamentVO vo = new TournamentVO();
+        vo.setName(getName());
+        return vo;
+    }
+
+    private void finished(){
+        //TODO
+    }
+
+    private boolean isLastLevel(int index){
+        return levels.size()-1 == index;
+    }
+}

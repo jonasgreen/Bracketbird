@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to='bracketbird'>
+
+  <inherits name='com.google.gwt.user.User'/>
+  <inherits name='com.google.gwt.user.theme.standard.Standard'/>
+
+  <entry-point class='com.bracketbird.client.Bracketbird'/>
+
+  <!-- Specify the paths for translatable code                    -->
+  <source path='client'/>
+  <source path='clientcore'/>
+  <public path='client.resources'></public>
+
+
+</module>

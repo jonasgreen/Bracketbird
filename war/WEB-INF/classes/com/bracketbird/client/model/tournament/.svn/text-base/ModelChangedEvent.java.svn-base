@@ -1,0 +1,13 @@
+package com.moveit.client.model.tournament;
+
+
+/**
+ *
+ */
+public class ModelChangedEvent {
+
+    public ModelChangedEvent() {
+        super();
+    }
+
+}

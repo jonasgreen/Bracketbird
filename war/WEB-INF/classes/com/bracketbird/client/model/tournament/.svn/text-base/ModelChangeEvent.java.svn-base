@@ -1,0 +1,19 @@
+package com.moveit.client.model.tournament;
+
+import com.moveit.client.model.Model;
+
+/**
+ *
+ */
+public abstract class ModelChangeEvent<M extends Model> {
+
+    private M model;
+
+    public ModelChangeEvent(M model) {
+        this.model = model;
+    }
+
+    public M getModel() {
+        return model;
+    }
+}

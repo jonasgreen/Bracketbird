@@ -1,0 +1,145 @@
+package com.moveit.client.model.tournament;
+
+import com.moveit.client.model.Model;
+import com.moveit.client.model.PlayingTeam;
+import com.moveit.client.model.WalkOverTeam;
+import com.moveit.client.model.keys.ClubId;
+import com.moveit.client.model.keys.MatchId;
+import com.moveit.client.model.keys.PlayingTeamId;
+import com.moveit.client.model.keys.TournamentLevelId;
+import com.moveit.client.util.EqualsUtil;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+/**
+ *
+ */
+public class MatchVO implements Serializable{
+    private static final long serialVersionUID = 1062096126907375534L;
+
+    private Integer tournamentLevelIndex;
+
+    //used in group-play
+    private Integer group;
+
+    //what round does this match belong to
+    private Long round;
+
+    //the order of the match in a subtournament
+    private Integer order;
+
+    //used in knockout - to reference between mathces (who meets who).
+    private String name;
+
+    private PlayingTeamId teamHome;
+
+    private PlayingTeamId teamOut;
+
+
+    private Date createdDate;
+
+    private Date lastChangeDate;
+
+    private Result result;
+
+    private String field;
+
+
+    public MatchVO() {
+
+    }
+
+
+    public Integer getGroup() {
+        return group;
+    }
+
+    public void setGroup(Integer group) {
+        this.group = group;
+    }
+
+    public Long getRound() {
+        return round;
+    }
+
+    public void setRound(Long round) {
+        this.round = round;
+    }
+
+    public Integer getOrder() {
+        return order;
+    }
+
+    public void setOrder(Integer order) {
+        this.order = order;
+    }
+
+
+    public Date getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public Date getLastChangeDate() {
+        return lastChangeDate;
+    }
+
+    public void setLastChangeDate(Date lastChangeDate) {
+        this.lastChangeDate = lastChangeDate;
+    }
+
+    public void setResult(Result r) {
+        result = r;
+    }
+
+    public String getField() {
+        return field;
+    }
+
+    public void setField(String f) {
+        this.field = f;
+    }
+
+    public Result getResult() {
+        return result;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
+    public PlayingTeamId getTeamHome() {
+        return teamHome;
+    }
+
+    public void setTeamHome(PlayingTeamId teamHome) {
+        this.teamHome = teamHome;
+    }
+
+    public PlayingTeamId getTeamOut() {
+        return teamOut;
+    }
+
+    public void setTeamOut(PlayingTeamId teamOut) {
+        this.teamOut = teamOut;
+    }
+
+    public Integer getTournamentLevelIndex() {
+        return tournamentLevelIndex;
+    }
+
+    public void setTournamentLevelIndex(Integer tournamentLevelIndex) {
+        this.tournamentLevelIndex = tournamentLevelIndex;
+    }
+}

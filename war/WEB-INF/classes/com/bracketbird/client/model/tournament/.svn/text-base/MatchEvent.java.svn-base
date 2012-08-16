@@ -1,0 +1,24 @@
+package com.moveit.client.model.tournament;
+
+
+
+/**
+ *
+ */
+public class MatchEvent extends TournamentEvent {
+
+    public static enum MatchAction{
+        update
+    }
+
+    private Match match;
+
+    public MatchEvent(boolean fromClient, Match m) {
+        super(fromClient);
+        match = m;
+    }
+
+    public Match getMatch() {
+        return match;
+    }
+}

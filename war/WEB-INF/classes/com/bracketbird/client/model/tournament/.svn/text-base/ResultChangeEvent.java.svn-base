@@ -1,0 +1,13 @@
+package com.moveit.client.model.tournament;
+
+import com.moveit.client.model.Model;
+
+/**
+ *
+ */
+public class ResultChangeEvent<M extends Model> extends ModelChangeEvent {
+    
+    public ResultChangeEvent(M model) {
+        super(model);
+    }
+}

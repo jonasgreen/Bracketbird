@@ -1,0 +1,3 @@
+# Module bracketbird
+# RPC service class, partial path of RPC policy file
+com.bracketbird.client.GreetingService, C04ECDF2921821D830B51239443ABE84.gwt.rpc
