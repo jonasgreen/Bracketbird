@@ -2,6 +2,7 @@ package com.bracketbird.client.gui.rtc.ranking;
 
 
 import com.bracketbird.client.gui.rtc.RTCLayoutFac2;
+import com.bracketbird.client.gui.rtc.RunningTournamentPageController;
 import com.bracketbird.client.model.tournament.*;
 import com.bracketbird.clientcore.gui.*;
 import com.bracketbird.clientcore.style.TextLayout;
@@ -9,6 +10,8 @@ import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.logical.shared.ResizeEvent;
 import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.CustomScrollPanel;
+import com.google.gwt.user.client.ui.VerticalScrollbar;
 
 import java.util.List;
 
@@ -73,17 +76,25 @@ public class GroupRankingPanel extends FlowComponent implements RankingPanel {
             }
         });
         initialSetup();
-        updateSizes();
     }
 
-    private void updateSizes() {
+    public void updateSizes() {
         int totalWidth = Window.getClientWidth();
+        CustomScrollPanel scrollPanel = RunningTournamentPageController.getInstance().getPage().getScrollPanel().getScrollPanel();
+        VerticalScrollbar verticalScrollbar = scrollPanel.getVerticalScrollbar();
+        int scrollH = verticalScrollbar.getScrollHeight();
+        int sch = scrollPanel.getElement().getClientHeight();
+        int schOff = scrollPanel.getElement().getOffsetHeight();
+        int clientHeight = Window.getClientHeight();
+        final int totalHeight = (scrollH > clientHeight ? scrollH : clientHeight) - 75;
         if (totalWidth < 600) {
             contentLeft.setWidth(400 + "px");
         }
         else {
             contentLeft.setWidth((totalWidth - widthContentRight) + "px");
         }
+        contentRight.setHeight(totalHeight + "px");
+
     }
 
     private void bindMathces() {
@@ -143,7 +154,9 @@ public class GroupRankingPanel extends FlowComponent implements RankingPanel {
     }
 
 
-    public void relayout() {
 
+
+    public void relayout() {
+        updateSizes();
     }
 }

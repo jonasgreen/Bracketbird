@@ -1,21 +1,21 @@
 package com.bracketbird.clientcore.gui;
 
-import com.google.gwt.user.client.ui.ScrollPanel;
+import com.google.gwt.user.client.ui.CustomScrollPanel;
 
 /**
  *
  */
 public class ScrollPanelComponent extends GuiComponent{
-    private ScrollPanel scrollPanel;
+    private CustomScrollPanel scrollPanel;
 
     public ScrollPanelComponent(GuiComponent gc) {
         super();
-        this.scrollPanel = new ScrollPanel(gc);
+        this.scrollPanel = new CustomScrollPanel(gc);
         initWidget(scrollPanel);
     }
 
 
-    public ScrollPanel getScrollPanel() {
+    public CustomScrollPanel getScrollPanel() {
         return scrollPanel;
     }
 }
