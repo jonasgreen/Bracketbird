@@ -2,13 +2,15 @@ package com.bracketbird.client.gui.rtc.ranking;
 
 
 import com.bracketbird.client.gui.rtc.RTCLayoutFac2;
-import com.bracketbird.client.gui.rtc.ViewMatch;
 import com.bracketbird.client.model.tournament.*;
 import com.bracketbird.clientcore.gui.*;
-import com.bracketbird.clientcore.style.*;
+import com.bracketbird.clientcore.style.TextLayout;
 import com.google.gwt.dom.client.Style;
+import com.google.gwt.event.logical.shared.ResizeEvent;
+import com.google.gwt.event.logical.shared.ResizeHandler;
+import com.google.gwt.user.client.Window;
 
-import java.util.*;
+import java.util.List;
 
 /**
  *
@@ -17,7 +19,10 @@ public class GroupRankingPanel extends FlowComponent implements RankingPanel {
 
     private TournamentLevel level;
     private SimplePanelComponent rankingHolder = new SimplePanelComponent();
+    private FlowComponent contentLeft = new FlowComponent();
+    private FlowComponent contentRight = new FlowComponent();
 
+    private static int widthContentRight = 200;
 
 
     private TournamentListener<LevelStateEvent> levelStateListner = new TournamentListener<LevelStateEvent>() {
@@ -49,8 +54,36 @@ public class GroupRankingPanel extends FlowComponent implements RankingPanel {
 
     private void init() {
         level.addStateListener(levelStateListner);
-        add(rankingHolder, new TextLayout(null, "100%"));
+        contentLeft.add(rankingHolder, new TextLayout(null, "100%"));
+        add(contentLeft);
+        add(contentRight);
+
+        contentLeft.getElement().getStyle().setFloat(Style.Float.LEFT);
+        contentRight.getElement().getStyle().setFloat(Style.Float.LEFT);
+        contentRight.setWidth("200px");
+        contentRight.setHeight("200px");
+
+        contentLeft.getElement().getStyle().setBackgroundColor("blue");
+        contentRight.getElement().getStyle().setBackgroundColor("red");
+
+        Window.addResizeHandler(new ResizeHandler() {
+            @Override
+            public void onResize(ResizeEvent event) {
+                updateSizes();
+            }
+        });
         initialSetup();
+        updateSizes();
+    }
+
+    private void updateSizes() {
+        int totalWidth = Window.getClientWidth();
+        if (totalWidth < 600) {
+            contentLeft.setWidth(400 + "px");
+        }
+        else {
+            contentLeft.setWidth((totalWidth - widthContentRight) + "px");
+        }
     }
 
     private void bindMathces() {
@@ -78,7 +111,7 @@ public class GroupRankingPanel extends FlowComponent implements RankingPanel {
 
 
     public void layoutRanking() {
-            layoutGroupRanking();
+        layoutGroupRanking();
     }
 
 
@@ -95,7 +128,7 @@ public class GroupRankingPanel extends FlowComponent implements RankingPanel {
 
         content.add(new HtmlComponent(sb.toString()), new TextLayout(20, 0, 0, 0));
 
-       /* FlowComponent right = new FlowComponent();
+        /* FlowComponent right = new FlowComponent();
 
         for (Round round : level.getRounds()) {
             for (Match match : round.getMatches()) {
@@ -108,7 +141,6 @@ public class GroupRankingPanel extends FlowComponent implements RankingPanel {
         */
         rankingHolder.add(content, new TextLayout(null, "100%"));
     }
-
 
 
     public void relayout() {

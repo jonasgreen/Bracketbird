@@ -1,6 +1,5 @@
 package com.bracketbird.client.gui.rtc.ranking;
 
-import com.bracketbird.client.gui.rtc.TeamScoreComp;
 import com.bracketbird.client.gui.rtc.ViewMatch;
 import com.bracketbird.client.model.tournament.*;
 import com.bracketbird.clientcore.gui.FlowComponent;
