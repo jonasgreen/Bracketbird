@@ -1,2 +1,0 @@
-serviceClass: com.bracketbird.client.GreetingService
-path: C04ECDF2921821D830B51239443ABE84.gwt.rpc
