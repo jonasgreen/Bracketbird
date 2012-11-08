@@ -11,6 +11,8 @@ import com.bracketbird.clientcore.util.MouseOver;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.logical.shared.ResizeEvent;
+import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.PopupPanel;
@@ -34,15 +36,26 @@ public class FrontPage extends Page<FrontPageController> implements TopPanelHold
         super();
         content = new FlowComponent();
         ScrollPanelComponent scrollPanelComponent = new ScrollPanelComponent(content);
-
+        scrollPanelComponent.getScrollPanel().setWidth("100%");
         initWidget(scrollPanelComponent);
+
     }
 
     public void init() {
-        content.getElement().getStyle().setProperty("marginLeft", "auto");
-        content.getElement().getStyle().setProperty("marginRight", "auto");
+        content.setWidth(Window.getClientWidth() + "px");
+        Window.addResizeHandler(new ResizeHandler() {
+            @Override
+            public void onResize(ResizeEvent event) {
+                content.setWidth(event.getWidth()+ "px");
+            }
+        });
 
-        content.add(getTopPanel(), new TextLayout(null, "100%"));
+        FlowComponent fl = new FlowComponent();
+        fl.getElement().getStyle().setProperty("margin", "0 auto");
+        fl.setWidth("900px");
+        content.add(fl);
+        fl.add(getTopPanel(), new TextLayout(null, "900px"));
+
 
 
         FlowComponent div = new FlowComponent();
@@ -51,7 +64,14 @@ public class FrontPage extends Page<FrontPageController> implements TopPanelHold
        // div.getElement().setClassName("shadowFrontPage");
 
 
-        content.add(new SloganPage(), new TextLayout(null, "100%").paddingLeft(20));
+        FlowComponent fl2 = new FlowComponent();
+        fl2.setStyleName("sloganPage");
+        SloganPage sloganPage = new SloganPage();
+        sloganPage.getElement().getStyle().setProperty("margin", "0 auto");
+        sloganPage.setWidth("900px");
+        fl2.add(sloganPage);
+        content.add(fl2);
+
     }
 
 
