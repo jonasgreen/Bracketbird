@@ -20,6 +20,7 @@ public class SloganPage extends VerticalComponent {
     }
 
     private void init() {
+        setStyleName("sloganPage");
         add(getSlogans(), new TextLayout("100%", null));
     }
 

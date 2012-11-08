@@ -32,6 +32,18 @@ public class FrontPageController extends PageController<FrontPage> {
 
 
     public void afterLoad() {
+        RandomCanvas w = new RandomCanvas(250, 250);
+        getPage().getContent().add(w);
+        w.load();
+
+        w = new RandomCanvas(250, 250);
+        getPage().getContent().add(w);
+        w.load();
+
+        w = new RandomCanvas(250, 250);
+        getPage().getContent().add(w);
+        w.load();
+
     }
 
     public void unload() {
