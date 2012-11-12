@@ -1,5 +1,6 @@
 package com.bracketbird.client.gui.rtc;
 
+import com.bracketbird.client.LogoDiv;
 import com.bracketbird.client.gui.rtc.help.AboutPageController;
 import com.bracketbird.client.gui.rtc.help.HelpPageController;
 import com.bracketbird.client.model.tournament.TournamentListener;
@@ -40,7 +41,7 @@ public class RunningTournamentTopSmall extends HorizontalComponent implements To
 
 
     private void init() {
-        add(new ImageComponent("bracketbird.png"), new TextLayout("40px", "175px",Horizontal.LEFT, Vertical.TOP).paddingLeft(18).paddingBottom(0).paddingTop(0).paddingRight(20));
+        add(new LogoDiv(), new TextLayout("40px", "175px",Horizontal.LEFT, Vertical.TOP).paddingLeft(18).paddingBottom(0).paddingTop(0).paddingRight(20));
         add(getTournamentName(), new TextLayout(null, "100%", Horizontal.CENTER, Vertical.MIDDLE).sizeH1().italic().colorBlack().margin(0,0,0,-173).paddingTop(6));
         add(getEjectOut(), new TextLayout("20px", "20px",Horizontal.RIGHT, Vertical.MIDDLE).margin(0,20, 0,0));
         //setBackgroundColor();

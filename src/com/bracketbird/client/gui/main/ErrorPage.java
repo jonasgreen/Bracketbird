@@ -1,10 +1,8 @@
 package com.bracketbird.client.gui.main;
 
 
-import com.bracketbird.client.gui.main.personal.personal.CreateTournamentPageController;
 import com.bracketbird.client.url.UrlUtil;
 import com.bracketbird.clientcore.appcontrol.Page;
-import com.bracketbird.clientcore.appcontrol.PageFlow;
 import com.bracketbird.clientcore.gui.*;
 import com.bracketbird.clientcore.style.Horizontal;
 import com.bracketbird.clientcore.style.StyleIt;
@@ -31,8 +29,8 @@ public class ErrorPage extends Page<ErrorPageController>{
     public ErrorPage() {
         super();
         content = new FlowComponent();
-        ScrollPanelComponent scrollPanelComponent = new ScrollPanelComponent(content);
-        initWidget(scrollPanelComponent);
+        ScrollPanelComponent customerScrollPanelComponent = new ScrollPanelComponent(content);
+        initWidget(customerScrollPanelComponent);
     }
 
     public void init() {

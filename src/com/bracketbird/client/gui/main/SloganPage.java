@@ -20,7 +20,6 @@ public class SloganPage extends VerticalComponent {
     }
 
     private void init() {
-        setStyleName("sloganPage");
         add(getSlogans(), new TextLayout("100%", null));
     }
 
@@ -37,10 +36,13 @@ public class SloganPage extends VerticalComponent {
 
                 vc.add(w);
             }
+            vc.add(new FrontSlogan("Group tournaments", "Set number of groups, points for a win, points for a draw, etc."));
+            vc.add(new FrontSlogan("Knock-out tournaments", "Also supported."));
+            vc.add(new FrontSlogan("Multi-stage tournaments", "Combine 'group' and 'knock-out' into a multi-stage tournament. Set number of teams progressing from one stage into the next."));
+            vc.add(new FrontSlogan("Seeding", "Seed the teams or use random seeding."));
 
-            vc.add(new FrontSlogan("Tired of running tournaments on paper, in Excel or likewise?", "I was, so i made Bracketbird - it's easy, fast and sharable"));
             vc.add(new FrontSlogan("No sign in, no installation, no fees", "Each tournament is uniquely identified by its url. Bookmark it and reopen it later. Or share it with others. It's 100% free."));
-            vc.add(new FrontSlogan("Share tournaments", "Update or follow the same tournament from unlimited number of devices. You can enter results on one laptop while following the tournament on a projector from another laptop."));
+            vc.add(new FrontSlogan("Share tournaments in the cloud", "Update or follow the same tournament from unlimited number of devices. You can enter results on one laptop while following the tournament on a projector from another laptop."));
             vc.add(new FrontSlogan("Anything on your mind", "Feel free to contact me at jonasgreen12345@gmail.com."));
 
             slogans.add(vc, new TextLayout("100%", "900px", Horizontal.CENTER).paddingTop(40));

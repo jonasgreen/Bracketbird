@@ -19,7 +19,7 @@ public class RunningTournamentPage extends Page<RunningTournamentPageController>
     private DockLayoutPanel p = new DockLayoutPanel(Style.Unit.PX);
     private DockLayoutPanel pContent;
     private SimplePanelComponent content = new SimplePanelComponent();
-    private ScrollPanelComponent scrollPanel;
+    private CustomScrollPanelComponent scrollPanel;
     private Page activePage;
     private Map<String, Integer> scrollPositions = new HashMap<String, Integer>();
             
@@ -57,9 +57,9 @@ public class RunningTournamentPage extends Page<RunningTournamentPageController>
 
     }
 
-    public ScrollPanelComponent getScrollPanel() {
+    public CustomScrollPanelComponent getScrollPanel() {
         if (scrollPanel == null) {
-            scrollPanel = new ScrollPanelComponent(content);
+            scrollPanel = new CustomScrollPanelComponent(content);
         }
         return scrollPanel;
     }

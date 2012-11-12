@@ -3,6 +3,7 @@ package com.bracketbird.client.gui.main;
 import com.bracketbird.client.model.*;
 import com.bracketbird.clientcore.appcontrol.*;
 import com.bracketbird.clientcore.gui.*;
+import com.google.gwt.user.client.Window;
 
 /**
  *
@@ -32,17 +33,7 @@ public class FrontPageController extends PageController<FrontPage> {
 
 
     public void afterLoad() {
-        RandomCanvas w = new RandomCanvas(250, 250);
-        getPage().getContent().add(w);
-        w.load();
-
-        w = new RandomCanvas(250, 250);
-        getPage().getContent().add(w);
-        w.load();
-
-        w = new RandomCanvas(250, 250);
-        getPage().getContent().add(w);
-        w.load();
+        getPage().getContent().setWidth(Window.getClientWidth() + "px");
 
     }
 

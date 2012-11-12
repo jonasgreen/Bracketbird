@@ -14,7 +14,7 @@ public class MainPage extends Page<MainPageController> {
 
     private DockLayoutPanel dockPanel;
     private SimplePanelComponent content = new SimplePanelComponent();
-    private ScrollPanelComponent scrollPanel = new ScrollPanelComponent(content);
+    private ScrollPanelComponent customerScrollPanel = new ScrollPanelComponent(content);
 
     private SimplePanelComponent topHolder = new SimplePanelComponent();
 
@@ -30,7 +30,7 @@ public class MainPage extends Page<MainPageController> {
         
         dockPanel.addNorth(topHolder, 138);
         //dockPanel.addSouth(bottom, 120);
-        dockPanel.add(scrollPanel);
+        dockPanel.add(customerScrollPanel);
         content.setHeight("100%");
 
     }
@@ -50,7 +50,7 @@ public class MainPage extends Page<MainPageController> {
 
 
         content.add(subPage, tlSubPage);
-        StyleIt.add(scrollPanel, tlScrollP);
+        StyleIt.add(customerScrollPanel, tlScrollP);
 
 
         if (subPage instanceof TopPanelHolder) {

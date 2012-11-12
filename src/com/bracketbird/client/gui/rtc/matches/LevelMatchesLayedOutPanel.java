@@ -6,9 +6,6 @@ import com.bracketbird.client.model.tournament.*;
 import com.bracketbird.client.table.TableManager;
 import com.bracketbird.clientcore.gui.*;
 import com.bracketbird.clientcore.style.*;
-import com.bracketbird.clientcore.util.*;
-import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.ScrollPanel;
 
 /**

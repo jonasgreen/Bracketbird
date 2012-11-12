@@ -5,7 +5,6 @@ import com.bracketbird.client.gui.rtc.RTC;
 import com.bracketbird.clientcore.appcontrol.Page;
 import com.bracketbird.clientcore.gui.*;
 import com.bracketbird.clientcore.style.Horizontal;
-import com.bracketbird.clientcore.style.StyleIt;
 import com.bracketbird.clientcore.style.TextLayout;
 import com.bracketbird.clientcore.util.MouseOver;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -19,7 +18,7 @@ public class SeedingPage extends Page<SeedingPageController> {
     private VerticalComponent content;
     private LabelComponent randomButton;
     private SeedingPanel seedingPanel;
-    private ScrollPanelComponent scrollPanelComponent;
+    private ScrollPanelComponent scrollPanel;
     private ButtonPanel buttonPanel;
 
     public SeedingPage() {
@@ -34,14 +33,14 @@ public class SeedingPage extends Page<SeedingPageController> {
         //hc.add(getClear(),new TextLayout(10, 10, 10, 10, Horizontal.RIGHT));
         content.add(new LabelComponent("Change team seeding"), new TextLayout().sizeH1().colorBaseDark());
         content.add(getRandomButton(), new TextLayout(10,0,10,0,Horizontal.LEFT));
-        content.add(getScrollPanelComponent(), new TextLayout());
+        content.add(getScrollPanel(), new TextLayout());
         content.add(new LabelComponent("Tip: use shift+arrows to move selected item"), new TextLayout(Horizontal.LEFT).colorBase().sizeEkstraSmall().italic().padding(10, 0, 0, 0));
 
         content.add(getButtonPanel(), new TextLayout(20, 0,0,0,null, "100%"));
 
 
         if(RTC.getInstance().getTournament().getTeams().size() > 14){
-            getScrollPanelComponent().setHeight("400px");
+            getScrollPanel().setHeight("400px");
         }
 
 
@@ -78,11 +77,11 @@ public class SeedingPage extends Page<SeedingPageController> {
         return buttonPanel;
     }
 
-    public ScrollPanelComponent getScrollPanelComponent() {
-        if (scrollPanelComponent == null) {
-            scrollPanelComponent = new ScrollPanelComponent(getSeedingPanel());
+    public ScrollPanelComponent getScrollPanel() {
+        if (scrollPanel == null) {
+            scrollPanel = new ScrollPanelComponent(getSeedingPanel());
         }
-        return scrollPanelComponent;
+        return scrollPanel;
     }
 
     public SeedingPanel getSeedingPanel() {
