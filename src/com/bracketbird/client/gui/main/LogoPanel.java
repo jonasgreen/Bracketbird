@@ -1,12 +1,19 @@
 package com.bracketbird.client.gui.main;
 
-import com.bracketbird.client.*;
-import com.bracketbird.client.event.*;
-import com.bracketbird.client.model.*;
-import com.google.gwt.event.dom.client.*;
-import com.bracketbird.clientcore.gui.*;
-import com.bracketbird.clientcore.style.*;
-import com.bracketbird.clientcore.util.*;
+import com.bracketbird.client.LogoDiv;
+import com.bracketbird.client.UserManager;
+import com.bracketbird.client.event.EventManager;
+import com.bracketbird.client.event.UserStateChangedEvent;
+import com.bracketbird.client.event.UserStateChangedHandler;
+import com.bracketbird.client.model.User;
+import com.bracketbird.clientcore.gui.HorizontalComponent;
+import com.bracketbird.clientcore.gui.ImageComponent;
+import com.bracketbird.clientcore.gui.SimplePanelComponent;
+import com.bracketbird.clientcore.style.Horizontal;
+import com.bracketbird.clientcore.style.TextLayout;
+import com.bracketbird.clientcore.style.Vertical;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 
 /**
  *
@@ -81,10 +88,10 @@ public class LogoPanel {
       public HorizontalComponent getPanel() {
         if (content == null) {
             content = new HorizontalComponent();
-            content.add(getImageHolder(), new TextLayout(0,0,10,0,"40px", "175px", Horizontal.LEFT, Vertical.BOTTOM));
+            content.add(new LogoDiv(), new TextLayout(0,0,10,0,"40px", "175px", Horizontal.LEFT, Vertical.BOTTOM));
             content.add(new SimplePanelComponent(), new TextLayout(null, "100%"));
             //content.add(getLogoMenues(), new TextLayout(0,0,10,0,Horizontal.RIGHT, Vertical.BOTTOM));
-            setImage("bracketbird.png");
+            //setImage("bracketbird.png");
         }
         return content;
     }

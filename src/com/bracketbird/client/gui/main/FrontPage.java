@@ -1,11 +1,12 @@
 package com.bracketbird.client.gui.main;
 
 
-import com.bracketbird.client.LogoDiv;
 import com.bracketbird.client.gui.main.personal.personal.CreateTournamentPageController;
-import com.bracketbird.clientcore.appcontrol.*;
+import com.bracketbird.clientcore.appcontrol.Page;
+import com.bracketbird.clientcore.appcontrol.PageFlow;
 import com.bracketbird.clientcore.gui.*;
-import com.bracketbird.clientcore.style.*;
+import com.bracketbird.clientcore.style.Horizontal;
+import com.bracketbird.clientcore.style.TextLayout;
 import com.bracketbird.clientcore.util.MouseOver;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -96,7 +97,7 @@ public class FrontPage extends Page<FrontPageController> implements TopPanelHold
             //centerPanel.add(new ImageComponent("front2.png"), new TextLayout(null, "252px"));
             VerticalComponent centerRight = new VerticalComponent();
             TextLayout headerLayout = new TextLayout(null, "600px").colorBaseDark().sizeGiga().paddingTop(0).paddingBottom(25).alignCenter();
-            centerRight.add(new LabelComponent("Create tournaments that suit your needs"), headerLayout);
+            centerRight.add(new LabelComponent("Instant tournaments"), headerLayout);
             centerRight.add(getCreateTournament(), new TextLayout(Horizontal.CENTER));
 
             centerRight.add(new LabelComponent("No account required"), new TextLayout().sizeSmall().colorGrey().paddingTop(6).alignCenter().paddingBottom(45));

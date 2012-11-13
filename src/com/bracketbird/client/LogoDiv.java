@@ -17,7 +17,7 @@ public class LogoDiv extends FlowComponent{
         content.getElement().getStyle().setBackgroundColor("black");
 
         setWidth("175px");
-        getElement().getStyle().setBackgroundColor("black");
+        //getElement().getStyle().setBackgroundColor("black");
 
         FlowComponent fl = new FlowComponent();
         fl.getElement().getStyle().setBackgroundColor("black");
@@ -30,5 +30,6 @@ public class LogoDiv extends FlowComponent{
         fl.add(new LabelComponent("BIRD"));
         fl.getElement().getStyle().setFloat(Style.Float.LEFT);
         content.add(fl, new TextLayout().sizeH2().colorWhite().padding(padding).paddingLeft(0).paddingBottom(2).paddingRight(12));
+
     }
 }
