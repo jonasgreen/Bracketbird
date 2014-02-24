@@ -1,10 +1,12 @@
 package com.bracketbird.clientcore.gui;
 
-import com.google.gwt.event.logical.shared.*;
-import com.google.gwt.user.client.*;
-import com.google.gwt.user.client.ui.*;
 import com.bracketbird.clientcore.appcontrol.*;
 import com.bracketbird.clientcore.style.*;
+import com.google.gwt.event.logical.shared.CloseEvent;
+import com.google.gwt.event.logical.shared.CloseHandler;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.PopupPanel;
+import com.google.gwt.user.client.ui.RootPanel;
 
 
 /**

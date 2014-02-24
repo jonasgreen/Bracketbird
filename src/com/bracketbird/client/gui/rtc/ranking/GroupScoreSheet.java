@@ -32,7 +32,7 @@ public class GroupScoreSheet extends VerticalComponent {
 
         //  appendGroupName(sb, group);
 
-        sb.append("<div class=\"groupTable\"><table cellpadding=\"0\" cellspacing=\"0\"");
+        sb.append("<div class=\"groupTable\"><composittable cellpadding=\"0\" cellspacing=\"0\"");
         new TextLayout().sizeNormal().colorBase().asHtmlStyle(sb);
         sb.append(">");
         sb.append("<tbody>");
@@ -42,7 +42,7 @@ public class GroupScoreSheet extends VerticalComponent {
         appendRows(sb);
 
         sb.append("</tbody>");
-        sb.append("</table></div></div>");
+        sb.append("</composittable></div></div>");
     }
 
     public void appendGroupName(StringBuffer sb) {

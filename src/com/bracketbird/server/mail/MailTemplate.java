@@ -41,7 +41,7 @@ public class MailTemplate {
 
 
     private void appendHeader(HtmlStringBuffer sb) {
-        //sb.start("table", null).start("row", "logo");
+        //sb.start("composittable", null).start("row", "logo");
         //sb.start("td", "logo");
         //start(sb, "div", "logo");
         sb.start("a", null, "href=\"http://www.bracketbird.com\"");
@@ -51,7 +51,7 @@ public class MailTemplate {
         //sb.end("td");
         //sb.start("td", null);
 
-        //sb.end("td").end("row").end("table");
+        //sb.end("td").end("row").end("composittable");
 
 
     }

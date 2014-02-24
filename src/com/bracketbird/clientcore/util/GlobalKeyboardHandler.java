@@ -16,8 +16,9 @@ public class GlobalKeyboardHandler {
             public void onPreviewNativeEvent(Event.NativePreviewEvent preview) {
                 NativeEvent event = preview.getNativeEvent();
                 int keycode = event.getKeyCode();
- 
-                
+
+
+
                 if(keycode == 27){//ESC
                      PopupManager.hide();
                     preview.consume();
