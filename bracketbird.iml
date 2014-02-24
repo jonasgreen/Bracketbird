@@ -15,7 +15,7 @@
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="inheritedJdk" />
-    <orderEntry type="library" name="gae 1.7.3" level="application" />
+    <orderEntry type="library" name="gae 1.7" level="application" />
     <orderEntry type="library" name="gwt 2.5" level="application" />
   </component>
 </module>
