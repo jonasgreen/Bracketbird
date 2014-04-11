@@ -1,7 +1,6 @@
 package com.bracketbird.client.gui.rtc;
 
 
-import com.bracketbird.client.Audio;
 import com.bracketbird.client.Bracketbird;
 import com.bracketbird.client.gui.rtc.event.*;
 import com.bracketbird.client.gui.rtc.health.LogPageController;
@@ -195,7 +194,6 @@ public class RTC {
     }
 
     public void deleteTeam(TeamId id) {
-        Audio.get().speak("Team Deleted");
         executeEvent(new DeleteTeamEvent(null, id));
     }
 

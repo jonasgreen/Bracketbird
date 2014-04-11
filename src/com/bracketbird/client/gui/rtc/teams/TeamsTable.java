@@ -30,7 +30,9 @@ public class TeamsTable extends Table {
         addHeaderRow(new TeamHeaderRow(this));
 
         RTC.getInstance().getTournament().addTeamsListener(new TournamentListener<TournamentTeamEvent>() {
+
             public void onChange(TournamentTeamEvent event) {
+                System.out.println("teamsTable");
                 if (event.getAction() == TournamentTeamEvent.Action.create) {
                     teamCreated(event.getTeam(), event.isClientEvent());
                     //if from server - do sort after eventid. TODO

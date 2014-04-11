@@ -2,19 +2,13 @@ package com.bracketbird.client.gui.rtc.ranking;
 
 
 import com.bracketbird.client.gui.rtc.RTCLayoutFac2;
-import com.bracketbird.client.gui.rtc.RunningTournamentPageController;
+import com.bracketbird.client.gui.rtc.ViewMatch;
 import com.bracketbird.client.model.tournament.*;
 import com.bracketbird.clientcore.gui.*;
-import com.bracketbird.clientcore.style.TextLayout;
+import com.bracketbird.clientcore.style.*;
 import com.google.gwt.dom.client.Style;
-import com.google.gwt.event.logical.shared.ResizeEvent;
-import com.google.gwt.event.logical.shared.ResizeHandler;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.CustomScrollPanel;
-import com.google.gwt.user.client.ui.ScrollPanel;
-import com.google.gwt.user.client.ui.VerticalScrollbar;
 
-import java.util.List;
+import java.util.*;
 
 /**
  *
@@ -23,10 +17,7 @@ public class GroupRankingPanel extends FlowComponent implements RankingPanel {
 
     private TournamentLevel level;
     private SimplePanelComponent rankingHolder = new SimplePanelComponent();
-    private FlowComponent contentLeft = new FlowComponent();
-    private FlowComponent contentRight = new FlowComponent();
 
-    private static int widthContentRight = 200;
 
 
     private TournamentListener<LevelStateEvent> levelStateListner = new TournamentListener<LevelStateEvent>() {
@@ -58,44 +49,8 @@ public class GroupRankingPanel extends FlowComponent implements RankingPanel {
 
     private void init() {
         level.addStateListener(levelStateListner);
-        contentLeft.add(rankingHolder, new TextLayout(null, "100%"));
-        add(contentLeft);
-        add(contentRight);
-
-        contentLeft.getElement().getStyle().setFloat(Style.Float.LEFT);
-        contentRight.getElement().getStyle().setFloat(Style.Float.LEFT);
-        contentRight.setWidth("200px");
-        contentRight.setHeight("200px");
-
-        contentLeft.getElement().getStyle().setBackgroundColor("blue");
-        contentRight.getElement().getStyle().setBackgroundColor("red");
-
-        Window.addResizeHandler(new ResizeHandler() {
-            @Override
-            public void onResize(ResizeEvent event) {
-                updateSizes();
-            }
-        });
+        add(rankingHolder, new TextLayout(null, "100%"));
         initialSetup();
-    }
-
-    public void updateSizes() {
-        int totalWidth = Window.getClientWidth();
-        CustomScrollPanel scrollPanel = RunningTournamentPageController.getInstance().getPage().getScrollPanel().getScrollPanel();
-        VerticalScrollbar verticalScrollbar = scrollPanel.getVerticalScrollbar();
-        int scrollH = verticalScrollbar.getScrollHeight();
-        int sch = scrollPanel.getElement().getClientHeight();
-        int schOff = scrollPanel.getElement().getOffsetHeight();
-        int clientHeight = Window.getClientHeight();
-        final int totalHeight = (scrollH > clientHeight ? scrollH : clientHeight) - 75;
-        if (totalWidth < 600) {
-            contentLeft.setWidth(400 + "px");
-        }
-        else {
-            contentLeft.setWidth((totalWidth - widthContentRight) + "px");
-        }
-        contentRight.setHeight(totalHeight + "px");
-
     }
 
     private void bindMathces() {
@@ -140,7 +95,7 @@ public class GroupRankingPanel extends FlowComponent implements RankingPanel {
 
         content.add(new HtmlComponent(sb.toString()), new TextLayout(20, 0, 0, 0));
 
-        /* FlowComponent right = new FlowComponent();
+       /* FlowComponent right = new FlowComponent();
 
         for (Round round : level.getRounds()) {
             for (Match match : round.getMatches()) {
@@ -156,8 +111,7 @@ public class GroupRankingPanel extends FlowComponent implements RankingPanel {
 
 
 
-
     public void relayout() {
-        updateSizes();
+
     }
 }

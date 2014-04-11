@@ -26,6 +26,7 @@ public class ViewTeamsPanel extends FlowComponent {
     }
 
     private void init() {
+        System.out.println("ViewTeamsPanel init");
         add(new LabelComponent("The tournament has not started - registered teams until now are:"), RTCLayoutFac2.h1().padding(20));
         RTC.getInstance().getTournament().addSeedingListener(new TournamentListener<SeedingChangedEvent>() {
             public void onChange(SeedingChangedEvent event) {
@@ -35,11 +36,16 @@ public class ViewTeamsPanel extends FlowComponent {
 
         RTC.getInstance().getTournament().addTeamsListener(new TournamentListener<TournamentTeamEvent>() {
             public void onChange(TournamentTeamEvent event) {
+                if(TournamentTeamEvent.Action.create == event.getAction()){
+                    event.getTeam().addListener(new REventListener() {
+                        public void onChange(REvent<?, ?> event) {
+                            updateTeamsPanel();
+                        }
+                    }, new UpdateTeamNameEvent());
+                }
                 updateTeamsPanel();
             }
         });
-
-        updateTeamsPanel();
     }
 
     private void updateTeamsPanel() {
@@ -54,15 +60,9 @@ public class ViewTeamsPanel extends FlowComponent {
         for (Team t  : RTC.getInstance().getTournament().getTeams()) {
             teamsPanel.add(createTeamComp(t));
         }
-
     }
 
     private Widget createTeamComp(Team t) {
-        t.addListener(new REventListener() {
-            public void onChange(REvent<?, ?> event) {
-                updateTeamsPanel();
-            }
-        }, new UpdateTeamNameEvent());
         FlowComponent fl = new FlowComponent();
         fl.setStyleName("viewTeamsPanel_team");
         fl.add(new LabelComponent(t.getName()), new TextLayout().sizeH1().colorBase());

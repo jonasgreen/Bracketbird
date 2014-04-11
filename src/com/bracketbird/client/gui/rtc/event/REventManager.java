@@ -32,6 +32,7 @@ public class REventManager {
         List<Listener> ls = new ArrayList<Listener>(listeners);
         for (Listener l : ls) {
             if (l.type.getHandler() == event.getHandler()) {
+                System.out.println((System.currentTimeMillis()/1000) + " REventManager Listener: " + l.eventListener.getClass().getName());
                 l.eventListener.onChange(event);
             }
         }

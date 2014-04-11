@@ -59,9 +59,9 @@ public class ViewMatch extends FlowComponent{
         else{
             FlowComponent fl = new FlowComponent();
             fl.setStyleName("fieldBanner");
-            LabelComponent w = new LabelComponent("Bord 3");
-            fl.add(w, new TextLayout().sizeSmall().padding(0).paddingBottom(-4).verticalAlignMiddel());
-            add(fl);
+            //LabelComponent w = new LabelComponent("Bord 3");
+            //fl.add(w, new TextLayout().sizeSmall().padding(0).paddingBottom(-4).verticalAlignMiddel());
+            //add(fl);
             getLine().setBackgroundColor(P.BACKGROUND_ORANGE);
         }
     }
