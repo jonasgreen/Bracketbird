@@ -26,7 +26,6 @@ public class StartPageComponentManager {
 
     public StartPageComponentManager() {
         topPanelElements.add(RunningTournamentTop.getInstance().getFeedback().getElement());
-        topPanelElements.add(RunningTournamentTop.getInstance().getLockPanel().getElement());
         topPanelElements.add(RankingViewPageController.getInstance().getMenu().getElement());
         topPanelElements.add(LogPageController.getInstance().getMenu().getElement());
         topPanelElements.add(TeamsPageController.getInstance().getMenu().getElement());

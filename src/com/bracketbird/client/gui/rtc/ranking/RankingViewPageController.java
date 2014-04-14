@@ -2,7 +2,6 @@ package com.bracketbird.client.gui.rtc.ranking;
 
 
 import com.bracketbird.client.gui.rtc.RunningTournamentPageController;
-import com.bracketbird.client.model.*;
 import com.bracketbird.clientcore.appcontrol.*;
 import com.bracketbird.clientcore.gui.*;
 
@@ -43,9 +42,5 @@ public class RankingViewPageController extends PageController<RankingViewPage> {
 
     public MenuComponent newMenuInstance() {
         return new MenuImageAndTextComponent("Presentation.png", "Presentation view");
-    }
-
-    public UserStateConstant getLegalState() {
-        return UserStateConstant.LOGGED_OUT;
     }
 }

@@ -2,9 +2,9 @@ package com.bracketbird.client.gui.rtc.settings;
 
 
 import com.bracketbird.client.gui.rtc.RunningTournamentPageController;
-import com.bracketbird.client.model.*;
-import com.bracketbird.clientcore.appcontrol.*;
-import com.bracketbird.clientcore.gui.*;
+import com.bracketbird.clientcore.appcontrol.PageController;
+import com.bracketbird.clientcore.gui.MenuComponent;
+import com.bracketbird.clientcore.gui.MenuImageAndTextComponent;
 
 /**
  *
@@ -44,9 +44,6 @@ public class SettingsPageController extends PageController<SettingsPage> {
         return new MenuImageAndTextComponent("Gear.png", "Change settings of tournament");
     }
 
-    public UserStateConstant getLegalState() {
-        return UserStateConstant.LOGGED_OUT;
-    }
 
     public void showSettingsFromScratch() {
         //getPage().getSettingsSetupPanel().setVisible(false);

@@ -1,8 +1,8 @@
 package com.bracketbird.client.gui.main;
 
-import com.bracketbird.client.model.*;
-import com.bracketbird.clientcore.appcontrol.*;
-import com.bracketbird.clientcore.gui.*;
+import com.bracketbird.clientcore.appcontrol.PageController;
+import com.bracketbird.clientcore.gui.MenuComponent;
+import com.bracketbird.clientcore.gui.MenuLinkComponent;
 
 /**
  *
@@ -41,9 +41,6 @@ public class MainPageController extends PageController<MainPage> {
         return new MenuLinkComponent("");
     }
 
-    public UserStateConstant getLegalState() {
-        return UserStateConstant.LOGGED_OUT;
-    }
 
    
 }

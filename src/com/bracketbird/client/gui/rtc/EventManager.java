@@ -1,20 +1,15 @@
 package com.bracketbird.client.gui.rtc;
 
-import com.bracketbird.client.Bracketbird;
 import com.bracketbird.client.gui.rtc.event.InitEvent;
 import com.bracketbird.client.gui.rtc.event.REvent;
 import com.bracketbird.client.gui.rtc.health.LogPageController;
 import com.bracketbird.client.gui.rtc.ranking.RankingViewPageController;
 import com.bracketbird.client.gui.rtc.teams.TeamsPageController;
-import com.bracketbird.client.model.keys.*;
-import com.bracketbird.client.service.*;
-import com.bracketbird.client.service.rtc.*;
+import com.bracketbird.client.model.keys.TournamentId;
 import com.bracketbird.clientcore.appcontrol.PageFlow;
-import com.bracketbird.clientcore.gui.PopupManager;
-import com.bracketbird.clientcore.service.*;
-import com.google.gwt.user.client.*;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *

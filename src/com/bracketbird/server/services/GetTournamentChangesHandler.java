@@ -2,7 +2,7 @@ package com.bracketbird.server.services;
 
 
 import com.bracketbird.client.service.*;
-import com.bracketbird.server.repository.tournament.*;
+import com.bracketbird.server.repository.TournamentRepository;
 import com.bracketbird.clientcore.appcontrol.*;
 import com.bracketbird.clientcore.service.*;
 

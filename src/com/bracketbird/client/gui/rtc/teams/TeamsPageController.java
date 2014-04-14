@@ -64,12 +64,4 @@ public class TeamsPageController extends PageController<TeamsPage> {
         return new MenuImageAndTextComponent("Teams.png", "Add teams");
     }
 
-    public UserStateConstant getLegalState() {
-        return UserStateConstant.LOGGED_OUT;
-    }
-
-
-    public void hidePopups() {
-        getPage().getInitPopup().hide();
-    }
 }

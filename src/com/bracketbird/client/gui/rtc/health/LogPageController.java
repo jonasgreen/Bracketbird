@@ -3,15 +3,12 @@ package com.bracketbird.client.gui.rtc.health;
 
 import com.bracketbird.client.gui.rtc.RunningTournamentPageController;
 import com.bracketbird.client.gui.rtc.event.REvent;
-import com.bracketbird.client.model.UserStateConstant;
 import com.bracketbird.client.service.BBService;
 import com.bracketbird.clientcore.appcontrol.PageController;
 import com.bracketbird.clientcore.gui.FlowComponent;
 import com.bracketbird.clientcore.gui.LabelComponent;
 import com.bracketbird.clientcore.gui.MenuComponent;
 import com.bracketbird.clientcore.gui.MenuImageAndTextComponent;
-import com.bracketbird.clientcore.service.LogAction;
-import com.bracketbird.clientcore.style.TextLayout;
 
 import java.util.Date;
 
@@ -45,10 +42,6 @@ public class LogPageController extends PageController<LogPage> {
 
     public MenuComponent newMenuInstance() {
         return new MenuImageAndTextComponent("Oscilloscope.png", "Activity and log");
-    }
-
-    public UserStateConstant getLegalState() {
-        return UserStateConstant.LOGGED_OUT;
     }
 
 

@@ -1,7 +1,6 @@
 package com.bracketbird.client.gui.main;
 
 
-import com.bracketbird.client.gui.main.personal.personal.CreateTournamentPageController;
 import com.bracketbird.clientcore.appcontrol.Page;
 import com.bracketbird.clientcore.appcontrol.PageFlow;
 import com.bracketbird.clientcore.gui.*;

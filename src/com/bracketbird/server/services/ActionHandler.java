@@ -13,7 +13,5 @@ public interface ActionHandler <A extends Action, R extends Result>{
 
     public Class<A> getActionType();
 
-    public Integer getClientLanguage();
 
-    public void setClientLanguage(Integer clientLanguage);
 }

@@ -25,8 +25,6 @@ public class UrlCommand {
     static {
         commands.put(CreateTournament.name, new CreateTournament());
         commands.put(EditTournament.name, new EditTournament());
-        commands.put(DeleteAccount.name, new DeleteAccount());
-        commands.put(DeleteMembership.name, new DeleteMembership());
     }
 
 
@@ -35,9 +33,6 @@ public class UrlCommand {
         UrlParam up = getUrlParam(command);
         //up.add(UrlParam.CLUB_ID, UserManager.getInstance().getUser().getPersonalClubId().getEncodedKey());
         //up.add(UrlParam.TOURNAMENT_NAME, tournamentName);
-        if (UserManager.getInstance().getUser() != null) {
-            up.add(UrlParam.USER_ID, UserManager.getInstance().getUser().getId().getEncodedKey());
-        }
         //up.add(UrlParam.INVALID_DATE, String.valueOf(new Date().getTime()));
         return new UrlCommand(baseUrl, up);
     }
@@ -45,26 +40,11 @@ public class UrlCommand {
     public static UrlCommand createEditTournament(String baseUrl, EditTournament command, UserId userId, TournamentId tId) {
         UrlParam up = getUrlParam(command);
         up.add(UrlParam.TOURNAMENT_ID, tId.getEncodedKey());
-        up.add(UrlParam.USER_ID, UserManager.getInstance().getUser().getId().getEncodedKey());
         up.add(UrlParam.INVALID_DATE, String.valueOf(DateUtil.addHoursToDate(new Date(), 1).getTime()));
         return new UrlCommand(baseUrl, up);
     }
 
-    public static UrlCommand deleteAccount(String baseUrl, DeleteAccount command, UserId userId) {
-        UrlParam up = getUrlParam(command);
-        up.add(UrlParam.USER_ID, userId.getEncodedKey());
-        return new UrlCommand(baseUrl, up);
-    }
-
-    public static UrlCommand deleteMembership(String baseUrl, DeleteMembership command, MemberId memberId, String clubName) {
-        UrlParam up = getUrlParam(command);
-        up.add(UrlParam.MEMBER_ID, memberId.getEncodedKey());
-        up.add(UrlParam.CLUB_NAME, clubName);
-        up.add(UrlParam.CREATED_DATE, String.valueOf(new Date().getTime()));
-        return new UrlCommand(baseUrl, up);
-    }
-
-
+    
     private static UrlParam getUrlParam(Command c) {
         UrlParam up = new UrlParam();
         up.add(URL_COMMAND, c.getName());

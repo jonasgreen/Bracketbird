@@ -81,9 +81,6 @@ public class RunningTournamentPage extends Page<RunningTournamentPageController>
         
     }
 
-    public void ejectIn() {
-        addContent(RunningTournamentTopSmall.getInstance(), 60);
-    }
 
     public void ejectOut() {
         addContent(RunningTournamentTop.getInstance(), 75);

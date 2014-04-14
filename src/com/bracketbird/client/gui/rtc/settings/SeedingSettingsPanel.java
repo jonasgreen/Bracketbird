@@ -1,7 +1,7 @@
 package com.bracketbird.client.gui.rtc.settings;
 
 
-import com.bracketbird.client.gui.main.club.tournament.PropertiesFac;
+import com.bracketbird.client.gui.main.PropertiesFac;
 import com.bracketbird.client.model.tournament.*;
 import com.bracketbird.clientcore.appcontrol.*;
 import com.bracketbird.clientcore.gui.*;

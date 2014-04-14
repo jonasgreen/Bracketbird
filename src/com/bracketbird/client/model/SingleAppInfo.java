@@ -16,9 +16,7 @@ import java.util.*;
 public class SingleAppInfo extends Model implements Serializable {
     private static final long serialVersionUID = 8451785089290918393L;
 
-    private User user;
     private Tournament tournament;
-    private Club club;
     private List<REvent> tournamentEventLog;
 
     public EntityId getId() {
@@ -36,29 +34,13 @@ public class SingleAppInfo extends Model implements Serializable {
         this.tournament = tournament;
     }
 
-    public Club getClub() {
-        return club;
-    }
-
-    public void setClub(Club club) {
-        this.club = club;
-    }
 
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     @Override
     public String toString() {
         return "SingleAppInfo{" +
-                "user=" + user +
                 ", tournament=" + tournament +
-                ", club=" + club +
                 '}';
     }
 

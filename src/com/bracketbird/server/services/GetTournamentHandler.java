@@ -3,15 +3,12 @@ package com.bracketbird.server.services;
 
 import com.bracketbird.client.gui.rtc.event.REvent;
 import com.bracketbird.client.model.tournament.Tournament;
-import com.bracketbird.client.service.FinderFac;
 import com.bracketbird.client.service.GetTournamentAction;
-import com.bracketbird.client.service.GetTournamentChangesAction;
 import com.bracketbird.client.service.TournamentResult;
 import com.bracketbird.clientcore.appcontrol.ApplicationException;
-import com.bracketbird.clientcore.service.ListResult;
 import com.bracketbird.clientcore.service.SingleFinder;
 import com.bracketbird.clientcore.service.StringSingleFinder;
-import com.bracketbird.server.repository.tournament.TournamentRepository;
+import com.bracketbird.server.repository.TournamentRepository;
 
 import java.util.Collection;
 import java.util.List;

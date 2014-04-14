@@ -16,10 +16,6 @@ public class Logger {
         context.log(text);
     }
 
-    public static void logPossibleDataError(String text) {
-        context.log(text);
-    }
-
 
     public static void log(String text, Throwable t) {
         context.log(text, t);

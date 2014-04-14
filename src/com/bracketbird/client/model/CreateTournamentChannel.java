@@ -13,6 +13,7 @@ import java.io.*;
 public class CreateTournamentChannel extends Creater implements Serializable {
 
 
+    private static final long serialVersionUID = 8958408831555130826L;
     private TournamentId tournamentId;
 
     public CreateTournamentChannel() {

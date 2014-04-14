@@ -2,7 +2,6 @@ package com.bracketbird.client.gui.rtc;
 
 
 import com.bracketbird.client.gui.rtc.event.REvent;
-import com.bracketbird.client.model.UserStateConstant;
 import com.bracketbird.client.service.BBService;
 import com.bracketbird.clientcore.appcontrol.PageController;
 import com.bracketbird.clientcore.gui.FlowComponent;
@@ -42,10 +41,6 @@ public class StartPageController extends PageController<StartPage> {
 
     public MenuComponent newMenuInstance() {
         return new MenuImageAndTextComponent("Oscilloscope.png", "Activity and log");
-    }
-
-    public UserStateConstant getLegalState() {
-        return UserStateConstant.LOGGED_OUT;
     }
 
 

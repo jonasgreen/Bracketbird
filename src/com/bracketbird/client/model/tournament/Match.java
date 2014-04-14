@@ -18,7 +18,6 @@ public class Match extends Model<MatchId> {
 
     private transient MatchState state = new MatchNotReady();
 
-    private ClubId clubId;
 
     private TournamentLevel level;
 
@@ -49,15 +48,6 @@ public class Match extends Model<MatchId> {
 
 
     public Match() {
-    }
-
-
-    public ClubId getClubId() {
-        return clubId;
-    }
-
-    public void setClubId(ClubId clubId) {
-        this.clubId = clubId;
     }
 
     public Team getTeamHome() {

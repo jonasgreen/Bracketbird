@@ -13,7 +13,7 @@ import com.bracketbird.server.jdo.club.RTCEventJDO;
 import com.bracketbird.server.repository.RTCEventConverter;
 import com.bracketbird.clientcore.appcontrol.*;
 import com.bracketbird.server.repository.TournamentChannelRepository;
-import com.bracketbird.server.repository.tournament.TournamentRepository;
+import com.bracketbird.server.repository.TournamentRepository;
 import com.google.appengine.api.channel.ChannelMessage;
 import com.google.appengine.api.channel.ChannelService;
 import com.google.appengine.api.channel.ChannelServiceFactory;

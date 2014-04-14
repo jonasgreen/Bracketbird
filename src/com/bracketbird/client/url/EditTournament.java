@@ -42,13 +42,11 @@ public class EditTournament implements Command {
 
         PageFlow.activeController = RunningTournamentPageController.getInstance();
 
-        ClubId clubId = new ClubId(pMap.get(UrlParam.CLUB_ID));
         TournamentId tournamentId = new TournamentId(pMap.get(UrlParam.TOURNAMENT_ID));
         final UserId userId = new UserId(pMap.get(UrlParam.USER_ID));
 
         StringBuffer sb = new StringBuffer();
         sb.append("UserId:").append(userId);
-        sb.append("ClubId:").append(clubId);
         sb.append("TournamentId:").append(tournamentId);
 
 

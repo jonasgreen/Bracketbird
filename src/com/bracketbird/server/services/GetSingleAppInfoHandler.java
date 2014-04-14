@@ -4,7 +4,6 @@ package com.bracketbird.server.services;
 import com.bracketbird.client.model.*;
 import com.bracketbird.client.service.*;
 import com.bracketbird.server.repository.*;
-import com.bracketbird.server.repository.tournament.*;
 import com.bracketbird.clientcore.appcontrol.*;
 import com.bracketbird.clientcore.service.*;
 
@@ -17,8 +16,7 @@ public class GetSingleAppInfoHandler extends AbstractActionHandler implements Ac
     public SingleResult<SingleAppInfo> execute(GetSingleAppInfoAction action) throws ApplicationException {
         SingleAppInfo sai = new SingleAppInfo();
 
-        sai.setUser(new UserRepository().get(action.getUserId()));
-
+     
         TournamentRepository tournamentRep = new TournamentRepository();
         if (action.getCreateTournament() != null) {
             CreateTournamentHandler crHandler = new CreateTournamentHandler();

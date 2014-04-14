@@ -2,7 +2,6 @@ package com.bracketbird.server.services;
 
 import com.bracketbird.server.*;
 import com.bracketbird.server.repository.*;
-import com.bracketbird.server.repository.tournament.*;
 import com.bracketbird.clientcore.appcontrol.*;
 import com.bracketbird.clientcore.service.*;
 
@@ -10,7 +9,6 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import java.util.*;
 
-//import com.bracketbird.clientcore.service.*;
 
 /**
  *
@@ -41,11 +39,7 @@ public class ActionHandlerRegistry {
     }
 
     private static void initRepositories() {
-        repos.put(FindIn.club, new ClubRepository());
-        repos.put(FindIn.user, new UserRepository());
-        repos.put(FindIn.member, new MemberRepository());
         repos.put(FindIn.tournament, new TournamentRepository());
-        repos.put(FindIn.constant, new ConstantRepository());
         repos.put(FindIn.tournamentchannel, new TournamentChannelRepository());
     }
 
@@ -65,29 +59,10 @@ public class ActionHandlerRegistry {
         add(new DeleteHandler());
         add(new UpdateHandler());
 
-        //USER
-        //add(new CreateUserHandler());
-        //add(new SigninHandler());
-        //add(new DeleteUserHandler());
-        //add(new EmailPasswordToUserHandler());
-        //add(new UpdateUserHandler());
-
-        //MEMBER
-        //add(new CreateMemberHandler());
-        //add(new GetMemberHandler());
-
-        //CLUB
-        //add(new CreateClubHandler());
-        //add(new FindClubsByUserHandler());
-        //add(new FindClubsHandler());
-
-        //CONSTANTS
-        add(new CreateConstantHandler());
 
         //TOURNAMENT
         add(new GetTournamentChangesHandler());
         add(new CreateTournamentHandler());
-        add(new TournamentIndexHandler());
         add(new GetTournamentHandler());
 
         //TOURNAMNT CHANNEL
@@ -105,9 +80,6 @@ public class ActionHandlerRegistry {
        //CRON
         add(new RefreshHandler());
 
-        //QUEUE JOB
-        add(new WaitingEmailHandler());
-        add(new EmailHandler());
     }
 
     private static void add(ActionHandler handler) {
@@ -123,7 +95,6 @@ public class ActionHandlerRegistry {
                 Logger.log(s);
                 throw new SystemException(s);
             }
-            actionHandler.setClientLanguage(a.getLanguage());
             return actionHandler.execute(a);
         }
         catch (Throwable t) {

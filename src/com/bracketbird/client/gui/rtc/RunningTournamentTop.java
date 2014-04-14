@@ -1,7 +1,5 @@
 package com.bracketbird.client.gui.rtc;
 
-import com.bracketbird.client.gui.rtc.help.AboutPageController;
-import com.bracketbird.client.gui.rtc.help.HelpPageController;
 import com.bracketbird.client.model.tournament.*;
 import com.bracketbird.client.url.UrlCommand;
 import com.bracketbird.clientcore.util.MouseOver;
@@ -17,11 +15,8 @@ public class RunningTournamentTop extends FlowComponent implements TournamentLis
 
     private static RunningTournamentTop instance;
     private LabelComponent tournamentName;
-    private HyperlinkLabelComponent help;
     private VerticalComponent menuLinks;
-    private HyperlinkLabelComponent about;
     private LockPanel lockPanel;
-    private ImageComponent ejectIn;
     private LabelComponent feedback;
     private HorizontalComponent content;
 
@@ -89,45 +84,6 @@ public class RunningTournamentTop extends FlowComponent implements TournamentLis
             });
         }
         return lockPanel;
-    }
-
-    public HyperlinkLabelComponent getHelp() {
-        if (help == null) {
-            help = new HyperlinkLabelComponent("Help");
-            help.addClickHandler(new ClickHandler() {
-                public void onClick(ClickEvent event) {
-                    PopupManager.show(HelpPageController.getInstance());
-                }
-            });
-        }
-        return help;
-    }
-
-    public ImageComponent getEjectIn() {
-        if (ejectIn == null) {
-            ejectIn = new ImageComponent("ejectin.png");
-            ejectIn.setTitle("Hide top panel");
-            ejectIn.getImage().addClickHandler(new ClickHandler() {
-                public void onClick(ClickEvent event) {
-                    RunningTournamentPageController.getInstance().ejectIn();
-                }
-            });
-            ejectIn.getImage().addMouseOverHandler(MouseOver.POINTER);
-        }
-        return ejectIn;
-    }
-
-    public HyperlinkLabelComponent getAbout() {
-        if (about == null) {
-            about = new HyperlinkLabelComponent("About");
-            about.addClickHandler(new ClickHandler() {
-                public void onClick(ClickEvent event) {
-                    PopupManager.show(AboutPageController.getInstance());
-
-                }
-            });
-        }
-        return about;
     }
 
 

@@ -11,6 +11,7 @@ import com.bracketbird.clientcore.appcontrol.*;
  */
 public class CreateChannelTokenHandler extends AbstractActionHandler implements ActionHandler<CreateChannelTokenAction, CreateChannelTokenResult> {
 
+
     public CreateChannelTokenResult execute(CreateChannelTokenAction action) throws ApplicationException {
         String clientId = action.getUid();
 

@@ -6,10 +6,8 @@ import com.bracketbird.client.model.*;
 import com.bracketbird.client.model.keys.TournamentId;
 import com.bracketbird.client.model.tournament.*;
 import com.bracketbird.client.service.*;
-import com.bracketbird.clientcore.model.keys.UserId;
 import com.bracketbird.server.dao.*;
 import com.bracketbird.server.repository.*;
-import com.bracketbird.server.repository.tournament.*;
 import com.bracketbird.clientcore.appcontrol.*;
 
 import java.util.*;
@@ -21,14 +19,12 @@ import java.util.*;
 public class CreateTournamentHandler extends AbstractActionHandler implements ActionHandler<CreateTournamentAction, TournamentResult> {
     TournamentRepository repos = new TournamentRepository();
     TournamentChannelRepository tCRep = new TournamentChannelRepository();
-    TournamentBrickRepository tbRep = new TournamentBrickRepository();
 
     public TournamentResult execute(CreateTournamentAction action) throws ApplicationException {
         List<REvent> evevntList = null;
         Tournament t;
 
         TournamentId tId = createTournamentId();
-        createTournamentBrick(tId, action.getUserId(), action.getNameOfTournament());
         try {
             PMF.startTransaction();
 
@@ -62,26 +58,6 @@ public class CreateTournamentHandler extends AbstractActionHandler implements Ac
             TournamentId id = KeyFac.getTournamentId(KeyFac.createTournamentKey());
             PMF.commitTransaction();
             return id;
-        }
-        finally {
-            PMF.endTransaction();
-        }
-    }
-
-    private TournamentBrick createTournamentBrick(TournamentId tournamentId, UserId userId, String tournamentName) throws ApplicationException {
-        if (userId == null) {
-            return null;
-        }
-        try {
-            PMF.startTransaction();
-            CreateTournamentBrick cBrick = new CreateTournamentBrick();
-            cBrick.setTournamentId(tournamentId);
-            cBrick.setUserId(userId);
-            cBrick.setTournamentName(tournamentName);
-            TournamentBrick brick = tbRep.create(cBrick);
-            PMF.commitTransaction();
-            return brick;
-
         }
         finally {
             PMF.endTransaction();

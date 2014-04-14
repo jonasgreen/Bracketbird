@@ -2,7 +2,6 @@ package com.bracketbird.client.gui.rtc.matches;
 
 
 import com.bracketbird.client.gui.rtc.teams.TeamsPageController;
-import com.bracketbird.client.model.UserStateConstant;
 import com.bracketbird.clientcore.appcontrol.PageController;
 import com.bracketbird.clientcore.gui.MenuComponent;
 
@@ -50,10 +49,6 @@ public class SeedingPageController extends PageController<SeedingPage> {
 
     public MenuComponent newMenuInstance() {
         return null;
-    }
-
-    public UserStateConstant getLegalState() {
-        return UserStateConstant.LOGGED_OUT;
     }
 
 

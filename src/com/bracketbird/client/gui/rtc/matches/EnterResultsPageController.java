@@ -50,9 +50,6 @@ public class EnterResultsPageController extends PageController<EnterResultsPage>
         return new MenuImageAndTextComponent("Play.png", "Start tournament");
     }
 
-    public UserStateConstant getLegalState() {
-        return UserStateConstant.LOGGED_OUT;
-    }
 
 
 }

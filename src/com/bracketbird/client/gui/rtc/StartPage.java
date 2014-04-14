@@ -1,25 +1,13 @@
 package com.bracketbird.client.gui.rtc;
 
 
-import com.bracketbird.client.gui.main.club.ResultsPageController;
-import com.bracketbird.client.gui.rtc.matches.EnterResultsPage;
 import com.bracketbird.client.gui.rtc.matches.EnterResultsPageController;
-import com.bracketbird.client.gui.rtc.ranking.DivColumn;
 import com.bracketbird.client.gui.rtc.settings.SettingsPageController;
 import com.bracketbird.client.gui.rtc.teams.TeamsPageController;
 import com.bracketbird.clientcore.appcontrol.Page;
-import com.bracketbird.clientcore.appcontrol.PageFlow;
-import com.bracketbird.clientcore.gui.*;
-import com.bracketbird.clientcore.style.Layout17;
+import com.bracketbird.clientcore.gui.VerticalComponent;
 import com.bracketbird.clientcore.style.StyleIt;
 import com.bracketbird.clientcore.style.TextLayout;
-import com.google.gwt.core.client.Scheduler;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.DeferredCommand;
-import com.google.gwt.user.client.Timer;
-import com.google.gwt.user.client.Window;
 
 /**
  *

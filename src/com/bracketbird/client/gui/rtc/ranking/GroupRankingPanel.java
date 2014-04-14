@@ -48,18 +48,24 @@ public class GroupRankingPanel extends FlowComponent implements RankingPanel {
     }
 
     private void init() {
+        System.out.println("********************* INIT GroupRankingPanel");
         level.addStateListener(levelStateListner);
         add(rankingHolder, new TextLayout(null, "100%"));
+
         initialSetup();
     }
 
+
     private void bindMathces() {
+        System.out.println("********************* BIND MATCHES GroupRankingPanel");
         for (Match m : level.getMatches()) {
             m.addMatchChangedListener(matchListener);
         }
     }
 
     private void initialSetup() {
+        System.out.println("********************* INITIEL SETUP GroupRankingPanel");
+
         bindMathces();
         if (level.isEmpty()) {
             layoutNoRanking();

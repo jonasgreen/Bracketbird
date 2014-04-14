@@ -2,7 +2,7 @@ package com.bracketbird.server.dao;
 
 import com.bracketbird.client.model.keys.*;
 import com.bracketbird.server.*;
-import com.bracketbird.server.jdo.club.*;
+import com.bracketbird.server.jdo.club.CounterJDO;
 import com.google.appengine.api.datastore.*;
 import com.bracketbird.clientcore.appcontrol.*;
 import com.bracketbird.clientcore.model.keys.*;
@@ -16,19 +16,8 @@ import java.util.*;
 public class CounterDao {
 
     public enum CounterType {
-        club,
-        constant,
-        user,
-        match,
-        playingteam,
-        member,
         tournament,
-        tournamentbrick,
         tournamentchannel,
-        subtournament,
-        wallevent,
-        wallnews,
-        wallmessage,
         rtceventlog,
         rtceventstate
     }
@@ -40,39 +29,9 @@ public class CounterDao {
     }
 
 
-
-    public long nextUserCounts(){
-        return next(CounterType.user);
-    }
-
-    public long nextClubCounts(){
-        return next(CounterType.club);
-    }
-
-    public long nextConstantCounts(){
-        return next(CounterType.constant);
-    }
-
     public long nextTournamentCounter() {
         return next(CounterType.tournament);
     }
-
-    public long nextTournamentBrickCounter(UserId id) {
-        return next(id, CounterType.tournamentbrick);
-    }
-
-    public long nextSubtournamentCounter(TournamentId id) {
-        return next(id, CounterType.subtournament);
-    }
-
-    public long nextMatchCounter(TournamentLevelId id) {
-        return next(id, CounterType.match);
-    }
-
-    public long nextPlayingTeamCounter(TournamentId id) {
-        return next(id, CounterType.playingteam);
-    }
-
 
     public long nextTournamentChannelCounter(TournamentId id) {
         return next(id, CounterType.tournamentchannel);
@@ -87,22 +46,6 @@ public class CounterDao {
         return next(id, CounterType.rtceventstate);
     }
 
-    public long nextMemberCounter(ClubId id) {
-        return next(id, CounterType.member);
-    }
-
-    public long nextWallEventCounter(ClubId id) {
-        return next(id, CounterType.wallevent);
-    }
-
-
-    public long nextWallNewsCounter(ClubId id) {
-        return next(id, CounterType.wallnews);
-    }
-
-    public long nextWallMessageCounter(ClubId id) {
-        return next(id, CounterType.wallmessage);
-    }
 
     //PRIVATE METHODS
 
@@ -112,10 +55,6 @@ public class CounterDao {
         return read(key);
     }
 
-    private long read(ClubId clubId, CounterType counter) {
-        Key key = getKey(clubId, counter.name());
-        return read(key);
-    }
 
     private long next(EntityId id, CounterType counter) {
         Key key = getKey(id, counter.name());
