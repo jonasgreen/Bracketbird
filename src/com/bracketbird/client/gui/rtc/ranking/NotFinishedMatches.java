@@ -1,9 +1,10 @@
 package com.bracketbird.client.gui.rtc.ranking;
 
+import com.google.gwt.dom.client.Style;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.client.ui.FlowPanel;
 
-import java.util.List;
+import java.util.*;
 
 /**
  *
@@ -20,7 +21,7 @@ public class NotFinishedMatches extends MatchesViewGrouping {
             match.setParent(this);
             match.getElement().getStyle().setZIndex(MatchesViewGrouping.nextZIndex());
         }
-        this.top = top;
+        setTop(top);
         repaint();
     }
 
@@ -46,37 +47,41 @@ public class NotFinishedMatches extends MatchesViewGrouping {
     public void add(MatchView matchView) {
         matchView.setParent(this);
         matchView.getElement().getStyle().setZIndex(MatchesViewGrouping.nextZIndex());
-        int countInProgress = countInProgress();
-        if (countInProgress >= notFinished.size()) {
-            notFinished.add(matchView);
-        }
-        else {
-            notFinished.add(countInProgress, matchView);
-        }
+        notFinished.add(matchView);
         repaint();
     }
 
-    private int countInProgress() {
-        int inProgress = 0;
-        for (MatchView m : notFinished) {
-            if (m.getMatch().isInProgress()) {
-                inProgress++;
-            }
-            else {
-                return inProgress;
-            }
-        }
-        return inProgress;
-    }
 
     private void repaint() {
-        System.out.println("REPAINT");
         int index = 0;
+
+
+        List<MatchView> inProgress = new ArrayList<MatchView>();
+        Iterator<MatchView> it = notFinished.iterator();
+        while (it.hasNext()) {
+            MatchView m = it.next();
+            if (m.getMatch().isInProgress()) {
+                it.remove();
+                inProgress.add(m);
+            }
+        }
+
+        Collections.sort(notFinished, new Comparator<MatchView>() {
+            @Override
+            public int compare(MatchView matchView, MatchView matchView2) {
+                return matchView.getNumber().compareTo(matchView2.getNumber());
+            }
+        });
+
+        for (MatchView matchView : notFinished) {
+            System.out.println("NOT FNI: " + matchView.getNumber() + " name: " + matchView.getMatch().getTeamHome().getName());
+        }
+
+        notFinished.addAll(0, inProgress);
 
         int windowHeight = Window.getClientHeight();
         for (MatchView matchView : notFinished) {
             int topC = calculateTop(index++);
-            System.out.println("REPAINT TOPC:" + topC);
 
             if (topC > windowHeight) {
                 matchView.setVisible(false);

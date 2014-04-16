@@ -72,6 +72,7 @@ public class P implements Serializable {
 
 
     public static P COLOR_WHITE = new P(Name.COLOR, "white");
+    public static P COLOR_WHITE_ALMOST = new P(Name.COLOR, "rgb(201,201,201)");
 
     public static P COLOR_PURPLE = new P(Name.COLOR, "#740160");
 

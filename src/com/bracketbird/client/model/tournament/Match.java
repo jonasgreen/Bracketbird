@@ -46,6 +46,7 @@ public class Match extends Model<MatchId> {
 
     private String field;
 
+    private Integer countId;
 
     public Match() {
     }
@@ -252,5 +253,13 @@ public class Match extends Model<MatchId> {
 
     public MatchState getState() {
         return state;
+    }
+
+    public Integer getCountId() {
+        return countId;
+    }
+
+    public void setCountId(Integer countId) {
+        this.countId = countId;
     }
 }

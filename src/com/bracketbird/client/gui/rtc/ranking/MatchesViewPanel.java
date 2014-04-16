@@ -1,12 +1,13 @@
 package com.bracketbird.client.gui.rtc.ranking;
 
-import com.bracketbird.client.model.tournament.Group;
-import com.bracketbird.client.model.tournament.Match;
+import com.bracketbird.client.model.tournament.*;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.event.logical.shared.ResizeEvent;
 import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.Widget;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +21,10 @@ public class MatchesViewPanel extends FlowPanel{
 
     private FinishedMatches finishedMatches;
     private NotFinishedMatches notFinishedMatches;
+    private FlowPanel matchesPlayedPanel = new FlowPanel();
 
-    public MatchesViewPanel(Group level) {
+    public MatchesViewPanel(final Group level) {
+        add(matchesPlayedPanel);
         final List<MatchView> finishedList = new ArrayList<MatchView>();
         final List<MatchView> notFinishedList = new ArrayList<MatchView>();
         for (Match match : level.getMatches()) {
@@ -57,6 +60,35 @@ public class MatchesViewPanel extends FlowPanel{
                 }
             }
         });
+
+        matchesPlayedPanel.setStyleName("matchesPlayedPanel");
+        for (Match m : level.getMatches()) {
+            m.addMatchChangedListener(new TournamentListener<MatchEvent>() {
+                @Override
+                public void onChange(MatchEvent event) {
+                    updateMatchesPlayedPanel(level);
+                }
+            });
+        }
+
+        updateMatchesPlayedPanel(level);
+    }
+
+    private void updateMatchesPlayedPanel(TournamentLevel level) {
+        List<Match> matches = level.getMatches();
+
+        int mathcesPlayed = 0;
+        for (Match m : matches) {
+            if(m.isFinish()){
+                mathcesPlayed++;
+            }
+        }
+        System.out.println("MATCHES PLAYED: "+mathcesPlayed);
+        StringBuilder sb = new StringBuilder();
+        sb.append(mathcesPlayed);
+        sb.append(" of ").append(matches.size()).append(" matches played");
+        matchesPlayedPanel.clear();
+        matchesPlayedPanel.add(new Label(sb.toString()));
     }
 
     private void windowResized() {

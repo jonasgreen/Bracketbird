@@ -11,6 +11,7 @@ public class MatchFac {
 
     public static Match create(TournamentLevel level, String groupName, long round, int order, Team teamHome, Team teamOut){
         Match m = new Match();
+        m.setCountId(countId);
         m.setId(new MatchId("matchId "+countId++));
         m.setLevel(level);
         m.setRound(round);
@@ -23,6 +24,7 @@ public class MatchFac {
 
     public static CupMatch createCup(TournamentLevel level, String groupName, long round, int order, Team teamHome, Team teamOut){
         CupMatch m = new CupMatch();
+        m.setCountId(countId);
         m.setId(new MatchId("matchId "+countId++));
         m.setLevel(level);
         m.setRound(round);

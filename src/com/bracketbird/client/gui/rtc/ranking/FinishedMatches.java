@@ -20,7 +20,7 @@ public class FinishedMatches extends MatchesViewGrouping {
             match.getElement().getStyle().setZIndex(MatchesViewGrouping.nextZIndex());
         }
 
-        this.bottom = bottom - MATCH_VIEW_HEIGHT;
+        setBottom(bottom);
         repaint();
     }
 

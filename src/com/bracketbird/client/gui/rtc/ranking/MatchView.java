@@ -12,6 +12,8 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public class MatchView extends FlowPanel {
 
+    private static int counter = 0;
+
     private static String TEAM_UPCOMING = "aMatchView_teamPanel_upcoming";
     private static String TEAM_INPROGRESS = "aMatchView_teamPanel_inProgress";
     private static String TEAM_FINISHED = "aMatchView_teamPanel_finished";
@@ -21,6 +23,7 @@ public class MatchView extends FlowPanel {
     private static String INFO_FINISHED = "aMatchView_infoPanel_finished";
 
 
+    private Integer number = counter++;
     private Match match;
     private MatchesViewGrouping parent;
 
@@ -30,7 +33,6 @@ public class MatchView extends FlowPanel {
     public MatchView(Match match) {
         this.match = match;
         setStyleName("aMatchView");
-        addStyleName("aMatchView_opacity");
 
         match.addMatchChangedListener(new TournamentListener<MatchEvent>() {
             @Override
@@ -139,5 +141,9 @@ public class MatchView extends FlowPanel {
 
     public FlowPanel getTeamPanel() {
         return teamPanel;
+    }
+
+    public Integer getNumber() {
+        return number;
     }
 }

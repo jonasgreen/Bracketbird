@@ -11,7 +11,7 @@ import java.util.*;
  */
 public class GroupScoreSheet extends VerticalComponent {
 
-    private static P color = P.COLOR_WHITE;
+    private static P color = P.COLOR_WHITE_ALMOST;
 
     private List<Position> positions;
     private AGroup group;

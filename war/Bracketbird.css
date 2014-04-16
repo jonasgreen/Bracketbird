@@ -461,6 +461,57 @@ font-family: klavika;
     background-color: orange;
 }
 
+.notFinishedMathesTopLine{
+    position: fixed;
+    top: 0;
+    right:0px;
+    height: 1px;
+    width: 404px;
+    border-top: 1px solid grey;
+
+        color: rgb(151,151,151);
+        font-family: klavika,Arial,Helvetica,sans-serif;
+        font-size: 18px;
+        font-stretch: normal;
+        font-style: normal;
+        font-variant: normal;
+        font-weight: normal;
+        line-height: 1.25;
+
+
+     -webkit-transition: top 3s ease-in-out;
+    -moz-transition: top 3s ease-in-out;
+    -o-transition: top 3s ease-in-out;
+    transition: top 3s ease-in-out;
+
+}
+
+.matchesPlayedPanel{
+    position: fixed;
+    top: 0;
+    padding-top:15px;
+    padding-left:4px;
+    right:0px;
+    width: 414px;
+    z-index: 1000000;
+    background-color:black;
+
+        font-family: klavika,Arial,Helvetica,sans-serif;
+        font-size: 38px;
+        font-stretch: normal;
+        font-style: normal;
+        font-variant: normal;
+        font-weight: normal;
+        line-height: 1.25;
+        color:white;
+
+        border-bottom: 1px solid rgb(51,51,51);
+}
+
+
+
+
+
 .aMatchView{
     position: fixed;
     top: 0;
@@ -481,11 +532,13 @@ font-family: klavika;
     -moz-transition: top 3s ease-in-out;
     -o-transition: top 3s ease-in-out;
     transition: top 3s ease-in-out;
+    padding-right:10px;
 }
 
 .aMatchView_teamPanel{
     width: 300px;
     float: right;
+    overflow:hidden;
 }
 
 .aMatchView_teamPanel_finished{
@@ -498,7 +551,7 @@ font-family: klavika;
 }
 
 .aMatchView_teamPanel_upcoming{
-
+    color:rgb(201,201,201);
 }
 
 .aMatchView_infoPanel{

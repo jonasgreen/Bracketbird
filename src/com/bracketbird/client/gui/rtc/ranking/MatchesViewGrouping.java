@@ -6,7 +6,7 @@ package com.bracketbird.client.gui.rtc.ranking;
 public abstract class MatchesViewGrouping {
 
     protected static int ZINDEX = 100;
-    protected int MATCH_VIEW_HEIGHT = 44;
+    public static int MATCH_VIEW_HEIGHT = 34;
 
     protected MatchesViewPanel parent;
 
