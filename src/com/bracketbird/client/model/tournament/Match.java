@@ -233,7 +233,7 @@ public class Match extends Model<MatchId> {
         if(result != null){
             return new MatchFinished();
         }
-        return (field == null || field.isEmpty()) ? new MatchReady() : new MatchReady();
+        return (field == null || field.isEmpty()) ? new MatchReady() : new MatchInProgress();
     }
 
 
@@ -242,6 +242,15 @@ public class Match extends Model<MatchId> {
         return "Match{" + teamHome.getName() + " - " + teamOut.getName() + '}';
     }
 
+    public boolean isInProgress(){
+        return state instanceof MatchInProgress;
+    }
 
+    public boolean isReady(){
+        return state instanceof MatchReady;
+    }
 
+    public MatchState getState() {
+        return state;
+    }
 }

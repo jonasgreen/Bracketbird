@@ -124,6 +124,38 @@ public class Result implements Serializable {
         return sb.toString();
     }
 
+    public String asHtmlString(String winnerColor){
+        StringBuilder sb = new StringBuilder();
+        int i = 0;
+        List<Integer> scoresOut = getScoresOut();
+
+        for (Integer sHome : getScoresHome()) {
+            if (i != 0) {
+                sb.append(", ");
+            }
+            int sOut = scoresOut.get(i++);
+            if(sHome > sOut){
+                addScoreWithColor(sb, sHome, winnerColor);
+                sb.append("-").append(sOut);
+            }
+            else if(sOut > sHome){
+                sb.append(sHome);
+                sb.append("-");
+                addScoreWithColor(sb, sOut, winnerColor);
+            }
+            else{
+                sb.append(sHome).append("-").append(sOut);
+            }
+        }
+        return sb.toString();
+    }
+
+    private void addScoreWithColor(StringBuilder sb, int score, String color){
+        sb.append("<span style='color: ").append(color).append("'>").append(score).append("</span>");
+    }
+
+
+
     public boolean equals(Object obj){
         if(obj instanceof Result){
             Result r = (Result) obj;

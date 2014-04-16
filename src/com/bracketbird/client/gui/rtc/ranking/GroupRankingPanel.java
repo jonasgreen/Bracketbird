@@ -1,12 +1,16 @@
 package com.bracketbird.client.gui.rtc.ranking;
 
 
+import com.bracketbird.client.gui.rtc.RTC;
 import com.bracketbird.client.gui.rtc.RTCLayoutFac2;
-import com.bracketbird.client.gui.rtc.ViewMatch;
 import com.bracketbird.client.model.tournament.*;
 import com.bracketbird.clientcore.gui.*;
 import com.bracketbird.clientcore.style.*;
 import com.google.gwt.dom.client.Style;
+import com.google.gwt.event.logical.shared.ResizeEvent;
+import com.google.gwt.event.logical.shared.ResizeHandler;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.Label;
 
 import java.util.*;
 
@@ -16,16 +20,12 @@ import java.util.*;
 public class GroupRankingPanel extends FlowComponent implements RankingPanel {
 
     private TournamentLevel level;
-    private SimplePanelComponent rankingHolder = new SimplePanelComponent();
 
 
 
-    private TournamentListener<LevelStateEvent> levelStateListner = new TournamentListener<LevelStateEvent>() {
-        public void onChange(LevelStateEvent event) {
-            bindMathces();
-            layoutRanking();
-        }
-    };
+    private SimpleFlowComponent groupPanel = new SimpleFlowComponent();
+    private MatchesViewPanel matchesViewPanel;
+
 
     private TournamentListener<MatchEvent> matchListener = new TournamentListener<MatchEvent>() {
         public void onChange(MatchEvent event) {
@@ -44,53 +44,78 @@ public class GroupRankingPanel extends FlowComponent implements RankingPanel {
     public GroupRankingPanel(TournamentLevel l) {
         super();
         this.level = l;
+
         init();
+        bindMathces();
+        layoutRanking();
     }
 
     private void init() {
-        System.out.println("********************* INIT GroupRankingPanel");
-        level.addStateListener(levelStateListner);
-        add(rankingHolder, new TextLayout(null, "100%"));
+        matchesViewPanel = new MatchesViewPanel((Group) level);
+        groupPanel.getElement().getStyle().setFloat(Style.Float.LEFT);
+        matchesViewPanel.getElement().getStyle().setFloat(Style.Float.RIGHT);
 
         initialSetup();
     }
 
 
     private void bindMathces() {
-        System.out.println("********************* BIND MATCHES GroupRankingPanel");
         for (Match m : level.getMatches()) {
             m.addMatchChangedListener(matchListener);
         }
     }
 
     private void initialSetup() {
-        System.out.println("********************* INITIEL SETUP GroupRankingPanel");
-
         bindMathces();
         if (level.isEmpty()) {
             layoutNoRanking();
         }
         else {
             layoutRanking();
+           // if (RTC.getInstance().getTournament().isViewOnly()) {
+                layoutMatchesPanel();
+           // }
         }
+
     }
 
 
     public void layoutNoRanking() {
-        VerticalComponent vc = new VerticalComponent();
-        vc.add(new HtmlComponent("Matches not layed out yet."), RTCLayoutFac2.h3());
-        rankingHolder.add(vc, new TextLayout(null, "100%"));
+        groupPanel.add(new HtmlComponent("Matches not layed out yet."), RTCLayoutFac2.h3());
     }
 
 
     public void layoutRanking() {
         layoutGroupRanking();
+
+    }
+
+    private void layoutMatchesPanel() {
+        add(matchesViewPanel);
+        Window.addResizeHandler(new ResizeHandler() {
+            @Override
+            public void onResize(ResizeEvent event) {
+
+                resize();
+            }
+        });
+        resize();
+    }
+
+    private void resize() {
+        int width = Window.getClientWidth();
+        if(width > 800){
+            matchesViewPanel.setVisible(true);
+            groupPanel.setWidth((width - 400) + "px");
+        }
+        else{
+            matchesViewPanel.setVisible(false);
+            groupPanel.setWidth(width+"px");
+        }
     }
 
 
     private void layoutGroupRanking() {
-        HorizontalComponent content = new HorizontalComponent();
-        //VerticalComponent vc = new VerticalComponent();
         StringBuffer sb = new StringBuffer();
         List<AGroup> grs = ((Group) level).getGroups();
         for (AGroup gr : grs) {
@@ -99,22 +124,10 @@ public class GroupRankingPanel extends FlowComponent implements RankingPanel {
             gs.generateHtml(sb);
         }
 
-        content.add(new HtmlComponent(sb.toString()), new TextLayout(20, 0, 0, 0));
+        groupPanel.add(new HtmlComponent(sb.toString()), new TextLayout(20, 0, 0, 0));
+        add(groupPanel);
 
-       /* FlowComponent right = new FlowComponent();
-
-        for (Round round : level.getRounds()) {
-            for (Match match : round.getMatches()) {
-                right.add(new ViewMatch(match));
-            }
-        }
-
-        content.add(right, new TextLayout(20,0,0,0));
-        right.getElement().getStyle().setFloat(Style.Float.RIGHT);
-        */
-        rankingHolder.add(content, new TextLayout(null, "100%"));
     }
-
 
 
     public void relayout() {

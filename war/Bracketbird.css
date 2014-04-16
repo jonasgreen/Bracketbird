@@ -355,7 +355,7 @@ html, body {
 
 .groupTable {
   margin: 20px;
-  border: 1px solid black;
+  border: 1px solid #4D4D4D;
   -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
   -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.18); }
@@ -460,3 +460,63 @@ font-family: klavika;
     z-index: 130;
     background-color: orange;
 }
+
+.aMatchView{
+    position: fixed;
+    top: 0;
+    right:0px;
+    height: 40px;
+    width: 400px;
+    white-space:nowrap;
+    color: rgb(151,151,151);
+        font-family: klavika,Arial,Helvetica,sans-serif;
+        font-size: 18px;
+        font-stretch: normal;
+        font-style: normal;
+        font-variant: normal;
+        font-weight: normal;
+        line-height: 1.25;
+
+     -webkit-transition: top 3s ease-in-out;
+    -moz-transition: top 3s ease-in-out;
+    -o-transition: top 3s ease-in-out;
+    transition: top 3s ease-in-out;
+}
+
+.aMatchView_teamPanel{
+    width: 300px;
+    float: right;
+}
+
+.aMatchView_teamPanel_finished{
+    color:grey;
+
+}
+
+.aMatchView_teamPanel_inProgress{
+      color: orange;
+}
+
+.aMatchView_teamPanel_upcoming{
+
+}
+
+.aMatchView_infoPanel{
+    width: 100px;
+    float: left;
+}
+
+.aMatchView_infoPanel_finished{
+    color:grey;
+
+}
+
+.aMatchView_infoPanel_inProgress{
+    color: orange;
+}
+
+.aMatchView_infoPanel_upcoming{
+}
+
+
+

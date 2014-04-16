@@ -15,7 +15,9 @@ import com.bracketbird.client.model.keys.TournamentLevelId;
 import com.bracketbird.client.model.tournament.*;
 import com.bracketbird.clientcore.appcontrol.*;
 import com.bracketbird.clientcore.gui.PopupManager;
+import com.bracketbird.clientcore.gui.TopPanelHolder;
 import com.bracketbird.clientcore.util.CU;
+import com.google.gwt.dom.client.Document;
 import com.google.gwt.user.client.Window;
 
 import java.util.*;
@@ -103,6 +105,9 @@ public class RTC {
 
 
     public void loadTournament(Tournament t, List<REvent> events, boolean justCreated) {
+        if(t.isViewOnly()){
+            Document.get().getBody().getStyle().setBackgroundColor("black");
+        }
         this.tournament = t;
         tournament.addStateListener(tournamentStateListener);
 
@@ -120,6 +125,11 @@ public class RTC {
         String url = t.isViewOnly() ? t.getViewUrl() : t.getUrl();
         Bracketbird.tournamentUrl =  url;
         com.google.gwt.user.client.History.newItem(url, false);
+
+        if(t.isViewOnly()){
+            RunningTournamentTop.getInstance().getTournamentName().getElement().getStyle().setColor("white");
+        }
+
     }
 
     private void initGuiListeners(Tournament t) {
