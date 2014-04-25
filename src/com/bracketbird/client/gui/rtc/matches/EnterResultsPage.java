@@ -36,6 +36,7 @@ public class EnterResultsPage extends Page<EnterResultsPageController> {
         content.add(getAllResultsPanel(), new TextLayout(null, "100%"));
         repaint();
 
+
     }
 
     protected void setSubPageHolder(Page subPage) {

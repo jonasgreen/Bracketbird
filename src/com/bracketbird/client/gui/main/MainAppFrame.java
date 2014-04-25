@@ -49,7 +49,6 @@ public class MainAppFrame extends VerticalComponent implements AppFrame {
             logoFrame = new HorizontalComponent();
             logoFrame.add(LogoPanel.getInstance().getPanel(), new TextLayout(LOGO_HEIGHT+"px", PAGE_WIDTH+"px", Horizontal.CENTER));
 
-
         }
         return logoFrame;
     }

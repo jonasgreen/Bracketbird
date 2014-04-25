@@ -41,7 +41,7 @@ public class RuningTournamentMenuPanel extends AbstractMenuPanel {
         return content;
     }
 
-    private void setup(HorizontalComponent hc, PageController pc) {
+    public void setup(HorizontalComponent hc, PageController pc) {
         addMenuItem(pc);
         hc.add(pc.getMenu(), new TextLayout(Vertical.BOTTOM).paddingRight(10).paddingLeft(10));
         //pc.getMenu().setVisible(false);

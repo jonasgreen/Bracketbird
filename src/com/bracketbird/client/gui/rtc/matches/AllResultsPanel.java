@@ -41,6 +41,8 @@ public class AllResultsPanel extends VerticalComponent {
                 createPanel(l);
             }
         }
+
+        add(FieldManager.getInstance());
     }
 
     private void createPanel(final TournamentLevel level) {
