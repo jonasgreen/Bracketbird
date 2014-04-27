@@ -78,32 +78,32 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="FieldManager.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="FieldManager.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/bracketbird/client/gui/rtc/matches/FieldManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="38" column="39" selection-start="1136" selection-end="1136" vertical-scroll-proportion="0.3503937" vertical-offset="392" max-vertical-offset="900">
+            <state line="56" column="26" selection-start="1663" selection-end="1663" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="930">
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1195#1343#0" expanded="true" />
-                <element signature="e#1328#1329#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ImageComponent.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/bracketbird/clientcore/gui/ImageComponent.java">
+      <file leaf-file-name="AllResultsPanel.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/bracketbird/client/gui/rtc/matches/AllResultsPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="11" selection-start="192" selection-end="192" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="390">
-              <folding />
+            <state line="44" column="15" selection-start="1316" selection-end="1316" vertical-scroll-proportion="0.0" vertical-offset="1" max-vertical-offset="945">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Bracketbird.css" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Bracketbird.css" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/war/Bracketbird.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="575" column="11" selection-start="15017" selection-end="15017" vertical-scroll-proportion="0.0" vertical-offset="7976" max-vertical-offset="8910">
+            <state line="620" column="33" selection-start="16086" selection-end="16086" vertical-scroll-proportion="4.0995717" vertical-offset="5471" max-vertical-offset="9495">
               <folding />
             </state>
           </provider>
@@ -112,7 +112,7 @@
       <file leaf-file-name="StartPageController.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/bracketbird/client/gui/rtc/StartPageController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="41" column="35" selection-start="1109" selection-end="1109" vertical-scroll-proportion="0.0" vertical-offset="210" max-vertical-offset="1230">
+            <state line="41" column="35" selection-start="1109" selection-end="1109" vertical-scroll-proportion="0.0" vertical-offset="615" max-vertical-offset="1350">
               <folding />
             </state>
           </provider>
@@ -121,7 +121,7 @@
       <file leaf-file-name="LogPageController.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/bracketbird/client/gui/rtc/health/LogPageController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="43" column="15" selection-start="1196" selection-end="1196" vertical-scroll-proportion="0.0" vertical-offset="296" max-vertical-offset="1230">
+            <state line="43" column="15" selection-start="1196" selection-end="1196" vertical-scroll-proportion="0.0" vertical-offset="645" max-vertical-offset="1365">
               <folding />
             </state>
           </provider>
@@ -130,7 +130,7 @@
       <file leaf-file-name="PageController.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/bracketbird/clientcore/appcontrol/PageController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="73" column="31" selection-start="1527" selection-end="1527" vertical-scroll-proportion="0.0" vertical-offset="761" max-vertical-offset="2040">
+            <state line="73" column="31" selection-start="1527" selection-end="1527" vertical-scroll-proportion="0.0" vertical-offset="1095" max-vertical-offset="2235">
               <folding />
             </state>
           </provider>
@@ -140,9 +140,7 @@
         <entry file="file://$PROJECT_DIR$/src/com/bracketbird/client/ServerWrapper.java">
           <provider selected="true" editor-type-id="text-editor">
             <state line="24" column="20" selection-start="753" selection-end="753" vertical-scroll-proportion="0.0" vertical-offset="152" max-vertical-offset="660">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -151,9 +149,7 @@
         <entry file="file://$PROJECT_DIR$/src/com/bracketbird/client/gui/rtc/RuningTournamentMenuPanel.java">
           <provider selected="true" editor-type-id="text-editor">
             <state line="36" column="39" selection-start="1199" selection-end="1199" vertical-scroll-proportion="0.0" vertical-offset="332" max-vertical-offset="840">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -161,16 +157,7 @@
       <file leaf-file-name="RunningTournamentTop.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/bracketbird/client/gui/rtc/RunningTournamentTop.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="57" column="48" selection-start="2121" selection-end="2121" vertical-scroll-proportion="0.0" vertical-offset="600" max-vertical-offset="1965">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EnterResultsPage.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/bracketbird/client/gui/rtc/matches/EnterResultsPage.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="56" column="16" selection-start="1528" selection-end="1528" vertical-scroll-proportion="0.0" vertical-offset="506" max-vertical-offset="1215">
+            <state line="57" column="48" selection-start="2121" selection-end="2121" vertical-scroll-proportion="0.0" vertical-offset="855" max-vertical-offset="2085">
               <folding />
             </state>
           </provider>
@@ -220,17 +207,17 @@
         <option value="$PROJECT_DIR$/src/com/bracketbird/client/gui/main/MainAppFrame.java" />
         <option value="$PROJECT_DIR$/src/com/bracketbird/client/gui/main/FrontPage.java" />
         <option value="$PROJECT_DIR$/src/com/bracketbird/client/gui/rtc/matches/EnterResultsPage.java" />
-        <option value="$PROJECT_DIR$/src/com/bracketbird/client/gui/rtc/matches/AllResultsPanel.java" />
-        <option value="$PROJECT_DIR$/war/Bracketbird.css" />
         <option value="$PROJECT_DIR$/src/com/bracketbird/client/gui/rtc/RuningTournamentMenuPanel.java" />
         <option value="$PROJECT_DIR$/src/com/bracketbird/client/gui/rtc/health/LogPageController.java" />
+        <option value="$PROJECT_DIR$/src/com/bracketbird/client/gui/rtc/matches/AllResultsPanel.java" />
         <option value="$PROJECT_DIR$/src/com/bracketbird/client/gui/rtc/matches/FieldManager.java" />
+        <option value="$PROJECT_DIR$/war/Bracketbird.css" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="72" />
-    <option name="y" value="37" />
+    <option name="y" value="22" />
     <option name="width" value="1555" />
     <option name="height" value="1028" />
   </component>
@@ -262,6 +249,150 @@
     <panes>
       <pane id="ProjectPane">
         <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Bracketbird" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gwt 2.6.0" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Bracketbird" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gwt 2.6.0" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gwt-user.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Bracketbird" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gwt 2.6.0" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gwt-user.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="google" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Bracketbird" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gwt 2.6.0" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gwt-user.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="google" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gwt" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Bracketbird" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gwt 2.6.0" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gwt-user.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="google" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gwt" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="uibinder" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Bracketbird" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="External Libraries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gwt 2.6.0" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gwt-user.jar" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="google" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="gwt" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="uibinder" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rebind" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
           <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="Bracketbird" />
@@ -722,19 +853,6 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <method />
-    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -760,6 +878,19 @@
       <envs />
       <properties />
       <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -830,30 +961,30 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="72" y="37" width="1555" height="1028" extended-state="0" />
+    <frame x="72" y="22" width="1555" height="1028" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.4324873" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25080386" sideWeight="0.67172897" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.4324873" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.328934" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39973873" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -878,13 +1009,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/bracketbird/client/model/tournament/Tournament.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="13" selection-start="1269" selection-end="1269" vertical-scroll-proportion="0.028248588" vertical-offset="285" max-vertical-offset="7935">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/bracketbird/client/gui/rtc/matches/MatchTableRow.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="21" column="17" selection-start="861" selection-end="861" vertical-scroll-proportion="0.19774011" vertical-offset="0" max-vertical-offset="2295">
@@ -901,16 +1025,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/bracketbird/client/model/tournament/TournamentLevel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="276" column="26" selection-start="8273" selection-end="8273" vertical-scroll-proportion="0.0" vertical-offset="3498" max-vertical-offset="6195">
-          <folding />
-        </state>
+        <state line="276" column="26" selection-start="8273" selection-end="8273" vertical-scroll-proportion="0.0" vertical-offset="3498" max-vertical-offset="6195" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/bracketbird/client/gui/rtc/ranking/MatchView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="11" selection-start="1093" selection-end="1093" vertical-scroll-proportion="0.0" vertical-offset="93" max-vertical-offset="2055">
-          <folding />
-        </state>
+        <state line="32" column="11" selection-start="1093" selection-end="1093" vertical-scroll-proportion="0.0" vertical-offset="93" max-vertical-offset="2055" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/bracketbird/client/gui/rtc/matches/RoundTable.java">
@@ -922,44 +1042,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/bracketbird/client/model/tournament/Round.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="42" selection-start="531" selection-end="531" vertical-scroll-proportion="0.0" vertical-offset="39" max-vertical-offset="570">
-          <folding />
-        </state>
+        <state line="26" column="42" selection-start="531" selection-end="531" vertical-scroll-proportion="0.0" vertical-offset="39" max-vertical-offset="570" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/bracketbird/client/model/tournament/GroupRound.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="23" selection-start="404" selection-end="404" vertical-scroll-proportion="0.0" vertical-offset="161" max-vertical-offset="765">
-          <folding />
-        </state>
+        <state line="22" column="23" selection-start="404" selection-end="404" vertical-scroll-proportion="0.0" vertical-offset="161" max-vertical-offset="765" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/bracketbird/client/gui/rtc/ranking/MatchesViewPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="19" selection-start="806" selection-end="806" vertical-scroll-proportion="0.0" vertical-offset="390" max-vertical-offset="1440">
-          <folding />
-        </state>
+        <state line="25" column="19" selection-start="806" selection-end="806" vertical-scroll-proportion="0.0" vertical-offset="390" max-vertical-offset="1440" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/bracketbird/client/gui/rtc/ranking/MatchesViewGrouping.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="33" selection-start="93" selection-end="93" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="450">
-          <folding />
-        </state>
+        <state line="5" column="33" selection-start="93" selection-end="93" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="450" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/bracketbird/client/gui/rtc/ranking/NotFinishedMatches.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="79" column="8" selection-start="2215" selection-end="2215" vertical-scroll-proportion="0.0" vertical-offset="714" max-vertical-offset="1470">
-          <folding />
-        </state>
+        <state line="79" column="8" selection-start="2215" selection-end="2215" vertical-scroll-proportion="0.0" vertical-offset="714" max-vertical-offset="1470" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/bracketbird/client/model/AGroupScheduler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="95" column="37" selection-start="2474" selection-end="2474" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1710">
-          <folding />
-        </state>
+        <state line="95" column="37" selection-start="2474" selection-end="2474" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1710" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/bracketbird/client/gui/rtc/ranking/GroupScoreSheet.java">
@@ -1018,13 +1126,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/bracketbird/client/gui/rtc/matches/AllResultsPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="11" selection-start="938" selection-end="938" vertical-scroll-proportion="0.0" vertical-offset="146" max-vertical-offset="870">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/bracketbird/client/gui/rtc/matches/EnterResultsPage.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="56" column="16" selection-start="1528" selection-end="1528" vertical-scroll-proportion="0.0" vertical-offset="506" max-vertical-offset="1215">
@@ -1039,13 +1140,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/war/Bracketbird.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="575" column="11" selection-start="15017" selection-end="15017" vertical-scroll-proportion="0.0" vertical-offset="7976" max-vertical-offset="8910">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/bracketbird/client/gui/rtc/StartPageController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="41" column="35" selection-start="1109" selection-end="1109" vertical-scroll-proportion="0.0" vertical-offset="210" max-vertical-offset="1230">
@@ -1056,9 +1150,7 @@
     <entry file="file://$PROJECT_DIR$/src/com/bracketbird/client/ServerWrapper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="24" column="20" selection-start="753" selection-end="753" vertical-scroll-proportion="0.0" vertical-offset="152" max-vertical-offset="660">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1079,9 +1171,7 @@
     <entry file="file://$PROJECT_DIR$/src/com/bracketbird/client/gui/rtc/RuningTournamentMenuPanel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="36" column="39" selection-start="1199" selection-end="1199" vertical-scroll-proportion="0.0" vertical-offset="332" max-vertical-offset="840">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1092,14 +1182,35 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/bracketbird/client/gui/rtc/matches/FieldManager.java">
+    <entry file="jar:///Applications/eclipse/plugins/com.google.gwt.eclipse.sdkbundle_2.6.0/gwt-2.6.0/gwt-user.jar!/com/google/gwt/uibinder/rebind/FieldManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="39" selection-start="1136" selection-end="1136" vertical-scroll-proportion="0.3503937" vertical-offset="392" max-vertical-offset="900">
+        <state line="39" column="13" selection-start="1431" selection-end="1431" vertical-scroll-proportion="0.14453961" vertical-offset="0" max-vertical-offset="6210">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/bracketbird/client/gui/rtc/matches/AllResultsPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="44" column="15" selection-start="1316" selection-end="1316" vertical-scroll-proportion="0.0" vertical-offset="1" max-vertical-offset="945">
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1195#1343#0" expanded="true" />
-            <element signature="e#1328#1329#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/bracketbird/client/gui/rtc/matches/FieldManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="56" column="26" selection-start="1663" selection-end="1663" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="930">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/war/Bracketbird.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="620" column="33" selection-start="16086" selection-end="16086" vertical-scroll-proportion="4.0995717" vertical-offset="5471" max-vertical-offset="9495">
+          <folding />
         </state>
       </provider>
     </entry>

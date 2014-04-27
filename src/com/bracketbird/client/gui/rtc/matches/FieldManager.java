@@ -50,5 +50,11 @@ public class FieldManager extends FlowComponent{
     private void logoImageClicked() {
         on = !on;
         getLogoImage().getImage().setUrl(on ? "fieldManager.png" : "fieldManager_greyscale.png");
+        if(on){
+            getLogoImage().addStyleName("rotating");
+        }
+        else{
+            getLogoImage().removeStyleName("rotating");
+        }
     }
 }
