@@ -573,9 +573,9 @@ font-family: klavika;
 
 .fieldManager{
     position: fixed;
-    top: 97px;
-    right: 23px;
-    z-index: 1000;
+    top: 94px;
+    right: 20px;
+    z-index: 5;
 
 }
 
@@ -615,10 +615,10 @@ font-family: klavika;
   }
 }
 .rotating {
-    animation: rotating 12s linear infinite;
-    -ms-animation: rotating 12s linear infinite;
-    -moz-animation: rotating 12s linear infinite;
-    -webkit-animation: rotating 12s linear infinite;
+    animation: rotating 20s linear infinite;
+    -ms-animation: rotating 20s linear infinite;
+    -moz-animation: rotating 20s linear infinite;
+    -webkit-animation: rotating 20s linear infinite;
 }
 
 
