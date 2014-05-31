@@ -32,6 +32,7 @@ public class RTC {
 
     private boolean reloading = false;
 
+
     private Map<Class<?>, REventHandler<REvent<?, ?>>> handlers = new HashMap<Class<?>, REventHandler<REvent<?, ?>>>();
     private FromServer from;
 

@@ -12,8 +12,6 @@ public class TournamentLevelConstant extends IntegerConstant {
     private static Map<Integer, TournamentLevelConstant> map = new HashMap<Integer, TournamentLevelConstant>();
 
     public static TournamentLevelConstant REMOVE = new TournamentLevelConstant("Remove last added stage", -2);
-
-
     public static TournamentLevelConstant CHOOSE = new TournamentLevelConstant("Add or remove stages", -1);
 
     public static TournamentLevelConstant SEEDING = new TournamentLevelConstant("Seeding", 10);
