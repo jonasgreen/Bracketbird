@@ -2,6 +2,8 @@ package com.bracketbird.client.gui.rtc.matches;
 
 import com.bracketbird.clientcore.gui.FlowComponent;
 import com.bracketbird.clientcore.gui.ImageComponent;
+import com.bracketbird.clientcore.gui.OnClose;
+import com.bracketbird.clientcore.gui.PopupManager;
 import com.bracketbird.clientcore.util.MouseOver;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -56,6 +58,14 @@ public class FieldManager extends FlowComponent{
         else{
             getLogoImage().removeStyleName("rotating");
         }
+
+        MatchManagerPanel p = new MatchManagerPanel();
+        PopupManager.show(p, new OnClose() {
+            @Override
+            public void onClose() {
+
+            }
+        });
 
 
     }

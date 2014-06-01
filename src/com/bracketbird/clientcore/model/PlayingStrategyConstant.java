@@ -19,7 +19,7 @@ public class PlayingStrategyConstant extends IntegerConstant {
     public static KeyValueList<Integer> LIST = new KeyValueList<Integer>();
     static{
         LIST.add(ONE_ROUND_AT_THE_TIME);
-        LIST.add(ONE_ROUND_AT_THE_TIME);
+        LIST.add(ONE_LEVEL_AT_THE_TIME);
         LIST.add(FAST_AS_POSSIBLE);
     }
 
