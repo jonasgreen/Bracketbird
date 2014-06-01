@@ -1,5 +1,8 @@
 package com.bracketbird.client.gui.rtc.matches;
 
+import com.bracketbird.client.gui.grid.ColWidth;
+import com.bracketbird.client.gui.grid.Grid;
+import com.bracketbird.client.gui.grid.GridRow;
 import com.bracketbird.clientcore.gui.FlowComponent;
 import com.bracketbird.clientcore.gui.LabelComponent;
 import com.bracketbird.clientcore.gui.ListContainer;
@@ -8,7 +11,6 @@ import com.bracketbird.clientcore.model.PauseStrategyConstant;
 import com.bracketbird.clientcore.model.PlayingStrategyConstant;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.TextArea;
 
 
 /**
@@ -27,25 +29,17 @@ public class MatchManagerPanel extends FlowComponent {
     public MatchManagerPanel() {
         setHeight("400px");
         setWidth("600px");
-        add(header);
+        //getElement().getStyle().setPadding(20, Style.Unit.PX);
 
+        add(header);
         add(playFields.getLabel());
         add(playFields.getGui());
 
-
-
-        FlowPanel fl = new FlowPanel();
-        fl.setHeight("40px");
-        add(fl);
-        fl.add(playingStrategyContainer.getLabel());
-        fl.add(playingStrategyContainer.getGui());
-        playingStrategyContainer.getLabel().getElement().getStyle().setFloat(Style.Float.LEFT);
-        playingStrategyContainer.getGui().getElement().getStyle().setFloat(Style.Float.LEFT);
-
-
-        add(pauseStrategyContainer.getLabel());
-        add(pauseStrategyContainer.getGui());
-
+        Grid grid = new Grid();
+        add(grid);
+        grid.addRow(30, 70, playingStrategyContainer);
+        grid.addRow(30, 70, pauseStrategyContainer);
+        pauseStrategyContainer.getGui().getElement().getStyle().setFloat(Style.Float.RIGHT);
 
     }
 
