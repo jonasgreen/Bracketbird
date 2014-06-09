@@ -1,7 +1,23 @@
 @font-face {
   font-family: "klavika";
-  src: url("Klavika-Regular.otf"); }
+  src: url("font/Klavika-Regular.otf"); }
+.text_basic, .text_label, .text_title {
+  font-family: "klavika";
+  font-stretch: normal;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1.25;
+  color: #97fb97; }
 
+.text_label {
+  font-size: 12px; }
+
+.text_title {
+  font-size: 28px; }
+
+@font-face {
+  font-family: "klavika";
+  src: url("font/Klavika-Regular.otf"); }
 .text_basic, .text_label, .text_title {
   font-family: "klavika";
   font-stretch: normal;
@@ -114,12 +130,6 @@ html, body {
 
 .dialogVPanel {
   margin: 5px; }
-
-.menu {
-  background: url("menu2.png") repeat-x; }
-
-.logobackground {
-  background: url("logobackground.png") repeat-x; }
 
 .imageFront {
   vertical-align: bottom; }
@@ -370,19 +380,13 @@ html, body {
   margin-left: 5px;
   margin-right: -15px; }
 
-.shadow_line {
-  background: url("shadow_line.png") no-repeat scroll center top transparent;
-  height: 10px;
-  margin: 0 auto;
-  width: 900px; }
-
 .bottomImage {
   overflow: hidden;
   position: fixed;
   right: 60px;
   bottom: 0px;
   z-index: 100000;
-  background-image: url("logoSmall.png");
+  background-image: url("img/logoSmall.png");
   height: 24px;
   width: 105px;
   -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);

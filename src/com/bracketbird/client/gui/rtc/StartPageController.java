@@ -40,7 +40,7 @@ public class StartPageController extends PageController<StartPage> {
     }
 
     public MenuComponent newMenuInstance() {
-        return new MenuImageAndTextComponent("Oscilloscope.png", "Activity and log");
+        return new MenuImageAndTextComponent("img/Oscilloscope.png", "Activity and log");
     }
 
 

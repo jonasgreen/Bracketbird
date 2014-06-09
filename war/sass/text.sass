@@ -1,0 +1,22 @@
+@font-face
+	font-family: "klavika"
+	src: url("font/Klavika-Regular.otf")
+
+
+$textColor: rgb(151,251,151)
+
+.text_basic
+	font-family: "klavika"
+	font-stretch: normal
+	font-style: normal
+	font-weight: normal
+	line-height: 1.25
+	color: $textColor
+  
+.text_label
+	@extend .text_basic
+	font-size: 12px
+
+.text_title
+	@extend .text_basic
+	font-size: 28px

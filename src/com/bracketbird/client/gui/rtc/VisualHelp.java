@@ -19,7 +19,6 @@ public class VisualHelp extends SimplePanelComponent {
 
 
     private ImageComponent hideVisualHelp;
-    private ImageComponent showVisualHelp;
 
     private List<VisualHelpItem> items = new ArrayList<VisualHelpItem>();
     private List<PopupPanel> popups = new ArrayList<PopupPanel>();
@@ -118,7 +117,7 @@ public class VisualHelp extends SimplePanelComponent {
 
     public ImageComponent getHideVisualHelp() {
         if (hideVisualHelp == null) {
-            hideVisualHelp = new ImageComponent("hideVisualHelp.png");
+            hideVisualHelp = new ImageComponent("img/hideVisualHelp.png");
             hideVisualHelp.getImage().addMouseOverHandler(MouseOver.POINTER);
             hideVisualHelp.getImage().addClickHandler(new ClickHandler() {
                 public void onClick(ClickEvent event) {

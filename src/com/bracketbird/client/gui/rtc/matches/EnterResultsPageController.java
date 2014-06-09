@@ -47,7 +47,7 @@ public class EnterResultsPageController extends PageController<EnterResultsPage>
     }
 
     public MenuComponent newMenuInstance() {
-        return new MenuImageAndTextComponent("Play.png", "Start tournament");
+        return new MenuImageAndTextComponent("img/Play.png", "Start tournament");
     }
 
 

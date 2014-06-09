@@ -26,9 +26,9 @@ public class StartPage extends Page<StartPageController> {
         StyleIt.add(content, RTCLayoutFac2.CONTENT.backgroundWhite());
 
         StartPageComponentManager manager = new StartPageComponentManager();
-        content.add(manager.add(new StartPageComponent(TeamsPageController.getInstance(), "Add Teams", "Teams1.png", 0)));
-        content.add(manager.add(new StartPageComponent(SettingsPageController.getInstance(), "Choose type of tournament", "Settings2.png", 1)), new TextLayout().paddingTop(30));
-        content.add(manager.add(new StartPageComponent(EnterResultsPageController.getInstance(), "Start tournament", "play2.png", 2)), new TextLayout().paddingTop(30));
+        content.add(manager.add(new StartPageComponent(TeamsPageController.getInstance(), "Add Teams", "img/Teams1.png", 0)));
+        content.add(manager.add(new StartPageComponent(SettingsPageController.getInstance(), "Choose type of tournament", "img/Settings2.png", 1)), new TextLayout().paddingTop(30));
+        content.add(manager.add(new StartPageComponent(EnterResultsPageController.getInstance(), "Start tournament", "img/play2.png", 2)), new TextLayout().paddingTop(30));
     }
 
 

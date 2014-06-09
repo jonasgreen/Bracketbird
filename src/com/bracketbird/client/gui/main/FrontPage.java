@@ -93,7 +93,6 @@ public class FrontPage extends Page<FrontPageController> implements TopPanelHold
         if (centerPanel == null) {
 
             centerPanel = new HorizontalComponent();
-            //centerPanel.add(new ImageComponent("front2.png"), new TextLayout(null, "252px"));
             VerticalComponent centerRight = new VerticalComponent();
             TextLayout headerLayout = new TextLayout(null, "600px").colorBaseDark().sizeGiga().paddingTop(0).paddingBottom(25).alignCenter();
             centerRight.add(new LabelComponent("Instant tournaments"), headerLayout);

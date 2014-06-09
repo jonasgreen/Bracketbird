@@ -29,7 +29,7 @@ public class MatchManagerPanel extends FlowComponent {
 
     private StringAreaContainer playFields = new StringAreaContainer("Name your play fields - one pr. line", false);
     public ListContainer<Integer> playingStrategyContainer = new ListContainer<Integer>("Assigning strategy", PlayingStrategyConstant.LIST, 1, false, false);
-    public ListContainer<Integer> pauseStrategyContainer = new ListContainer<Integer>("Stop assigning play fields", PauseStrategyConstant.LIST, 1, false, false);
+    public ListContainer<Integer> pauseStrategyContainer = new ListContainer<Integer>("Stop assigning", PauseStrategyConstant.LIST, 1, false, false);
 
 
     public MatchManagerPanel() {

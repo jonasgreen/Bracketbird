@@ -39,7 +39,7 @@ public class DatePanel extends HorizontalComponent implements ClickHandler {
 
     public Image getImage() {
         if (image == null) {
-            image = new Image("calendar_25.png");
+            image = new Image("img/calendar_25.png");
             //image.setPixelSize(25, 25);
             StyleIt.add(image, Name.MARGIN, "0 0 0 4");
         }

@@ -35,10 +35,10 @@ public class StagePanelHolder extends HorizontalComponent {
     private void init() {
 
 
-        add(new ImageComponent("start.png"));
+        add(new ImageComponent("img/start.png"));
         add(levelHolder);
         levelHolder.add(getQuestionMark(), lQuestion);
-        add(new ImageComponent("end.png"));
+        add(new ImageComponent("img/end.png"));
         add(LEVELS.getGui(), new TextLayout(0, 0, 0, 10, Vertical.MIDDLE).sizeSmall().padding(2).colorBaseDark());
 
         LEVELS.getGui().getListBox().addChangeHandler(new ChangeHandler() {
@@ -72,13 +72,13 @@ public class StagePanelHolder extends HorizontalComponent {
 
     private String getImageUrl(int levelType) {
         if (levelType == TournamentLevelConstant.SEEDING.getValue()) {
-            return "seeding.png";
+            return "img/seeding.png";
         }
         if (levelType == TournamentLevelConstant.CUP.getValue()) {
-            return "cup.png";
+            return "img/cup.png";
         }
         if (levelType == TournamentLevelConstant.GROUP.getValue()) {
-            return "group.png";
+            return "img/group.png";
         }
         throw new SystemException("tournament leveltype is not supported for image. Leveltype:" + levelType);
     }

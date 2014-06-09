@@ -37,7 +37,6 @@ public class RunningTournamentTop extends FlowComponent implements TournamentLis
 
 
     private void init() {
-        //images.add(new ImageComponent("bracketbird.png"), new TextLayout("40px", "175px"));
 
         if (!RTC.getInstance().getTournament().isViewOnly()) {
             HorizontalComponent content = getContent();
@@ -77,11 +76,7 @@ public class RunningTournamentTop extends FlowComponent implements TournamentLis
 
     public LockPanel getLockPanel() {
         if (lockPanel == null) {
-            lockPanel = new LockPanel(new ClickHandler() {
-                public void onClick(ClickEvent clickEvent) {
-
-                }
-            });
+            lockPanel = new LockPanel();
         }
         return lockPanel;
     }

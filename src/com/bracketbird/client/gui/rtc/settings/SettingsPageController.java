@@ -41,7 +41,7 @@ public class SettingsPageController extends PageController<SettingsPage> {
 
 
     public MenuComponent newMenuInstance() {
-        return new MenuImageAndTextComponent("Gear.png", "Change settings of tournament");
+        return new MenuImageAndTextComponent("img/Gear.png", "Change settings of tournament");
     }
 
 

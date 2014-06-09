@@ -41,7 +41,7 @@ public class LogPageController extends PageController<LogPage> {
     }
 
     public MenuComponent newMenuInstance() {
-        return new MenuImageAndTextComponent("Oscilloscope.png", "Activity and log");
+        return new MenuImageAndTextComponent("img/Oscilloscope.png", "Activity and log");
     }
 
 

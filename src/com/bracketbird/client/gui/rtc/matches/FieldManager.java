@@ -35,7 +35,7 @@ public class FieldManager extends FlowComponent{
 
     public ImageComponent getLogoImage() {
         if (logoImage == null) {
-            logoImage = new ImageComponent("fieldManager_greyscale.png");
+            logoImage = new ImageComponent("img/fieldManager_greyscale.png");
             logoImage.getImage().setStyleName("fieldManager_logoImage");
             logoImage.getImage().addMouseOverHandler(MouseOver.POINTER);
             logoImage.setTitle("Manage fields");
@@ -51,7 +51,7 @@ public class FieldManager extends FlowComponent{
 
     private void logoImageClicked() {
         on = !on;
-        getLogoImage().getImage().setUrl(on ? "fieldManager.png" : "fieldManager_greyscale.png");
+        getLogoImage().getImage().setUrl(on ? "img/fieldManager.png" : "img/fieldManager_greyscale.png");
         if(on){
             getLogoImage().addStyleName("rotating");
         }

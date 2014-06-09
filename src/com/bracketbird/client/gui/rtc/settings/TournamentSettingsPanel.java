@@ -71,7 +71,7 @@ public class TournamentSettingsPanel extends VerticalComponent {
 
     public void showInitPopoup() {
         StyleIt.add(initPopup, new TextLayout().border(0));
-        initPopup.add(new ImageComponent("vhSettingsStages.png"));
+        initPopup.add(new ImageComponent("img/vhSettingsStages.png"));
         initPopup.setPopupPosition(610, 190);
         initPopup.show();
     }
@@ -95,9 +95,8 @@ public class TournamentSettingsPanel extends VerticalComponent {
     public VisualHelp getVisualHelp() {
         if (visualHelp == null) {
             visualHelp = new VisualHelp();
-            //visualHelp.add(new VisualHelpItem(EnterResultsPageController.getInstance().getMenu(), 30, 140, "vhSettingsNextPage.png"));
-            visualHelp.add(new VisualHelpItem(getStagePanelHolder2().LEVELS.getGui(), 210, -20, "vhSettingsStages.png"));
-            visualHelp.add(new VisualHelpItem(getStagePanelHolder2().getStageHolder(), -110, 110, "vhSettingsSettings.png"));
+            visualHelp.add(new VisualHelpItem(getStagePanelHolder2().LEVELS.getGui(), 210, -20, "img/vhSettingsStages.png"));
+            visualHelp.add(new VisualHelpItem(getStagePanelHolder2().getStageHolder(), -110, 110, "img/vhSettingsSettings.png"));
 
         }
         return visualHelp;

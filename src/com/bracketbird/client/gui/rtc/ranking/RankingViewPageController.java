@@ -41,6 +41,6 @@ public class RankingViewPageController extends PageController<RankingViewPage> {
     }
 
     public MenuComponent newMenuInstance() {
-        return new MenuImageAndTextComponent("Presentation.png", "Presentation view");
+        return new MenuImageAndTextComponent("img/Presentation.png", "Presentation view");
     }
 }

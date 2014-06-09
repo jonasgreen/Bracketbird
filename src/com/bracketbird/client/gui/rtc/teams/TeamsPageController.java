@@ -61,7 +61,7 @@ public class TeamsPageController extends PageController<TeamsPage> {
     }
 
     public MenuComponent newMenuInstance() {
-        return new MenuImageAndTextComponent("Teams.png", "Add teams");
+        return new MenuImageAndTextComponent("img/Teams.png", "Add teams");
     }
 
 }

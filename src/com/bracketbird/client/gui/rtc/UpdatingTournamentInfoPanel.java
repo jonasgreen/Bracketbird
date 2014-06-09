@@ -14,7 +14,7 @@ public class UpdatingTournamentInfoPanel extends HorizontalComponent {
 
     private UpdatingTournamentInfoPanel() {
         super();
-        add(new ImageComponent("spin.png"), new TextLayout(20, 10, 20, 20));
+        add(new ImageComponent("img/spin.png"), new TextLayout(20, 10, 20, 20));
         add(getLabelComponent(), RTCLayoutFac2.h2().margin(0, 20, 0, 0));
 
     }

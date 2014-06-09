@@ -26,7 +26,7 @@ public class AddRemoveListContainer<T> extends DataContainer {
             this.listContainer = new ListContainer<T>("", list, 0, false, true);
             add(listContainer.getGui(), new TextLayout().sizeSmall().padding(2).colorBaseDark());
 
-            ImageComponent minus = new ImageComponent("minus.png");
+            ImageComponent minus = new ImageComponent("img/minus.png");
             minus.getImage().addClickHandler(new ClickHandler() {
                 public void onClick(ClickEvent event) {
                     removeRow(RowPanel.this);
@@ -38,7 +38,7 @@ public class AddRemoveListContainer<T> extends DataContainer {
             minus.setHeight("10px");
             minus.setWidth("10px");
 
-            ImageComponent plus = new ImageComponent("plus.png");
+            ImageComponent plus = new ImageComponent("img/plus.png");
             plus.getImage().addClickHandler(new ClickHandler() {
                 public void onClick(ClickEvent event) {
                     addRow();
