@@ -1,6 +1,7 @@
 package com.bracketbird.clientcore.gui;
 
 import com.google.gwt.dom.client.*;
+import com.google.gwt.dom.client.Style;
 import com.google.gwt.user.client.ui.*;
 import com.bracketbird.clientcore.style.*;
 

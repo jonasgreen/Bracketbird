@@ -1,18 +1,29 @@
-/** Add css rules here for your application. */
-/** Example rules used by the template application (remove for your app) */
 @font-face {
   font-family: "klavika";
   src: url("Klavika-Regular.otf"); }
 
+.text_basic, .text_label, .text_title {
+  font-family: "klavika";
+  font-stretch: normal;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1.25;
+  color: #97fb97; }
+
+.text_label {
+  font-size: 12px; }
+
+.text_title {
+  font-size: 28px; }
+
 html, body {
   height: 100%; }
 
-/** Most GWT widgets already have a style name defined */
 .gwt-SuggestBoxPopup {
   width: 380px;
   padding-left: 0px;
   padding-right: 0px;
-  background: #FFb200;
+  background: #ffb200;
   color: white;
   border-bottom: solid 1px #466c3a;
   border-top: solid 1px #466c3a;
@@ -23,12 +34,10 @@ html, body {
   font-family: Helvetica, Arial, sans-serif;
   font-size: 14px;
   padding: 2px 0px 2px 0px;
-  background-color: #FFb200;
+  background-color: #ffb200;
   color: #466c3a; }
 
 .gwt-SuggestBoxPopup .item-selected {
-  /**background-color:#FFb200;
-  */
   font-size: 28px; }
 
 .gwt-SuggestBoxPopup .suggestPopupTopLeft {
@@ -120,14 +129,14 @@ html, body {
 
 .subpage {
   height: 100%;
-  -moz-box-shadow: 4px 4px 5px #D2D8D5;
-  -webkit-box-shadow: 4px 4px 5px #D2D8D5;
-  box-shadow: 4px 4px 5px #D2D8D5; }
+  -moz-box-shadow: 4px 4px 5px #d2d8d5;
+  -webkit-box-shadow: 4px 4px 5px #d2d8d5;
+  box-shadow: 4px 4px 5px #d2d8d5; }
 
 .shadow {
-  -moz-box-shadow: 4px 4px 5px #D2D8D5;
-  -webkit-box-shadow: 4px 4px 5px #D2D8D5;
-  box-shadow: 4px 4px 5px #D2D8D5; }
+  -moz-box-shadow: 4px 4px 5px #d2d8d5;
+  -webkit-box-shadow: 4px 4px 5px #d2d8d5;
+  box-shadow: 4px 4px 5px #d2d8d5; }
 
 .shadowreset {
   -moz-box-shadow: 0px 0px 0px; }
@@ -144,19 +153,19 @@ html, body {
   -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
   border: solid 1px #b7b7b7;
-  background: #fff;
+  background: white;
   background: -webkit-gradient(linear, left top, left bottom, from(white), to(#ededed));
   background: -moz-linear-gradient(top, white, #ededed);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#ffffff', endColorstr = '#ededed'); }
 
 .gwt-Button:hover {
   background: #ededed;
-  background: -webkit-gradient(linear, left top, left bottom, from(white), to(#dcdcdc));
-  background: -moz-linear-gradient(top, white, #dcdcdc);
+  background: -webkit-gradient(linear, left top, left bottom, from(white), to(gainsboro));
+  background: -moz-linear-gradient(top, white, gainsboro);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#ffffff', endColorstr = '#dcdcdc'); }
 
 .gwt-Button:active {
-  color: #999;
+  color: #999999;
   background: -webkit-gradient(linear, left top, left bottom, from(#ededed), to(white));
   background: -moz-linear-gradient(top, #ededed, white); }
 
@@ -174,7 +183,7 @@ html, body {
   border: 1px solid black; }
 
 .colorbutton:hover, .colorbutton:visited {
-  background: none repeat scroll 0 0 #29ABE2;
+  background: none repeat scroll 0 0 #29abe2;
   color: white;
   cursor: pointer; }
 
@@ -192,7 +201,7 @@ html, body {
   border: 1px solid black; }
 
 .colorbuttonhelp:hover, .colorbuttonhelp:visited {
-  background: none repeat scroll 0 0 #29ABE2;
+  background: none repeat scroll 0 0 #29abe2;
   color: white;
   cursor: pointer; }
 
@@ -212,7 +221,7 @@ html, body {
   border: 2px solid black; }
 
 .colorbutton2:hover, .colorbutton2:visited {
-  background: none repeat scroll 0 0 #29ABE2;
+  background: none repeat scroll 0 0 #29abe2;
   color: white;
   cursor: pointer; }
 
@@ -237,7 +246,7 @@ html, body {
 .buttoncell:hover {
   border-top-color: #28597a;
   background: #28597a;
-  color: #ccc; }
+  color: #cccccc; }
 
 .buttoncell:active {
   border-top-color: #1b435e;
@@ -261,7 +270,7 @@ html, body {
   padding-right: 16px;
   padding-bottom: 6px;
   font-family: klavika;
-  border: 1px solid #F2A814; }
+  border: 1px solid #f2a814; }
 
 .colorbutton3:hover, .colorbutton3:visited {
   cursor: pointer;
@@ -285,7 +294,7 @@ html, body {
   padding-right: 16px;
   padding-bottom: 4px;
   font-family: klavika;
-  border: 1px solid #1A8CBC;
+  border: 1px solid #1a8cbc;
   white-space: nowrap; }
 
 .colorbutton4:hover, .colorbutton4:visited {
@@ -293,7 +302,7 @@ html, body {
   -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
   -moz-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
-  border: 1px solid #146A90; }
+  border: 1px solid #146a90; }
 
 .lineShadow {
   -webkit-box-shadow: 0 8px 16px -6px black;
@@ -301,76 +310,56 @@ html, body {
   box-shadow: 0 8px 16px -6px black; }
 
 .shadowFrontPage {
-  -moz-box-shadow: 5px 5px 5px #ccc;
-  -webkit-box-shadow: 5px 5px 5px #ccc;
-  box-shadow: 5px 5px 5px #ccc; }
+  -moz-box-shadow: 5px 5px 5px #cccccc;
+  -webkit-box-shadow: 5px 5px 5px #cccccc;
+  box-shadow: 5px 5px 5px #cccccc; }
 
 .sloganPage {
   border-top: 1px solid #f2f2f2;
-  /* Safari 4-5, Chrome 1-9 */
   background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fafafa), to(white));
-  /* Safari 5.1, Chrome 10+ */
   background: -webkit-linear-gradient(top, #fafafa, white);
-  /* Firefox 3.6+ */
   background: -moz-linear-gradient(top, #fafafa, white);
-  /* IE 10 */
   background: -ms-linear-gradient(top, #fafafa, white);
-  /* Opera 11.10+ */
   background: -o-linear-gradient(top, #fafafa, white); }
 
 .topPanel {
-
   height: 75px;
-  /* Safari 4-5, Chrome 1-9 */
   background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#e8e8e8), to(#dbdbdb));
-  /* Safari 5.1, Chrome 10+ */
   background: -webkit-linear-gradient(top, #e8e8e8, #dbdbdb);
-  /* Firefox 3.6+ */
   background: -moz-linear-gradient(top, #e8e8e8, #dbdbdb);
-  /* IE 10 */
   background: -ms-linear-gradient(top, #e8e8e8, #dbdbdb);
-  /* Opera 11.10+ */
   background: -o-linear-gradient(top, #e8e8e8, #dbdbdb);
-  border-bottom: 1px solid #c8c8c8;
-}
+  border-bottom: 1px solid #c8c8c8; }
 
 .matchView {
   position: relative;
   margin: 20px;
   width: 240px;
-  /* Safari 4-5, Chrome 1-9 */
   background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#3d3d3d), to(#333333));
-  /* Safari 5.1, Chrome 10+ */
   background: -webkit-linear-gradient(top, #3d3d3d, #333333);
-  /* Firefox 3.6+ */
   background: -moz-linear-gradient(top, #3d3d3d, #333333);
-  /* IE 10 */
   background: -ms-linear-gradient(top, #3d3d3d, #333333);
-  /* Opera 11.10+ */
   background: -o-linear-gradient(top, #3d3d3d, #333333);
   -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
   -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
-}
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.18); }
 
 .groupTable {
   margin: 20px;
-  border: 1px solid #4D4D4D;
+  border: 1px solid #4d4d4d;
   -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
   -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.18); }
 
 .groupHeaderRow {
-  border: 1px solid #C1C1C1;
+  border: 1px solid #c1c1c1;
   color: white;
-  background-color: black;
-  /*rgb(41,171,226);*/ }
+  background-color: black; }
 
 .groupTitleRow {
   width: 100%;
   color: #29abe2;
-  background-color: black;
-  /*rgb(41,171,226);*/ }
+  background-color: black; }
 
 .triangle-right {
   border-color: transparent transparent transparent #29abe2;
@@ -407,11 +396,10 @@ html, body {
   padding: 2px 0px 2px 0px;
   margin: 0px 20px 0px 40px; }
 
-.share_url{
-    -moz-box-shadow: inset 1px 0px 0px 0px rgba(0, 0, 0, .2);
-    -webkit-box-shadow: inset 1px 0px 0px 0px rgba(0, 0, 0, .2);
-    box-shadow: inset 1px 0px 0px 0px rgba(0, 0, 0, .2);
-}
+.share_url {
+  -moz-box-shadow: inset 1px 0px 0px 0px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: inset 1px 0px 0px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 1px 0px 0px 0px rgba(0, 0, 0, 0.2); }
 
 .bookmarkAdvice {
   overflow: hidden;
@@ -419,168 +407,130 @@ html, body {
   left: 20px;
   bottom: 0px;
   z-index: -1;
-  background-color:white;
-   }
+  background-color: white; }
 
-.startImage{
-  cursor:pointer;
-    width:128px;
-    height:128px;
-    position:fixed;
-    padding-left:40px;
-    padding-top:40px;
-}
+.startImage {
+  cursor: pointer;
+  width: 128px;
+  height: 128px;
+  position: fixed;
+  padding-left: 40px;
+  padding-top: 40px; }
 
-.startLabel{
-    opacity: 1.0;
-      cursor:pointer;
+.startLabel {
+  opacity: 1;
+  cursor: pointer; }
 
-}
+.resultContainer {
+  top: 0px;
+  right: 0px;
+  text-align: right;
+  background-color: yellow;
+  position: relative; }
 
-.resultContainer{
-    top:0px;
-    right:0px;
-    text-align:right;
-    background-color:yellow;
-    position:relative;
+.fieldBanner {
+  font-family: klavika;
+  height: 14px;
+  overflow: hidden;
+  position: absolute;
+  padding: 2px;
+  padding-left: 6px;
+  padding-right: 6px;
+  top: -12px;
+  left: 170px;
+  text-align: center;
+  z-index: 130;
+  background-color: orange; }
 
-}
+.notFinishedMathesTopLine {
+  position: fixed;
+  top: 0;
+  right: 0px;
+  height: 1px;
+  width: 404px;
+  border-top: 1px solid gray;
+  color: #979797;
+  font-family: klavika, Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  font-stretch: normal;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  line-height: 1.25;
+  -webkit-transition: top 3s ease-in-out;
+  -moz-transition: top 3s ease-in-out;
+  -o-transition: top 3s ease-in-out;
+  transition: top 3s ease-in-out; }
 
-.fieldBanner{
-font-family: klavika;
-    height:14px;
-    overflow: hidden;
-    position: absolute;
-    padding:2px;
-    padding-left:6px;
-    padding-right:6px;
-    top: -12px;
-    left: 170px;
-    text-align: center;
-    z-index: 130;
-    background-color: orange;
-}
+.matchesPlayedPanel {
+  position: fixed;
+  top: 0;
+  padding-top: 15px;
+  padding-left: 4px;
+  right: 0px;
+  width: 414px;
+  z-index: 1000000;
+  background-color: black;
+  font-family: klavika, Arial, Helvetica, sans-serif;
+  font-size: 38px;
+  font-stretch: normal;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  line-height: 1.25;
+  color: white;
+  border-bottom: 1px solid #333333; }
 
-.notFinishedMathesTopLine{
-    position: fixed;
-    top: 0;
-    right:0px;
-    height: 1px;
-    width: 404px;
-    border-top: 1px solid grey;
+.aMatchView {
+  position: fixed;
+  top: 0;
+  right: 0px;
+  height: 40px;
+  width: 400px;
+  white-space: nowrap;
+  color: #979797;
+  font-family: klavika, Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  font-stretch: normal;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  line-height: 1.25;
+  -webkit-transition: top 3s ease-in-out;
+  -moz-transition: top 3s ease-in-out;
+  -o-transition: top 3s ease-in-out;
+  transition: top 3s ease-in-out;
+  padding-right: 10px; }
 
-        color: rgb(151,151,151);
-        font-family: klavika,Arial,Helvetica,sans-serif;
-        font-size: 18px;
-        font-stretch: normal;
-        font-style: normal;
-        font-variant: normal;
-        font-weight: normal;
-        line-height: 1.25;
+.aMatchView_teamPanel {
+  width: 300px;
+  float: right;
+  overflow: hidden; }
 
+.aMatchView_teamPanel_finished {
+  color: gray; }
 
-     -webkit-transition: top 3s ease-in-out;
-    -moz-transition: top 3s ease-in-out;
-    -o-transition: top 3s ease-in-out;
-    transition: top 3s ease-in-out;
+.aMatchView_teamPanel_inProgress {
+  color: orange; }
 
-}
+.aMatchView_teamPanel_upcoming {
+  color: #c9c9c9; }
 
-.matchesPlayedPanel{
-    position: fixed;
-    top: 0;
-    padding-top:15px;
-    padding-left:4px;
-    right:0px;
-    width: 414px;
-    z-index: 1000000;
-    background-color:black;
+.aMatchView_infoPanel {
+  width: 100px;
+  float: left; }
 
-        font-family: klavika,Arial,Helvetica,sans-serif;
-        font-size: 38px;
-        font-stretch: normal;
-        font-style: normal;
-        font-variant: normal;
-        font-weight: normal;
-        line-height: 1.25;
-        color:white;
+.aMatchView_infoPanel_finished {
+  color: gray; }
 
-        border-bottom: 1px solid rgb(51,51,51);
-}
+.aMatchView_infoPanel_inProgress {
+  color: orange; }
 
-
-
-
-
-.aMatchView{
-    position: fixed;
-    top: 0;
-    right:0px;
-    height: 40px;
-    width: 400px;
-    white-space:nowrap;
-    color: rgb(151,151,151);
-        font-family: klavika,Arial,Helvetica,sans-serif;
-        font-size: 18px;
-        font-stretch: normal;
-        font-style: normal;
-        font-variant: normal;
-        font-weight: normal;
-        line-height: 1.25;
-
-     -webkit-transition: top 3s ease-in-out;
-    -moz-transition: top 3s ease-in-out;
-    -o-transition: top 3s ease-in-out;
-    transition: top 3s ease-in-out;
-    padding-right:10px;
-}
-
-.aMatchView_teamPanel{
-    width: 300px;
-    float: right;
-    overflow:hidden;
-}
-
-.aMatchView_teamPanel_finished{
-    color:grey;
-
-}
-
-.aMatchView_teamPanel_inProgress{
-      color: orange;
-}
-
-.aMatchView_teamPanel_upcoming{
-    color:rgb(201,201,201);
-}
-
-.aMatchView_infoPanel{
-    width: 100px;
-    float: left;
-}
-
-.aMatchView_infoPanel_finished{
-    color:grey;
-
-}
-
-.aMatchView_infoPanel_inProgress{
-    color: orange;
-}
-
-.aMatchView_infoPanel_upcoming{
-}
-
-.fieldManager{
-    position: fixed;
-    top: 94px;
-    right: 20px;
-    z-index: 5;
-
-}
-
-.fieldManager_logoImage{
-}
+.fieldManager {
+  position: fixed;
+  top: 94px;
+  right: 20px;
+  z-index: 5; }
 
 @keyframes rotating {
   from {
@@ -588,40 +538,30 @@ font-family: klavika;
     -ms-transform: rotate(0deg);
     -moz-transform: rotate(0deg);
     -webkit-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
-  }
+    -o-transform: rotate(0deg); }
+
   to {
     transform: rotate(360deg);
     -ms-transform: rotate(360deg);
     -moz-transform: rotate(360deg);
     -webkit-transform: rotate(360deg);
-    -o-transform: rotate(360deg);
-  }
-}
-@-webkit-keyframes rotating /* Safari and Chrome */ {
+    -o-transform: rotate(360deg); } }
+@-webkit-keyframes rotating {
   from {
     transform: rotate(0deg);
     -ms-transform: rotate(0deg);
     -moz-transform: rotate(0deg);
     -webkit-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
-  }
+    -o-transform: rotate(0deg); }
+
   to {
     transform: rotate(360deg);
     -ms-transform: rotate(360deg);
     -moz-transform: rotate(360deg);
     -webkit-transform: rotate(360deg);
-    -o-transform: rotate(360deg);
-  }
-}
+    -o-transform: rotate(360deg); } }
 .rotating {
-    animation: rotating 20s linear infinite;
-    -ms-animation: rotating 20s linear infinite;
-    -moz-animation: rotating 20s linear infinite;
-    -webkit-animation: rotating 20s linear infinite;
-}
-
-
-
-
-
+  animation: rotating 20s linear infinite;
+  -ms-animation: rotating 20s linear infinite;
+  -moz-animation: rotating 20s linear infinite;
+  -webkit-animation: rotating 20s linear infinite; }
