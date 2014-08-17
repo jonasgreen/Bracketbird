@@ -18,6 +18,7 @@
 @font-face {
   font-family: "klavika";
   src: url("font/Klavika-Light.otf"); }
+
 .text_basic, .text_label, .text_title {
   font-family: "klavika";
   font-stretch: normal;
