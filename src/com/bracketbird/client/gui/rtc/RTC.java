@@ -72,24 +72,28 @@ public class RTC {
     }
 
     private void initHandlers() {
+        //tournament
+        //createTournament (name)
+
         //Teams
         add(new CreateTeamEventHandler());
         add(new UpdateTeamNameEventHandler());
         add(new UpdateTeamInfoEventHandler());
         add(new UpdateTeamSeedingEventHandler());
         add(new DeleteTeamEventHandler());
+
         add(new UpdateSeedingEventHandler());
 
         //Level settings
         add(new CreateLevelEventHandler());
         add(new UpdateLevelEventHandler());
         add(new DeleteLevelEventHandler());
-
+        add(new LevelFinishedEventHandler());
+        //set teamranking(ids[])
 
         //Matches
         add(new LayoutMatchesEventHandler());
         add(new UpdateMatchResultEventHandler());
-        add(new LevelFinishedEventHandler());
         add(new UpdateMatchFieldEventHandler());
     }
 

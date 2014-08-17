@@ -6,6 +6,10 @@ import com.bracketbird.clientcore.model.PauseStrategyConstant;
 import com.bracketbird.clientcore.model.PlayingStrategyConstant;
 import com.bracketbird.clientcore.style.*;
 import com.google.gwt.dom.client.Style;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.TextArea;
 
 
 /**
@@ -22,10 +26,14 @@ public class MatchManagerPanel extends FlowComponent {
 
     protected TextLayout contentIntegerLayout = new TextLayout(0, 0, 0, 10, "18px", "50px", Horizontal.LEFT, Vertical.MIDDLE).sizeSmall().padding(2).alignRight().colorBaseDark();
 
+    private Label header;
+
 
 
     //private LabelComponent l = Texts.label("");
 
+
+    private Duo<TextArea> fields;
 
     private StringAreaContainer playFields = new StringAreaContainer("Name your play fields - one pr. line", false);
     public ListContainer<Integer> playingStrategyContainer = new ListContainer<Integer>("Assigning strategy", PlayingStrategyConstant.LIST, 1, false, false);
@@ -33,11 +41,12 @@ public class MatchManagerPanel extends FlowComponent {
 
 
     public MatchManagerPanel() {
+
         setHeight("600px");
         setWidth("400px");
         getElement().getStyle().setPadding(20, Style.Unit.PX);
 
-        add(Texts.title("Automatically assign play fields to upcoming matches"));
+        add(getHeader());
 
         add(playFields.getLabel(), labelLayout);
         add(playFields.getGui(), textAreaLayout);
@@ -49,6 +58,33 @@ public class MatchManagerPanel extends FlowComponent {
         //playingStrategyContainer.getGui().getElement().getStyle().setFloat(Style.Float.RIGHT);
         //pauseStrategyContainer.getGui().getElement().getStyle().setFloat(Style.Float.RIGHT);
 
+    }
+
+
+    public Duo<TextArea> getFieldsDuo() {
+        if (fields == null) {
+            TextArea t = new TextArea();
+            t.addClickHandler(new ClickHandler() {
+                @Override
+                public void onClick(ClickEvent event) {
+
+                }
+            });
+
+            fields = new Duo<TextArea>(Texts.label("nice"), t);
+        }
+        return fields;
+    }
+
+    public Label getHeader() {
+        if (header == null) {
+            createHeader();
+        }
+        return header;
+    }
+
+    protected void createHeader() {
+        header = Texts.title("Automatically assign play fields to upcoming matches");
     }
 
 }

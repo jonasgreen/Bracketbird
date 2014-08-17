@@ -13,7 +13,7 @@ public class DefaultColorScheme implements ColorScheme{
 
     private final String BASE = "#8E8E8E";
     private final String BASE_LIGHT = "#638e52";
-    private final String BASE_DARK = "#333333";
+    private final String BASE_DARK = "#37474f";
 
     private final String COMPL = "#FFb200";
     private final String COMPL_LIGHT = "#FFC94D";

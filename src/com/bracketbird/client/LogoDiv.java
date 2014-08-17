@@ -14,22 +14,22 @@ public class LogoDiv extends FlowComponent{
         int padding = 8;
         FlowComponent content = new FlowComponent();
         add(content);
-        content.getElement().getStyle().setBackgroundColor("black");
+        //content.getElement().getStyle().setBackgroundColor("black");
 
         setWidth("175px");
         //getElement().getStyle().setBackgroundColor("black");
 
         FlowComponent fl = new FlowComponent();
-        fl.getElement().getStyle().setBackgroundColor("black");
+        //fl.getElement().getStyle().setBackgroundColor("black");
         fl.add(new LabelComponent("BRACKET"));
         fl.getElement().getStyle().setFloat(Style.Float.LEFT);
-        content.add(fl, new TextLayout().colorBlue().sizeH2().padding(padding).paddingRight(0).paddingBottom(2).paddingLeft(12));
+        content.add(fl, new TextLayout().colorLightBlue().sizeH2().padding(padding).paddingRight(0).paddingBottom(2).paddingLeft(12));
 
         fl = new FlowComponent();
-        fl.getElement().getStyle().setBackgroundColor("black");
+        //fl.getElement().getStyle().setBackgroundColor("black");
         fl.add(new LabelComponent("BIRD"));
         fl.getElement().getStyle().setFloat(Style.Float.LEFT);
-        content.add(fl, new TextLayout().sizeH2().colorWhite().padding(padding).paddingLeft(0).paddingBottom(2).paddingRight(12));
+        content.add(fl, new TextLayout().sizeH2().colorGreyLight().padding(padding).paddingLeft(0).paddingBottom(2).paddingRight(12));
 
     }
 }

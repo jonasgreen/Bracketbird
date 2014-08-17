@@ -60,6 +60,8 @@ public class P implements Serializable {
 
     public static P COLOR_BLACK = new P(Name.COLOR, "#000000");
     public static P COLOR_BLUE = new P(Name.COLOR, "#29abe2");
+    public static P COLOR_BLUE_LIGHT = new P(Name.COLOR, "lightblue");
+
     public static P COLOR_DARK_BLUE = new P(Name.COLOR, "#1A8CBC");
 
     public static P COLOR_GREY_LIGHT = new P(Name.COLOR, "#E7E7DE");
@@ -68,6 +70,7 @@ public class P implements Serializable {
 
 
     public static P COLOR_GREY = new P(Name.COLOR, "#999999");
+    public static P COLOR_GREY_LIGHT2 = new P(Name.COLOR, "#C9C9C9");
     public static P COLOR_GREY_CA = new P(Name.COLOR, "#CACACA");
 
 

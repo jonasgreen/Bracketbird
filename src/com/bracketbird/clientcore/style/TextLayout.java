@@ -405,6 +405,11 @@ public class TextLayout extends Layout17 {
         return this;
     }
 
+    public TextLayout colorLightBlue() {
+        getProperties().add(P.COLOR_BLUE_LIGHT);
+        return this;
+    }
+
     public TextLayout colorDarkBlue() {
         getProperties().add(P.COLOR_DARK_BLUE);
         return this;
@@ -487,6 +492,11 @@ public class TextLayout extends Layout17 {
 
     public TextLayout colorGrey() {
         getProperties().add(P.COLOR_GREY);
+        return this;
+    }
+
+    public TextLayout colorGreyLight() {
+        getProperties().add(P.COLOR_GREY_LIGHT2);
         return this;
     }
 
