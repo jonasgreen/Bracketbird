@@ -289,7 +289,7 @@ public class RTC {
         RankingViewPageController.getInstance().clear();
 
         initGuiListeners(getTournament());
-        PageFlow.show(PageFlow.activeController);
+        Application.show(Application.get().activePageController());
 
     }
 

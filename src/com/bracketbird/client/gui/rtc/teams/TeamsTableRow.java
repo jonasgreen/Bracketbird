@@ -2,13 +2,22 @@ package com.bracketbird.client.gui.rtc.teams;
 
 
 import com.bracketbird.client.gui.rtc.RTC;
-import com.bracketbird.client.gui.rtc.event.*;
+import com.bracketbird.client.gui.rtc.event.REvent;
+import com.bracketbird.client.gui.rtc.event.REventListener;
+import com.bracketbird.client.gui.rtc.event.UpdateTeamInfoEvent;
+import com.bracketbird.client.gui.rtc.event.UpdateTeamNameEvent;
+import com.bracketbird.client.gui.rtc.event.UpdateTeamSeedingEvent;
 import com.bracketbird.client.gui.rtc.matches.SeedingPageController;
-import com.bracketbird.client.model.*;
-import com.bracketbird.client.table.*;
+import com.bracketbird.client.model.Team;
+import com.bracketbird.client.table.CellData;
+import com.bracketbird.client.table.EditOnlyTableData;
 import com.bracketbird.client.table.LabelCellData;
-import com.bracketbird.clientcore.appcontrol.PageFlow;
-import com.bracketbird.clientcore.style.*;
+import com.bracketbird.client.table.Table;
+import com.bracketbird.client.table.TableRow;
+import com.bracketbird.clientcore.appcontrol.Application;
+import com.bracketbird.clientcore.style.Name;
+import com.bracketbird.clientcore.style.P;
+import com.bracketbird.clientcore.style.TextLayout;
 import com.bracketbird.clientcore.util.StringUtil;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -55,7 +64,6 @@ public class TeamsTableRow extends TableRow {
 
         refreshRowValues();
         paintFocusLost();
-        StyleIt.add(this, new TextLayout().borderBottom(1).borderColor(P.COLOR_GREY_LIGHT));
     }
 
     private void refreshRowValues() {
@@ -90,7 +98,7 @@ public class TeamsTableRow extends TableRow {
         if (columnSeeding == null) {
             columnSeeding = new LabelCellData(this, "", new ClickHandler() {
                 public void onClick(ClickEvent event) {
-                    PageFlow.popUp(SeedingPageController.getInstance());
+                    Application.popUp(SeedingPageController.getInstance());
                 }
             });
         }

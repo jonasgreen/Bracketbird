@@ -95,42 +95,4 @@ public class DialogComponent extends DialogBox {
     }
 
 
-    public static DialogComponent showSimpleOk(String title, final PageController nextPage, String... labels) {
-        DialogComponent dc = showSimpleOk(title, labels);
-        dc.getButton(Response.OK).getButton().addClickHandler(new ClickHandler() {
-            public void onClick(ClickEvent event) {
-                if (nextPage != null) {
-                    PageFlow.show(nextPage);
-                }
-                else{
-                    //PageFlow.show(FrontPageController.getInstance());
-                }
-            }
-        });
-        return dc;
-    }
-
-
-    public static DialogComponent showSimpleOk(String title, String... labels) {
-        DialogComponent dc = new DialogComponent(false, true, Response.OK);
-        dc.setWidth("300px");
-        dc.setText(title);
-        VerticalComponent vc = new VerticalComponent();
-        for (String l : labels) {
-            if (l == null || l.equals("")) {
-                vc.add(new SimplePanelComponent(), new Layout17(0, 0, 0, 0, "20px", "20px"));
-            }
-            else {
-                LabelComponent la = new LabelComponent(l);
-                la.getLabel().setWordWrap(false);
-                vc.add(la, new Layout17(0, 0, 0, 0));
-            }
-        }
-        dc.add(vc, new Layout17(12, 4, 12, 4));
-        dc.show(null);
-        dc.getButton(Response.OK).getButton().setFocus(true);
-        return dc;
-    }
-
-
 }

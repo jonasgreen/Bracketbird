@@ -1,7 +1,6 @@
 package com.bracketbird.client.gui.rtc;
 
 import com.bracketbird.client.model.tournament.*;
-import com.bracketbird.client.url.UrlCommand;
 import com.bracketbird.clientcore.util.MouseOver;
 import com.google.gwt.event.dom.client.*;
 import com.google.gwt.user.client.*;
@@ -106,7 +105,7 @@ public class RunningTournamentTop extends FlowComponent implements TournamentLis
             feedback.addMouseOver(MouseOver.POINTER);
             feedback.getLabel().addClickHandler(new ClickHandler() {
                 public void onClick(ClickEvent event) {
-                    UrlCommand.openUrl("http://www.facebook.com/Bracketbird", "Bracketbird");
+                    openUrl("http://www.facebook.com/Bracketbird", "Bracketbird");
                 }
             });
         }
@@ -124,6 +123,12 @@ public class RunningTournamentTop extends FlowComponent implements TournamentLis
         getTournamentName().setText(RTC.getInstance().getTournament().getName());
         Window.setTitle(RTC.getInstance().getTournament().getName());
     }
+
+
+    public static native void openUrl(String url, String name)/*-{
+        $wnd.open(url, name);
+    }-*/;
+
 
 
 }

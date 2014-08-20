@@ -47,7 +47,7 @@ public class SetupPanel extends SimplePanelComponent {
         HyperlinkLabelComponent link = new HyperlinkLabelComponent("teams and players.", RTCLayoutFac2.h2().underline().paddingLeft(6));
         link.addClickHandler(new ClickHandler() {
             public void onClick(ClickEvent event) {
-                PageFlow.show(TeamsPageController.getInstance());
+                Application.show(TeamsPageController.getInstance());
             }
         });
         one.add(link, new TextLayout(Vertical.MIDDLE));
@@ -63,7 +63,7 @@ public class SetupPanel extends SimplePanelComponent {
         HyperlinkLabelComponent link = new HyperlinkLabelComponent("tournament settings.", RTCLayoutFac2.h2().underline().paddingLeft(6));
         link.addClickHandler(new ClickHandler() {
             public void onClick(ClickEvent event) {
-                PageFlow.show(SettingsPageController.getInstance());
+                Application.show(SettingsPageController.getInstance());
             }
         });
         one.add(link, new TextLayout(Vertical.MIDDLE));

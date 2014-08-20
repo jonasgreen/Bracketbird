@@ -32,11 +32,10 @@ public class FrontPageController extends PageController<FrontPage> {
 
 
     public void afterLoad() {
-        getPage().getContent().setWidth(Window.getClientWidth() + "px");
 
     }
 
-    public void unload() {
+    public void beforeUnload() {
     }
 
     public FrontPage newInstance() {

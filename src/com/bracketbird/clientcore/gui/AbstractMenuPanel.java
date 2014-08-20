@@ -48,7 +48,7 @@ public abstract class AbstractMenuPanel {
                 if (controller != null) {
                     controller.selected(AbstractMenuPanel.this);
                 }
-                PageFlow.show(pc);
+                Application.show(pc);
             }
         });
     }

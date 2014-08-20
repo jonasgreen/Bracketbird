@@ -16,10 +16,9 @@ public class ErrorPageController extends PageController<ErrorPage> {
         super(AppPageController.getInstance(), HISTORY_NAME);
     }
 
-    public static ErrorPageController getInstance() {
+    public static ErrorPageController get() {
         if (instance == null) {
             instance = new ErrorPageController();
-
         }
         return instance;
     }
@@ -34,7 +33,7 @@ public class ErrorPageController extends PageController<ErrorPage> {
     public void afterLoad() {
     }
 
-    public void unload() {
+    public void beforeUnload() {
     }
 
     public ErrorPage newInstance() {
@@ -47,6 +46,11 @@ public class ErrorPageController extends PageController<ErrorPage> {
 
     public MenuComponent newMenuInstance() {
         return new MenuLinkComponent("");
+    }
+
+    public void tokenError(String token){
+        getPage().getHeader().setText("Ooops, unable to load page");
+        getPage().getText().setText("Unable to load tournament with id = "+token+". Please verify that there is no typo in the address bar.");
     }
 
 }

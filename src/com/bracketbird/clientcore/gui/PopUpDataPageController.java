@@ -46,7 +46,7 @@ public class PopUpDataPageController extends PageController<PopUpDataPage> {
         page.setFocus();
     }
 
-    public void unload() {
+    public void beforeUnload() {
 
     }
 

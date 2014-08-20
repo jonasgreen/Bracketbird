@@ -27,7 +27,7 @@ public class TeamsTable extends Table {
 
     public TeamsTable(TableManager tm) {
         super(tm);
-        addHeaderRow(new TeamHeaderRow(this));
+        //addHeaderRow(new TeamHeaderRow(this));
 
         RTC.getInstance().getTournament().addTeamsListener(new TournamentListener<TournamentTeamEvent>() {
 

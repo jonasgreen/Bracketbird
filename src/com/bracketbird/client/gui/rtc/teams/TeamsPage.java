@@ -121,7 +121,7 @@ public class TeamsPage extends Page<TeamsPageController> {
             editSeeding.getLabel().addMouseOverHandler(MouseOver.POINTER);
             editSeeding.getLabel().addClickHandler(new ClickHandler() {
                 public void onClick(ClickEvent event) {
-                    PageFlow.popUp(SeedingPageController.getInstance());
+                   Application.popUp(SeedingPageController.getInstance());
 
                 }
             });
@@ -136,7 +136,7 @@ public class TeamsPage extends Page<TeamsPageController> {
             nextButton.setStyleName("colorbutton4");
             nextButton.addClickHandler(new ClickHandler() {
                 public void onClick(ClickEvent event) {
-                    PageFlow.show(SettingsPageController.getInstance());
+                    Application.show(SettingsPageController.getInstance());
                 }
             });
         }

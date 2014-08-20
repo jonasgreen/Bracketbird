@@ -38,7 +38,7 @@ public abstract class PageController<P extends Page> {
     public void afterLoad() {
     }
 
-    public void unload() {
+    public void beforeUnload() {
     }
 
 
@@ -76,33 +76,6 @@ public abstract class PageController<P extends Page> {
         return menuComponent;
     }
 
-    //returns the state that this site has permission to be shown in.
-    //public abstract UserStateConstant getLegalState();
-
-
-    public boolean pagePermission(PageController toLoad) {
- /*       String[] errMsg = PermissionManager.getInstance().pagePermission(toLoad);
-        if (errMsg != null) {
-            DialogComponent.showSimpleOk("Permission denied", errMsg).addCloseHandler(new CloseHandler<PopupPanel>() {
-                public void onClose(CloseEvent<PopupPanel> popupPanelCloseEvent) {
-                    //the old menu is set again
-                    if (getChild() != null) {
-                        setSelectedMenu(getChild().getMenu());
-                    }
-                }
-            });
-            return false;
-
-        }*/
-        return true;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-
-
-    public PageController getChild() {
-        return childController;
-    }
-
     public void setChild(PageController pc) {
         childController = pc;
     }
@@ -119,23 +92,8 @@ public abstract class PageController<P extends Page> {
 
 
     public void clear() {
-        /*if (menuComponent != null) {
-            menuComponent.removeFromParent();
-        }
-
-        
-        if (page != null) {
-            page.removeFromParent();
-        }
-        */
         childController = null;
         page = null;
-        //menuComponent = null;
-    }
-
-
-    public void loadParams(HashMap<String, String> pMap) {
-        //throw new SystemException("loadParams not implemented by PageController + " + this.getClass().getName());
     }
 
 

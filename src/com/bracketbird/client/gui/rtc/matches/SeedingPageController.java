@@ -35,7 +35,7 @@ public class SeedingPageController extends PageController<SeedingPage> {
         getPage().setWidth("400px");
     }
 
-    public void unload() {
+    public void beforeUnload() {
     }
 
 

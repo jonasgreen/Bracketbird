@@ -48,6 +48,7 @@ public class ErrorPage extends Page<ErrorPageController>{
         holder.add(vc, new TextLayout(null, PAGE_WIDTH + "px", Horizontal.CENTER));
         content.add(holder, new TextLayout("400px", "100%").margin(100,0,0,0).backgroundBlue());
         StyleIt.add(this, new TextLayout().backgroundBlue());
+
     }
 
 

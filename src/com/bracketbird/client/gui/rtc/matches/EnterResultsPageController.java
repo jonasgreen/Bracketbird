@@ -34,7 +34,7 @@ public class EnterResultsPageController extends PageController<EnterResultsPage>
     public void afterLoad() {
     }
 
-    public void unload() {
+    public void beforeUnload() {
     }
 
 

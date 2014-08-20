@@ -1,16 +1,23 @@
 package com.bracketbird.client.gui.rtc;
 
 
-import com.bracketbird.client.gui.rtc.teams.TeamsPageController;
-import com.bracketbird.clientcore.appcontrol.PageFlow;
-import com.google.gwt.event.dom.client.*;
-import com.google.gwt.event.logical.shared.*;
-import com.google.gwt.user.client.ui.*;
-import com.bracketbird.clientcore.gui.*;
-import com.bracketbird.clientcore.style.*;
-import com.bracketbird.clientcore.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import java.util.*;
+import com.bracketbird.client.gui.rtc.teams.TeamsPageController;
+import com.bracketbird.clientcore.appcontrol.Application;
+import com.bracketbird.clientcore.gui.FlowComponent;
+import com.bracketbird.clientcore.gui.ImageComponent;
+import com.bracketbird.clientcore.gui.LabelComponent;
+import com.bracketbird.clientcore.gui.SimplePanelComponent;
+import com.bracketbird.clientcore.style.StyleIt;
+import com.bracketbird.clientcore.style.TextLayout;
+import com.bracketbird.clientcore.util.MouseOver;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.logical.shared.CloseEvent;
+import com.google.gwt.event.logical.shared.CloseHandler;
+import com.google.gwt.user.client.ui.PopupPanel;
 
 /**
  *
@@ -44,7 +51,7 @@ public class VisualHelp extends SimplePanelComponent {
         p.setStyleName("colorbutton4");
         p.addClickHandler(new ClickHandler() {
             public void onClick(ClickEvent event) {
-                PageFlow.show(TeamsPageController.getInstance());
+                Application.show(TeamsPageController.getInstance());
             }
         });
 
@@ -69,7 +76,7 @@ public class VisualHelp extends SimplePanelComponent {
         p.setStyleName("colorbutton4");
         p.addClickHandler(new ClickHandler() {
             public void onClick(ClickEvent event) {
-                PageFlow.show(TeamsPageController.getInstance());
+                Application.show(TeamsPageController.getInstance());
             }
         });
 

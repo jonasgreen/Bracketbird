@@ -6,7 +6,8 @@ import com.bracketbird.client.gui.rtc.health.LogPageController;
 import com.bracketbird.client.gui.rtc.ranking.RankingViewPageController;
 import com.bracketbird.client.gui.rtc.teams.TeamsPageController;
 import com.bracketbird.client.model.keys.TournamentId;
-import com.bracketbird.clientcore.appcontrol.PageFlow;
+import com.bracketbird.clientcore.appcontrol.Application;
+import com.bracketbird.clientcore.appcontrol.RunningTournamentContext;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,15 +34,12 @@ public class EventManager {
 
     public void start(List<REvent> doneEvs, boolean justCreated) {
         executeInitialServerEvents(doneEvs);
+        Application.get().shiftApplicationContext(RunningTournamentContext.get());
         if (RTC.getInstance().getTournament().isViewOnly()) {
-            PageFlow.show(RankingViewPageController.getInstance());
-
-        }
-        else if(justCreated){
-            PageFlow.show(StartPageController.getInstance());
+            Application.show(RankingViewPageController.getInstance());
         }
         else{
-            PageFlow.show(TeamsPageController.getInstance());
+            Application.show(TeamsPageController.getInstance());
         }
     }
 

@@ -61,7 +61,7 @@ public class TournamentSettingsPanel extends VerticalComponent {
             nextButton.setStyleName("colorbutton4");
             nextButton.addClickHandler(new ClickHandler() {
                 public void onClick(ClickEvent event) {
-                    PageFlow.show(EnterResultsPageController.getInstance());
+                    Application.show(EnterResultsPageController.getInstance());
                 }
             });
         }

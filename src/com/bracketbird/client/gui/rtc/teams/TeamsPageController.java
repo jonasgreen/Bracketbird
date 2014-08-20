@@ -36,19 +36,6 @@ public class TeamsPageController extends PageController<TeamsPage> {
             RTC.getInstance().createTeam();
         }
         getPage().setFocus(true);
-        /*if (firstShow && RTC.getInstance().getSync().getDoneEvents().size()< 5) {
-            firstShow = false;
-            OkWarning gc = new OkWarning("Don't forget to bookmark this tournament for later access");
-            gc.setTitle("Bookmark this tournament");
-
-            PopupManager.show(gc, new OnClose() {
-                public void onClose() {
-                    getPage().setFocus(true);
-                }
-            });
-            gc.getOkButton().getButton().setFocus(true);
-        }
-        */
 
     }
 
