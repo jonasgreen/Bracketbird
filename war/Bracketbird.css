@@ -1,40 +1,40 @@
 @font-face {
   font-family: "klavika";
   src: url("font/Klavika-Light.otf"); }
-.text_basic, .text_label, .text_title {
+
+html{
+  height: 100%;
+}
+
+body {
+  height: 100%;
   font-family: "klavika";
-  font-stretch: normal;
-  font-style: normal;
-  font-weight: normal;
-  line-height: 1.25;
-  color: #97fb97; }
+      font-size: 14px;
+      font-stretch: normal;
+      font-style: normal;
+      font-weight: normal;
+      line-height: 1.25;
+      color: #37474f;
+}
 
-.text_label {
-  font-size: 12px; }
+.menuPanel{
 
-.text_title {
-  font-size: 28px; }
+}
 
-@font-face {
-  font-family: "klavika";
-  src: url("font/Klavika-Light.otf"); }
+.menuItem{
+    padding:20px;
+    font-size: 28px;
+    float: left;
 
-.text_basic, .text_label, .text_title {
-  font-family: "klavika";
-  font-stretch: normal;
-  font-style: normal;
-  font-weight: normal;
-  line-height: 1.25;
-  color: #97fb97; }
+}
 
-.text_label {
-  font-size: 12px; }
+.menuItem_active{
+}
 
-.text_title {
-  font-size: 28px; }
+.menuItem_passive{
+    color: #C9C9C9;
+}
 
-html, body {
-  height: 100%; }
 
 .gwt-SuggestBoxPopup {
   width: 380px;
@@ -405,14 +405,78 @@ html, body {
 .frontPage{
     display: flex;
     flex-direction: column;
-    background-color: yellow;
 }
 
-.logoDiv{
-    width: 600px;
-    background-color: red;
+
+.logo{
+    padding: 20px;
+    padding-top: 30px;
+
+    width: 900px;
+    margin: auto;
+    font-size: 22px;
+}
+
+.logoRight{
+    color: #C9C9C9;
+}
+
+.logoLeft{
+    color: lightblue;
+}
+
+
+.frontPage_createTournamentPanel{
+    padding:20px;
+    padding-top:125px;
+    padding-bottom:200px;
+    text-align: center;
+    width:900px;
     margin: auto;
 }
+
+.frontPage_createTournamentPanel_title{
+    font-size: 48px;
+    padding-bottom: 20px;
+}
+
+
+.frontPage_createTournamentPanel_noAccountLabel{
+    font-size: 14px;
+    padding-top: 6px;
+    color: #999999;
+}
+
+
+.frontPage_slogans{
+    border-top: 1px solid #f2f2f2;
+    background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fafafa), to(white));
+    background: -webkit-linear-gradient(top, #fafafa, white);
+    background: -moz-linear-gradient(top, #fafafa, white);
+    background: -ms-linear-gradient(top, #fafafa, white);
+    background: -o-linear-gradient(top, #fafafa, white);
+    padding: 20px;
+    padding-top: 40px;
+}
+
+
+.slogan{
+    margin: auto;
+    width: 900px;
+    margin: auto;
+}
+
+.slogan_header{
+    font-size: 28px;
+}
+
+.slogan_text{
+    color: #8E8E8E;
+    font-size: 18px;
+    text-align: justify;
+    padding-bottom: 30px;
+}
+
 
 
 .share_url {

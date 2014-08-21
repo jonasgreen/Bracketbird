@@ -1,7 +1,6 @@
 package com.bracketbird.client.gui.rtc.health;
 
 
-import com.bracketbird.client.gui.rtc.RunningTournamentPageController;
 import com.bracketbird.client.gui.rtc.event.REvent;
 import com.bracketbird.client.service.BBService;
 import com.bracketbird.clientcore.appcontrol.PageController;
@@ -18,11 +17,8 @@ import java.util.Date;
 public class LogPageController extends PageController<LogPage> {
 
     private static LogPageController instance;
-    public static String HISTORY_NAME = "logpage";
-
 
     private LogPageController() {
-        super(RunningTournamentPageController.getInstance(), HISTORY_NAME);
     }
 
     public static LogPageController getInstance() {

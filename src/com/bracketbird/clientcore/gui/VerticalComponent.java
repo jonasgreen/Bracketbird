@@ -20,7 +20,7 @@ public class VerticalComponent extends CellComponent implements ClickHandler, Mo
         super();
         addDomHandler(this, ClickEvent.getType());
         addDomHandler(this, MouseOverEvent.getType());
-        initWidget(verticalPanel);
+        add(verticalPanel);
     }
 
 

@@ -45,15 +45,9 @@ public class ActionHandlerRegistry {
 
 
     private static void initHandlers() {
-    	
-    	
-        //SINGLE APP INFO
-        add(new GetSingleAppInfoHandler());
 
         add(new GetUUIDHandler());
 
-        //GENERICS
-        add(new GetAllHandler());
         add(new GetHandler());
         add(new FindByHandler());
         add(new DeleteHandler());

@@ -1,10 +1,9 @@
 package com.bracketbird.client.gui.rtc.matches;
 
 
-import com.bracketbird.client.gui.rtc.RunningTournamentPageController;
-import com.bracketbird.client.model.*;
-import com.bracketbird.clientcore.appcontrol.*;
-import com.bracketbird.clientcore.gui.*;
+import com.bracketbird.clientcore.appcontrol.PageController;
+import com.bracketbird.clientcore.gui.MenuComponent;
+import com.bracketbird.clientcore.gui.MenuImageAndTextComponent;
 
 /**
  *
@@ -12,11 +11,8 @@ import com.bracketbird.clientcore.gui.*;
 public class EnterResultsPageController extends PageController<EnterResultsPage> {
 
     private static EnterResultsPageController instance;
-    public static String HISTORY_NAME = "EnterResultsPageController";
-
 
     private EnterResultsPageController() {
-        super(RunningTournamentPageController.getInstance(), HISTORY_NAME);
     }
 
     public static EnterResultsPageController getInstance() {

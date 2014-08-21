@@ -24,12 +24,12 @@ public class SimpleFlowComponent extends CellComponent {
 
     public SimpleFlowComponent() {
         super();
-        initWidget(flowPanel);
+        add(flowPanel);
     }
 
     public SimpleFlowComponent(GuiComponent component, TextLayout layout) {
         super();
-        initWidget(flowPanel);
+        add(flowPanel);
         add(component, layout);
     }
 

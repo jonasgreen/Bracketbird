@@ -10,10 +10,8 @@ import com.bracketbird.clientcore.gui.MenuLinkComponent;
 public class ErrorPageController extends PageController<ErrorPage> {
 
     private static ErrorPageController instance;
-    public static String HISTORY_NAME = "error";
 
     private ErrorPageController() {
-        super(AppPageController.getInstance(), HISTORY_NAME);
     }
 
     public static ErrorPageController get() {

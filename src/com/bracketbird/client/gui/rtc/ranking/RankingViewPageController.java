@@ -1,9 +1,9 @@
 package com.bracketbird.client.gui.rtc.ranking;
 
 
-import com.bracketbird.client.gui.rtc.RunningTournamentPageController;
-import com.bracketbird.clientcore.appcontrol.*;
-import com.bracketbird.clientcore.gui.*;
+import com.bracketbird.clientcore.appcontrol.PageController;
+import com.bracketbird.clientcore.gui.MenuComponent;
+import com.bracketbird.clientcore.gui.MenuImageAndTextComponent;
 
 /**
  *
@@ -11,11 +11,9 @@ import com.bracketbird.clientcore.gui.*;
 public class RankingViewPageController extends PageController<RankingViewPage> {
 
     private static RankingViewPageController instance;
-    public static String HISTORY_NAME = "RankingViewPageController";
 
 
     private RankingViewPageController() {
-        super(RunningTournamentPageController.getInstance(), HISTORY_NAME);
     }
 
     public static RankingViewPageController getInstance() {
@@ -27,9 +25,10 @@ public class RankingViewPageController extends PageController<RankingViewPage> {
 
 
     public void afterLoad() {
-        if(getPage().getRankingPanel() != null){
+        /*if(getPage().getRankingPanel() != null){
             getPage().getRankingPanel().relayout();
         }
+        */
     }
 
     public RankingViewPage newInstance() {

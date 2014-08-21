@@ -51,7 +51,6 @@ public class Bracketbird extends com.bracketbird.clientcore.appcontrol.AppEntry 
         });
 
         loadPage(token);
-        BBService.refreshServer();
     }
 
     private void loadPage(String token) {

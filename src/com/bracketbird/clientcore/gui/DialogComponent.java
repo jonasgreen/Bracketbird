@@ -33,7 +33,7 @@ public class DialogComponent extends DialogBox {
         super(autoHide, modal);
         this.responses = responses;
         //fails if initWidget is called
-        //    initWidget(dialogBox);
+        //    add(dialogBox);
     }
 
     public void show(DialogCallBack callBack) {

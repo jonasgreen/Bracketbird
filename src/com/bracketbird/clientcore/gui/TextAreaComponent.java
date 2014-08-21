@@ -22,7 +22,7 @@ public class TextAreaComponent extends GuiComponent implements FocusComponentInt
 
     public TextAreaComponent() {
         super();
-        initWidget(textArea);
+        //add(textArea);
         addDomHandler(this, KeyDownEvent.getType());
         addDomHandler(this, ClickEvent.getType());
 

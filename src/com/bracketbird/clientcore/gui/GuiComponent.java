@@ -26,9 +26,6 @@ public abstract class GuiComponent extends Composite implements RequiresResize, 
     }
 
     
-    protected void initWidget(Widget widget) {
-        super.initWidget(widget);
-    }
 
 
     public void onResize() {

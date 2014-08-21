@@ -24,7 +24,7 @@ public class SeedingPage extends Page<SeedingPageController> {
     public SeedingPage() {
         super();
         content = new VerticalComponent();
-        initWidget(content);
+        add(content);
     }
 
     public void init() {

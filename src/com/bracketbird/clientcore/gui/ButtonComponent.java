@@ -11,12 +11,17 @@ public class ButtonComponent extends GuiComponent{
 
     public ButtonComponent() {
         super();
-        initWidget(button);
+        add(button);
     }
 
-    public ButtonComponent(String s){
+    private void add(Button button2) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public ButtonComponent(String s){
         super();
-        initWidget(button);
+        add(button);
         button.setText(s);
     }
 

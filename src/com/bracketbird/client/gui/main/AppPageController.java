@@ -10,11 +10,10 @@ import com.bracketbird.clientcore.gui.MenuLinkComponent;
 public class AppPageController extends PageController<AppPage> {
 
     private static AppPageController instance;
-    public static String HISTORY_NAME = "apppage";
 
 
     private AppPageController() {
-        super(null, HISTORY_NAME);
+        super();
     }
 
     public static AppPageController getInstance() {

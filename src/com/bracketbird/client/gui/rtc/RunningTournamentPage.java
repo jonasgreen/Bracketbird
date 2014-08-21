@@ -1,7 +1,6 @@
 package com.bracketbird.client.gui.rtc;
 
 
-import com.google.gwt.dom.client.*;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.*;
@@ -30,7 +29,7 @@ public class RunningTournamentPage extends Page<RunningTournamentPageController>
     }
 
     public void init() {
-        initWidget(p);
+        add(p);
         DOM.getElementById("logodiv").setClassName("bottomImage");
         addContent(RunningTournamentTop.getInstance(), 75);
     }
@@ -66,9 +65,9 @@ public class RunningTournamentPage extends Page<RunningTournamentPageController>
     }
 
     protected void setSubPageHolder(Page subPage) {
-        if(activePage != null){
+        /*if(activePage != null){
             int pos = getScrollPanel().getScrollPanel().getVerticalScrollPosition();
-            scrollPositions.put(activePage.getController().getHistoryName(), pos);
+            //scrollPositions.put(activePage.getController().getHistoryName(), pos);
         }
 
         content.add(subPage, new TextLayout(null, "100%"));
@@ -79,7 +78,7 @@ public class RunningTournamentPage extends Page<RunningTournamentPageController>
         }
 
         activePage = subPage;
-        
+        */
     }
 
 

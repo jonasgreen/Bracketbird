@@ -12,7 +12,7 @@ public class ListBoxComponent extends GuiComponent{
 
     public ListBoxComponent() {
         super();
-        initWidget(listBox);
+       // add(listBox);
     }
 
     public ListBox getListBox() {

@@ -23,7 +23,7 @@ public class SimplePanelComponent extends GuiComponent implements MouseOverHandl
         addDomHandler(this, MouseOutEvent.getType());
 
         addDomHandler(this, ClickEvent.getType());
-        initWidget(panel);
+        add(panel);
 
     }
 

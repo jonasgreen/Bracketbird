@@ -2,7 +2,6 @@ package com.bracketbird.client.gui.main;
 
 
 import com.bracketbird.client.gui.rtc.RTC;
-import com.bracketbird.client.gui.rtc.RunningTournamentPageController;
 import com.bracketbird.client.service.BBService;
 import com.bracketbird.client.service.TournamentResult;
 import com.bracketbird.clientcore.appcontrol.PageController;
@@ -19,12 +18,9 @@ import com.bracketbird.clientcore.service.CallBack;
 public class CreateTournamentPageController extends PageController<CreateTournamentPage> implements PopupPageController {
 
     private static CreateTournamentPageController instance = null;
-    public static String HISTORY_NAME = "createtournament";
 
-    private UserId userId;
 
     private CreateTournamentPageController() {
-        super(RunningTournamentPageController.getInstance(), HISTORY_NAME);
     }
 
     public static CreateTournamentPageController getInstance() {
@@ -63,17 +59,6 @@ public class CreateTournamentPageController extends PageController<CreateTournam
             return;
         }
 
-        BBService.createTournament(name, userId, new CallBack<TournamentResult>() {
-            @Override
-            public void success(TournamentResult r) {
-                RTC.getInstance().loadTournament(r.getTournament(), r.getEventLogs(), true);
-            }
-
-            @Override
-            public void fail(Throwable t) {
-                t.printStackTrace();
-            }
-        });
 
 
 
@@ -81,11 +66,4 @@ public class CreateTournamentPageController extends PageController<CreateTournam
 
     }
 
-    public UserId getUserId() {
-        return userId;
-    }
-
-    public void setUserId(UserId userId) {
-        this.userId = userId;
-    }
 }

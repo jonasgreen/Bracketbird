@@ -5,7 +5,6 @@ import com.bracketbird.client.gui.rtc.RTC;
 import com.bracketbird.client.gui.rtc.RTCLayoutFac2;
 import com.bracketbird.client.gui.rtc.matches.FinalRankRow;
 import com.bracketbird.client.model.Team;
-import com.bracketbird.client.model.keys.TeamId;
 import com.bracketbird.client.model.tournament.*;
 import com.bracketbird.clientcore.appcontrol.*;
 import com.bracketbird.clientcore.gui.*;
@@ -27,13 +26,13 @@ public class RankingViewPage extends Page<RankingViewPageController> {
 
     public RankingViewPage() {
         super();
-        content = new SimpleFlowComponent();
-        initWidget(content);
-        content.add(new ViewTeamsPanel());//show teams
+       // content = new SimpleFlowComponent();
+       // add(content);
+      //  content.add(new ViewTeamsPanel());//show teams
     }
 
     public void init() {
-        RTC.getInstance().getTournament().addStateListener(new TournamentListener<TournamentStateChangedEvent>() {
+       /* RTC.getInstance().getTournament().addStateListener(new TournamentListener<TournamentStateChangedEvent>() {
             public void onChange(TournamentStateChangedEvent event) {
                 repaint(event);
             }
@@ -70,7 +69,7 @@ public class RankingViewPage extends Page<RankingViewPageController> {
 
             }
         });
-
+*/
     }
 
     private void levelFinished(TournamentLevel level) {

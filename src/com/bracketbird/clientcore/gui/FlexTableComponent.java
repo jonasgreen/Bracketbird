@@ -12,7 +12,7 @@ public class FlexTableComponent extends PanelComponent{
 
     public FlexTableComponent() {
         super();
-        initWidget(panel);
+        add(panel);
     }
 
 

@@ -21,7 +21,7 @@ public class TextBoxComponent extends GuiComponent implements FocusComponentIntf
 
     public TextBoxComponent() {
         super();
-        initWidget(textBox);
+        //add(textBox);
         addDomHandler(this, KeyDownEvent.getType());
         addDomHandler(this, ClickEvent.getType());
 

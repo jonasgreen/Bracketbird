@@ -23,7 +23,7 @@ public class HorizontalComponent extends CellComponent implements ClickHandler, 
         super();
         addDomHandler(this, ClickEvent.getType());
         addDomHandler(this, MouseOverEvent.getType());
-        initWidget(horizontalPanel);
+        add(horizontalPanel);
     }
 
     public HorizontalPanel getPanel() {

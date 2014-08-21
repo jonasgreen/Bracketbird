@@ -12,7 +12,7 @@ public class ImageComponent extends GuiComponent {
     public ImageComponent(String url) {
         super();
         image = new Image(url);
-        initWidget(image);
+        //add(image);
     }
 
 

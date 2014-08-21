@@ -20,7 +20,7 @@ public class CreateTournamentPage extends Page<CreateTournamentPageController> {
     public CreateTournamentPage() {
         super();
         this.content = new VerticalComponent();
-        initWidget(content);
+        add(content);
     }
 
     public void init() {

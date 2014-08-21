@@ -13,11 +13,11 @@ public abstract class CallBack<T> implements AsyncCallback<T> {
     private int retries = 0;
 
     public void startProgressBar() {
-        startProgressBar(null);
+      //  startProgressBar(null);
     }
 
     public void startProgressBar(String text) {
-        InfoManager.startProgressBar(text);
+    //    InfoManager.startProgressBar(text);
     }
 
 
@@ -47,7 +47,7 @@ public abstract class CallBack<T> implements AsyncCallback<T> {
 
 
     public void onSuccess(T result) {
-        InfoManager.stopProgressBar();
+        //InfoManager.stopProgressBar();
         success(result);
     }
 

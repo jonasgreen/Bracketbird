@@ -12,7 +12,7 @@ public class CheckBoxComponent extends GuiComponent{
 
     public CheckBoxComponent(String text) {
         this.checkBox = new CheckBox(text);
-        initWidget(checkBox);
+        //add(checkBox);
     }
 
     public CheckBox getCheckBox() {

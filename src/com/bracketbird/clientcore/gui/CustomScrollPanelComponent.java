@@ -11,7 +11,7 @@ public class CustomScrollPanelComponent extends GuiComponent{
     public CustomScrollPanelComponent(GuiComponent gc) {
         super();
         this.scrollPanel = new CustomScrollPanel(gc);
-        initWidget(scrollPanel);
+        //add(scrollPanel);
     }
 
 

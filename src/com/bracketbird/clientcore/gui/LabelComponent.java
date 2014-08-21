@@ -15,7 +15,7 @@ public class LabelComponent extends GuiComponent {
     public LabelComponent(String text) {
         super();
         label.setText(text);
-        initWidget(label);
+        //add(label);
     }
 
     public Label getLabel() {

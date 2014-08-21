@@ -15,7 +15,7 @@ public class HtmlComponent extends GuiComponent{
     public HtmlComponent(String html) {
         super();
         htmlContent = new HTML(html);
-        initWidget(htmlContent);
+        //add(htmlContent);
     }
 
     public void setHtml(String html){

@@ -1,11 +1,11 @@
 package com.bracketbird.clientcore.appcontrol;
 
-import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.ScrollPanel;
 
 /**
  *
  */
-public class FrontPageContext extends ApplicationContext<FlowPanel>{
+public class FrontPageContext extends ApplicationContext<ScrollPanel>{
 
     private static FrontPageContext instance;
 
@@ -20,7 +20,7 @@ public class FrontPageContext extends ApplicationContext<FlowPanel>{
     }
 
     @Override
-    protected FlowPanel createPageContainer() {
-        return new FlowPanel();
+    protected ScrollPanel createPageContainer() {
+        return new ScrollPanel();
     }
 }

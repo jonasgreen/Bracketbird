@@ -20,12 +20,12 @@ public class SettingsPage extends Page<SettingsPageController> {
 
     public SettingsPage() {
         super();
-        content = new VerticalComponent();
-        initWidget(content);
+       // content = new VerticalComponent();
+       // add(content);
     }
 
     public void init() {
-        StyleIt.add(content, RTCLayoutFac2.CONTENT);
+        /*StyleIt.add(content, RTCLayoutFac2.CONTENT);
 
         RTC.getInstance().getTournament().addLevelListener(new TournamentListener<TournamentLevelEvent>() {
             public void onChange(TournamentLevelEvent event) {
@@ -43,6 +43,8 @@ public class SettingsPage extends Page<SettingsPageController> {
  //       content.add(getSettingsSetupPanel());
         content.add(getTournamentSettingsPanel(), new TextLayout(null, "100%"));
 //        getTournamentSettingsPanel().setVisible(false);
+
+*/
     }
 
     private void removeStage() {

@@ -68,7 +68,7 @@ public class HistorySupport {
 
     public void addHistory(PageController controller) {
         if (allowHistory) {
-            History.newItem(controller.getHistoryName(), false);
+            History.newItem(controller.getClass().getSimpleName(), false);
         }
     }
 

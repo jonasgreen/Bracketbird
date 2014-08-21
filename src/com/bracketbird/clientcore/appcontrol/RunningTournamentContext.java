@@ -1,6 +1,7 @@
 package com.bracketbird.clientcore.appcontrol;
 
 import com.bracketbird.client.gui.rtc.RunningTournamentTop;
+import com.bracketbird.client.pages.MenuPanel;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
 
@@ -26,7 +27,8 @@ public class RunningTournamentContext extends ApplicationContext<DockLayoutPanel
     @Override
     protected DockLayoutPanel createPageContainer() {
         DockLayoutPanel panel = new DockLayoutPanel(Style.Unit.PX);
-        panel.addNorth(RunningTournamentTop.getInstance(), 75);
+        panel.addNorth(new MenuPanel(), 75);
+
         return panel;
     }
 }

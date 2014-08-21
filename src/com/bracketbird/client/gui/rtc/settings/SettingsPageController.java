@@ -1,7 +1,6 @@
 package com.bracketbird.client.gui.rtc.settings;
 
 
-import com.bracketbird.client.gui.rtc.RunningTournamentPageController;
 import com.bracketbird.clientcore.appcontrol.PageController;
 import com.bracketbird.clientcore.gui.MenuComponent;
 import com.bracketbird.clientcore.gui.MenuImageAndTextComponent;
@@ -12,12 +11,10 @@ import com.bracketbird.clientcore.gui.MenuImageAndTextComponent;
 public class SettingsPageController extends PageController<SettingsPage> {
 
     private static SettingsPageController instance;
-    public static String HISTORY_NAME = "SettingsPageController";
     private boolean firstTime = true;
 
 
     private SettingsPageController() {
-        super(RunningTournamentPageController.getInstance(), HISTORY_NAME);
     }
 
     public static SettingsPageController getInstance() {
@@ -28,7 +25,7 @@ public class SettingsPageController extends PageController<SettingsPage> {
     }
 
     public void afterLoad() {
-        showSettingsFromScratch();
+        //showSettingsFromScratch();
     }
 
     public SettingsPage newInstance() {

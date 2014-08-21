@@ -9,11 +9,9 @@ import com.bracketbird.clientcore.appcontrol.*;
 public class PopUpDataPageController extends PageController<PopUpDataPage> {
 
     private static PopUpDataPageController instance = null;
-    public static String HISTORY_NAME = "popupdatapage";
 
 
     private PopUpDataPageController() {
-        super(null, HISTORY_NAME);
     }
 
     public static PopUpDataPageController getInstance() {
@@ -25,11 +23,6 @@ public class PopUpDataPageController extends PageController<PopUpDataPage> {
 
     public PopUpDataPage newInstance() {
         return new PopUpDataPage();
-    }
-
-    public void afterLoadFromHistory() {
-        getPage();
-        doLoad();
     }
 
     public MenuComponent newMenuInstance() {

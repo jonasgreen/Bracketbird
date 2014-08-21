@@ -24,18 +24,18 @@ public class EnterResultsPage extends Page<EnterResultsPageController> {
 
     public EnterResultsPage() {
         super();
-        content = new VerticalComponent();
-        initWidget(content);
+        //content = new VerticalComponent();
+        //add(content);
     }
 
     public void init() {
-        RTC.getInstance().getTournament().addStateListener(stateListener);
+        /*RTC.getInstance().getTournament().addStateListener(stateListener);
 
         StyleIt.add(content, RTCLayoutFac2.CONTENT);
         content.add(getSetupPanel());
         content.add(getAllResultsPanel(), new TextLayout(null, "100%"));
         repaint();
-
+*/
 
     }
 

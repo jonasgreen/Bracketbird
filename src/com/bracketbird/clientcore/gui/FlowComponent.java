@@ -23,14 +23,14 @@ public class FlowComponent extends CellComponent implements ClickHandler, MouseO
         super();
         addDomHandler(this, ClickEvent.getType());
         addDomHandler(this, MouseOverEvent.getType());
-        initWidget(flowPanel);
+        add(flowPanel);
     }
 
     public FlowComponent(GuiComponent component, TextLayout layout) {
         super();
         addDomHandler(this, ClickEvent.getType());
         addDomHandler(this, MouseOverEvent.getType());
-        initWidget(flowPanel);
+        add(flowPanel);
         add(component, layout);
     }
 

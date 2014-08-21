@@ -1,9 +1,7 @@
 package com.bracketbird.clientcore.appcontrol;
 
 import com.bracketbird.client.HistorySupport;
-import com.bracketbird.clientcore.gui.InfoManager;
-import com.bracketbird.clientcore.gui.PopupManager;
-import com.google.gwt.user.client.ui.ComplexPanel;
+import com.google.gwt.user.client.ui.Panel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +9,7 @@ import java.util.List;
 /**
  *
  */
-public abstract class ApplicationContext<PAGE_CONTAINER extends ComplexPanel> {
+public abstract class ApplicationContext<PAGE_CONTAINER extends Panel> {
 
     private PageController activePageController;
     private PAGE_CONTAINER pageContainer;
@@ -37,6 +35,7 @@ public abstract class ApplicationContext<PAGE_CONTAINER extends ComplexPanel> {
     protected PAGE_CONTAINER getPageContainer() {
         if (pageContainer == null) {
             pageContainer = createPageContainer();
+            pageContainer.setStyleName("text");
         }
         return pageContainer;
     }
@@ -47,8 +46,8 @@ public abstract class ApplicationContext<PAGE_CONTAINER extends ComplexPanel> {
 
         activePageController = pc;
 
-        PopupManager.hide();
-        InfoManager.hideInfo();
+        //PopupManager.hide();
+        //InfoManager.hideInfo();
 
         getPageContainer().add(pc.getPage());
         HistorySupport.getInstance().addHistory(pc);
@@ -68,7 +67,7 @@ public abstract class ApplicationContext<PAGE_CONTAINER extends ComplexPanel> {
 
     private void unloadActivePage() {
         activePageController.beforeUnload();
-        activePageController.getPage().removeFromParent();
+        activePageController.getPage().asWidget().removeFromParent();
     }
 
 
@@ -76,7 +75,7 @@ public abstract class ApplicationContext<PAGE_CONTAINER extends ComplexPanel> {
         return activePageController;
     }
 
-    public void addListener(PageChangedListener listener){
+    public void addPageChangeListener(PageChangedListener listener){
         pageChangedListeners.add(listener);
     }
 }

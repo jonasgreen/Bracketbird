@@ -16,7 +16,7 @@ import com.google.gwt.user.client.Window;
 /**
  *
  */
-public class ErrorPage extends Page<ErrorPageController>{
+public class ErrorPage extends Page<ErrorPageController> {
 
     private FlowComponent content;
 
@@ -30,7 +30,7 @@ public class ErrorPage extends Page<ErrorPageController>{
         super();
         content = new FlowComponent();
         ScrollPanelComponent customerScrollPanelComponent = new ScrollPanelComponent(content);
-        initWidget(customerScrollPanelComponent);
+        //add(customerScrollPanelComponent);
     }
 
     public void init() {

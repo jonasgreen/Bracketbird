@@ -28,7 +28,7 @@ public class CreateTournamentHandler extends AbstractActionHandler implements Ac
         try {
             PMF.startTransaction();
 
-            t = repos.create(new CreateTournament(action.getNameOfTournament(), tId));
+            t = repos.create(new CreateTournament("Tournament", tId));
 
             CreateTournamentChannel channelCreator = new CreateTournamentChannel();
             channelCreator.setTournamentId(t.getId());

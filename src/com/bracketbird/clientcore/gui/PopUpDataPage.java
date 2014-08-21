@@ -18,7 +18,7 @@ public class PopUpDataPage extends Page<PopUpDataPageController> {
     public PopUpDataPage() {
         super();
         content = new VerticalComponent();
-        initWidget(content);
+        add(content);
     }
 
     public void init() {

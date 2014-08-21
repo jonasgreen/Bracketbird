@@ -38,7 +38,7 @@ public abstract class AbstractMenuPanel {
     }
 
     public void addMenuItem(final PageController pc) {
-        allMenues.add(pc.getMenu());
+        /*allMenues.add(pc.getMenu());
         add(pc.getMenu());
         pc.getMenu().setParentPanel(this);
 
@@ -51,6 +51,7 @@ public abstract class AbstractMenuPanel {
                 Application.show(pc);
             }
         });
+        */
     }
 
     public void addAnacisticMenuItem(MenuComponent mc) {

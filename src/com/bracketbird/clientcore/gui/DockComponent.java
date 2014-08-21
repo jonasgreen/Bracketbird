@@ -15,7 +15,7 @@ public class DockComponent extends GuiComponent {
     public DockComponent(Style.Unit unit) {
         super();
         panel = new DockLayoutPanel(unit);
-        initWidget(panel);
+        add(panel);
     }
 
     public DockLayoutPanel getPanel() {

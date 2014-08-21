@@ -50,11 +50,6 @@ public class PopupManager {
     }
 
 
-    public static void showComponentFromHistory(PageController pc) {
-        showPage(pc, null);
-        pc.afterLoadFromHistory();
-    }
-
     public static void show(PageController pc) {
         show(pc, null);
     }
@@ -68,7 +63,7 @@ public class PopupManager {
 
     private static void showPage(PageController pc, OnClose afterClose) {
         VerticalComponent content = new VerticalComponent();
-        content.add(pc.getPage(), new TextLayout(0, 0, 0, 0).padding(10, 10, 10, 10));
+        //content.add(pc.getPage(), new TextLayout(0, 0, 0, 0).padding(10, 10, 10, 10));
         show(content, onClose);
     }
 
@@ -103,10 +98,11 @@ public class PopupManager {
 
 
     public static void hide() {
-        if (panel != null && panel.isShowing()) {
+        /*if (panel != null && panel.isShowing()) {
             panel.hide();
         }
         rootPanel.setVisible(false);
+        */
     }
 
     public static void setLightRootPanel() {

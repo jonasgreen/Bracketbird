@@ -17,7 +17,7 @@ public class LogPage extends Page<LogPageController> {
     public LogPage() {
         super();
         content = new VerticalComponent();
-        initWidget(content);
+        add(content);
     }
 
     public void init() {
