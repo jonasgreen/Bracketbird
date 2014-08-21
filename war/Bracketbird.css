@@ -3,7 +3,7 @@
   src: url("font/Klavika-Light.otf"); }
 
 html{
-  height: 100%;
+
 }
 
 body {
@@ -18,21 +18,26 @@ body {
 }
 
 .menuPanel{
+    padding-left: 50px;
 
 }
 
 .menuItem{
     padding:20px;
-    font-size: 28px;
+    font-size: 22px;
     float: left;
-
 }
+
 
 .menuItem_active{
 }
 
 .menuItem_passive{
     color: #C9C9C9;
+}
+
+.menuItem_passive:hover{
+    cursor:pointer;
 }
 
 

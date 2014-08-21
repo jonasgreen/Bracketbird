@@ -35,6 +35,8 @@ public class EventManager {
     public void start(List<REvent> doneEvs, boolean justCreated) {
         executeInitialServerEvents(doneEvs);
         Application.get().shiftApplicationContext(RunningTournamentContext.get());
+        Application.show(TeamsPageController.getInstance());
+
         if (RTC.getInstance().getTournament().isViewOnly()) {
             Application.show(RankingViewPageController.getInstance());
         }
