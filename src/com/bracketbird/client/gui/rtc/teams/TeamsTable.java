@@ -1,8 +1,6 @@
 package com.bracketbird.client.gui.rtc.teams;
 
 
-//import java.util.*;
-
 import com.bracketbird.client.gui.rtc.RTC;
 import com.bracketbird.client.gui.rtc.matches.TeamHeaderRow;
 import com.bracketbird.client.model.*;

@@ -7,6 +7,7 @@ import com.bracketbird.client.gui.main.CreateTournamentPageController;
 import com.bracketbird.client.gui.main.FrontPageController;
 import com.bracketbird.client.gui.main.FrontSlogan;
 import com.bracketbird.client.gui.rtc.RTC;
+import com.bracketbird.client.gui.rtc.teams.TeamsPageController;
 import com.bracketbird.client.service.BBService;
 import com.bracketbird.client.service.TournamentResult;
 import com.bracketbird.clientcore.appcontrol.Application;
@@ -67,6 +68,7 @@ public class FrontPage extends Page<FrontPageController> {
                     @Override
                     public void success(TournamentResult r) {
                         Application.get().shiftApplicationContext(RunningTournamentContext.get());
+                        Application.show(TeamsPageController.getInstance());
                         //RTC.getInstance().loadTournament(r.getTournament(), r.getEventLogs(), true);
                     }
 

@@ -19,7 +19,7 @@ body {
 
 .menuPanel{
     padding-left: 50px;
-
+    padding-right: 50px;
 }
 
 .menuItem{
@@ -37,6 +37,20 @@ body {
 }
 
 .menuItem_passive:hover{
+    cursor:pointer;
+}
+
+.menuItem_secondary{
+    padding:20px;
+    padding-top: 26px;
+    padding-left: 10px;
+    color: lightblue;
+    font-size: 14px;
+    float: right;
+    text-decoration: underline;
+}
+
+.menuItem_secondary:hover{
     cursor:pointer;
 }
 

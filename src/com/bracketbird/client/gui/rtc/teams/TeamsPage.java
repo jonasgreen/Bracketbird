@@ -46,6 +46,9 @@ public class TeamsPage extends Page<TeamsPageController> {
     }
 
     public void init() {
+
+        setHeight("1000px");
+        getElement().getStyle().setBackgroundColor("red");
         /*RTC.getInstance().getTournament().addStateListener(stateListener);
 
         StyleIt.add(content, RTCLayoutFac2.CONTENT.backgroundWhite());

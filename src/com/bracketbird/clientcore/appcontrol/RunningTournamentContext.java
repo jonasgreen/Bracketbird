@@ -3,6 +3,7 @@ package com.bracketbird.clientcore.appcontrol;
 import com.bracketbird.client.pages.MenuPanel;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
+import com.google.gwt.user.client.ui.ScrollPanel;
 
 /**
  *
@@ -25,8 +26,9 @@ public class RunningTournamentContext extends ApplicationContext<DockLayoutPanel
 
     @Override
     protected DockLayoutPanel createPageContainer() {
+
         DockLayoutPanel panel = new DockLayoutPanel(Style.Unit.PX);
-        panel.addNorth(new MenuPanel(), 175);
+        panel.addNorth(new MenuPanel(), 62);
 
         return panel;
     }
