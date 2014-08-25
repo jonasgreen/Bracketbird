@@ -1,7 +1,7 @@
 package com.bracketbird.client.gui.rtc.matches;
 
 
-import com.bracketbird.client.gui.rtc.RunningTournamentPageController;
+import com.bracketbird.client.pages.TournamentPageController;
 import com.bracketbird.client.model.tournament.*;
 import com.bracketbird.client.table.TableManager;
 import com.bracketbird.clientcore.gui.*;
@@ -24,13 +24,13 @@ public class LevelMatchesLayedOutPanel extends VerticalComponent {
         TableManager tm = new TableManager() {
             @Override
             public void scrollUp() {
-                ScrollPanel scrollPanel = RunningTournamentPageController.getInstance().getPage().getScrollPanel().getScrollPanel();
+                ScrollPanel scrollPanel = TournamentPageController.getInstance().getPage().getScrollPanel().getScrollPanel();
                 scrollPanel.setVerticalScrollPosition(scrollPanel.getVerticalScrollPosition() - 40);
             }
 
             @Override
             public void scrollDown() {
-                ScrollPanel scrollPanel = RunningTournamentPageController.getInstance().getPage().getScrollPanel().getScrollPanel();
+                ScrollPanel scrollPanel = TournamentPageController.getInstance().getPage().getScrollPanel().getScrollPanel();
                      scrollPanel.setVerticalScrollPosition(scrollPanel.getVerticalScrollPosition() + 40);
             }
         };

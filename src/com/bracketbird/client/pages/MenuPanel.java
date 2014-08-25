@@ -5,12 +5,11 @@ import com.bracketbird.client.gui.rtc.ShareComponent;
 import com.bracketbird.client.gui.rtc.matches.EnterResultsPageController;
 import com.bracketbird.client.gui.rtc.ranking.RankingViewPageController;
 import com.bracketbird.client.gui.rtc.settings.SettingsPageController;
-import com.bracketbird.client.gui.rtc.teams.TeamsPageController;
+import com.bracketbird.client.pages.teamspage.TeamsPageController;
 import com.bracketbird.clientcore.gui.PopupManager;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Label;
 
 /**

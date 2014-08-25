@@ -49,12 +49,16 @@ public abstract class ApplicationContext<PAGE_CONTAINER extends Panel> {
         //PopupManager.hide();
         //InfoManager.hideInfo();
 
-        getPageContainer().add(pc.getPage());
+        addToPageContainer(pc);
         HistorySupport.getInstance().addHistory(pc);
 
 
         pc.afterLoad();
         notifyListeners(event);
+    }
+
+    protected void addToPageContainer(PageController pc) {
+        getPageContainer().add(pc.getPage());
     }
 
 

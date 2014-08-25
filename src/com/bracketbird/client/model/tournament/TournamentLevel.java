@@ -4,7 +4,7 @@ import com.bracketbird.client.gui.rtc.event.LevelFinishedEvent;
 import com.bracketbird.client.gui.rtc.event.UpdateLevelEvent;
 import com.bracketbird.client.gui.rtc.event.UpdateMatchFieldEvent;
 import com.bracketbird.client.gui.rtc.event.UpdateMatchResultEvent;
-import com.bracketbird.client.gui.rtc.teams.TeamsPageController;
+import com.bracketbird.client.pages.teamspage.TeamsPageController;
 import com.bracketbird.client.model.*;
 import com.bracketbird.client.model.keys.*;
 import com.bracketbird.clientcore.model.*;

@@ -4,10 +4,9 @@ import com.bracketbird.client.gui.rtc.health.LogPageController;
 import com.bracketbird.client.gui.rtc.settings.SettingsPageController;
 import com.bracketbird.client.gui.rtc.matches.EnterResultsPageController;
 import com.bracketbird.client.gui.rtc.ranking.RankingViewPageController;
-import com.bracketbird.client.gui.rtc.teams.TeamsPageController;
+import com.bracketbird.client.pages.teamspage.TeamsPageController;
 import com.bracketbird.clientcore.appcontrol.*;
 import com.bracketbird.clientcore.gui.*;
-import com.bracketbird.clientcore.style.*;
 
 
 /**

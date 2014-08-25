@@ -3,7 +3,7 @@ package com.bracketbird.client.gui.rtc.matches;
 
 import com.bracketbird.client.gui.rtc.RTCLayoutFac2;
 import com.bracketbird.client.gui.rtc.settings.SettingsPageController;
-import com.bracketbird.client.gui.rtc.teams.TeamsPageController;
+import com.bracketbird.client.pages.teamspage.TeamsPageController;
 import com.google.gwt.event.dom.client.*;
 import com.bracketbird.clientcore.appcontrol.*;
 import com.bracketbird.clientcore.gui.*;

@@ -4,7 +4,7 @@ package com.bracketbird.client.gui.rtc;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.bracketbird.client.gui.rtc.teams.TeamsPageController;
+import com.bracketbird.client.pages.teamspage.TeamsPageController;
 import com.bracketbird.clientcore.appcontrol.Application;
 import com.bracketbird.clientcore.gui.FlowComponent;
 import com.bracketbird.clientcore.gui.ImageComponent;

@@ -26,7 +26,7 @@ public class MenuItem extends FlowPanel implements PageChangedListener {
         this.addStyleName(STYLE_PASSIVE_MODE);
         this.mode = STYLE_PASSIVE_MODE;
 
-        RunningTournamentContext.get().addPageChangeListener(this);
+        TournamentContext.get().addPageChangeListener(this);
 
         label.addClickHandler(new ClickHandler() {
             @Override

@@ -1,27 +1,23 @@
-package com.bracketbird.client.gui.rtc.teams;
+package com.bracketbird.client.pages.teamspage;
 
 
-import com.bracketbird.client.gui.rtc.RTCLayoutFac2;
-import com.bracketbird.client.gui.rtc.RunningTournamentPageController;
+import com.bracketbird.client.gui.rtc.teams.TeamsTable;
 import com.bracketbird.client.gui.rtc.matches.SeedingPageController;
 import com.bracketbird.client.gui.rtc.settings.SettingsPageController;
 import com.bracketbird.client.gui.rtc.RTC;
 import com.bracketbird.client.model.tournament.*;
+import com.bracketbird.client.pages.TournamentPage;
 import com.bracketbird.client.table.TableManager;
 import com.bracketbird.clientcore.util.MouseOver;
-import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.*;
 import com.google.gwt.user.client.ui.*;
 import com.bracketbird.clientcore.appcontrol.*;
 import com.bracketbird.clientcore.gui.*;
-import com.bracketbird.clientcore.style.*;
 
 /**
  *
  */
-public class TeamsPage extends Page<TeamsPageController> {
-
-    private VerticalComponent content;
+public class TeamsPage extends TournamentPage<TeamsPageController> {
 
     private LabelComponent header;
     private LabelComponent nextButton;
@@ -46,35 +42,19 @@ public class TeamsPage extends Page<TeamsPageController> {
     }
 
     public void init() {
+        super.init();
+        FlowPanel panel = new FlowPanel();
 
-        setHeight("1000px");
-        getElement().getStyle().setBackgroundColor("red");
+        int i = 0;
+        while(i++ < 1000){
+            Label l = new Label("alksjdfælakjsd fælkajsfælakjf");
+            panel.add(l);
+        }
+        getScrollPanelContent().add(panel);
         /*RTC.getInstance().getTournament().addStateListener(stateListener);
 
-        StyleIt.add(content, RTCLayoutFac2.CONTENT.backgroundWhite());
-
-
-        content.add(new LabelComponent("Teams"), RTCLayoutFac2.h1().margin(0, 0, 30, 0));
-
-        //content.add(getHeader(), RTCLayoutFac.h1());
         //content.add(getParticipaters(), new TextLayout(null, "100%").paddingTop(30));
-
-
         content.add(getTeamsTable(), new TextLayout(null, "100%").margin(0,0,20, 0));
-
-        FlowComponent hc = new FlowComponent();
-
-        FlowComponent buttons = new FlowComponent();
-        buttons.addLeft(getAddTeam(), new TextLayout(Vertical.MIDDLE));
-        buttons.addLeft(getDeleteTeam(), new TextLayout(0, 0, 0, 0, Vertical.MIDDLE));
-        buttons.addLeft(getEditSeeding(), new TextLayout(0, 0, 0, 0, Vertical.MIDDLE));
-
-        hc.addLeft(buttons, null).getElement().getStyle().setPaddingTop(20, Style.Unit.PX);
-        hc.addRigth(getNextButton(), null).getElement().getStyle().setPaddingTop(20, Style.Unit.PX);
-
-
-        content.add(hc, new TextLayout(null, "100%").backgroundBase());
-
 */
 
     }
@@ -151,14 +131,14 @@ public class TeamsPage extends Page<TeamsPageController> {
             TableManager tm = new TableManager() {
                 @Override
                 public void scrollUp() {
-                    ScrollPanel scrollPanel = RunningTournamentPageController.getInstance().getPage().getScrollPanel().getScrollPanel();
-                    scrollPanel.setVerticalScrollPosition(scrollPanel.getVerticalScrollPosition() - 40);
+//                    ScrollPanel scrollPanel = TournamentPageController.getInstance().getPage().getScrollPanel().getScrollPanel();
+//                    scrollPanel.setVerticalScrollPosition(scrollPanel.getVerticalScrollPosition() - 40);
                 }
 
                 @Override
                 public void scrollDown() {
-                    ScrollPanel scrollPanel = RunningTournamentPageController.getInstance().getPage().getScrollPanel().getScrollPanel();
-                    scrollPanel.setVerticalScrollPosition(scrollPanel.getVerticalScrollPosition() + 40);
+//                    ScrollPanel scrollPanel = TournamentPageController.getInstance().getPage().getScrollPanel().getScrollPanel();
+//                    scrollPanel.setVerticalScrollPosition(scrollPanel.getVerticalScrollPosition() + 40);
                 }
             };
 

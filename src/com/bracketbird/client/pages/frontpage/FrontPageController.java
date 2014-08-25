@@ -1,6 +1,5 @@
-package com.bracketbird.client.gui.main;
+package com.bracketbird.client.pages.frontpage;
 
-import com.bracketbird.client.pages.FrontPage;
 import com.bracketbird.clientcore.appcontrol.PageController;
 import com.bracketbird.clientcore.gui.MenuComponent;
 import com.bracketbird.clientcore.gui.MenuLinkComponent;

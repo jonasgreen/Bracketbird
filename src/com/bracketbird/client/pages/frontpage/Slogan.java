@@ -1,4 +1,4 @@
-package com.bracketbird.client.gui.main;
+package com.bracketbird.client.pages.frontpage;
 
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
@@ -6,9 +6,9 @@ import com.google.gwt.user.client.ui.Label;
 /**
  *
  */
-public class FrontSlogan extends FlowPanel {
+public class Slogan extends FlowPanel {
 
-    public FrontSlogan(String header, String text) {
+    public Slogan(String header, String text) {
         setStyleName("slogan");
         Label headerLabel = new Label(header);
         headerLabel.setStyleName("slogan_header");

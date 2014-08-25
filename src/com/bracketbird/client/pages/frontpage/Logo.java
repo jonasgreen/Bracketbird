@@ -1,4 +1,4 @@
-package com.bracketbird.client;
+package com.bracketbird.client.pages.frontpage;
 
 import com.google.gwt.user.client.ui.HTML;
 
