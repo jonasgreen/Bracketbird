@@ -7,11 +7,12 @@ import com.bracketbird.client.model.tournament.*;
 import com.bracketbird.clientcore.appcontrol.*;
 import com.bracketbird.clientcore.gui.*;
 import com.bracketbird.clientcore.style.*;
+import com.google.gwt.user.client.ui.FlowPanel;
 
 /**
  *
  */
-public class EnterResultsPage extends Page<EnterResultsPageController> {
+public class EnterResultsPage extends FlowPanelPage<EnterResultsPageController> {
 
     private VerticalComponent content;
     private SetupPanel setupPanel;

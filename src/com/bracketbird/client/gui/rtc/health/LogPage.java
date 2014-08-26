@@ -2,15 +2,17 @@ package com.bracketbird.client.gui.rtc.health;
 
 
 import com.bracketbird.client.gui.rtc.RTCLayoutFac2;
+import com.bracketbird.clientcore.appcontrol.FlowPanelPage;
 import com.bracketbird.clientcore.appcontrol.Page;
 import com.bracketbird.clientcore.gui.LabelComponent;
 import com.bracketbird.clientcore.gui.VerticalComponent;
 import com.bracketbird.clientcore.style.StyleIt;
+import com.google.gwt.user.client.ui.FlowPanel;
 
 /**
  *
  */
-public class LogPage extends Page<LogPageController> {
+public class LogPage extends FlowPanelPage<LogPageController> {
 
     private VerticalComponent content;
 

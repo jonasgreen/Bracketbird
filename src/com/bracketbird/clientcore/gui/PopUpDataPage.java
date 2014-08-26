@@ -2,11 +2,12 @@ package com.bracketbird.clientcore.gui;
 
 import com.bracketbird.clientcore.appcontrol.*;
 import com.bracketbird.clientcore.style.*;
+import com.google.gwt.user.client.ui.FlowPanel;
 
 /**
  *
  */
-public class PopUpDataPage extends Page<PopUpDataPageController> {
+public class PopUpDataPage extends FlowPanelPage<PopUpDataPageController> {
 
     private VerticalComponent content;
     private SimplePanelComponent contentHolder = new SimplePanelComponent();

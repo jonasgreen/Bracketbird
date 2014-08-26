@@ -1,7 +1,6 @@
 package com.bracketbird.client.pages.teamspage;
 
 
-import com.bracketbird.client.pages.TournamentPageController;
 import com.bracketbird.clientcore.appcontrol.PageController;
 import com.bracketbird.clientcore.gui.MenuComponent;
 import com.bracketbird.clientcore.gui.MenuImageAndTextComponent;
@@ -9,7 +8,7 @@ import com.bracketbird.clientcore.gui.MenuImageAndTextComponent;
 /**
  *
  */
-public class TeamsPageController extends TournamentPageController<TeamsPage> {
+public class TeamsPageController extends PageController<TeamsPage> {
 
     private static TeamsPageController instance;
 

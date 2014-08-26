@@ -58,7 +58,7 @@ public abstract class ApplicationContext<PAGE_CONTAINER extends Panel> {
     }
 
     protected void addToPageContainer(PageController pc) {
-        getPageContainer().add(pc.getPage());
+        getPageContainer().add(pc.getPage().getContentPanel());
     }
 
 
@@ -71,7 +71,7 @@ public abstract class ApplicationContext<PAGE_CONTAINER extends Panel> {
 
     private void unloadActivePage() {
         activePageController.beforeUnload();
-        activePageController.getPage().asWidget().removeFromParent();
+        activePageController.getPage().getContentPanel().removeFromParent();
     }
 
 

@@ -2,6 +2,7 @@ package com.bracketbird.client.gui.rtc.matches;
 
 
 import com.bracketbird.client.gui.rtc.RTC;
+import com.bracketbird.clientcore.appcontrol.FlowPanelPage;
 import com.bracketbird.clientcore.appcontrol.Page;
 import com.bracketbird.clientcore.gui.*;
 import com.bracketbird.clientcore.style.Horizontal;
@@ -9,11 +10,12 @@ import com.bracketbird.clientcore.style.TextLayout;
 import com.bracketbird.clientcore.util.MouseOver;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.ui.FlowPanel;
 
 /**
  *
  */
-public class SeedingPage extends Page<SeedingPageController> {
+public class SeedingPage extends FlowPanelPage<SeedingPageController> {
 
     private VerticalComponent content;
     private LabelComponent randomButton;

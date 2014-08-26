@@ -18,7 +18,7 @@ import java.util.List;
 /**
  *
  */
-public class RankingViewPage extends Page<RankingViewPageController> {
+public class RankingViewPage extends FlowPanelPage<RankingViewPageController> {
 
     private SimpleFlowComponent content;
     private TournamentLevel activeLevel;
@@ -87,7 +87,7 @@ public class RankingViewPage extends Page<RankingViewPageController> {
         activeLevel = level;
         rankingPanel = createPanel(activeLevel);
         content.add(rankingPanel.getContent());
-        if (isAttached()) {
+        if (getContentPanel().isAttached()) {
             rankingPanel.relayout();
         }
         //   paint();

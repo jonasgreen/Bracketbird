@@ -1,16 +1,18 @@
 package com.bracketbird.client.gui.main;
 
 
+import com.bracketbird.clientcore.appcontrol.FlowPanelPage;
 import com.bracketbird.clientcore.appcontrol.Page;
 import com.bracketbird.clientcore.gui.*;
 import com.bracketbird.clientcore.style.*;
 import com.bracketbird.clientcore.util.KeyUtil;
 import com.google.gwt.event.dom.client.*;
+import com.google.gwt.user.client.ui.FlowPanel;
 
 /**
  *
  */
-public class CreateTournamentPage extends Page<CreateTournamentPageController> {
+public class CreateTournamentPage extends FlowPanelPage<CreateTournamentPageController> {
 
     private VerticalComponent content;
     private TextBoxComponent textBox;

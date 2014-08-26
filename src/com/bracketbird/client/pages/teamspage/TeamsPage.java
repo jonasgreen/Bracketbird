@@ -1,23 +1,28 @@
 package com.bracketbird.client.pages.teamspage;
 
 
-import com.bracketbird.client.gui.rtc.teams.TeamsTable;
+import com.bracketbird.client.gui.rtc.RTC;
 import com.bracketbird.client.gui.rtc.matches.SeedingPageController;
 import com.bracketbird.client.gui.rtc.settings.SettingsPageController;
-import com.bracketbird.client.gui.rtc.RTC;
-import com.bracketbird.client.model.tournament.*;
-import com.bracketbird.client.pages.TournamentPage;
+import com.bracketbird.client.gui.rtc.teams.TeamsTable;
+import com.bracketbird.client.model.tournament.TournamentListener;
+import com.bracketbird.client.model.tournament.TournamentStateChangedEvent;
 import com.bracketbird.client.table.TableManager;
+import com.bracketbird.clientcore.appcontrol.Application;
+import com.bracketbird.clientcore.appcontrol.Page;
+import com.bracketbird.clientcore.appcontrol.ScrollPanelPage;
+import com.bracketbird.clientcore.gui.LabelComponent;
 import com.bracketbird.clientcore.util.MouseOver;
-import com.google.gwt.event.dom.client.*;
-import com.google.gwt.user.client.ui.*;
-import com.bracketbird.clientcore.appcontrol.*;
-import com.bracketbird.clientcore.gui.*;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.PopupPanel;
 
 /**
  *
  */
-public class TeamsPage extends TournamentPage<TeamsPageController> {
+public class TeamsPage extends ScrollPanelPage<TeamsPageController> {
 
     private LabelComponent header;
     private LabelComponent nextButton;
@@ -35,14 +40,7 @@ public class TeamsPage extends TournamentPage<TeamsPageController> {
     private LabelComponent editSeeding;
 
 
-    public TeamsPage() {
-        super();
-       // content = new VerticalComponent();
-       // add(content);
-    }
-
     public void init() {
-        super.init();
         FlowPanel panel = new FlowPanel();
 
         int i = 0;

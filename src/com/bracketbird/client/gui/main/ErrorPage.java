@@ -2,6 +2,7 @@ package com.bracketbird.client.gui.main;
 
 
 import com.bracketbird.client.url.UrlUtil;
+import com.bracketbird.clientcore.appcontrol.FlowPanelPage;
 import com.bracketbird.clientcore.appcontrol.Page;
 import com.bracketbird.clientcore.gui.*;
 import com.bracketbird.clientcore.style.Horizontal;
@@ -11,12 +12,13 @@ import com.bracketbird.clientcore.util.MouseOver;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.FlowPanel;
 
 
 /**
  *
  */
-public class ErrorPage extends Page<ErrorPageController> {
+public class ErrorPage extends FlowPanelPage<ErrorPageController> {
 
     private FlowComponent content;
 
@@ -47,7 +49,7 @@ public class ErrorPage extends Page<ErrorPageController> {
 
         holder.add(vc, new TextLayout(null, PAGE_WIDTH + "px", Horizontal.CENTER));
         content.add(holder, new TextLayout("400px", "100%").margin(100,0,0,0).backgroundBlue());
-        StyleIt.add(this, new TextLayout().backgroundBlue());
+        //StyleIt.add(this, new TextLayout().backgroundBlue());
 
     }
 
