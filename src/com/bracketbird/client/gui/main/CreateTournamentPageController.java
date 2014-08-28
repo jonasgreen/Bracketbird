@@ -36,7 +36,7 @@ public class CreateTournamentPageController extends PageController<CreateTournam
 
     public void afterLoad() {
         getPage();
-        page.setVisible(true);
+       // page.setVisible(true);
         page.getTextBox().setText("");
         page.getTextBox().setFocus(true);
     }

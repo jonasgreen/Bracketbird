@@ -1,7 +1,6 @@
 package com.bracketbird.client.table;
 
 import com.bracketbird.clientcore.gui.FlowComponent;
-import com.bracketbird.clientcore.gui.TableHeader;
 import com.bracketbird.clientcore.style.StyleIt;
 import com.bracketbird.clientcore.style.TextLayout;
 import com.google.gwt.dom.client.Style;
@@ -16,11 +15,9 @@ import java.util.List;
 public abstract class Table extends FlowComponent {
 
     private static int count = 0;
-    private final long id;
+    private final long id = count++;
     protected TableRow lastFocus;
     private List<TableRow> rows = new ArrayList<TableRow>();
-    private TableManager tableManager = null;
-    private TableRow header;
 
 
     public List<TableRow> getRows() {
@@ -33,18 +30,7 @@ public abstract class Table extends FlowComponent {
 
     protected Table(TableManager tm) {
         super();
-        if (tm != null) {
-            tm.addTable(this);
-        }
-        this.id = count++;
-        this.tableManager = tm;
         StyleIt.add(this, new TextLayout().alignCenter());
-    }
-
-    public void addHeaderRow(TableRow header) {
-        add(header, new TextLayout(null, "100%"));
-        this.header = header;
-        styleRow(header);
     }
 
     public void addTableRow(TableRow row) {
@@ -65,9 +51,10 @@ public abstract class Table extends FlowComponent {
         int index = rows.indexOf(row);
         if (isLastRow(index)) {
             //call manager
-            if (tableManager != null) {
+            /*if (tableManager != null) {
                 tableManager.down(this, cellIndex);
             }
+            */
             return;
         }
         else {
@@ -88,9 +75,10 @@ public abstract class Table extends FlowComponent {
         int index = rows.indexOf(row);
         if (index == 0) {
             //call manager
-            if (tableManager != null) {
+           /* if (tableManager != null) {
                 tableManager.up(this, cellIndex);
             }
+            */
             return;
         }
         else {

@@ -2,11 +2,12 @@
   font-family: "klavika";
   src: url("font/Klavika-Light.otf"); }
 
+
 html{
 
 }
 
-body {
+body, input {
   height: 100%;
   font-family: "klavika";
       font-size: 14px;
@@ -17,17 +18,54 @@ body {
       color: #37474f;
 }
 
-.menuPanel{
-    padding-left: 50px;
-    padding-right: 50px;
+input {
+  font-family: "klavika";
+      font-size: 14px;
+      font-stretch: normal;
+      font-style: normal;
+      font-weight: normal;
+      line-height: 1.25;
+      color: #37474f;
+      background: transparent;
+}
+
+
+
+::-webkit-input-placeholder {
+    color:#C9C9C9;
+    font-style: italic;
+}
+
+::-moz-placeholder {
+    color:#C9C9C9;
+    font-style: italic;
+}
+
+:-ms-input-placeholder {
+    color:#C9C9C9;
+    font-style: italic;
+
+}
+
+/* MENU PANEL */
+
+.menuPanel_outer{
+    display: flex;
+    align-items: center;
+    padding-left: 75px;
+    padding-right: 75px;
+}
+
+.menuPanel_inner{
+    width:100%;
+    display: flex;
+    align-items: baseline;
 }
 
 .menuItem{
-    padding:20px;
+    padding-right:40px;
     font-size: 22px;
-    float: left;
 }
-
 
 .menuItem_active{
 }
@@ -40,14 +78,18 @@ body {
     cursor:pointer;
 }
 
+.menuPanel_secondaryPanel{
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
 .menuItem_secondary{
-    padding:20px;
-    padding-top: 26px;
-    padding-left: 10px;
+    padding-top: 6px;
+    padding-left: 25px;
     color: lightblue;
     font-size: 14px;
-    float: right;
-    text-decoration: underline;
+
 }
 
 .menuItem_secondary:hover{
@@ -55,98 +97,38 @@ body {
 }
 
 
-.gwt-SuggestBoxPopup {
-  width: 380px;
-  padding-left: 0px;
-  padding-right: 0px;
-  background: #ffb200;
-  color: white;
-  border-bottom: solid 1px #466c3a;
-  border-top: solid 1px #466c3a;
-  border-left: solid 1px #466c3a;
-  border-right: solid 1px #466c3a; }
+/* */
 
-.gwt-SuggestBoxPopup .item {
-  font-family: Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  padding: 2px 0px 2px 0px;
-  background-color: #ffb200;
-  color: #466c3a; }
+.tournament_scrollPanel{
+    padding-top:50px;
+    padding-left: 100px;
+    padding-right: 100px;
+    height: 100%;
+}
 
-.gwt-SuggestBoxPopup .item-selected {
-  font-size: 28px; }
 
-.gwt-SuggestBoxPopup .suggestPopupTopLeft {
-  border: none;
-  background: none; }
+.teamsRow{
+    display: flex;
+    align-items: center;
+   /* background-color: lightblue;*/
+    /*	border: 1px solid lightblue;
+        border-radius: 5px;*/
+}
 
-.gwt-SuggestBoxPopup .suggestPopupTopLeftInner {
-  border: none;
-  background: none; }
+.teamsRow_seeding{
+    border: none;
+    color:#C9C9C9;
+    font-size: 10px;
+    width: 20px;
+}
 
-.gwt-SuggestBoxPopup .suggestPopupTopCenter {
-  border: none;
-  background: none; }
+.teamsRow_team{
+    padding-left: 50px;
+    border: none;
+    flex-grow: 1;
+    font-size: 16px;
+}
 
-.gwt-SuggestBoxPopup .suggestPopupTopCenterInner {
-  border: none;
-  background: none; }
-
-.gwt-SuggestBoxPopup .suggestPopupTopRight {
-  border: none;
-  background: none; }
-
-.gwt-SuggestBoxPopup .suggestPopupTopRightInner {
-  border: none;
-  background: none; }
-
-.gwt-SuggestBoxPopup .suggestPopupMiddleLeft {
-  border: none;
-  background: none; }
-
-.gwt-SuggestBoxPopup .suggestPopupMiddleLeftInner {
-  border: none;
-  background: none; }
-
-.gwt-SuggestBoxPopup .suggestPopupMiddleCenter {
-  border: none;
-  background: none; }
-
-.gwt-SuggestBoxPopup .suggestPopupMiddleCenterInner {
-  border: none;
-  background: none; }
-
-.gwt-SuggestBoxPopup .suggestPopupMiddleRight {
-  border: none;
-  background: none; }
-
-.gwt-SuggestBoxPopup .suggestPopupMiddleRightInner {
-  border: none;
-  background: none; }
-
-.gwt-SuggestBoxPopup .suggestPopupBottomLeft {
-  border: none;
-  background: none; }
-
-.gwt-SuggestBoxPopup .suggestPopupBottomLeftInner {
-  border: none;
-  background: none; }
-
-.gwt-SuggestBoxPopup .suggestPopupBottomCenter {
-  border: none;
-  background: none; }
-
-.gwt-SuggestBoxPopup .suggestPopupBottomCenterInner {
-  border: none;
-  background: none; }
-
-.gwt-SuggestBoxPopup .suggestPopupBottomRight {
-  border: none;
-  background: none; }
-
-.gwt-SuggestBoxPopup .suggestPopupBottomRightInner {
-  border: none;
-  background: none; }
 
 .dialogVPanel {
   margin: 5px; }

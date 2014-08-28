@@ -1,12 +1,13 @@
 package com.bracketbird.client.gui.rtc.matches;
 
 
-import com.bracketbird.client.pages.TournamentPageController;
-import com.bracketbird.client.model.tournament.*;
+import com.bracketbird.client.model.tournament.Round;
+import com.bracketbird.client.model.tournament.TournamentLevel;
 import com.bracketbird.client.table.TableManager;
-import com.bracketbird.clientcore.gui.*;
-import com.bracketbird.clientcore.style.*;
-import com.google.gwt.user.client.ui.ScrollPanel;
+import com.bracketbird.clientcore.gui.HorizontalComponent;
+import com.bracketbird.clientcore.gui.LabelComponent;
+import com.bracketbird.clientcore.gui.VerticalComponent;
+import com.bracketbird.clientcore.style.TextLayout;
 
 /**
  *
@@ -24,14 +25,14 @@ public class LevelMatchesLayedOutPanel extends VerticalComponent {
         TableManager tm = new TableManager() {
             @Override
             public void scrollUp() {
-                ScrollPanel scrollPanel = TournamentPageController.getInstance().getPage().getScrollPanel().getScrollPanel();
-                scrollPanel.setVerticalScrollPosition(scrollPanel.getVerticalScrollPosition() - 40);
+              //  ScrollPanel scrollPanel = TournamentPageController.getInstance().getPage().getScrollPanel().getScrollPanel();
+              //  scrollPanel.setVerticalScrollPosition(scrollPanel.getVerticalScrollPosition() - 40);
             }
 
             @Override
             public void scrollDown() {
-                ScrollPanel scrollPanel = TournamentPageController.getInstance().getPage().getScrollPanel().getScrollPanel();
-                     scrollPanel.setVerticalScrollPosition(scrollPanel.getVerticalScrollPosition() + 40);
+               // ScrollPanel scrollPanel = TournamentPageController.getInstance().getPage().getScrollPanel().getScrollPanel();
+               //      scrollPanel.setVerticalScrollPosition(scrollPanel.getVerticalScrollPosition() + 40);
             }
         };
 

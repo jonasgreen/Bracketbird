@@ -15,7 +15,7 @@ public class RoundTable extends Table {
     public RoundTable(TableManager tm, Round round, boolean withHeader) {
         super(tm);
         if (withHeader) {
-            addHeaderRow(new MatchHeaderRow(this));
+           // addHeaderRow(new MatchHeaderRow(this));
         }
         for (Match match : round.getMatches()) {
             addTableRow(new MatchTableRow(this, match));

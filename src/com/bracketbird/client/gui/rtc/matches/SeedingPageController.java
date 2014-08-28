@@ -29,7 +29,7 @@ public class SeedingPageController extends PageController<SeedingPage> {
 
     public void afterLoad() {
         getPage().getSeedingPanel().setInitialSeedings();
-        getPage().setWidth("400px");
+       // getPage().setWidth("400px");
     }
 
     public void beforeUnload() {

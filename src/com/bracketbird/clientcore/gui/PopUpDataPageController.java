@@ -35,7 +35,7 @@ public class PopUpDataPageController extends PageController<PopUpDataPage> {
     }
 
     private void doLoad() {
-        page.setVisible(true);
+       // page.setVisible(true);
         page.setFocus();
     }
 

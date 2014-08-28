@@ -1,12 +1,12 @@
 package com.bracketbird.clientcore.appcontrol;
 
 
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.client.ui.Panel;
 
 /**
  *
  */
-public abstract class Page<W extends Widget, C extends PageController> {
+public abstract class Page<W extends Panel, C extends PageController> {
 
     private C controller;
 

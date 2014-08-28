@@ -19,18 +19,25 @@ public class MenuPanel extends FlowPanel{
 
 
     public MenuPanel() {
-        setStyleName("menuPanel");
+
+        setStyleName("menuPanel_outer");
+
+        FlowPanel content = new FlowPanel();
+        content.setStyleName("menuPanel_inner");
+        add(content);
 
         //primary menu items to the left
-        add(new MenuItem("Teams", TeamsPageController.getInstance()));
-        add(new MenuItem("Tournament settings", SettingsPageController.getInstance()));
-        add(new MenuItem("Matches", EnterResultsPageController.getInstance()));
-        add(new MenuItem("Ranking", RankingViewPageController.getInstance()));
+        content.add(new MenuItem("Teams", TeamsPageController.getInstance()));
+        content.add(new MenuItem("Tournament settings", SettingsPageController.getInstance()));
+        content.add(new MenuItem("Matches", EnterResultsPageController.getInstance()));
+        content.add(new MenuItem("Ranking", RankingViewPageController.getInstance()));
 
         //secondary menu items to the right
-        add(helpMenuItem());
-        add(shareMenuItem());
-        addStyleName("shadow");
+        FlowPanel secondaryPanel = new FlowPanel();
+        secondaryPanel.setStyleName("menuPanel_secondaryPanel");
+        content.add(secondaryPanel);
+        secondaryPanel.add(helpMenuItem());
+        secondaryPanel.add(shareMenuItem());
     }
 
     private Label helpMenuItem() {
