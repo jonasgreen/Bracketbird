@@ -79,7 +79,7 @@ public class StressTeam {
     }
 
     private void createTeam() {
-        RTC.getInstance().createTeam();
+        RTC.getInstance().createTeam("", 0);
     }
 
     private int getTodo() {

@@ -15,8 +15,13 @@ public class Team extends Model<TeamId> {
     protected String info;
     protected Integer seeding;
 
-    public Team() {
+    protected Team() {
+    }
+
+    public Team(String name, int seeding) {
         super();
+        this.name = name;
+        this.seeding = seeding;
     }
 
     public Integer getSeeding() {

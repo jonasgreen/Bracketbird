@@ -25,7 +25,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 /**
  *
  */
-public class TeamsTableRow extends TableRow {
+public class TeamsTableRowOld extends TableRow {
 
     private static TextLayout focusLayout = new TextLayout().sizeH3().bold().add(P.BACKGROUND_WHITE).colorBlack().border(2).borderColor(new P(Name.COLOR, "#29ABE2"));
     private static TextLayout normalLayout = new TextLayout().sizeNormal().add(P.BACKGROUND_WHITE).border(2).borderColor(P.BACKGROUND_WHITE).add(Name.COLOR, "#5C5C5C");
@@ -47,7 +47,7 @@ public class TeamsTableRow extends TableRow {
     private LabelCellData columnSeeding;
 
 
-    public TeamsTableRow(Table table, Team team) {
+    public TeamsTableRowOld(Table table, Team team) {
         super(table, false);
         this.team = team;
         this.addCell(getColumnSeeding(), seedingLayout);

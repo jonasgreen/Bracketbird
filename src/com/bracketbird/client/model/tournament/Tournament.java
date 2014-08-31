@@ -204,7 +204,7 @@ public class Tournament extends Model<TournamentId> {
     }
 
     public void createTeam(CreateTeamEvent event) {
-        Team team = new Team();
+        Team team = new Team(event.getTeamName(), event.getSeeding());
         team.setId(event.getModelId());
         team.setEventLogId(event.getEventId());
         teams.add(team);

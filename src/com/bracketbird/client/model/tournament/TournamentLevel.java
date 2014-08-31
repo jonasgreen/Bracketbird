@@ -1,13 +1,14 @@
 package com.bracketbird.client.model.tournament;
 
-import com.bracketbird.client.gui.rtc.event.LevelFinishedEvent;
-import com.bracketbird.client.gui.rtc.event.UpdateLevelEvent;
-import com.bracketbird.client.gui.rtc.event.UpdateMatchFieldEvent;
-import com.bracketbird.client.gui.rtc.event.UpdateMatchResultEvent;
-import com.bracketbird.client.pages.teamspage.TeamsPageController;
-import com.bracketbird.client.model.*;
-import com.bracketbird.client.model.keys.*;
-import com.bracketbird.clientcore.model.*;
+import com.bracketbird.client.gui.rtc.event.*;
+import com.bracketbird.client.model.Scheduler;
+import com.bracketbird.client.model.SeedingTeam;
+import com.bracketbird.client.model.Team;
+import com.bracketbird.client.model.keys.TeamId;
+import com.bracketbird.client.model.keys.TournamentId;
+import com.bracketbird.client.model.keys.TournamentLevelId;
+import com.bracketbird.clientcore.model.Model;
+import com.bracketbird.clientcore.model.TournamentLevelConstant;
 
 import java.util.*;
 
@@ -134,8 +135,8 @@ public abstract class TournamentLevel extends Model<TournamentLevelId> {
             while (iterator.hasNext()) {
                 Team t = iterator.next();
                 if (t.getName() == null || t.getName().equals("")) {
-                    iterator.remove();
-                    TeamsPageController.getInstance().getPage().getTeamsTable().teamDeleted(t, false);
+                //    iterator.remove();TODO
+                   // TeamsPageController.getInstance().getPage().getTeamsTable().teamDeleted(t, false);
                 }
             }
 

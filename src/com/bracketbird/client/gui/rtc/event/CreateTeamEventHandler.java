@@ -2,8 +2,6 @@ package com.bracketbird.client.gui.rtc.event;
 
 
 import com.bracketbird.client.gui.rtc.RTC;
-import com.bracketbird.client.pages.teamspage.TeamsPageController;
-import com.bracketbird.client.model.Team;
 
 /**
  *
@@ -35,8 +33,9 @@ public class CreateTeamEventHandler extends REventHandler<CreateTeamEvent> {
     public void postServerAction(final CreateTeamEvent event){
         //get teams page and sort teams.
 
-                Team team = TeamsPageController.getInstance().getPage().getTeamsTable().getTeam(event.getModelId());
-                team.setEventLogId(event.getEventId());
+         /*       Team team = TeamsPageController.getInstance().getPage().getTeamsTable().getTeam(event.getModelId());
+                team.setEventLogId(event.getEventId()); TODO
+*/
 
 
 

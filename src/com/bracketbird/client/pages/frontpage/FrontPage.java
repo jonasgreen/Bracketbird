@@ -2,12 +2,12 @@ package com.bracketbird.client.pages.frontpage;
 
 
 import com.bracketbird.client.browser.Browser;
+import com.bracketbird.client.gui.rtc.RTC;
 import com.bracketbird.client.pages.teamspage.TeamsPageController;
 import com.bracketbird.client.service.BBService;
 import com.bracketbird.client.service.TournamentResult;
 import com.bracketbird.clientcore.appcontrol.Application;
 import com.bracketbird.clientcore.appcontrol.FlowPanelPage;
-import com.bracketbird.clientcore.appcontrol.Page;
 import com.bracketbird.clientcore.appcontrol.TournamentContext;
 import com.bracketbird.clientcore.service.CallBack;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -63,8 +63,8 @@ public class FrontPage extends FlowPanelPage<FrontPageController> {
                     @Override
                     public void success(TournamentResult r) {
                         Application.get().shiftApplicationContext(TournamentContext.get());
+                        RTC.getInstance().loadTournament(r.getTournament(), r.getEventLogs(), true);
                         Application.show(TeamsPageController.getInstance());
-                        //RTC.getInstance().loadTournament(r.getTournament(), r.getEventLogs(), true);
                     }
 
                     @Override

@@ -120,25 +120,25 @@ public class RTC {
 
         String tName = t.getName();
         Window.setTitle(tName);
-        RunningTournamentTop.getInstance().getTournamentName().setText(tName);
+        //RunningTournamentTop.getInstance().getTournamentName().setText(tName);
 
         RTC.getInstance().loadServerSync(events, justCreated);
 
-        PopupManager.hide();
+        //PopupManager.hide();
 
         String url = t.isViewOnly() ? t.getViewUrl() : t.getUrl();
         Bracketbird.tournamentUrl =  url;
         com.google.gwt.user.client.History.newItem(url, false);
 
         if(t.isViewOnly()){
-            RunningTournamentTop.getInstance().getTournamentName().getElement().getStyle().setColor("white");
+            //RunningTournamentTop.getInstance().getTournamentName().getElement().getStyle().setColor("white");
         }
 
     }
 
     private void initGuiListeners(Tournament t) {
         if (!t.isViewOnly()) {
-            TeamsPageController.getInstance().getPage();
+            TeamsPageController.getInstance().beginListening();
             SettingsPageController.getInstance().getPage();
             EnterResultsPageController.getInstance().getPage();
         }
@@ -185,8 +185,8 @@ public class RTC {
     //TEAMS
 
 
-    public void createTeam() {
-        executeEvent(new CreateTeamEvent(null, new TeamId(UID.getUID())));
+    public void createTeam(String teamName, int seeding) {
+        executeEvent(new CreateTeamEvent(teamName, seeding, new TeamId(UID.getUID())));
     }
 
     public void updateTeamName(TeamId id, String name) {

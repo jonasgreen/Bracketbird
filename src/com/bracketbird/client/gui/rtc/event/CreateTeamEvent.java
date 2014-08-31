@@ -9,11 +9,24 @@ public class CreateTeamEvent extends REvent<CreateTeamEventHandler, TeamId>{
 
     private static final long serialVersionUID = -2655835684157046604L;
 
+    private String teamName;
+    private int seeding;
+
     public CreateTeamEvent() {
     }
 
-    public CreateTeamEvent(Long eventId, TeamId teamId) {
-        super(eventId, teamId);
+    public CreateTeamEvent(String teamName, int seeding, TeamId teamId) {
+        super(null, teamId);
+        this.teamName = teamName;
+        this.seeding = seeding;
+    }
+
+    public String getTeamName() {
+        return teamName;
+    }
+
+    public int getSeeding() {
+        return seeding;
     }
 
     @Override

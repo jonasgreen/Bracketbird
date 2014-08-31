@@ -86,7 +86,7 @@ public class OldEditOnlyTableData extends TextBoxComponent {
         else if (KeyCodes.KEY_ENTER == keyCode) {
             //commit(getTextBox().getValue());
             //TODO - change to continue one row down
-            RTC.getInstance().createTeam();
+            RTC.getInstance().createTeam("", 0);
         }
         else if (KeyCodes.KEY_DELETE == keyCode || KeyCodes.KEY_BACKSPACE == keyCode) {
             if (getText() == null || getText().equals("")) {

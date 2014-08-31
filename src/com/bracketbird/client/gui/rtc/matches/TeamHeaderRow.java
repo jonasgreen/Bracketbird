@@ -1,6 +1,6 @@
 package com.bracketbird.client.gui.rtc.matches;
 
-import com.bracketbird.client.gui.rtc.teams.TeamsTableRow;
+import com.bracketbird.client.gui.rtc.teams.TeamsTableRowOld;
 import com.bracketbird.client.table.CellData;
 import com.bracketbird.client.table.LabelCellData;
 import com.bracketbird.client.table.Table;
@@ -16,9 +16,9 @@ public class TeamHeaderRow extends TableRow{
 
     private static TextLayout normalLayout = new TextLayout().sizeNormal().add(P.BACKGROUND_WHITE).border(2).borderColor(P.BACKGROUND_WHITE).colorBaseDark().italic();
 
-    public static TextLayout teamName = TeamsTableRow.teamLayout.clone().colorBaseDark();
-    public static TextLayout comment = TeamsTableRow.commnetLaypout.clone().colorBaseDark();
-    public static TextLayout seeding = TeamsTableRow.seedingLayout.clone().colorBaseDark();
+    public static TextLayout teamName = TeamsTableRowOld.teamLayout.clone().colorBaseDark();
+    public static TextLayout comment = TeamsTableRowOld.commnetLaypout.clone().colorBaseDark();
+    public static TextLayout seeding = TeamsTableRowOld.seedingLayout.clone().colorBaseDark();
 
 
     public TeamHeaderRow(Table table) {

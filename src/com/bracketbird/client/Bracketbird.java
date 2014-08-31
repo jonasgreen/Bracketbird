@@ -70,7 +70,6 @@ public class Bracketbird extends com.bracketbird.clientcore.appcontrol.AppEntry 
     }
 
     private void loadTournamentPage(final String token) {
-
         BBService.getTournament(token, true, new CallBack<TournamentResult>() {
             @Override
             public void success(TournamentResult r) {

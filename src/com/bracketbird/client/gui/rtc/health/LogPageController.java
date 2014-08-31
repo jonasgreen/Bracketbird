@@ -2,14 +2,9 @@ package com.bracketbird.client.gui.rtc.health;
 
 
 import com.bracketbird.client.gui.rtc.event.REvent;
-import com.bracketbird.client.service.BBService;
 import com.bracketbird.clientcore.appcontrol.PageController;
-import com.bracketbird.clientcore.gui.FlowComponent;
-import com.bracketbird.clientcore.gui.LabelComponent;
 import com.bracketbird.clientcore.gui.MenuComponent;
 import com.bracketbird.clientcore.gui.MenuImageAndTextComponent;
-
-import java.util.Date;
 
 /**
  *
@@ -42,7 +37,7 @@ public class LogPageController extends PageController<LogPage> {
 
 
     public void log(REvent event) {
-        StringBuilder sb = new StringBuilder();
+        /*StringBuilder sb = new StringBuilder();
         sb.append(" [").append(event.isFromClient() ? "client] ------ " : "server] ----- ").append(event.getEventName());
 
         if (!event.isFromClient() && event.getTimeStamp() != null) {
@@ -52,10 +47,11 @@ public class LogPageController extends PageController<LogPage> {
             sb.append(" (").append(event.getEventId()).append(", ").append(hour).append(":").append(min < 10 ? ("0" + min) : min).append(")");
         }
         log(sb.toString());
+        */
     }
 
     public void log(String text) {
-        StringBuilder sb = new StringBuilder();
+       /* StringBuilder sb = new StringBuilder();
         Date rightNow = new Date();
 
         int hour = rightNow.getHours();
@@ -66,11 +62,12 @@ public class LogPageController extends PageController<LogPage> {
         FlowComponent div = new FlowComponent();
         div.add(new LabelComponent(sb.toString()));
         getPage().getContent().add(div);
+        */
     }
 
 
     public void log(String message, Throwable caught) {
-        StringBuilder sb = new StringBuilder("Error: ").append(message).append(" - ");
+        /*StringBuilder sb = new StringBuilder("Error: ").append(message).append(" - ");
         sb.append(caught.getMessage());
         if (caught.getCause() != null) {
             sb.append("\n").append(caught.getMessage());
@@ -78,5 +75,6 @@ public class LogPageController extends PageController<LogPage> {
         BBService.log(sb.toString());
 
         log(sb.toString());
+        */
     }
 }

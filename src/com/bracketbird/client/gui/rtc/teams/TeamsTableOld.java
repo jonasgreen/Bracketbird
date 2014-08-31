@@ -2,28 +2,22 @@ package com.bracketbird.client.gui.rtc.teams;
 
 
 import com.bracketbird.client.gui.rtc.RTC;
-import com.bracketbird.client.gui.rtc.matches.TeamHeaderRow;
-import com.bracketbird.client.model.*;
+import com.bracketbird.client.model.Team;
 import com.bracketbird.client.model.keys.TeamId;
-import com.bracketbird.client.model.tournament.*;
+import com.bracketbird.client.model.tournament.SeedingChangedEvent;
+import com.bracketbird.client.model.tournament.TournamentListener;
+import com.bracketbird.client.model.tournament.TournamentTeamEvent;
 import com.bracketbird.client.table.Table;
 import com.bracketbird.client.table.TableManager;
 import com.bracketbird.client.table.TableRow;
-import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Timer;
-import com.bracketbird.clientcore.gui.*;
-import com.bracketbird.clientcore.style.*;
-import com.google.gwt.user.client.ui.Widget;
-
-import javax.swing.text.Style;
-import java.util.*;
 
 /**
  *
  */
-public class TeamsTable extends Table {
+public class TeamsTableOld extends Table {
 
-    public TeamsTable(TableManager tm) {
+    public TeamsTableOld(TableManager tm) {
         super(tm);
         //addHeaderRow(new TeamHeaderRow(this));
 
@@ -69,14 +63,14 @@ public class TeamsTable extends Table {
     @Override
     public void backspace(TableRow row, int cellIndex) {
         if (cellIndex == 1 && (getRows().size() > 1)) {
-            RTC.getInstance().deleteTeam(((TeamsTableRow) row).getTeam().getId());
+            RTC.getInstance().deleteTeam(((TeamsTableRowOld) row).getTeam().getId());
         }
     }
 
     @Override
     public void enter(TableRow row, int cellIndex) {
         if (isLastRow(getRows().indexOf(row))) {
-            RTC.getInstance().createTeam();
+            RTC.getInstance().createTeam("", 0);
         }
         else {
             down(row, cellIndex);
@@ -86,7 +80,7 @@ public class TeamsTable extends Table {
     public void teamDeleted(Team team, boolean isClientEvent) {
         int index = 0;
         for (TableRow row : getRows()) {
-            if (((TeamsTableRow) row).getTeam().equals(team)) {
+            if (((TeamsTableRowOld) row).getTeam().equals(team)) {
                 deleteRow(index);
                 break;
             }
@@ -111,7 +105,7 @@ public class TeamsTable extends Table {
 
 
     private void teamCreated(Team team, boolean isClient) {
-        TeamsTableRow teamsTableRow = new TeamsTableRow(this, team);
+        TeamsTableRowOld teamsTableRow = new TeamsTableRowOld(this, team);
         addTableRow(teamsTableRow);
         if (isClient) {
             teamsTableRow.setFocus(true);
@@ -122,8 +116,8 @@ public class TeamsTable extends Table {
         if (getRows().size() == 1) {
             return;
         }
-        if (getLastFocus() != null && ((TeamsTableRow) getLastFocus()).getLostFocusTime() + 1000 > System.currentTimeMillis()) {
-            TeamId id = ((TeamsTableRow) getLastFocus()).getTeam().getId();
+        if (getLastFocus() != null && ((TeamsTableRowOld) getLastFocus()).getLostFocusTime() + 1000 > System.currentTimeMillis()) {
+            TeamId id = ((TeamsTableRowOld) getLastFocus()).getTeam().getId();
             setLastFocus(null);
             RTC.getInstance().deleteTeam(id);
         }
@@ -134,7 +128,7 @@ public class TeamsTable extends Table {
 
     public Team getTeam(TeamId modelId) {
         for (TableRow tableRow : getRows()) {
-            Team team = ((TeamsTableRow) tableRow).getTeam();
+            Team team = ((TeamsTableRowOld) tableRow).getTeam();
             if (team.getId().equals(modelId)) {
                 return team;
             }
