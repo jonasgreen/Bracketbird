@@ -118,10 +118,10 @@ input {
     position: absolute;
     display: flex;
     align-items: center;
-        -webkit-transition: top 0.25s ease-in-out;
-          -moz-transition: top 0.25s ease-in-out;
-          -o-transition: top 0.25s ease-in-out;
-          transition: top 0.25s ease-in-out;
+        -webkit-transition: top 0.25s linear;
+          -moz-transition: top 0.25s linear;
+          -o-transition: top 0.25s linear;
+          transition: top 0.25s linear;
 }
 
 .teamsRow_seeding{
