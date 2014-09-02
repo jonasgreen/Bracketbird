@@ -14,7 +14,6 @@ public class TeamCell extends TextBox{
 
     public TeamCell(Team team) {
         this.team = team;
-
         setStyleName("teamsRow_team");
         setText(team.getName());
 

@@ -50,7 +50,6 @@ public class TeamsPage extends ScrollPanelPage<TeamsPageController> {
     public void updatePositions() {
         int top = TOP_START;
         for (TeamRow r : teamRows) {
-            System.out.println("TOP: "+top);
             setTop(r, top);
             top += ROW_HEIGHT;
         }
