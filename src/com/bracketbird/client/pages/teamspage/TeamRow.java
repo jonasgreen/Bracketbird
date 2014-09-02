@@ -10,6 +10,7 @@ public class TeamRow extends FlowPanel {
 
     private SeedingCell seedingCell;
     private TeamCell teamCell;
+
     private Team team;
 
     public TeamRow(Team team) {

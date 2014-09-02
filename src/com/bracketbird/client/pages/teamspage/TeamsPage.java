@@ -29,7 +29,9 @@ public class TeamsPage extends ScrollPanelPage<TeamsPageController> {
     public void init() {
         //teams are added/removed by controller listening for create/delete team events.
         add(getEnterTeamBox());
+
         updatePositions();
+
     }
 
     public List<TeamRow> getTeamRows() {

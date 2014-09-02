@@ -1,6 +1,7 @@
 @font-face {
   font-family: "klavika";
-  src: url("font/Klavika-Light.otf"); }
+  src: url("fonts/Klavika-Light.otf");
+  }
 
 
 html{
@@ -158,6 +159,13 @@ input:focus, select:focus, textarea:focus, button:focus {
     -moz-transition: opacity 0.5s ease-in-out;
     transition: opacity 0.5s ease-in-out;
 }
+
+.teamsRow_deleteIcon:hover{
+    cursor: pointer;
+    opacity: 1;
+    color: #3B9EBF;
+}
+
 
 .teamsRow_team{
     padding-left: 20px;
