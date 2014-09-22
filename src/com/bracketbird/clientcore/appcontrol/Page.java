@@ -1,12 +1,12 @@
 package com.bracketbird.clientcore.appcontrol;
 
 
-import com.google.gwt.user.client.ui.Panel;
+import com.google.gwt.user.client.ui.FlowPanel;
 
 /**
  *
  */
-public abstract class Page<W extends Panel, C extends PageController> {
+public abstract class Page<C extends PageController> extends FlowPanel {
 
     private C controller;
 
@@ -20,5 +20,4 @@ public abstract class Page<W extends Panel, C extends PageController> {
 
     protected abstract void init();
 
-    protected abstract W getContentPanel();
 }

@@ -36,11 +36,11 @@ public class Application {
     }
 
     private void unloadActiveContext() {
-        activeContext.getPageContainer().removeFromParent();
+        activeContext.getContextWidget().removeFromParent();
     }
 
     private void loadNewContext(ApplicationContext context) {
-        RootLayoutPanel.get().add(context.getPageContainer());
+        RootLayoutPanel.get().add(context.getContextWidget());
         this.activeContext = context;
     }
 

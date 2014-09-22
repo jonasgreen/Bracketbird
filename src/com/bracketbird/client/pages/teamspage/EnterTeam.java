@@ -1,11 +1,10 @@
 package com.bracketbird.client.pages.teamspage;
 
 import com.bracketbird.client.gui.rtc.RTC;
+import com.bracketbird.clientcore.appcontrol.TournamentContext;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.*;
-import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.*;
 
 /**
  *
@@ -14,7 +13,7 @@ public class EnterTeam extends FlowPanel {
 
     private TeamsPage page;
     private TextBox textBox = new TextBox();
-    private Label addTeamButton;
+    private Button addTeamButton;
 
     public EnterTeam(TeamsPage page) {
         this.page = page;
@@ -27,6 +26,7 @@ public class EnterTeam extends FlowPanel {
                 keyDown(event);
             }
         });
+
         textBox.addKeyUpHandler(new KeyUpHandler() {
             @Override
             public void onKeyUp(KeyUpEvent event) {
@@ -50,10 +50,19 @@ public class EnterTeam extends FlowPanel {
         add(getAddTeamButton());
     }
 
-    public Label getAddTeamButton() {
+    private void keyUp(KeyUpEvent event) {
+        if (KeyCodes.KEY_ENTER == event.getNativeKeyCode()) {
+            createTeam();
+            stopEvent(event);
+
+        }
+    }
+
+    public Button getAddTeamButton() {
         if (addTeamButton == null) {
-            addTeamButton = new Label("Add Team");
+            addTeamButton = new Button("Add Team");
             addTeamButton.setStyleName("primaryButton");
+            addTeamButton.addStyleName("enterTeam_addButton");
             addTeamButton.getElement().getStyle().setMarginLeft(20, Style.Unit.PX);
             addTeamButton.addClickHandler(new ClickHandler() {
                 @Override
@@ -80,16 +89,11 @@ public class EnterTeam extends FlowPanel {
         textBox.getElement().setAttribute("placeholder", page.getTeamRows().isEmpty() ? "Enter team name" : "Enter another team");
     }
 
-    private void keyUp(KeyUpEvent event) {
-        if (event.isUpArrow() && !page.getTeamRows().isEmpty()) {
-            TeamRow row = page.getTeamRows().get(page.getTeamRows().size() - 1);
-            row.getTeamName().setFocus(true);
-        }
-    }
-
     private void keyDown(KeyDownEvent event) {
-        if (KeyCodes.KEY_ENTER == event.getNativeKeyCode()) {
-            createTeam();
+        if (event.isUpArrow() && !event.isShiftKeyDown() && !page.getTeamRows().isEmpty()) {
+            TeamRow row = page.getTeamRows().get(page.getTeamRows().size() - 1);
+            stopEvent(event);
+            row.getTeamName().setFocus(true);
         }
     }
 
@@ -104,6 +108,13 @@ public class EnterTeam extends FlowPanel {
     }
 
     public void setFocus(boolean focus) {
+        TournamentContext.get().getPageContainer().ensureVisible(this);
         textBox.setFocus(focus);
+    }
+
+
+    private void stopEvent(KeyEvent event){
+        event.stopPropagation();
+        event.preventDefault();
     }
 }

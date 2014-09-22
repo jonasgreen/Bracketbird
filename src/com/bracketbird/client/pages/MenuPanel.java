@@ -28,9 +28,9 @@ public class MenuPanel extends FlowPanel{
 
         //primary menu items to the left
         content.add(new MenuItem("Teams", TeamsPageController.getInstance()));
-        content.add(new MenuItem("Tournament settings", SettingsPageController.getInstance()));
+        content.add(new MenuItem("Settings", SettingsPageController.getInstance()));
         content.add(new MenuItem("Matches", EnterResultsPageController.getInstance()));
-        content.add(new MenuItem("Ranking", RankingViewPageController.getInstance()));
+        content.add(new MenuItem("Progress", RankingViewPageController.getInstance()));
 
         //secondary menu items to the right
         FlowPanel secondaryPanel = new FlowPanel();
@@ -74,6 +74,15 @@ public class MenuPanel extends FlowPanel{
         Label l = new Label(name);
         l.setStyleName("menuItem_secondary");
         return l;
+    }
+
+    public void addShadow(boolean shadow){
+        if(shadow){
+            addStyleName("menuPanel_outer_shadow");
+        }
+        else{
+            removeStyleName("menuPanel_outer_shadow");
+        }
     }
 
 

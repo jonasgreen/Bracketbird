@@ -1,12 +1,12 @@
 package com.bracketbird.client.pages.teamspage;
 
 import com.bracketbird.client.model.Team;
-import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.Label;
 
 /**
  *
  */
-public class SeedingCell extends TextBox{
+public class SeedingCell extends Label {
 
     private Team team;
 
@@ -14,5 +14,6 @@ public class SeedingCell extends TextBox{
         this.team = team;
         setStyleName("teamsRow_seeding");
         setText(""+team.getSeeding());
+        //setEnabled(false);
     }
 }

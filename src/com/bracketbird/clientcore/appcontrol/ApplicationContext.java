@@ -2,6 +2,7 @@ package com.bracketbird.clientcore.appcontrol;
 
 import com.bracketbird.client.HistorySupport;
 import com.google.gwt.user.client.ui.Panel;
+import com.google.gwt.user.client.ui.Widget;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
 public abstract class ApplicationContext<PAGE_CONTAINER extends Panel> {
 
     private PageController activePageController;
+    private Widget contextWidget;
     private PAGE_CONTAINER pageContainer;
 
     private List<PageChangedListener> pageChangedListeners = new ArrayList<PageChangedListener>();
@@ -30,12 +32,20 @@ public abstract class ApplicationContext<PAGE_CONTAINER extends Panel> {
     }
 
 
+    protected abstract Widget createContextWidget();
     protected abstract PAGE_CONTAINER createPageContainer();
 
-    protected PAGE_CONTAINER getPageContainer() {
+    protected Widget getContextWidget() {
+        if (contextWidget == null) {
+            contextWidget = createContextWidget();
+            contextWidget.setStyleName("text");
+        }
+        return contextWidget;
+    }
+
+    public PAGE_CONTAINER getPageContainer() {
         if (pageContainer == null) {
             pageContainer = createPageContainer();
-            pageContainer.setStyleName("text");
         }
         return pageContainer;
     }
@@ -58,7 +68,7 @@ public abstract class ApplicationContext<PAGE_CONTAINER extends Panel> {
     }
 
     protected void addToPageContainer(PageController pc) {
-        getPageContainer().add(pc.getPage().getContentPanel());
+        getPageContainer().add(pc.getPage());
     }
 
 
@@ -71,7 +81,7 @@ public abstract class ApplicationContext<PAGE_CONTAINER extends Panel> {
 
     private void unloadActivePage() {
         activePageController.beforeUnload();
-        activePageController.getPage().getContentPanel().removeFromParent();
+        activePageController.getPage().removeFromParent();
     }
 
 

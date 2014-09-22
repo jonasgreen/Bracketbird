@@ -2,16 +2,22 @@ package com.bracketbird.clientcore.appcontrol;
 
 import com.bracketbird.client.pages.MenuPanel;
 import com.google.gwt.dom.client.Style;
+import com.google.gwt.event.logical.shared.ResizeEvent;
+import com.google.gwt.event.logical.shared.ResizeHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
+import com.google.gwt.user.client.ui.ScrollPanel;
 
 /**
  *
  */
-public class TournamentContext extends ApplicationContext<DockLayoutPanel> {
+public class TournamentContext extends ApplicationContext<ScrollPanel> {
 
     private static TournamentContext instance;
+    private MenuPanel menuPanel;
 
     private TournamentContext() {
+
     }
 
     public static TournamentContext get() {
@@ -21,11 +27,41 @@ public class TournamentContext extends ApplicationContext<DockLayoutPanel> {
         return instance;
     }
 
+    public void updateMenuShadow(){
+        getMenuPanel().addShadow(getPageContainer().getMaximumVerticalScrollPosition() > 0);
+    }
+
+
 
     @Override
-    protected DockLayoutPanel createPageContainer() {
+    protected DockLayoutPanel createContextWidget() {
         DockLayoutPanel panel = new DockLayoutPanel(Style.Unit.PX);
-        panel.addNorth(new MenuPanel(), 62);
+        panel.addNorth(getMenuPanel(), 62);
+        panel.add(getPageContainer());
+
+        Window.addResizeHandler(new ResizeHandler() {
+            @Override
+            public void onResize(ResizeEvent event) {
+                updateMenuShadow();
+            }
+        });
+
         return panel;
     }
+
+    public MenuPanel getMenuPanel() {
+        if (menuPanel == null) {
+            menuPanel = new MenuPanel();
+        }
+        return menuPanel;
+    }
+
+    @Override
+    protected ScrollPanel createPageContainer() {
+        ScrollPanel w = new ScrollPanel();
+        w.setStyleName("tournamentContext_scrollPanel");
+        return w;
+    }
+
+
 }

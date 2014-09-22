@@ -87,9 +87,9 @@ public class RankingViewPage extends FlowPanelPage<RankingViewPageController> {
         activeLevel = level;
         rankingPanel = createPanel(activeLevel);
         content.add(rankingPanel.getContent());
-        if (getContentPanel().isAttached()) {
+        /*if (getContentPanel().isAttached()) {
             rankingPanel.relayout();
-        }
+        }*/
         //   paint();
     }
 

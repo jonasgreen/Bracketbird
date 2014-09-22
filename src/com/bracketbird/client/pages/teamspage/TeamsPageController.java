@@ -30,11 +30,6 @@ public class TeamsPageController extends PageController<TeamsPage> {
 
     public void afterLoad() {
         getPage().getEnterTeamBox().setFocus(true);
-       /* if (getPage().getTeamsTable().isEmpty()) {
-            RTC.getInstance().createTeam();
-        }
-        getPage().setFocus(true);
-        */
     }
 
     public TeamsPage newInstance() {
@@ -50,19 +45,22 @@ public class TeamsPageController extends PageController<TeamsPage> {
     }
 
     private void teamCreated(Team team, boolean isClient) {
-        getPage().addTeam(team, isClient);
+
     }
+
+
 
     public void beginListening(){
         RTC.getInstance().getTournament().addTeamsListener(new TournamentListener<TournamentTeamEvent>() {
 
             public void onChange(TournamentTeamEvent event) {
                 if (event.getAction() == TournamentTeamEvent.Action.create) {
-                    teamCreated(event.getTeam(), event.isClientEvent());
+                    System.out.println("team create");
+                    getPage().addTeam(event.getTeam(), event.isClientEvent());
                     //if from server - do sort after eventid. TODO
                 }
                 else if (event.getAction() == TournamentTeamEvent.Action.delete) {
-                    //teamDeleted(event.getTeam(), event.isClientEvent());
+                    getPage().deleteTeam(event.getTeam(), event.isClientEvent());
                 }
             }
         });

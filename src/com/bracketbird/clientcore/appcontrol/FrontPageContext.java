@@ -8,6 +8,7 @@ import com.google.gwt.user.client.ui.ScrollPanel;
 public class FrontPageContext extends ApplicationContext<ScrollPanel>{
 
     private static FrontPageContext instance;
+    private ScrollPanel scrollPanel = new ScrollPanel();
 
     private FrontPageContext() {
     }
@@ -19,8 +20,15 @@ public class FrontPageContext extends ApplicationContext<ScrollPanel>{
         return instance;
     }
 
+    //Page container and Context widget are the same;
+
+    @Override
+    protected ScrollPanel createContextWidget() {
+        return scrollPanel;
+    }
+
     @Override
     protected ScrollPanel createPageContainer() {
-        return new ScrollPanel();
+        return scrollPanel;
     }
 }
