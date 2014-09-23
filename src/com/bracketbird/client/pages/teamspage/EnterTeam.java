@@ -15,11 +15,13 @@ public class EnterTeam extends FlowPanel {
     private TextBox textBox = new TextBox();
     private Button addTeamButton;
 
+    private int top = 0;
+    private int left = 0;
+
     public EnterTeam(TeamsPage page) {
         this.page = page;
         setStyleName("enterTeam");
 
-        textBox.getElement().getStyle().setWidth(200, Style.Unit.PX);
         textBox.addKeyDownHandler(new KeyDownHandler() {
             @Override
             public void onKeyDown(KeyDownEvent event) {
@@ -63,7 +65,6 @@ public class EnterTeam extends FlowPanel {
             addTeamButton = new Button("Add Team");
             addTeamButton.setStyleName("primaryButton");
             addTeamButton.addStyleName("enterTeam_addButton");
-            addTeamButton.getElement().getStyle().setMarginLeft(20, Style.Unit.PX);
             addTeamButton.addClickHandler(new ClickHandler() {
                 @Override
                 public void onClick(ClickEvent event) {
@@ -116,5 +117,23 @@ public class EnterTeam extends FlowPanel {
     private void stopEvent(KeyEvent event){
         event.stopPropagation();
         event.preventDefault();
+    }
+
+    public int getTop() {
+        return top;
+    }
+
+    public void setTop(int top) {
+        this.top = top;
+        getElement().getStyle().setTop(top, Style.Unit.PX);
+    }
+
+    public int getLeft() {
+        return left;
+    }
+
+    public void setLeft(int left) {
+        this.left = left;
+        getElement().getStyle().setLeft(left, Style.Unit.PX);
     }
 }

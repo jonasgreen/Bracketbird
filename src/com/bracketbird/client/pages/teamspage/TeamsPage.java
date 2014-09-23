@@ -9,7 +9,10 @@ import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyDownEvent;
 import com.google.gwt.event.dom.client.KeyDownHandler;
+import com.google.gwt.event.logical.shared.ResizeEvent;
+import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.user.client.Timer;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Widget;
 
 import java.util.ArrayList;
@@ -21,13 +24,16 @@ import java.util.List;
 public class TeamsPage extends Page<TeamsPageController> {
 
     private static int ROW_HEIGHT = 30;
+    private static int ROW_WIDTH = 320;
+
     private static int TOP_START = 40;
 
     private static int TOP_START_ENTER_TEAM = TOP_START + (6 * ROW_HEIGHT);
 
 
-    private List<TeamRow> teamRows;
+    private List<TeamRow> teamRows = new ArrayList<TeamRow>();
     private EnterTeam enterTeamBox;
+    private boolean hasTwoColumns = false;
 
 
     public void init() {
@@ -35,6 +41,12 @@ public class TeamsPage extends Page<TeamsPageController> {
         //teams are added/removed by controller listening for create/delete team events.
         add(getEnterTeamBox());
         updatePositions();
+        Window.addResizeHandler(new ResizeHandler() {
+            @Override
+            public void onResize(ResizeEvent event) {
+                updatePositions();
+            }
+        });
     }
 
     public List<TeamRow> getTeamRows() {
@@ -47,33 +59,88 @@ public class TeamsPage extends Page<TeamsPageController> {
     public EnterTeam getEnterTeamBox() {
         if (enterTeamBox == null) {
             enterTeamBox = new EnterTeam(this);
-            setTop(enterTeamBox, (getTopOfEnterTeamsBox()));
+            enterTeamBox.setTop(TOP_START_ENTER_TEAM);
         }
         return enterTeamBox;
     }
 
     public void updatePositions() {
-        int top = TOP_START;
+
+        boolean buildTwoColumns = shouldBuildTwoColumns();
+        int scrollPanelHeight = TournamentContext.get().getPageContainer().getOffsetHeight();
+
         int index = 0;
+        int indexInColumn = 0;
+
+        int top = TOP_START;
+        int topOfEnterTeamsBox = TOP_START_ENTER_TEAM;
+
+        int left = 0;
+
         for (TeamRow r : teamRows) {
-            setTop(r, top);
-            top += ROW_HEIGHT;
             r.getSeedingCell().setText(++index + "");
+
+            setTop(r, top);
+            setLeft(r, left);
+
+            top += ROW_HEIGHT;
+            topOfEnterTeamsBox = top+ROW_HEIGHT > topOfEnterTeamsBox ? top+ROW_HEIGHT : topOfEnterTeamsBox;
+            getEnterTeamBox().setTop(topOfEnterTeamsBox);
+            getEnterTeamBox().setLeft(left);
+
+            indexInColumn++;
+            if(buildTwoColumns && calculateColumnHeight(indexInColumn+1) > scrollPanelHeight){
+                top = TOP_START;
+                left = ROW_WIDTH + 20;
+                indexInColumn = 0;
+            }
         }
 
-        int topOfEnterTeamsBox = getTopOfEnterTeamsBox();
-        setTop(getEnterTeamBox(), topOfEnterTeamsBox);
         setHeight((topOfEnterTeamsBox + ROW_HEIGHT) + "px");
         TournamentContext.get().updateMenuShadow();
+
+        if(hasTwoColumns != buildTwoColumns){
+            Scheduler.get().scheduleDeferred(new Scheduler.ScheduledCommand() {
+                @Override
+                public void execute() {
+                    TournamentContext.get().getPageContainer().scrollToBottom();
+                }
+            });
+        }
+        hasTwoColumns = buildTwoColumns;
+
+        Scheduler.get().scheduleDeferred(new Scheduler.ScheduledCommand() {
+            @Override
+            public void execute() {
+                System.out.println("SCROLLPANEL-HEIGHT: "+ TournamentContext.get().getPageContainer().getOffsetHeight());
+                System.out.println("PAGE HEIGHT: "+((getOffsetHeight())));
+            }
+        });
     }
 
-    private int getTopOfEnterTeamsBox() {
-        int newTopOfEnterTeam = getTopOfNextTeam() + ROW_HEIGHT;
-        return newTopOfEnterTeam <= TOP_START_ENTER_TEAM ? TOP_START_ENTER_TEAM : newTopOfEnterTeam;
+    private boolean shouldBuildTwoColumns(){
+        if(teamRows.size() == 0){
+            return false;
+        }
+        int rowsInColumnTwo = (teamRows.size()/2) + (teamRows.size()%2);
+        int scrollPanelHeight = TournamentContext.get().getPageContainer().getOffsetHeight();
+
+        boolean moreThanOneColumn = calculateColumnHeight(teamRows.size()) > scrollPanelHeight;
+        boolean noMoreThanTwoColumn = calculateColumnHeight(rowsInColumnTwo) <= scrollPanelHeight;
+
+        return moreThanOneColumn && noMoreThanTwoColumn;
+    }
+
+    private int calculateColumnHeight(int columns) {
+        return (columns * ROW_HEIGHT) + 150;
     }
 
     private void setTop(Widget w, int top) {
         w.getElement().getStyle().setTop(top, Style.Unit.PX);
+    }
+
+    private void setLeft(Widget w, int left) {
+        w.getElement().getStyle().setLeft(left, Style.Unit.PX);
     }
 
     public void addTeam(Team team, boolean isClient) {
@@ -81,11 +148,14 @@ public class TeamsPage extends Page<TeamsPageController> {
         if (isClient) {
             //add on top of enterTeamBox, delete text in enterTeamsBox and recalculate positions
             add(row);
-            setTop(row, getTopOfEnterTeamsBox());
+            setTop(row, getEnterTeamBox().getTop());
+            setLeft(row, getEnterTeamBox().getLeft());
         }
         else {
             //add below last item and recalculate positions
-            setTop(row, getTopOfNextTeam());
+            setTop(row, (TournamentContext.get().getPageContainer().getOffsetHeight()/2));
+            setLeft(row, Window.getClientWidth());
+
             add(row);
         }
         teamRows.add(row);

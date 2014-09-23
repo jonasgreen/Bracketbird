@@ -111,6 +111,7 @@ input:focus, select:focus, textarea:focus, button:focus {
 
     flex-grow: 1;
     -webkit-flex-grow: 1;
+
     flex-direction: row-reverse;
     -webkit-flex-direction: row-reverse;
 }
@@ -147,8 +148,9 @@ input:focus, select:focus, textarea:focus, button:focus {
 
 
 .teamsRow{
-    width: 600px;
+    width: 320px;
     top: 0;
+    left: 0;
     position: absolute;
     display: -ms-flexbox;      /* TWEENER - IE 10 */
     display: -webkit-flex;     /* NEW - Chrome */
@@ -158,9 +160,9 @@ input:focus, select:focus, textarea:focus, button:focus {
     -ms-align-items: center;
     align-items: center;
 
-    -webkit-transition: top 0.25s linear;
-    -moz-transition: top 0.25s linear;
-    transition: top 0.25s linear;
+    -webkit-transition: top 0.25s linear, left 0.25s linear;
+    -moz-transition: top 0.25s linear, left 0.25s linear;
+    transition: top 0.25s linear, left 0.25s linear;
 }
 
 .teamsRow_seeding{
@@ -207,17 +209,36 @@ input:focus, select:focus, textarea:focus, button:focus {
 }
 
 .enterTeam{
+    top: 0;
+    left: 0;
+
+    display: -ms-flexbox;      /* TWEENER - IE 10 */
+    display: -webkit-flex;     /* NEW - Chrome */
+    display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
+
+    align-items: baseline;
+    -webkit-align-items: baseline;
+
+    -webkit-transition: top 0.25s linear, left 0.25s linear;
+    -moz-transition: top 0.25s linear, left 0.25s linear;
+    transition: top 0.25s linear, left 0.25s linear;
+
+
     position: absolute;
     padding-left: 40px;
+    width: 320px;
+    height:40px;
 }
 
 .enterTeam input{
     border: none;
     font-size: 18px;
+    width:200px;
 }
 
 .enterTeam_addButton{
     z-index:10;
+    margin-left:20px;
 }
 
 
