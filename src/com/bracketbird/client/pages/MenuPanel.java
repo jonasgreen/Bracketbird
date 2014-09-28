@@ -28,7 +28,7 @@ public class MenuPanel extends FlowPanel{
 
         //primary menu items to the left
         content.add(new MenuItem("Teams", TeamsPageController.getInstance()));
-        content.add(new MenuItem("Tournament settings", SettingsPageController.getInstance()));
+        content.add(new MenuItem("Settings", SettingsPageController.getInstance()));
         content.add(new MenuItem("Matches", EnterResultsPageController.getInstance()));
         content.add(new MenuItem("Live scores", RankingViewPageController.getInstance()));
 

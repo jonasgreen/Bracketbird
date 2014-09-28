@@ -59,19 +59,7 @@ public class FrontPage extends FlowPanelPage<FrontPageController> {
         createTournament.setStyleName("colorbutton3");
         createTournament.addClickHandler(new ClickHandler() {
             public void onClick(ClickEvent event) {
-                BBService.createTournament(new CallBack<TournamentResult>() {
-                    @Override
-                    public void success(TournamentResult r) {
-                        Application.get().shiftApplicationContext(TournamentContext.get());
-                        RTC.getInstance().loadTournament(r.getTournament(), r.getEventLogs(), true);
-                        Application.show(TeamsPageController.getInstance());
-                    }
-
-                    @Override
-                    public void fail(Throwable t) {
-                        t.printStackTrace();
-                    }
-                });
+                getController().createTournament();
             }
         });
         return createTournament;

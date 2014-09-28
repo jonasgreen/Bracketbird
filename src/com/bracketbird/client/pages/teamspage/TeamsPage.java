@@ -108,14 +108,6 @@ public class TeamsPage extends Page<TeamsPageController> {
             });
         }
         hasTwoColumns = buildTwoColumns;
-
-        Scheduler.get().scheduleDeferred(new Scheduler.ScheduledCommand() {
-            @Override
-            public void execute() {
-                System.out.println("SCROLLPANEL-HEIGHT: "+ TournamentContext.get().getPageContainer().getOffsetHeight());
-                System.out.println("PAGE HEIGHT: "+((getOffsetHeight())));
-            }
-        });
     }
 
     private boolean shouldBuildTwoColumns(){

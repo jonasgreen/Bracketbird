@@ -183,6 +183,23 @@ input:focus, select:focus, textarea:focus, button:focus {
     */
 }
 
+.teamsRow_seeding_focus{
+    color: #3B9EBF;
+    opacity: 1;
+}
+
+.teamsRow_focusIndicator{
+    position: absolute;
+    left: -15px;
+    top: 8px;
+    height: 6px;
+    width: 6px;
+    background-color: lightblue;
+    border-radius: 3px;
+}
+
+
+
 .teamsRow_deleteIcon{
     position: absolute;
     left: 26px;
