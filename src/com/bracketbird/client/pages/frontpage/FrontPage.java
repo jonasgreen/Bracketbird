@@ -2,14 +2,7 @@ package com.bracketbird.client.pages.frontpage;
 
 
 import com.bracketbird.client.browser.Browser;
-import com.bracketbird.client.gui.rtc.RTC;
-import com.bracketbird.client.pages.teamspage.TeamsPageController;
-import com.bracketbird.client.service.BBService;
-import com.bracketbird.client.service.TournamentResult;
-import com.bracketbird.clientcore.appcontrol.Application;
-import com.bracketbird.clientcore.appcontrol.FlowPanelPage;
-import com.bracketbird.clientcore.appcontrol.TournamentContext;
-import com.bracketbird.clientcore.service.CallBack;
+import com.bracketbird.clientcore.appcontrol.Page;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -19,7 +12,7 @@ import com.google.gwt.user.client.ui.Label;
 /**
  *
  */
-public class FrontPage extends FlowPanelPage<FrontPageController> {
+public class FrontPage extends Page<FrontPageController> {
 
     public FrontPage() {
     }

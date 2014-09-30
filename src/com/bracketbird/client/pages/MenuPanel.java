@@ -4,7 +4,7 @@ import com.bracketbird.client.gui.rtc.RTC;
 import com.bracketbird.client.gui.rtc.ShareComponent;
 import com.bracketbird.client.gui.rtc.matches.EnterResultsPageController;
 import com.bracketbird.client.gui.rtc.ranking.RankingViewPageController;
-import com.bracketbird.client.gui.rtc.settings.SettingsPageController;
+import com.bracketbird.client.pages.settingspage.SettingsPageController;
 import com.bracketbird.client.pages.teamspage.TeamsPageController;
 import com.bracketbird.clientcore.gui.PopupManager;
 import com.google.gwt.event.dom.client.ClickEvent;

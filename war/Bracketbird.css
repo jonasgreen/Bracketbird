@@ -259,10 +259,30 @@ input:focus, select:focus, textarea:focus, button:focus {
 }
 
 
+.settingsPage{
+    padding-top:50px;
+}
+
+.settingsPage_sep{
+    font-size: 22px;
+    float:left;
+    padding: 10px;
+    color:grey;
+}
 
 
+.levelComponent{
+    width: 80px;
+    height: 60px;
+    background-color: lightblue;
+    border-radius: 10px;
+    float: left;
+}
 
 
+.levelComponent_name{
+    text-align: center;
+}
 
 
 
