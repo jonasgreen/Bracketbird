@@ -11,8 +11,13 @@ public class LevelComponent extends FlowPanel{
 
     public LevelComponent(String name) {
         setStyleName("levelComponent");
+
+
         Label l = new Label(name);
         l.setStyleName("levelComponent_name");
         add(l);
+
+
+
     }
 }
