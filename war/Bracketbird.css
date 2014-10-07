@@ -259,114 +259,113 @@ input:focus, select:focus, textarea:focus, button:focus {
 }
 
 
+/*
+    SETTINGS PAGE
+*/
+
 .settingsPage{
     padding-top:50px;
 }
 
 
-.levelPanel{
-    display: -ms-flexbox;      /* TWEENER - IE 10 */
-    display: -webkit-flex;     /* NEW - Chrome */
-    display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
-
-    align-items: center;
-    -webkit-align-items: center;
-
-}
-
-
-.levelComponent{
+.levelComponent_innerPanel{
     width: 80px;
     height: 80px;
-    border:2px solid rgb(61, 133, 198);
+    border:2px solid #73BCD4;
     border-radius: 20px;
-    text-align: center;
-
-     display: -ms-flexbox;      /* TWEENER - IE 10 */
-     display: -webkit-flex;     /* NEW - Chrome */
-     display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
-
-     align-items: center;
-     -webkit-align-items: center;
-     justify-content: center;
-     -webkit-justify-content: center;
 }
 
-.levelComponentHover{
-}
-
-.levelComponentHover:hover{
-    background-color: lightblue;
+.levelComponent_innerPanel:hover{
     cursor:pointer;
+    background-color: lightblue;
 }
 
-.levelComponent_beginAndEnd{
+.beginAndEndComponent_innerPanel{
     width: 60px;
     height: 60px;
     border-radius: 30px;
+    border:2px solid #73BCD4;
 }
 
-
-.levelComponent_beginAndEnd .levelComponent_name{
-     font-size:18px;
- }
-
-
-.levelComponent_leftEar{
+.levelComponent_ear{
     height:8px;
     width: 3px;
+    background-color: #73BCD4;
+}
+
+.levelComponent_leftEar{
     border-radius: 8px 0 0 8px;
-    background-color: rgb(61, 133, 198);
     margin-right:-2px;
 }
 
 .levelComponent_rightEar{
-    height:8px;
-    width: 3px;
     border-radius: 0px 8px 8px 0px;
-    background-color: rgb(61, 133, 198);
     margin-left:-2px;
+}
+
+
+.levelComponent_allEmpty{
+    border-color: transparent;
+    background-color:transparent;
 }
 
 .levelComponent_beginArrow{
      width:0;
          height:0;
-         border-left:8px solid rgb(61, 133, 198);
+         border-left:8px solid #73BCD4;
          border-top:4px solid transparent;
          border-bottom:4px solid transparent;
-         margin-right: -8px;
+         margin-right: -2px;
          margin-left:-1px;
 }
 
-.levelComponent_endArrow{
-     width:0;
-         height:0;
-         border-left:6px solid rgb(61, 133, 198);
-         border-top:4px solid transparent;
-         border-bottom:4px solid transparent;
-         margin-left: -6px;
-}
-
-
 .levelComponent_sep{
     height: 2px;
-    width: 30px;
-    background-color: rgb(61, 133, 198);
+    width: 26px;
+    background-color: #73BCD4;
 }
-
-
 
 .levelComponent_name{
     text-align: center;
-    color: rgb(61, 133, 198);
+    color: #4CA9C8;
     font-size:18px;
 }
 
 
+/*
+    FLEX STYLES
+*/
+
+.flex{
+    display: -ms-flexbox;      /* TWEENER - IE 10 */
+    display: -webkit-flex;     /* NEW - Chrome */
+    display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+
+.flex_alignItems_center{
+    align-items: center;
+    -webkit-align-items: center;
+}
+
+.flex_justifyContent_center{
+    justify-content: center;
+    -webkit-justify-content: center;
+}
+
+.flex_center{
+    display: -ms-flexbox;      /* TWEENER - IE 10 */
+    display: -webkit-flex;     /* NEW - Chrome */
+    display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
+
+    /* horizontal */
+    align-items: center;
+    -webkit-align-items: center;
 
 
-
-
+    /* vertical */
+    justify-content: center;
+    -webkit-justify-content: center;
+}
 
 
 .dialogVPanel {
@@ -557,6 +556,12 @@ input:focus, select:focus, textarea:focus, button:focus {
   -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
   -moz-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3); }
+
+.primaryButton:active{
+ -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+ }
 
 
 

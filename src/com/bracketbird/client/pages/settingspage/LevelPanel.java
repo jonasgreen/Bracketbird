@@ -1,69 +1,62 @@
 package com.bracketbird.client.pages.settingspage;
 
+import com.bracketbird.client.Flex;
+import com.google.gwt.dom.client.Style;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.Label;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  */
 public class LevelPanel extends FlowPanel {
 
+
+    private List<LevelComponent> levelComponents = new ArrayList<LevelComponent>();
+
+    private Button button;
+
+
     public LevelPanel() {
-        setStyleName("levelPanel");
+        setStyleName(Flex.FLEX);
+        addStyleName(Flex.ALIGN_ITEMS_CENTER);
 
-        LevelComponent begin = new LevelComponent("Begin");
-        begin.addStyleName("levelComponent_beginAndEnd");
-        add(begin);
+        add(new BeginLevelComponent());
 
-        FlowPanel beginArrow = new FlowPanel();
-        beginArrow.setStyleName("levelComponent_beginArrow");
-        add(beginArrow);
+        add(new LevelComponent("Group"));
+        add(new LevelComponent("Knockout"));
 
-        addSep();
-
-        addLeftEar();
-        LevelComponent group = new LevelComponent("Group");
-        group.addStyleName("levelComponentHover");
-
-        add(group);
-        addRightEar();
-
-        addSep();
-
-        addLeftEar();
-        LevelComponent knockout = new LevelComponent("Knockout");
-        knockout.addStyleName("levelComponentHover");
-
-        add(knockout);
-        addRightEar();
-        addSep();
-
-        addLeftEar();
-        LevelComponent end = new LevelComponent("End");
-        end.addStyleName("levelComponent_beginAndEnd");
-        add(end);
-
-
+        add(new EndLevelComponent());
+        //add(new AllEmptyLevelComponent());
+        //add(new EndLevelComponent());
+        add(getButton());
 
     }
 
-    private void addRightEar() {
-        FlowPanel rightEar = new FlowPanel();
-        rightEar.setStyleName("levelComponent_rightEar");
-        add(rightEar);
+
+    public Button getButton() {
+        if (button == null) {
+            button = new Button("Add Stage/Level");
+            button.setStyleName("primaryButton");
+
+            button.getElement().getStyle().setMarginLeft(40, Style.Unit.PX);
+
+        }
+        return button;
     }
 
-    private void addLeftEar() {
-        FlowPanel leftEar;
-        leftEar = new FlowPanel();
-        leftEar.setStyleName("levelComponent_leftEar");
-        add(leftEar);
+    private boolean isEmpty(){
+        return levelComponents.size() == 1 && levelComponents.get(0) instanceof AllEmptyLevelComponent;
     }
 
-    private void addSep() {
-        FlowPanel l = new FlowPanel();
-        l.setStyleName("levelComponent_sep");
-        l.add(new Label(""));
-        add(l);
-    }
+
+
+
+
+
+
+
+
 }

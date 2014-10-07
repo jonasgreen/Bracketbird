@@ -48,7 +48,7 @@ public class FrontPage extends Page<FrontPageController> {
 
 
     public Label getCreateTournamentButton() {
-        Label createTournament = new Label("Create a tournament");
+        Label createTournament = new Label("Create a Tournament");
         createTournament.setStyleName("colorbutton3");
         createTournament.addClickHandler(new ClickHandler() {
             public void onClick(ClickEvent event) {

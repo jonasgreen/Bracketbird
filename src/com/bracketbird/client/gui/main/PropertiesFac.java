@@ -47,7 +47,7 @@ public class PropertiesFac {
     public static AddRemoveListContainer<Integer> rankingRules(){
         AddRemoveListContainer<Integer> arc = new AddRemoveListContainer<Integer>("Ranking rules when teams have equal points", FindingRankingConstant.LIST, true);
         arc.setTitle("When teams has the same amount of points, theese rules (Starting from the top) define the final ranking of those teams.");
-        StyleIt.add(arc.getLabel(), P.WRAP);
+        //StyleIt.add(arc.getLabel(), P.WRAP);
         return arc;
     }
 
