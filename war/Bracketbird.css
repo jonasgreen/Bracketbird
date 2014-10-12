@@ -88,7 +88,7 @@ input:focus, select:focus, textarea:focus, button:focus {
 }
 
 .menuItem{
-    padding-right:40px;
+    margin-right:40px;
     font-size: 22px;
 }
 
@@ -330,6 +330,34 @@ input:focus, select:focus, textarea:focus, button:focus {
     color: #4CA9C8;
     font-size:18px;
 }
+
+
+.addSettingsDropDown{
+     -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+     -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+     background-color:white;
+}
+
+.addSettingsDropDown_item{
+    font-size: 16px;
+    width: 100%;
+}
+
+.addSettingsDropDown_item:hover{
+    background-color: lightblue;
+    cursor: pointer;
+}
+
+
+.addSettingsDropDown_item div{
+    padding: 10px;
+    padding-bottom:6px;
+}
+
+
+
+
 
 
 /*
