@@ -2,10 +2,11 @@ package com.bracketbird.client.gui.rtc.settings;
 
 
 import com.bracketbird.client.gui.main.PropertiesFac;
-import com.bracketbird.client.model.tournament.*;
-import com.bracketbird.clientcore.appcontrol.*;
-import com.bracketbird.clientcore.gui.*;
-import com.bracketbird.clientcore.model.*;
+import com.bracketbird.client.model.tournament.Cup;
+import com.bracketbird.client.model.tournament.LevelSettings;
+import com.bracketbird.clientcore.gui.IntegerContainer;
+import com.bracketbird.clientcore.gui.ListContainer;
+import com.bracketbird.clientcore.model.TournamentLevelConstant;
 
 /**
  *
@@ -17,11 +18,8 @@ public class CupSettingsPanel extends SettingsPanel {
     public ListContainer<Integer> ELIMINATION_TYPE = PropertiesFac.eliminationType();
 
 
-    protected CupSettingsPanel(TournamentLevel level) {
+    protected CupSettingsPanel(Cup level) {
         super("Cup stage settings", level);
-        if (level.getType() != TournamentLevelConstant.CUP.getValue()) {
-            throw new SystemException("Setting wrong kind of tournamentLevel. " + level.getClass().getName());
-        }
         init();
     }
 

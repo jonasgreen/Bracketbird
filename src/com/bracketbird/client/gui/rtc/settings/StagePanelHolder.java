@@ -53,7 +53,7 @@ public class StagePanelHolder extends HorizontalComponent {
                     }
                 }
                 else {
-                    RTC.getInstance().createLevel(levelType);
+                    //RTC.getInstance().createLevel(levelType);
                 }
                 LEVELS.setValue(-1);
             }
@@ -65,9 +65,7 @@ public class StagePanelHolder extends HorizontalComponent {
             levelHolder.add(getStages());
             parent.getClickText().setText("Click on a stage to edit its settings.");
         }
-        StagePanel p = new StagePanel(level, getImageUrl(level.getType()));
-        getStages().add(p);
-        panelList.add(p);
+
     }
 
     private String getImageUrl(int levelType) {

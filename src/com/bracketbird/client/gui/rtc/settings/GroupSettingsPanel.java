@@ -2,12 +2,16 @@ package com.bracketbird.client.gui.rtc.settings;
 
 
 import com.bracketbird.client.gui.main.PropertiesFac;
-import com.bracketbird.client.model.tournament.*;
-import com.bracketbird.clientcore.appcontrol.*;
-import com.bracketbird.clientcore.gui.*;
-import com.bracketbird.clientcore.model.*;
+import com.bracketbird.client.model.tournament.Group;
+import com.bracketbird.client.model.tournament.LevelSettings;
+import com.bracketbird.clientcore.gui.AddRemoveListContainer;
+import com.bracketbird.clientcore.gui.IntegerContainer;
+import com.bracketbird.clientcore.gui.ListContainer;
+import com.bracketbird.clientcore.model.FindingRankingConstant;
+import com.bracketbird.clientcore.model.TournamentLevelConstant;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -25,11 +29,9 @@ public class GroupSettingsPanel extends SettingsPanel {
     public IntegerContainer ENTERING_TEAMS = PropertiesFac.maximumTeams();
 
 
-    protected GroupSettingsPanel(TournamentLevel level) {
+    protected GroupSettingsPanel(Group level) {
         super("Group stage settings", level);
-        if (level.getType() != TournamentLevelConstant.GROUP.getValue()) {
-            throw new SystemException("Setting wrong kind of tournamentLevel. " + level.getClass().getName());
-        }
+
 
         init();
     }

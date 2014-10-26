@@ -1,9 +1,11 @@
 package com.bracketbird.client.model.tournament;
 
-import com.bracketbird.client.gui.rtc.event.UpdateMatchResultEvent;
-import com.bracketbird.client.model.*;
+import com.bracketbird.client.model.CupScheduler;
+import com.bracketbird.client.model.LevelType;
+import com.bracketbird.client.model.Scheduler;
+import com.bracketbird.client.model.Team;
 
-import java.util.*;
+import java.util.List;
 
 /**
  *
@@ -14,7 +16,7 @@ public class Cup extends TournamentLevel {
     private static final long serialVersionUID = 2056092174233628140L;
 
     public Cup() {
-        super();
+        super(LevelType.knockout);
 
     }
 

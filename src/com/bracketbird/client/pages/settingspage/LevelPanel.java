@@ -1,6 +1,7 @@
 package com.bracketbird.client.pages.settingspage;
 
 import com.bracketbird.client.Flex;
+import com.bracketbird.client.model.tournament.TournamentLevel;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -22,26 +23,32 @@ public class LevelPanel extends FlowPanel {
     private List<LevelComponent> levelComponents = new ArrayList<LevelComponent>();
     private AddStageDropDown popup;
 
-
     private Button button;
+    private FlowPanel levelHolder;
 
 
     public LevelPanel() {
         setStyleName(Flex.FLEX);
         addStyleName(Flex.ALIGN_ITEMS_CENTER);
-
         add(new BeginLevelComponent());
 
-        add(new LevelComponent("Group"));
-        add(new LevelComponent("Knockout"));
+        //Holds all added levels
+        add(getLevelHolder());
 
         add(new EndLevelComponent());
-        //add(new AllEmptyLevelComponent());
-        //add(new EndLevelComponent());
         add(getButton());
 
     }
 
+    public FlowPanel getLevelHolder() {
+        if (levelHolder == null) {
+            levelHolder = new FlowPanel();
+            levelHolder.setStyleName(Flex.FLEX);
+            levelHolder.addStyleName(Flex.ALIGN_ITEMS_CENTER);
+            levelHolder.add(new AllEmptyLevelComponent());
+        }
+        return levelHolder;
+    }
 
     public Button getButton() {
         if (button == null) {
@@ -63,7 +70,6 @@ public class LevelPanel extends FlowPanel {
                                 popup = null;
                             }
                         });
-
                         popup.addAutoHidePartner(button.getElement());
                     }
                     else{
@@ -71,15 +77,16 @@ public class LevelPanel extends FlowPanel {
                     }
                 }
             });
-
-
-
         }
         return button;
     }
 
-    private boolean isEmpty() {
-        return levelComponents.size() == 1 && levelComponents.get(0) instanceof AllEmptyLevelComponent;
+
+    public void addLevel(TournamentLevel level){
+        if(levelComponents.isEmpty()){
+            levelHolder.clear();
+        }
+        getLevelHolder().add(new LevelComponent(level.getType()));
     }
 
 

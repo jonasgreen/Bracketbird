@@ -7,6 +7,7 @@ import com.bracketbird.client.gui.rtc.health.LogPageController;
 import com.bracketbird.client.gui.rtc.matches.EnterResultsPageController;
 import com.bracketbird.client.gui.rtc.ranking.RankingViewPageController;
 import com.bracketbird.client.gui.rtc.settings.SettingsPageController;
+import com.bracketbird.client.model.LevelType;
 import com.bracketbird.client.pages.teamspage.TeamsPageController;
 import com.bracketbird.client.gui.util.UID;
 import com.bracketbird.client.model.keys.MatchId;
@@ -212,7 +213,7 @@ public class RTC {
     }
 
     //LEVELS
-    public void createLevel(Integer levelType) {
+    public void createLevel(LevelType levelType) {
         executeEvent(new CreateLevelEvent(null, levelType, new TournamentLevelId(UID.getUID())));
     }
 

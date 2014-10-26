@@ -1,5 +1,6 @@
 package com.bracketbird.client.gui.rtc.event;
 
+import com.bracketbird.client.model.LevelType;
 import com.bracketbird.client.model.keys.TournamentLevelId;
 
 /**
@@ -9,17 +10,17 @@ public class CreateLevelEvent extends REvent<CreateLevelEventHandler, Tournament
 
     private static final long serialVersionUID = -2655835684157046604L;
 
-    private Integer levelType;
+    private LevelType levelType;
 
     public CreateLevelEvent() {
     }
 
-    public CreateLevelEvent(Long eventId, Integer leveltype, TournamentLevelId id) {
+    public CreateLevelEvent(Long eventId, LevelType leveltype, TournamentLevelId id) {
         super(eventId, id);
         this.levelType = leveltype;
     }
 
-    public Integer getLevelType() {
+    public LevelType getLevelType() {
         return levelType;
     }
 

@@ -90,6 +90,7 @@ input:focus, select:focus, textarea:focus, button:focus {
 .menuItem{
     margin-right:40px;
     font-size: 22px;
+    letter-spacing: 1.2px;
 }
 
 .menuItem_active{

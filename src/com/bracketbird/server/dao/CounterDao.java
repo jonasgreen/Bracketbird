@@ -20,6 +20,7 @@ public class CounterDao {
         tournamentchannel,
         rtceventlog,
         rtceventstate
+
     }
 
 

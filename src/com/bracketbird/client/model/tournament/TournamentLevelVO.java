@@ -1,5 +1,7 @@
 package com.bracketbird.client.model.tournament;
 
+import com.bracketbird.client.model.LevelType;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +12,7 @@ import java.util.List;
 public class TournamentLevelVO implements Serializable{
     private static final long serialVersionUID = -2149176908460343264L;
 
-    private Integer tournamentLevelType;
+    private LevelType tournamentLevelType;
 
     //the index in the tournamnt
     private Integer index;
@@ -116,11 +118,11 @@ public class TournamentLevelVO implements Serializable{
         this.rankingRules = rankingRules;
     }
 
-    public Integer getTournamentLevelType() {
+    public LevelType getTournamentLevelType() {
         return tournamentLevelType;
     }
 
-    public void setTournamentLevelType(Integer tournamentLevelType) {
+    public void setTournamentLevelType(LevelType tournamentLevelType) {
         this.tournamentLevelType = tournamentLevelType;
     }
 

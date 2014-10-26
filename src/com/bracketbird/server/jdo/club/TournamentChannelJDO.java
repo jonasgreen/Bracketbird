@@ -13,6 +13,7 @@ import java.util.*;
 public class TournamentChannelJDO extends JDO {
 
 
+
     @PrimaryKey
     @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
     private Key key;

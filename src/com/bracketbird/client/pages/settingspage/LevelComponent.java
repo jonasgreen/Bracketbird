@@ -1,6 +1,7 @@
 package com.bracketbird.client.pages.settingspage;
 
 import com.bracketbird.client.Flex;
+import com.bracketbird.client.model.LevelType;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 
@@ -16,9 +17,12 @@ public class LevelComponent extends FlowPanel{
     private FlowPanel rightEar;
     private FlowPanel leftEar;
 
-    public LevelComponent(String name) {
+    private LevelType levelType;
+
+    public LevelComponent(LevelType levelType) {
+        this.levelType = levelType;
         setStyleName(Flex.FLEX_CENTER);
-        getNameLabel().setText(name);
+        getNameLabel().setText(levelType.getLevelName());
         add(getLeftEar());
         add(getInnerPanel());
         add(getRightEar());
@@ -71,4 +75,7 @@ public class LevelComponent extends FlowPanel{
         return leftEar;
     }
 
+    public LevelType getLevelType() {
+        return levelType;
+    }
 }

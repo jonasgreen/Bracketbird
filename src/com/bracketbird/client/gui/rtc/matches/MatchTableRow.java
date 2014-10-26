@@ -14,7 +14,6 @@ import com.bracketbird.clientcore.style.P;
 import com.bracketbird.clientcore.style.StyleIt;
 import com.bracketbird.clientcore.style.TextLayout;
 import com.bracketbird.clientcore.util.StringUtil;
-import org.apache.bcel.generic.NEW;
 
 /**
  *

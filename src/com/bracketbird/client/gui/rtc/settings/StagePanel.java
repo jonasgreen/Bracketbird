@@ -5,12 +5,14 @@ import com.bracketbird.client.gui.rtc.RTC;
 import com.bracketbird.client.gui.rtc.event.REvent;
 import com.bracketbird.client.gui.rtc.event.REventListener;
 import com.bracketbird.client.gui.rtc.event.UpdateLevelEvent;
-import com.bracketbird.client.model.tournament.*;
-import com.google.gwt.event.dom.client.*;
-import com.bracketbird.clientcore.appcontrol.*;
+import com.bracketbird.client.model.LevelType;
+import com.bracketbird.client.model.tournament.Cup;
+import com.bracketbird.client.model.tournament.TournamentLevel;
+import com.bracketbird.clientcore.appcontrol.SystemException;
 import com.bracketbird.clientcore.gui.*;
-import com.bracketbird.clientcore.model.*;
-import com.bracketbird.clientcore.util.*;
+import com.bracketbird.clientcore.util.MouseOver;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 
 /**
  *
@@ -83,14 +85,8 @@ public class StagePanel extends VerticalComponent {
 
     private SettingsPanel getSettingsPanel() {
         if (settingsPanel == null) {
-            if (level.getType() == TournamentLevelConstant.CUP.getValue()) {
-                settingsPanel = new CupSettingsPanel(level);
-            }
-            else if (level.getType() == TournamentLevelConstant.GROUP.getValue()) {
-                settingsPanel = new GroupSettingsPanel(level);
-            }
-            else if (level.getType() == TournamentLevelConstant.SEEDING.getValue()) {
-                settingsPanel = new SeedingSettingsPanel(level);
+            if (LevelType.knockout == level.getType()) {
+                settingsPanel = new CupSettingsPanel((Cup) level);
             }
             else {
                 throw new SystemException("type of tournament level is not supported. Level=" + level.getType());

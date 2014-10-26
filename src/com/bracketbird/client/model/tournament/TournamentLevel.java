@@ -1,6 +1,7 @@
 package com.bracketbird.client.model.tournament;
 
 import com.bracketbird.client.gui.rtc.event.*;
+import com.bracketbird.client.model.LevelType;
 import com.bracketbird.client.model.Scheduler;
 import com.bracketbird.client.model.SeedingTeam;
 import com.bracketbird.client.model.Team;
@@ -29,7 +30,7 @@ public abstract class TournamentLevel extends Model<TournamentLevelId> {
     protected List<Round> rounds = new ArrayList<Round>();
 
     private TournamentId tournamentId;
-    private Integer type;
+    private LevelType type;
     protected Tournament tournament;
 
 
@@ -43,7 +44,11 @@ public abstract class TournamentLevel extends Model<TournamentLevelId> {
     private Date lastChangeDate;
 
 
-    public TournamentLevel() {
+    private TournamentLevel() {
+    }
+
+    public TournamentLevel(LevelType type){
+        this.type = type;
     }
 
     protected TournamentLevel(Tournament tournament) {
@@ -102,12 +107,8 @@ public abstract class TournamentLevel extends Model<TournamentLevelId> {
     }
 
 
-    public Integer getType() {
+    public LevelType getType() {
         return type;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
     }
 
     public boolean isFinish() {
@@ -332,7 +333,7 @@ public abstract class TournamentLevel extends Model<TournamentLevelId> {
     }
 
     public String getName() {
-        return TournamentLevelConstant.get(type).getText();
+        return type.getLevelName();
     }
 
     public List<Round> getRounds() {

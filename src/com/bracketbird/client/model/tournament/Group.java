@@ -1,8 +1,8 @@
 package com.bracketbird.client.model.tournament;
 
 import com.bracketbird.client.model.GroupScheduler;
+import com.bracketbird.client.model.LevelType;
 import com.bracketbird.client.model.Scheduler;
-import com.bracketbird.client.model.keys.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,7 @@ public class Group extends TournamentLevel {
     private List<AGroup> groups = new ArrayList<AGroup>();
 
     public Group() {
-        super();
+        super(LevelType.group);
     }
 
 
