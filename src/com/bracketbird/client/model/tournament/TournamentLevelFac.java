@@ -41,8 +41,8 @@ public class TournamentLevelFac {
         return level;
     }
 
-    public static Cup createCup(Tournament t) {
-        Cup level = new Cup(t);
+    public static Knockout createCup(Tournament t) {
+        Knockout level = new Knockout(t);
         LevelSettings ss = new LevelSettings();
         ss.setEliminationType(1);//single elim
 

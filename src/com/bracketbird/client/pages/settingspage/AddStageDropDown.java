@@ -37,10 +37,11 @@ public class AddStageDropDown extends PopupPanel{
             groupPanel.addStyleName("addSettingsDropDown_item_group");
 
             groupPanel.add(new Label("Group"));
-            addDomHandler(new ClickHandler() {
+            groupPanel.addDomHandler(new ClickHandler() {
                 @Override
                 public void onClick(ClickEvent event) {
-                    RTC.getInstance().createLevel(LevelType.knockout);
+                    RTC.getInstance().createLevel(LevelType.group);
+                    hide();
                 }
             }, ClickEvent.getType());
         }
@@ -54,10 +55,11 @@ public class AddStageDropDown extends PopupPanel{
             knockoutPanel.addStyleName("addSettingsDropDown_item_knockout");
 
             knockoutPanel.add(new Label("Knockout"));
-            addDomHandler(new ClickHandler() {
+            knockoutPanel.addDomHandler(new ClickHandler() {
                 @Override
                 public void onClick(ClickEvent event) {
                     RTC.getInstance().createLevel(LevelType.knockout);
+                    hide();
                 }
             }, ClickEvent.getType());
         }

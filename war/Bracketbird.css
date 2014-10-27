@@ -210,11 +210,16 @@ input:focus, select:focus, textarea:focus, button:focus {
     opacity: 0.5;
 }
 
+
+
+
 .teamsRow_deleteIcon:hover{
     color: #3B9EBF;
     opacity:1;
     cursor:pointer;
 }
+
+
 
 
 .teamsRow_team{
@@ -274,12 +279,30 @@ input:focus, select:focus, textarea:focus, button:focus {
     height: 80px;
     border:2px solid #73BCD4;
     border-radius: 20px;
+    position:relative;
 }
 
-.levelComponent_innerPanel:hover{
-    cursor:pointer;
-    background-color: lightblue;
+.levelComponent_innerPanel:hover {
+    cursor: pointer;
 }
+
+.level_deleteIcon{
+    cursor: pointer;
+    font-size: 10px;
+    height: 20px;
+    left: 84px;
+    opacity: 0.5;
+    position: absolute;
+    top: 0px;
+    width: 20px;
+}
+
+.level_deleteIcon:hover{
+    color: #3B9EBF;
+    opacity:1;
+    cursor:pointer;
+}
+
 
 .beginAndEndComponent_innerPanel{
     width: 60px;

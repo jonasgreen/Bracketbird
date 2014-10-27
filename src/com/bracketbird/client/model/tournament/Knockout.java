@@ -10,18 +10,17 @@ import java.util.List;
 /**
  *
  */
-public class Cup extends TournamentLevel {
+public class Knockout extends TournamentLevel {
 
 
     private static final long serialVersionUID = 2056092174233628140L;
 
-    public Cup() {
-        super(LevelType.knockout);
-
+    private Knockout() {
+        super();
     }
 
-    public Cup(Tournament t) {
-        super(t);
+    public Knockout(Tournament t) {
+        super(t, LevelType.knockout);
     }
 
 

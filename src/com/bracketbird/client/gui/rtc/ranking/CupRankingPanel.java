@@ -1,6 +1,5 @@
 package com.bracketbird.client.gui.rtc.ranking;
 
-import com.bracketbird.client.gui.rtc.TeamScoreComp;
 import com.bracketbird.client.gui.rtc.ViewMatch;
 import com.bracketbird.client.model.tournament.*;
 import com.bracketbird.clientcore.gui.FlowComponent;
@@ -15,11 +14,11 @@ import java.util.List;
  */
 public class CupRankingPanel extends FlowComponent implements RankingPanel {
 
-    private final Cup level;
+    private final Knockout level;
     private List<DivColumn> columns = new ArrayList<DivColumn>();
 
     public CupRankingPanel(TournamentLevel l) {
-        this.level = (Cup) l;
+        this.level = (Knockout) l;
         this.getStyleElement().getStyle().setDisplay(Style.Display.INLINE);
         level.addStateListener(new TournamentListener<LevelStateEvent>() {
             public void onChange(LevelStateEvent event) {
@@ -53,7 +52,7 @@ public class CupRankingPanel extends FlowComponent implements RankingPanel {
 
     }
 
-    private String getHeader(Cup level, int round, List<Round> rounds) {
+    private String getHeader(Knockout level, int round, List<Round> rounds) {
         if (round == rounds.size()) {
             return "The final";
         }
@@ -66,7 +65,7 @@ public class CupRankingPanel extends FlowComponent implements RankingPanel {
 
     }
 
-    public Cup getLevel() {
+    public Knockout getLevel() {
         return level;
     }
 

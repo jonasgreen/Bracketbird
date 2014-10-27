@@ -84,9 +84,32 @@ public class LevelPanel extends FlowPanel {
 
     public void addLevel(TournamentLevel level){
         if(levelComponents.isEmpty()){
-            levelHolder.clear();
+            getLevelHolder().clear();
         }
-        getLevelHolder().add(new LevelComponent(level.getType()));
+
+        LevelComponent lc = new LevelComponent(level);
+
+        getLevelHolder().add(lc);
+        levelComponents.add(lc);
+    }
+
+    public void removeLevel(TournamentLevel level){
+        LevelComponent found = null;
+        for (LevelComponent lc : levelComponents) {
+            if(lc.getLevel().equals(level)){
+                found = lc;
+                break;
+            }
+        }
+
+        if(found != null){
+            found.removeFromParent();
+            levelComponents.remove(found);
+        }
+
+        if(levelComponents.isEmpty()){
+            getLevelHolder().add(new AllEmptyLevelComponent());
+        }
     }
 
 

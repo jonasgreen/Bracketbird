@@ -15,13 +15,13 @@ public class Group extends TournamentLevel {
 
     private List<AGroup> groups = new ArrayList<AGroup>();
 
-    public Group() {
-        super(LevelType.group);
+    private Group() {
+        super();
     }
 
 
     public Group(Tournament t) {
-        super(t);
+        super(t, LevelType.group);
     }
 
     @Override

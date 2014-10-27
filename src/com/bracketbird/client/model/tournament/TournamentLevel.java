@@ -1,6 +1,9 @@
 package com.bracketbird.client.model.tournament;
 
-import com.bracketbird.client.gui.rtc.event.*;
+import com.bracketbird.client.gui.rtc.event.LevelFinishedEvent;
+import com.bracketbird.client.gui.rtc.event.UpdateLevelEvent;
+import com.bracketbird.client.gui.rtc.event.UpdateMatchFieldEvent;
+import com.bracketbird.client.gui.rtc.event.UpdateMatchResultEvent;
 import com.bracketbird.client.model.LevelType;
 import com.bracketbird.client.model.Scheduler;
 import com.bracketbird.client.model.SeedingTeam;
@@ -9,7 +12,6 @@ import com.bracketbird.client.model.keys.TeamId;
 import com.bracketbird.client.model.keys.TournamentId;
 import com.bracketbird.client.model.keys.TournamentLevelId;
 import com.bracketbird.clientcore.model.Model;
-import com.bracketbird.clientcore.model.TournamentLevelConstant;
 
 import java.util.*;
 
@@ -44,14 +46,12 @@ public abstract class TournamentLevel extends Model<TournamentLevelId> {
     private Date lastChangeDate;
 
 
-    private TournamentLevel() {
+    protected TournamentLevel() {
     }
 
-    public TournamentLevel(LevelType type){
+
+    protected TournamentLevel(Tournament tournament, LevelType type) {
         this.type = type;
-    }
-
-    protected TournamentLevel(Tournament tournament) {
         this.tournament = tournament;
     }
 
@@ -451,7 +451,7 @@ public abstract class TournamentLevel extends Model<TournamentLevelId> {
     }
 
     public boolean isCup() {
-        return this instanceof Cup;
+        return this instanceof Knockout;
     }
 
 }

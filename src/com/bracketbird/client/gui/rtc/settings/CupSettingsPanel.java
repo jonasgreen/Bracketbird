@@ -2,7 +2,7 @@ package com.bracketbird.client.gui.rtc.settings;
 
 
 import com.bracketbird.client.gui.main.PropertiesFac;
-import com.bracketbird.client.model.tournament.Cup;
+import com.bracketbird.client.model.tournament.Knockout;
 import com.bracketbird.client.model.tournament.LevelSettings;
 import com.bracketbird.clientcore.gui.IntegerContainer;
 import com.bracketbird.clientcore.gui.ListContainer;
@@ -18,7 +18,7 @@ public class CupSettingsPanel extends SettingsPanel {
     public ListContainer<Integer> ELIMINATION_TYPE = PropertiesFac.eliminationType();
 
 
-    protected CupSettingsPanel(Cup level) {
+    protected CupSettingsPanel(Knockout level) {
         super("Cup stage settings", level);
         init();
     }

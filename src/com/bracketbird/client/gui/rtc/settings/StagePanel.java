@@ -6,7 +6,7 @@ import com.bracketbird.client.gui.rtc.event.REvent;
 import com.bracketbird.client.gui.rtc.event.REventListener;
 import com.bracketbird.client.gui.rtc.event.UpdateLevelEvent;
 import com.bracketbird.client.model.LevelType;
-import com.bracketbird.client.model.tournament.Cup;
+import com.bracketbird.client.model.tournament.Knockout;
 import com.bracketbird.client.model.tournament.TournamentLevel;
 import com.bracketbird.clientcore.appcontrol.SystemException;
 import com.bracketbird.clientcore.gui.*;
@@ -86,7 +86,7 @@ public class StagePanel extends VerticalComponent {
     private SettingsPanel getSettingsPanel() {
         if (settingsPanel == null) {
             if (LevelType.knockout == level.getType()) {
-                settingsPanel = new CupSettingsPanel((Cup) level);
+                settingsPanel = new CupSettingsPanel((Knockout) level);
             }
             else {
                 throw new SystemException("type of tournament level is not supported. Level=" + level.getType());

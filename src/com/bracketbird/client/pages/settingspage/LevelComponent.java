@@ -1,7 +1,9 @@
 package com.bracketbird.client.pages.settingspage;
 
 import com.bracketbird.client.Flex;
-import com.bracketbird.client.model.LevelType;
+import com.bracketbird.client.gui.rtc.RTC;
+import com.bracketbird.client.model.tournament.TournamentLevel;
+import com.google.gwt.event.dom.client.*;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 
@@ -17,16 +19,30 @@ public class LevelComponent extends FlowPanel{
     private FlowPanel rightEar;
     private FlowPanel leftEar;
 
-    private LevelType levelType;
+    private TournamentLevel level;
+    private FlowPanel deleteIcon;
 
-    public LevelComponent(LevelType levelType) {
-        this.levelType = levelType;
+    public LevelComponent(TournamentLevel level) {
         setStyleName(Flex.FLEX_CENTER);
-        getNameLabel().setText(levelType.getLevelName());
+        this.level = level;
+        getNameLabel().setText(level == null ? "?" : level.getType().getLevelName());
         add(getLeftEar());
         add(getInnerPanel());
         add(getRightEar());
         add(getSeparationLine());
+        addDomHandler(new MouseOverHandler() {
+            @Override
+            public void onMouseOver(MouseOverEvent event) {
+                getDeleteIcon().setVisible(true);
+            }
+        }, MouseOverEvent.getType());
+
+        addDomHandler(new MouseOutHandler() {
+            @Override
+            public void onMouseOut(MouseOutEvent event) {
+                getDeleteIcon().setVisible(false);
+            }
+        }, MouseOutEvent.getType());
     }
 
 
@@ -36,6 +52,8 @@ public class LevelComponent extends FlowPanel{
             innerPanel.setStyleName(Flex.FLEX_CENTER);
             innerPanel.addStyleName("levelComponent_innerPanel");
             innerPanel.add(getNameLabel());
+            innerPanel.add(getDeleteIcon());
+
         }
         return innerPanel;
     }
@@ -75,7 +93,28 @@ public class LevelComponent extends FlowPanel{
         return leftEar;
     }
 
-    public LevelType getLevelType() {
-        return levelType;
+
+    public FlowPanel getDeleteIcon() {
+        if (deleteIcon == null) {
+            deleteIcon = new FlowPanel();
+            deleteIcon.setStyleName("icon-uniE600");
+            deleteIcon.addStyleName("level_deleteIcon");
+            deleteIcon.setVisible(false);
+            deleteIcon.setTitle("Delete level");
+            deleteIcon.addDomHandler(new ClickHandler() {
+                @Override
+                public void onClick(ClickEvent event) {
+                    RTC.getInstance().deleteLevel(level.getId());
+                }
+            }, ClickEvent.getType());
+        }
+        return deleteIcon;
+    }
+
+
+
+
+    public TournamentLevel getLevel() {
+        return level;
     }
 }

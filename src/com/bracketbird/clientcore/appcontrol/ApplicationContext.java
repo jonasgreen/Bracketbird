@@ -63,7 +63,7 @@ public abstract class ApplicationContext<PAGE_CONTAINER extends Panel> {
         HistorySupport.getInstance().addHistory(pc);
 
 
-        pc.afterLoad();
+        pc.handleAfterLoad();
         notifyListeners(event);
     }
 
