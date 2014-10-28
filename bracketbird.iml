@@ -7,35 +7,6 @@
       <src_folder value="file://$MODULE_DIR$/src" expected_position="0" />
     </src_description>
   </component>
-  <component name="FacetManager">
-    <facet type="gwt" name="GWT">
-      <configuration>
-        <setting name="compilerMaxHeapSize" value="1024" />
-        <setting name="gwtScriptOutputStyle" value="DETAILED" />
-        <setting name="gwtSdkUrl" value="file://$USER_HOME$/gwt-2.6.1" />
-        <setting name="webFacet" value="Web" />
-      </configuration>
-    </facet>
-    <facet type="web" name="Web">
-      <configuration>
-        <descriptors>
-          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/war/WEB-INF/web.xml" />
-        </descriptors>
-        <webroots>
-          <root url="file://$MODULE_DIR$/war" relative="/" />
-        </webroots>
-      </configuration>
-    </facet>
-    <facet type="google-app-engine" name="Google App Engine">
-      <configuration>
-        <sdk-home-path>$USER_HOME$/appengine-java-sdk-1.9.13</sdk-home-path>
-        <run-enhancer-on-make>true</run-enhancer-on-make>
-        <files-to-enhance>
-          <file path="$MODULE_DIR$/src" />
-        </files-to-enhance>
-      </configuration>
-    </facet>
-  </component>
   <component name="NewModuleRootManager" inherit-compiler-output="false">
     <output url="file://$MODULE_DIR$/war/WEB-INF/classes" />
     <exclude-output />
@@ -44,83 +15,8 @@
     </content>
     <orderEntry type="jdk" jdkName="1.7" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$USER_HOME$/gwt-2.6.1/gwt-user.jar!/" />
-          <root url="jar://$USER_HOME$/gwt-2.6.1/gwt-servlet.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="jar://$USER_HOME$/gwt-2.6.1/gwt-user.jar!/" />
-          <root url="jar://$USER_HOME$/gwt-2.6.1/gwt-servlet.jar!/" />
-        </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$USER_HOME$/appengine-java-sdk-1.9.13/lib/user/appengine-api-1.0-sdk-1.9.13.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$USER_HOME$/appengine-java-sdk-1.9.13/lib/user/orm/datanucleus-appengine-1.0.10.final.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$USER_HOME$/appengine-java-sdk-1.9.13/lib/user/orm/datanucleus-core-1.1.5.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$USER_HOME$/appengine-java-sdk-1.9.13/lib/user/orm/datanucleus-jpa-1.1.5.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$USER_HOME$/appengine-java-sdk-1.9.13/lib/user/orm/jdo2-api-2.3-eb.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$USER_HOME$/appengine-java-sdk-1.9.13/lib/appengine-tools-api.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="jar://$USER_HOME$/appengine-java-sdk-1.9.13/lib/appengine-tools-api.jar!/com/google/appengine/repackaged/com/google/common/base/super" />
-        </SOURCES>
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$USER_HOME$/appengine-java-sdk-1.9.13/lib/agent/appengine-agent.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
+    <orderEntry type="library" name="gwt" level="application" />
+    <orderEntry type="library" name="gae" level="application" />
   </component>
 </module>
+

@@ -52,7 +52,7 @@ public class LevelPanel extends FlowPanel {
 
     public Button getButton() {
         if (button == null) {
-            button = new Button("Add Stage/Level");
+            button = new Button("Add stage/level");
             button.setStyleName("primaryButton");
             button.getElement().getStyle().setMarginLeft(40, Style.Unit.PX);
             button.addClickHandler(new ClickHandler() {
@@ -71,8 +71,7 @@ public class LevelPanel extends FlowPanel {
                             }
                         });
                         popup.addAutoHidePartner(button.getElement());
-                    }
-                    else{
+                    } else {
                         popup.hide();
                     }
                 }
@@ -82,8 +81,8 @@ public class LevelPanel extends FlowPanel {
     }
 
 
-    public void addLevel(TournamentLevel level){
-        if(levelComponents.isEmpty()){
+    public void addLevel(TournamentLevel level) {
+        if (levelComponents.isEmpty()) {
             getLevelHolder().clear();
         }
 
@@ -91,25 +90,32 @@ public class LevelPanel extends FlowPanel {
 
         getLevelHolder().add(lc);
         levelComponents.add(lc);
+        updateButtonText();
     }
 
-    public void removeLevel(TournamentLevel level){
+    private void updateButtonText() {
+        getButton().setText(levelComponents.isEmpty() ? "Add stage/level" : "Add another stage/level");
+    }
+
+    public void removeLevel(TournamentLevel level) {
         LevelComponent found = null;
         for (LevelComponent lc : levelComponents) {
-            if(lc.getLevel().equals(level)){
+            if (lc.getLevel().equals(level)) {
                 found = lc;
                 break;
             }
         }
 
-        if(found != null){
+        if (found != null) {
             found.removeFromParent();
             levelComponents.remove(found);
         }
 
-        if(levelComponents.isEmpty()){
+        if (levelComponents.isEmpty()) {
             getLevelHolder().add(new AllEmptyLevelComponent());
         }
+
+        updateButtonText();
     }
 
 
