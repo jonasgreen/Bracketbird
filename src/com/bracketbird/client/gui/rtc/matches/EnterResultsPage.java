@@ -1,13 +1,16 @@
 package com.bracketbird.client.gui.rtc.matches;
 
 
-import com.bracketbird.client.gui.rtc.RTCLayoutFac2;
 import com.bracketbird.client.gui.rtc.RTC;
-import com.bracketbird.client.model.tournament.*;
-import com.bracketbird.clientcore.appcontrol.*;
-import com.bracketbird.clientcore.gui.*;
-import com.bracketbird.clientcore.style.*;
-import com.google.gwt.user.client.ui.FlowPanel;
+import com.bracketbird.client.gui.rtc.RTCLayoutFac2;
+import com.bracketbird.client.model.tournament.Tournament;
+import com.bracketbird.client.model.tournament.TournamentListener;
+import com.bracketbird.client.model.tournament.TournamentStateChangedEvent;
+import com.bracketbird.clientcore.appcontrol.FlowPanelPage;
+import com.bracketbird.clientcore.appcontrol.Page;
+import com.bracketbird.clientcore.gui.VerticalComponent;
+import com.bracketbird.clientcore.style.StyleIt;
+import com.bracketbird.clientcore.style.TextLayout;
 
 /**
  *
@@ -17,11 +20,7 @@ public class EnterResultsPage extends FlowPanelPage<EnterResultsPageController> 
     private VerticalComponent content;
     private SetupPanel setupPanel;
     private AllResultsPanel allResultsPanel;
-    private TournamentListener<TournamentStateChangedEvent> stateListener = new TournamentListener<TournamentStateChangedEvent>() {
-        public void onChange(TournamentStateChangedEvent event) {
-            repaint();
-        }
-    };
+    private TournamentListener<TournamentStateChangedEvent> stateListener;
 
     public EnterResultsPage() {
         super();
@@ -30,13 +29,17 @@ public class EnterResultsPage extends FlowPanelPage<EnterResultsPageController> 
     }
 
     public void init() {
-        /*RTC.getInstance().getTournament().addStateListener(stateListener);
+        RTC.getInstance().getTournament().addStateListener(new TournamentListener<TournamentStateChangedEvent>() {
+            public void onChange(TournamentStateChangedEvent event) {
+                repaint();
+            }
+        });
 
         StyleIt.add(content, RTCLayoutFac2.CONTENT);
         content.add(getSetupPanel());
         content.add(getAllResultsPanel(), new TextLayout(null, "100%"));
         repaint();
-*/
+
 
     }
 

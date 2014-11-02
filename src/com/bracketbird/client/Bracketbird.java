@@ -2,7 +2,7 @@ package com.bracketbird.client;
 
 
 import com.bracketbird.client.gui.main.ErrorPageController;
-import com.bracketbird.client.pages.frontpage.FrontPageController;
+import com.bracketbird.client.pages.front.FrontPageController;
 import com.bracketbird.client.gui.rtc.RTC;
 import com.bracketbird.client.service.BBService;
 import com.bracketbird.client.service.TournamentResult;

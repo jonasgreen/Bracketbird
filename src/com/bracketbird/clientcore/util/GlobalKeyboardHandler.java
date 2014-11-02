@@ -20,8 +20,8 @@ public class GlobalKeyboardHandler {
 
 
                 if(keycode == 27){//ESC
-                     PopupManager.hide();
-                    preview.consume();
+                 //    PopupManager.hide();
+                  //  preview.consume();
 
                 }
 

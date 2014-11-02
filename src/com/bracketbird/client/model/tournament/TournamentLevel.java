@@ -213,6 +213,10 @@ public abstract class TournamentLevel extends Model<TournamentLevelId> {
         return state instanceof LevelStateEmpty;
     }
 
+    public boolean isAllMatchesPlayed(){
+        return state instanceof LevelStateAllMatchesPlayed;
+    }
+
 
     public void updateState(boolean notifyParent, boolean fromClient) {
         TournamentLevelState newState = calculateState();
@@ -252,7 +256,7 @@ public abstract class TournamentLevel extends Model<TournamentLevelId> {
             }
             //all matches are finished or is walkover - ending teams had not been set though
             if (!someIsNonFinished) {
-                //if(isCup()){
+                //if(isKnockout()){
                 //  return new LevelStateInFinished();
                 //}
                 return new LevelStateAllMatchesPlayed();
@@ -450,8 +454,11 @@ public abstract class TournamentLevel extends Model<TournamentLevelId> {
 
     }
 
-    public boolean isCup() {
+    public boolean isKnockout() {
         return this instanceof Knockout;
     }
 
+    public LevelSettings getLevelSettings() {
+        return levelSettings;
+    }
 }

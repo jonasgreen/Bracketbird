@@ -175,7 +175,7 @@ public class MatchEditor extends VerticalComponent implements KeyDownHandler {
 
     public void showMatch(Match m) {
         reset();
-        drawAllowed = !m.getLevel().isCup();
+        drawAllowed = !m.getLevel().isKnockout();
 
         this.match = m;
         getTeamNameHome().setText(match.getTeamHome().getName());

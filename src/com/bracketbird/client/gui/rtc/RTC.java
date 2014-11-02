@@ -7,20 +7,23 @@ import com.bracketbird.client.gui.rtc.health.LogPageController;
 import com.bracketbird.client.gui.rtc.matches.EnterResultsPageController;
 import com.bracketbird.client.gui.rtc.ranking.RankingViewPageController;
 import com.bracketbird.client.gui.rtc.settings.SettingsPageController;
-import com.bracketbird.client.model.LevelType;
-import com.bracketbird.client.pages.teamspage.TeamsPageController;
 import com.bracketbird.client.gui.util.UID;
+import com.bracketbird.client.model.LevelType;
 import com.bracketbird.client.model.keys.MatchId;
 import com.bracketbird.client.model.keys.TeamId;
 import com.bracketbird.client.model.keys.TournamentLevelId;
 import com.bracketbird.client.model.tournament.*;
-import com.bracketbird.clientcore.appcontrol.*;
+import com.bracketbird.client.pages.matches.MatchesPageController;
+import com.bracketbird.client.pages.teams.TeamsPageController;
+import com.bracketbird.clientcore.appcontrol.Application;
 import com.bracketbird.clientcore.gui.PopupManager;
 import com.bracketbird.clientcore.util.CU;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.user.client.Window;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * All events originated from User interaction goes through this class.
@@ -141,7 +144,7 @@ public class RTC {
         if (!t.isViewOnly()) {
             TeamsPageController.getInstance().beginListening();
             SettingsPageController.getInstance().getPage();
-            EnterResultsPageController.getInstance().getPage();
+            MatchesPageController.getInstance().getPage();
         }
         RankingViewPageController.getInstance().getPage();
     }

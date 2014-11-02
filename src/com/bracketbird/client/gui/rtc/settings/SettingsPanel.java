@@ -3,17 +3,21 @@ package com.bracketbird.client.gui.rtc.settings;
 
 //import com.bracketbird.client.model.tournament.*;
 
-import com.bracketbird.client.model.tournament.*;
-import com.google.gwt.event.dom.client.*;
-import com.google.gwt.user.client.ui.*;
+import com.bracketbird.client.model.tournament.LevelSettings;
+import com.bracketbird.client.model.tournament.TournamentLevel;
 import com.bracketbird.clientcore.gui.*;
-import com.bracketbird.clientcore.style.*;
+import com.bracketbird.clientcore.style.Horizontal;
+import com.bracketbird.clientcore.style.TextLayout;
+import com.bracketbird.clientcore.style.Vertical;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
+import com.google.gwt.user.client.ui.HasVerticalAlignment;
 
 /**
  *
  */
 public abstract class SettingsPanel extends VerticalComponent {
-
 
     protected TextLayout labelLayout = new TextLayout(null, "240px", Horizontal.LEFT, Vertical.MIDDLE).sizeSmall().bold().colorBaseDark().padding(6, 0, 2, 0);
 

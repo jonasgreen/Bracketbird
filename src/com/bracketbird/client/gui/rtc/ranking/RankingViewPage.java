@@ -185,7 +185,7 @@ public class RankingViewPage extends FlowPanelPage<RankingViewPageController> {
 
 
     private RankingPanel createPanel(TournamentLevel level) {
-        if (level.isCup()) {
+        if (level.isKnockout()) {
             return new CupRankingPanel(level);
         }
         else {

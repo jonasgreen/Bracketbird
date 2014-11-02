@@ -11,10 +11,8 @@ public abstract class Validator {
 
     public static DateValidator DATE_FORMAT = new DateValidator();
 
-
     public static MandatoryValidator MANDATORY = new MandatoryValidator();
 
-    
     public static DoubleValidator DOUBLE_VALIDATOR = new DoubleValidator();
     public static IntegerValidator INTEGER_VALIDATOR = new IntegerValidator();
 

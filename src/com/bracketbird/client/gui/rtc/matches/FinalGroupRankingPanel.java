@@ -22,11 +22,9 @@ public class FinalGroupRankingPanel extends VerticalComponent {
     private SimplePanelComponent rankingPanel = new SimplePanelComponent();
     private SimplePanelComponent errorsPanel = new SimplePanelComponent();
     private List<FinalRankListPanel> rows = new ArrayList<FinalRankListPanel>();
-    private boolean isFromClient;
 
-    public FinalGroupRankingPanel(Group level, boolean fromClient) {
+    public FinalGroupRankingPanel(Group level) {
         super();
-        this.isFromClient = fromClient;
         this.level = level;
     }
 
@@ -134,7 +132,7 @@ public class FinalGroupRankingPanel extends VerticalComponent {
         }
 
         if (hasEqualPoints) {
-            add(new FinalRankingDecisionPanel(level, finalPositions, isFromClient), new TextLayout(30, 0, 0, 0, null, "100%").borderTop(1).borderColor(P.COLOR_C1));
+            add(new FinalRankingDecisionPanel(level, finalPositions));
         }
         else {
             //update model
@@ -142,9 +140,8 @@ public class FinalGroupRankingPanel extends VerticalComponent {
             for (Position fp : finalPositions) {
                 finalRank.add(fp.getPointsCounters().get(0).getTeam().getId());
             }
-            if (isFromClient) {
                 RTC.getInstance().levelFinished(level.getId(), convertFinalRank(finalRank));
-            }
+
         }
     }
 

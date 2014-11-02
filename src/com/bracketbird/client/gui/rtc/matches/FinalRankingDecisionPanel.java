@@ -8,13 +8,14 @@ import com.bracketbird.client.model.tournament.*;
 import com.google.gwt.event.dom.client.*;
 import com.bracketbird.clientcore.gui.*;
 import com.bracketbird.clientcore.style.*;
+import com.google.gwt.user.client.ui.FlowPanel;
 
 import java.util.*;
 
 /**
  *
  */
-public class FinalRankingDecisionPanel extends VerticalComponent {
+public class FinalRankingDecisionPanel extends FlowPanel {
 
     private ButtonComponent okButton;
     private SimplePanelComponent buttonPanel = new SimplePanelComponent();
@@ -23,24 +24,22 @@ public class FinalRankingDecisionPanel extends VerticalComponent {
     private FinalRankListPanel finalRow = null;
     private List<Position> positions;
     private TournamentLevel level;
-    private boolean isFromClient;
 
-    public FinalRankingDecisionPanel(TournamentLevel tl, List<Position> positions, boolean fromClient) {
+    public FinalRankingDecisionPanel(TournamentLevel tl, List<Position> positions) {
         super();
-        this.isFromClient = fromClient;
         this.level = tl;
         this.positions = positions;
         init();
     }
 
     private void init() {
-        add(rankingPanel, new TextLayout(null, "100%"));
+        add(rankingPanel);
 
         finalRow = new FinalRankListPanel(null, positions);
         rankingPanel.add(finalRow, new TextLayout(20, 0, 0, 0, null, "100%"));
 
-        add(errorsPanel, new TextLayout(20, 0, 0, 10, null, "100%"));
-        add(buttonPanel, new TextLayout(null, "100%"));
+        add(errorsPanel);
+        add(buttonPanel);
         buttonPanel.add(new ButtonPanel(Horizontal.LEFT, getOkButton()), new TextLayout(10, 0, 10, 10, null, "100%"));
     }
 
@@ -54,9 +53,8 @@ public class FinalRankingDecisionPanel extends VerticalComponent {
         for (Team team : finalRankedTeams) {
             ids.add(team.getId());
         }
-        if (isFromClient) {
-            RTC.getInstance().levelFinished(level.getId(), convertFinalRank(ids));
-        }
+        RTC.getInstance().levelFinished(level.getId(), convertFinalRank(ids));
+
 
     }
 

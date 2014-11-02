@@ -53,6 +53,7 @@ public class MatchTableRow extends TableRow implements TournamentListener<MatchE
                 getFieldCol().setText(match.getField());
             }
         }, new UpdateMatchFieldEvent());
+
         onChange(null);
     }
 

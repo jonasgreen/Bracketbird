@@ -3,7 +3,6 @@ package com.bracketbird.client.gui.rtc.matches;
 
 import com.bracketbird.client.gui.rtc.RTC;
 import com.bracketbird.client.gui.rtc.RTCLayoutFac2;
-import com.bracketbird.client.gui.rtc.UpdatingTournamentInfoPanel;
 import com.bracketbird.client.model.*;
 import com.bracketbird.client.model.keys.*;
 import com.bracketbird.client.model.tournament.*;
@@ -70,7 +69,7 @@ public class LevelResultPanel extends VerticalComponent {
     }
 
     public void showAllMatchesPlayedRanking(boolean fromClient) {
-        if (level.isCup() && fromClient) {
+        if (level.isKnockout() && fromClient) {
 
             //find ranking and set ending teams
             List<TeamId[]> endingTeams = new ArrayList<TeamId[]>();
@@ -96,7 +95,7 @@ public class LevelResultPanel extends VerticalComponent {
             RTC.getInstance().levelFinished(level.getId(), endingTeams);
         }
         else {
-            FinalGroupRankingPanel fr = new FinalGroupRankingPanel((Group) level, fromClient);
+            FinalGroupRankingPanel fr = new FinalGroupRankingPanel((Group) level);
             finalRankingHolder.add(fr, new TextLayout(null, "100%").backgroundGreyLight().paddingBottom(30));
             fr.build();
         }
@@ -104,7 +103,7 @@ public class LevelResultPanel extends VerticalComponent {
     }
 
     public void showFinalRanking(List<Team[]> finalRankOfTeams) {
-        if (level.isCup()) {
+        if (level.isKnockout()) {
             buildFinalRankingCup(finalRankOfTeams);
         }
         else {

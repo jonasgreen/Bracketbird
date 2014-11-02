@@ -10,25 +10,33 @@ html{
 }
 
 body{
-  height: 100%;
-  font-family: "klavika";
-      font-size: 14px;
+      height: 100%;
+      font-family: "klavika";
+      font-size: 16px;
       font-stretch: normal;
       font-style: normal;
       font-weight: normal;
       line-height: 1.25;
-      color: #37474f;
+      color: rgb(55,71,79);
 }
 
 input {
-  font-family: "klavika";
-      font-size: 14px;
-      font-stretch: normal;
-      font-style: normal;
-      font-weight: normal;
-      line-height: 1.25;
-      color: #37474f;
-      background: transparent;
+    background: transparent;
+    border: 1px solid rgb(192, 192, 192);
+    border-top-color: rgb(192, 192, 192);
+    border-right-color: rgb(217, 217, 217);
+    border-bottom-color: rgb(217, 217, 217);
+    border-left-color: rgb(217, 217, 217);
+
+    color: #37474F;
+    font-family: "klavika";
+    font-size: 16px;
+    font-stretch: normal;
+    font-style: normal;
+    font-weight: normal;
+    height: 22px;
+    line-height: 1.25;
+    padding: 2px 2px 0;
 }
 
 input:focus, select:focus, textarea:focus, button:focus {
@@ -60,12 +68,6 @@ input:focus, select:focus, textarea:focus, button:focus {
 /* MENU PANEL */
 
 .menuPanel_outer{
-    display: -ms-flexbox;      /* TWEENER - IE 10 */
-    display: -webkit-flex;     /* NEW - Chrome */
-    display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
-
-    align-items: center;
-    -webkit-align-items: center;
     padding-left: 75px;
     padding-right: 75px;
     border-bottom: 1px solid white;
@@ -76,15 +78,8 @@ input:focus, select:focus, textarea:focus, button:focus {
 }
 
 
-
 .menuPanel_inner{
-    display: -ms-flexbox;      /* TWEENER - IE 10 */
-    display: -webkit-flex;     /* NEW - Chrome */
-    display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
-
     width:100%;
-    align-items: baseline;
-    -webkit-align-items: baseline;
 }
 
 .menuItem{
@@ -112,9 +107,11 @@ input:focus, select:focus, textarea:focus, button:focus {
 
     flex-grow: 1;
     -webkit-flex-grow: 1;
+    -ms-flex-grow: 1;
 
     flex-direction: row-reverse;
     -webkit-flex-direction: row-reverse;
+    -ms-flex-direction: row-reverse;
 }
 
 .menuItem_secondary{
@@ -153,13 +150,6 @@ input:focus, select:focus, textarea:focus, button:focus {
     top: 0;
     left: 0;
     position: absolute;
-    display: -ms-flexbox;      /* TWEENER - IE 10 */
-    display: -webkit-flex;     /* NEW - Chrome */
-    display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
-
-    -webkit-align-items: center;
-    -ms-align-items: center;
-    align-items: center;
 
     -webkit-transition: top 0.25s linear, left 0.25s linear;
     -moz-transition: top 0.25s linear, left 0.25s linear;
@@ -225,22 +215,16 @@ input:focus, select:focus, textarea:focus, button:focus {
 .teamsRow_team{
     padding-left: 20px;
     border: none;
-    font-size: 18px;
+    font-size: 16px;
 
     flex-grow: 1;
     -webkit-flex-grow: 1;
+    -ms-flex-grow: 1;
 }
 
 .enterTeam{
     top: 0;
     left: 0;
-
-    display: -ms-flexbox;      /* TWEENER - IE 10 */
-    display: -webkit-flex;     /* NEW - Chrome */
-    display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
-
-    align-items: baseline;
-    -webkit-align-items: baseline;
 
     -webkit-transition: top 0.25s linear, left 0.25s linear;
     -moz-transition: top 0.25s linear, left 0.25s linear;
@@ -255,8 +239,9 @@ input:focus, select:focus, textarea:focus, button:focus {
 
 .enterTeam input{
     border: none;
-    font-size: 18px;
+    font-size: 16px;
     width:200px;
+    margin-left:-2px;
 }
 
 .enterTeam_addButton{
@@ -270,21 +255,35 @@ input:focus, select:focus, textarea:focus, button:focus {
 */
 
 .settingsPage{
-    padding-top:50px;
+    padding-top:38px;
 }
 
 
 .levelComponent_innerPanel{
-    width: 80px;
-    height: 80px;
-    border:2px solid #73BCD4;
-    border-radius: 20px;
-    position:relative;
+    border: 2px solid #73BCD4;
+    border-radius: 5px 5px 5px 5px;
+    height: 0px;
+    position: relative;
+    width: 0px;
+    -webkit-transition: width 0.25s linear, height 0.25s linear;
+    -moz-transition: width 0.25s linear, height 0.25s linear;
+    transition: width 0.25s linear, height 0.25s linear;
 }
 
-.levelComponent_innerPanel:hover {
+.levelComponent_mouseOver{
     cursor: pointer;
 }
+
+
+.levelComponent_innerPanel_edit{
+    background: #73BCD4;
+    border-radius: 5px 5px 5px 5px;
+}
+
+.levelComponent_innerPanel_edit .levelComponent_name{
+    color: white;
+}
+
 
 .level_deleteIcon{
     cursor: pointer;
@@ -304,12 +303,20 @@ input:focus, select:focus, textarea:focus, button:focus {
 }
 
 
-.beginAndEndComponent_innerPanel{
-    width: 60px;
-    height: 60px;
-    border-radius: 30px;
-    border:2px solid #73BCD4;
+.beginComponent_innerPanel{
+    border: 2px solid #73BCD4;
+    border-radius: 30px 5px 5px 30px;
+    height: 50px;
+    width: 55px;
 }
+
+.endComponent_innerPanel{
+    border: 2px solid #73BCD4;
+    border-radius: 5px 30px 30px 5px;
+    height: 50px;
+    width: 55px;
+}
+
 
 .levelComponent_ear{
     height:8px;
@@ -325,6 +332,12 @@ input:focus, select:focus, textarea:focus, button:focus {
 .levelComponent_rightEar{
     border-radius: 0px 8px 8px 0px;
     margin-left:-2px;
+}
+
+.allEmpty_Component_innerPanel{
+    border-color: transparent;
+    background-color:transparent;
+    width:40px;
 }
 
 
@@ -345,23 +358,30 @@ input:focus, select:focus, textarea:focus, button:focus {
 
 .levelComponent_sep{
     height: 2px;
-    width: 26px;
+    width: 20px;
     background-color: #73BCD4;
+
+    -webkit-transition: width 0.25s linear;
+    -moz-transition: width 0.25s linear;
+    transition: width 0.25s linear;
 }
 
 .levelComponent_name{
     text-align: center;
     color: #4CA9C8;
-    font-size:18px;
+    font-size:16px;
 }
 
 
 .addSettingsDropDown{
-     -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-     -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-     background-color:white;
+    border: 1px solid rgba(55,71,79, 0.5);
+    background-color:white;
 }
+
+.addSettingsDropDown_innerPanel{
+    width:180px;
+}
+
 
 .addSettingsDropDown_item{
     font-size: 16px;
@@ -379,46 +399,15 @@ input:focus, select:focus, textarea:focus, button:focus {
     padding-bottom:6px;
 }
 
-
-
-
-
-
-/*
-    FLEX STYLES
-*/
-
-.flex{
-    display: -ms-flexbox;      /* TWEENER - IE 10 */
-    display: -webkit-flex;     /* NEW - Chrome */
-    display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
+.groupSettingsPanel{
 }
 
-.flex_alignItems_center{
-    align-items: center;
-    -webkit-align-items: center;
+.knockoutSettingsPanel{
 }
 
-.flex_justifyContent_center{
-    justify-content: center;
-    -webkit-justify-content: center;
+.emptyLine{
+    height: 15px;
 }
-
-.flex_center{
-    display: -ms-flexbox;      /* TWEENER - IE 10 */
-    display: -webkit-flex;     /* NEW - Chrome */
-    display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
-
-    /* horizontal */
-    align-items: center;
-    -webkit-align-items: center;
-
-
-    /* vertical */
-    justify-content: center;
-    -webkit-justify-content: center;
-}
-
 
 .dialogVPanel {
   margin: 5px; }
@@ -583,6 +572,12 @@ input:focus, select:focus, textarea:focus, button:focus {
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3); }
 
 
+
+.buttonsPanel{
+    padding-top:40px;
+}
+
+
 .primaryButton, .primaryButton:link {
   -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
@@ -592,15 +587,16 @@ input:focus, select:focus, textarea:focus, button:focus {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#3B9EBF', endColorstr = '#3B9EBF');
   color: white;
   display: inline-block;
-  font-size: 18px;
+  font-size: 16px;
   padding-top: 5px;
-  padding-left: 8px;
-  padding-right: 8px;
+  padding-left: 15px;
+  padding-right: 15px;
   padding-bottom: 3px;
   font-family: klavika;
   border: 1px solid #0097BF;
   border-radius: 2px;
   white-space: nowrap;
+  z-index: 20;
 }
 
 .primaryButton:hover, .primaryButton:visited {
@@ -616,6 +612,24 @@ input:focus, select:focus, textarea:focus, button:focus {
  }
 
 
+.secondaryButton, .secondaryButton:link {
+  color: #3B9EBF;
+  display: inline-block;
+  font-size: 16px;
+  padding-top: 5px;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-bottom: 3px;
+  font-family: klavika;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  white-space: nowrap;
+}
+
+.secondaryButton:hover{
+    cursor:pointer;
+    text-decoration: underline;
+}
 
 
 
@@ -739,6 +753,7 @@ input:focus, select:focus, textarea:focus, button:focus {
 
    flex-direction: column;
    -webkit-flex-direction: column;
+   -ms-flex-direction: column;
 }
 
 
@@ -988,3 +1003,157 @@ box-shadow:         inset 0px 5px 5px -5px rgba(150, 150, 150, 0.15);
   -ms-animation: rotating 20s linear infinite;
   -moz-animation: rotating 20s linear infinite;
   -webkit-animation: rotating 20s linear infinite; }
+
+
+.popupBracketBird{
+    background-color: white;
+    border: 2px solid #73BCD4;
+
+    border-radius: 0px 0px 5px 5px;
+    padding: 20px;
+}
+
+
+.textInput{
+    font-size: 14px;
+    height: 18px;
+    margin: 0 auto 0 10px;
+    padding: 2px;
+    vertical-align: middle;
+    width: 100px;
+}
+
+.integerInput{
+    text-align: right;
+    width: 50px;
+}
+
+.popUpHeader{
+    font-size: 28px;
+    padding-bottom: 40px;
+}
+
+.settingsValue{
+    white-space: nowrap;
+}
+
+.settingsValue:focus{
+    border: 1px solid #3B9EBF;
+}
+
+.noneEditableValue{
+   font-size: 16px;
+   text-align:left;
+   opacity: 0.7;
+}
+
+.settingsLabel{
+}
+
+.settingsPanelButton{
+    margin-left:10px;
+}
+
+.labelValueRow{
+    height: 30px;
+}
+
+.glass{
+  background-color: #9A9999;
+  opacity: 0.5;
+}
+
+.errorPanel{
+   background: rgb(176,0,0);
+   padding: 8px;
+   color:white;
+   font-size: 14px;
+   margin-bottom: 20px;
+}
+
+.error_label{
+    color: rgb(176,0,0);
+}
+
+.error_value{
+    border-color: rgb(176,0,0);
+}
+
+.settingsIntegerInput{
+    width: 50px;
+    text-align: right;
+}
+
+.matchesPage{
+    padding-top: 38px;
+}
+
+.matchRow{
+    height: 30px;
+
+}
+
+.matchRow_no{
+    min-width: 40px;
+    width: 40px;
+    font-size: 10px;
+    opacity:0.5;
+}
+
+.matchRow_sep{
+    min-width: 20px;
+    width: 20px;
+}
+
+.matchRow_team{
+    min-width: 200px;
+    width: 200px;
+
+}
+
+.matchRow_result{
+    border: none;
+    width:150px;
+    min-width: 150px;
+}
+
+.matchRow_result::-moz-placeholder{
+    color: #3B9EBF;
+    font-style: normal;
+    opacity:1.0;
+}
+
+.matchRow_result::-webkit-input-placeholder{
+    color: #3B9EBF;
+    font-style: normal;
+    opacity:1.0;
+}
+
+.matchRow_result:-ms-input-placeholder{
+    color: #3B9EBF;
+    font-style: normal;
+    opacity:1.0;
+}
+
+
+.matchRow_field{
+    border:1px solid black;
+    width:150px;
+    min-width: 150px;
+}
+
+.levelMatchesHeader{
+    padding-bottom: 10px;
+}
+
+.levelMatchesHeader_label{
+    opacity:0.5;
+}
+
+.matches_emptyLine{
+    height: 15px;
+}
+
+
+
+

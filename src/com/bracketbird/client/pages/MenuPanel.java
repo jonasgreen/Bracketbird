@@ -1,11 +1,12 @@
 package com.bracketbird.client.pages;
 
+import com.bracketbird.client.Css;
 import com.bracketbird.client.gui.rtc.RTC;
 import com.bracketbird.client.gui.rtc.ShareComponent;
-import com.bracketbird.client.gui.rtc.matches.EnterResultsPageController;
 import com.bracketbird.client.gui.rtc.ranking.RankingViewPageController;
-import com.bracketbird.client.pages.settingspage.SettingsPageController;
-import com.bracketbird.client.pages.teamspage.TeamsPageController;
+import com.bracketbird.client.pages.matches.MatchesPageController;
+import com.bracketbird.client.pages.settings.SettingsPageController;
+import com.bracketbird.client.pages.teams.TeamsPageController;
 import com.bracketbird.clientcore.gui.PopupManager;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -20,24 +21,22 @@ public class MenuPanel extends FlowPanel{
 
     public MenuPanel() {
 
-        setStyleName("menuPanel_outer");
+        Css.style(this, "menuPanel_outer", "flex_alignItems_center");
 
-        FlowPanel content = new FlowPanel();
-        content.setStyleName("menuPanel_inner");
+        FlowPanel content = Css.style(new FlowPanel(), "menuPanel_inner", "flex_alignItems_baseline");
         add(content);
 
         //primary menu items to the left
         content.add(new MenuItem("TEAMS", TeamsPageController.getInstance()));
         content.add(new MenuItem("SETTINGS", SettingsPageController.getInstance()));
-        content.add(new MenuItem("MATCHES", EnterResultsPageController.getInstance()));
+        content.add(new MenuItem("MATCHES", MatchesPageController.getInstance()));
         content.add(new MenuItem("LIVE SCORES", RankingViewPageController.getInstance()));
 
         //secondary menu items to the right
-        FlowPanel secondaryPanel = new FlowPanel();
-        secondaryPanel.setStyleName("menuPanel_secondaryPanel");
-        content.add(secondaryPanel);
-        secondaryPanel.add(helpMenuItem());
-        secondaryPanel.add(shareMenuItem());
+        FlowPanel sp = Css.style(new FlowPanel(), "menuPanel_secondaryPanel");
+        content.add(sp);
+        sp.add(helpMenuItem());
+        sp.add(shareMenuItem());
     }
 
     private Label helpMenuItem() {

@@ -1,0 +1,106 @@
+.flex{
+    display: -ms-flexbox;      /* TWEENER - IE 10 */
+    display: -webkit-flex;     /* NEW - Chrome */
+    display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+
+
+/*  ALIGNING - Items are ALIGNED around the horizontal axis - like items on a wire */
+
+.flex_alignItems_center{
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+
+    align-items: center;
+    -webkit-align-items: center;
+    -ms-align-items: center;
+}
+
+.flex_alignItems_baseline{
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+
+    align-items: baseline;
+    -webkit-align-items: baseline;
+    -ms-align-items: baseline;
+}
+
+
+
+/*  JUSTIFYING - Like justifying text :) */
+
+.flex_justifyContent_center{
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+
+    justify-content: center;
+    -webkit-justify-content: center;
+    -ms-justify-content: center;
+}
+
+.flex_justifyContent_spaceBetween{
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+
+    justify-content: space-between;
+    -webkit-justify-content: space-between;
+    -ms-justify-content: space-between;
+}
+
+.flex_justifyContent_end{
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+
+    justify-content: flex-end;
+    -webkit-justify-content: flex-end;
+    -ms-justify-content: flex-end;
+}
+
+/* short for flex center aligned and center justified*/
+
+.flex_center_center{
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+
+    align-items: center;
+    -webkit-align-items: center;
+    -ms-align-items: center;
+
+    justify-content: center;
+    -webkit-justify-content: center;
+    -ms-justify-content: center;
+}
+
+/* short for flex center aligned and end justified*/
+
+.flex_center_end{
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+
+    align-items: center;
+    -webkit-align-items: center;
+    -ms-align-items: center;
+
+    justify-content: flex-end;
+    -webkit-justify-content: flex-end;
+    -ms-justify-content: flex-end;
+}
+
+.flex_grow_1{
+    flex-grow: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-grow: 1;
+}
+
+.flex_grow_2{
+    flex-grow: 2;
+    -webkit-flex-grow: 2;
+    -ms-flex-grow: 2;
+}
