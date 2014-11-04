@@ -1,11 +1,11 @@
 package com.bracketbird.client.pages.matches;
 
+import com.bracketbird.client.gui.rtc.matches.SetEditor2;
 import com.bracketbird.client.model.tournament.Match;
 import com.bracketbird.clientcore.appcontrol.TournamentContext;
 import com.google.gwt.event.dom.client.*;
-import com.google.gwt.user.client.ui.TextBox;
 
-public class ResultBox extends TextBox {
+public class ResultBox extends SetEditor2 {
 
     private Match match;
     private MatchRow row;

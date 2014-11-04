@@ -1141,7 +1141,7 @@ box-shadow:         inset 0px 5px 5px -5px rgba(150, 150, 150, 0.15);
 }
 
 .matchRow_result{
-    border:none;
+    border: 1px solid transparent;
     width:150px;
     min-width: 150px;
 }
@@ -1153,6 +1153,13 @@ box-shadow:         inset 0px 5px 5px -5px rgba(150, 150, 150, 0.15);
 .matchRow_result:focus{
     background-color:white;
 }
+
+.matchRow_result_readOnly{
+    background-color: lightblue;
+    opacity: 0.5;
+}
+
+
 
 .matchRow_result::-moz-placeholder{
     color: #3B9EBF;

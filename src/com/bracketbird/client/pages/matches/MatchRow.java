@@ -125,7 +125,7 @@ public class MatchRow extends FlowPanel {
 
     public void onMatchChange() {
         //updating result
-        getResultTextBox().setText(match.resultAsString());
+        //getResultTextBox().setText(match.resultAsString());
         getFieldTextBox().setText(match.getField());
         getTeamHomeLabel().setText(match.getTeamHome().getName());
         getTeamOutLabel().setText(match.getTeamOut().getName());
