@@ -2,6 +2,8 @@ package com.bracketbird.clientcore.appcontrol;
 
 import com.bracketbird.client.pages.MenuPanel;
 import com.google.gwt.dom.client.Style;
+import com.google.gwt.event.dom.client.ScrollEvent;
+import com.google.gwt.event.dom.client.ScrollHandler;
 import com.google.gwt.event.logical.shared.ResizeEvent;
 import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.user.client.Window;
@@ -28,7 +30,8 @@ public class TournamentContext extends ApplicationContext<ScrollPanel> {
     }
 
     public void updateMenuShadow(){
-        getMenuPanel().addShadow(getPageContainer().getMaximumVerticalScrollPosition() > 0);
+        getMenuPanel().addShadow(getPageContainer().getVerticalScrollPosition() > 0);
+
     }
 
 
@@ -39,6 +42,12 @@ public class TournamentContext extends ApplicationContext<ScrollPanel> {
         panel.addNorth(getMenuPanel(), 62);
         panel.add(getPageContainer());
 
+        getPageContainer().addScrollHandler(new ScrollHandler() {
+            @Override
+            public void onScroll(ScrollEvent event) {
+                updateMenuShadow();
+            }
+        });
         Window.addResizeHandler(new ResizeHandler() {
             @Override
             public void onResize(ResizeEvent event) {

@@ -6,6 +6,8 @@ import com.bracketbird.client.gui.rtc.event.UpdateTeamNameEvent;
 import com.bracketbird.client.model.tournament.Match;
 import com.bracketbird.client.model.tournament.MatchEvent;
 import com.bracketbird.client.model.tournament.TournamentListener;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
@@ -19,11 +21,15 @@ public class MatchRow extends FlowPanel {
     private Label teamOutLabel;
     private Label teamSep;
 
-    private TextBox resultTextBox;
+    private ResultBox resultTextBox;
     private TextBox fieldTextBox;
 
-    public MatchRow(Match match) {
+    private MatchesTable table;
+
+    public MatchRow(Match match, MatchesTable table) {
         this.match = match;
+        this.table = table;
+
         setStyleName("matchRow");
         addStyleName("flex_alignItems_center");
 
@@ -33,7 +39,7 @@ public class MatchRow extends FlowPanel {
         add(getTeamSepLabel());
         add(getTeamOutLabel());
         add(getResultTextBox());
-        add(getFieldTextBox());
+        //add(getFieldTextBox());
 
         match.addMatchChangedListener(new TournamentListener<MatchEvent>() {
             @Override
@@ -43,6 +49,16 @@ public class MatchRow extends FlowPanel {
         });
 
         onMatchChange();
+        addDomHandler(new ClickHandler() {
+            @Override
+            public void onClick(ClickEvent event) {
+                handleClick();
+            }
+        }, ClickEvent.getType());
+    }
+
+    private void handleClick() {
+        getResultTextBox().setFocus(true);
     }
 
 
@@ -90,12 +106,9 @@ public class MatchRow extends FlowPanel {
         return teamOutLabel;
     }
 
-    public TextBox getResultTextBox() {
+    public ResultBox getResultTextBox() {
         if (resultTextBox == null) {
-            resultTextBox = new TextBox();
-            resultTextBox.setStyleName("matchRow_result");
-            resultTextBox.getElement().setAttribute("placeholder", "Enter result");
-
+            resultTextBox = new ResultBox(match, table, this);
         }
         return resultTextBox;
     }
@@ -104,6 +117,7 @@ public class MatchRow extends FlowPanel {
         if (fieldTextBox == null) {
             fieldTextBox = new TextBox();
             fieldTextBox.setStyleName("matchRow_field");
+            fieldTextBox.getElement().setAttribute("placeholder", "Field");
         }
         return fieldTextBox;
     }

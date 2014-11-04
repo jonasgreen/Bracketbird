@@ -772,13 +772,36 @@ box-shadow:         inset 0px 5px 5px -5px rgba(150, 150, 150, 0.15);
     font-size: 22px;
 }
 
-.logoRight{
+
+.logoTop{
+    letter-spacing:0.8px;
+}
+
+.logoBottom{
+    margin-top: -8px;
+    font-size: 12px;
+    letter-spacing: 1.2px;
+
+}
+
+
+.logoTopRight{
     color: #C9C9C9;
 }
 
-.logoLeft{
+.logoTopLeft{
     color: lightblue;
 }
+
+
+.logoBottomRight{
+    color: lightblue;
+}
+
+.logoBottomLeft{
+    color: #C9C9C9;
+}
+
 
 
 .frontPage_createTournamentPanel{
@@ -1090,8 +1113,14 @@ box-shadow:         inset 0px 5px 5px -5px rgba(150, 150, 150, 0.15);
 
 .matchRow{
     height: 30px;
-
+    padding-right:4px;
+    padding-left:4px;
 }
+
+.matchRow_focus{
+    background-color: lightblue;
+}
+
 
 .matchRow_no{
     min-width: 40px;
@@ -1112,9 +1141,17 @@ box-shadow:         inset 0px 5px 5px -5px rgba(150, 150, 150, 0.15);
 }
 
 .matchRow_result{
-    border: none;
+    border:none;
     width:150px;
     min-width: 150px;
+}
+
+.matchRow_result:hover{
+    cursor:pointer;
+}
+
+.matchRow_result:focus{
+    background-color:white;
 }
 
 .matchRow_result::-moz-placeholder{
@@ -1137,10 +1174,15 @@ box-shadow:         inset 0px 5px 5px -5px rgba(150, 150, 150, 0.15);
 
 
 .matchRow_field{
-    border:1px solid black;
+    border: 1px solid transparent;
     width:150px;
     min-width: 150px;
 }
+
+.matchRow_field:focus{
+    border: 1px solid #3B9EBF;
+}
+
 
 .levelMatchesHeader{
     padding-bottom: 10px;

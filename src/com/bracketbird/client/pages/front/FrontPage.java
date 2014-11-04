@@ -22,7 +22,7 @@ public class FrontPage extends Page<FrontPageController> {
 
         addLogo();
         addCreateTournamentPanel();
-        addSlogans();
+        //addSlogans();
     }
 
     private void addLogo() {
