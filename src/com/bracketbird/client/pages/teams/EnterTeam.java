@@ -99,7 +99,7 @@ public class EnterTeam extends FlowPanel {
     }
 
     private void createTeam() {
-        RTC.getInstance().createTeam(textBox.getText(), page.getTeamRows().size() + 1);
+        RTC.getInstance().createTeam(textBox.getText(), 0);
     }
 
 
