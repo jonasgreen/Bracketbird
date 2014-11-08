@@ -1,125 +1,80 @@
 package com.bracketbird.client.gui.rtc.matches;
 
-import java.util.*;
+import com.bracketbird.client.model.tournament.Result;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  */
 public class SetEditorState {
 
-    private static String setSep = " ";
-    private static String scoreSep = "-";
-
-    private int legalStateIndex = 0;
-
-    public enum State {
-        unknown,
-        homeIsWinning,
-        outIsWinning,
-        draw,
-        reset,
-        illegal
-    }
-
-    private String text;
-    private List<SetItem> items;
+    private Result result = null;
+    private boolean validResult;
 
     public SetEditorState(String text, List<SetItem> items) {
-        this.text = text.trim();
-        this.items = items;
+        this.validResult = validate(items);
+        if(validResult){
+            this.result = createResult(text);
+        }
     }
 
-    public State getState() {
-        if(text == null || text.length() == 0){
-            return State.reset;
-        }
-        if (!validSize()) {
-            return State.unknown;
-        }
-        if (invalidItemOrder()) {
-            return SetEditorState.State.illegal;
-        }
-        if (!validLastItem()) {
-            return State.unknown;
-        }
-
-
-        return calculateWinner();
-    }
-
-    private boolean invalidItemOrder() {
-        SetItem last = null;
-
-        for (SetItem item : items) {
-            if (last == null) {
-                last = item;
-            }
-            else {
-                if (last.isNextItemValid(item)) {
-                    last = item;
-                }
-                else {
-                    return true;
-                }
-            }
-        }
-        return false;
-
+    private boolean validate(List<SetItem> items) {
+        return validSize(items) && validLastItem(items);
     }
 
 
-    private State calculateWinner() {
+    private Result createResult(String text){
+     List<Integer> homeResult = new ArrayList<Integer>();
+        List<Integer> outResult = new ArrayList<Integer>();
         int index = 0;
-        int homeWins = 0;
-        int outWins = 0;
-        while (index < text.length()) {
+        StringBuffer sb = new StringBuffer();
+        boolean home = true;
+        while (index < text.length()){
+            char c = text.charAt(index++);
+            if(Character.isDigit(c)){
+                sb.append(c);
+            }
+            else{
+                if(sb.length() != 0){
+                    Integer value = Integer.valueOf(sb.toString());
+                    if(home){
+                        homeResult.add(value);
+                        home = false;
+                    }
+                    else{
+                        outResult.add(Integer.valueOf(sb.toString()));
+                        home = true;
+                    }
 
-            String homeResult = text.substring(index, getIndexOf(index, scoreSep));
-            index = index + homeResult.length() + 1;
-
-            String outResult = text.substring(index, getIndexOf(index, setSep));
-            int h = 0;
-            int o = 0;
-            try {
-                h = Integer.valueOf(homeResult);
-                o = Integer.valueOf(outResult);
+                    sb = new StringBuffer();
+                }
             }
-            catch (NumberFormatException e) {
-                return SetEditorState.State.unknown;
-            }
-            if (h > o) {
-                homeWins++;
-            }
-            else if (h < o) {
-                outWins++;
-            }
-            index = index + outResult.length() + 1;
         }
-
-        if (outWins > homeWins) {
-            return State.outIsWinning;
+        //in case out has not been emptied
+        if(sb.length() != 0){
+            outResult.add(Integer.valueOf(sb.toString()));
         }
-        if (outWins < homeWins) {
-            return State.homeIsWinning;
-
-        }
-        return State.draw;
+        return Result.newInstance(homeResult, outResult);
     }
 
-    private boolean validLastItem() {
+    public Result getResult() {
+        return result;
+    }
+
+    public boolean isValidResult() {
+        return validResult;
+    }
+
+    private boolean validLastItem(List<SetItem> items) {
         SetItem lastItem = items.get(items.size() - 1);
         boolean outResult = lastItem instanceof NumberItem && !((NumberItem) lastItem).isHome();
         return outResult || lastItem instanceof SetSepItem;
     }
 
-    private boolean validSize() {
+    private boolean validSize(List<SetItem> items) {
         return items.size() > 3;
-    }
-
-    private int getIndexOf(int index, String s) {
-        int tempEndIndex = text.indexOf(s, index);
-        tempEndIndex = tempEndIndex == -1 ? text.length() : tempEndIndex;
-        return tempEndIndex;
     }
 
 

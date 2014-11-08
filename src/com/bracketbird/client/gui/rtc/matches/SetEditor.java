@@ -14,9 +14,6 @@ import java.util.*;
  */
 public class SetEditor extends HorizontalComponent {
 
-    private SetEditorState.State state = SetEditorState.State.unknown;
-
-    private List<SetEditorListener> listeners = new ArrayList<SetEditorListener>();
     private TextBoxComponent textComponent;
     private List<SetItem> items = new ArrayList<SetItem>();
 
@@ -30,10 +27,6 @@ public class SetEditor extends HorizontalComponent {
 
     }
 
-
-    public void addListener(SetEditorListener l) {
-        listeners.add(l);
-    }
 
     public void setFocus(boolean b) {
         textComponent.setFocus(true);
@@ -108,7 +101,6 @@ public class SetEditor extends HorizontalComponent {
                         removeDoubleSpaces();
                         rebuild();
                     }
-                    changesMade();
                 }
             });
         }
@@ -265,32 +257,8 @@ public class SetEditor extends HorizontalComponent {
     }
 
 
-    private void changesMade() {
-        SetEditorState.State newState = calculateNewState();
-        if (newState != state) {
-            SetEditorListener.SetEditorEvent event = new SetEditorListener.SetEditorEvent(newState, state);
-            this.state = newState;
-            for (SetEditorListener listener : listeners) {
-                listener.onChange(event);
-            }
-        }
-    }
-
-    private SetEditorState.State calculateNewState() {
-        SetEditorState setEditorState = new SetEditorState(textComponent.getText(), items);
-        return setEditorState.getState();
-
-    }
-
-    public SetEditorState.State getState() {
-        return state;
-    }
 
     public Result getResult() {
-        if(state == SetEditorState.State.reset){
-            return null;
-        }
-
         List<Integer> homeResult = new ArrayList<Integer>();
         List<Integer> outResult = new ArrayList<Integer>();
         String text = textComponent.getText();

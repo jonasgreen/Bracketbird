@@ -4,6 +4,8 @@ import com.bracketbird.client.gui.rtc.matches.SetEditor2;
 import com.bracketbird.client.model.tournament.Match;
 import com.bracketbird.clientcore.appcontrol.TournamentContext;
 import com.google.gwt.event.dom.client.*;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
 
 public class ResultBox extends SetEditor2 {
 
@@ -37,7 +39,18 @@ public class ResultBox extends SetEditor2 {
                 handleBlur();
             }
         });
+        addValueChangeHandler(new ValueChangeHandler<String>() {
+            @Override
+            public void onValueChange(ValueChangeEvent<String> event) {
+                handleValueChanged();
+            }
+        });
         handleBlur();
+
+    }
+
+    private void handleValueChanged() {
+        System.out.println("Value changed");
     }
 
     private void handleBlur() {

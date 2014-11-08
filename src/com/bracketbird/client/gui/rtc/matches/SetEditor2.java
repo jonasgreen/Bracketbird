@@ -2,13 +2,9 @@ package com.bracketbird.client.gui.rtc.matches;
 
 import com.bracketbird.client.model.tournament.Result;
 import com.bracketbird.clientcore.util.KeyUtil;
-import com.google.gwt.event.dom.client.KeyDownEvent;
-import com.google.gwt.event.dom.client.KeyDownHandler;
-import com.google.gwt.event.dom.client.KeyUpEvent;
-import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.event.dom.client.*;
 import com.google.gwt.user.client.ui.TextBox;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -17,37 +13,63 @@ import java.util.List;
  */
 public class SetEditor2 extends TextBox {
 
-    private SetEditorState.State state = SetEditorState.State.unknown;
-
-    private List<SetEditorListener> listeners = new ArrayList<SetEditorListener>();
-    private List<SetItem> items = new ArrayList<SetItem>();
+    public static final char SET_SEP = ' ';
+    public static final char SCORE_SEP = '-';
 
     public SetEditor2() {
         super();
-        items.add(new StartItem());
         addKeyDownHandler(new KeyDownHandler() {
             public void onKeyDown(KeyDownEvent event) {
-                keyPressed(event);
+                handleKeyDown(event);
             }
         });
 
         addKeyUpHandler(new KeyUpHandler() {
             public void onKeyUp(KeyUpEvent event) {
-                if (KeyUtil.isArrow(event.getNativeKeyCode())) {
-                    return;
-                }
-                if (items.size() != getText().length() + 1) {
-                    removeDoubleSpaces();
-                    rebuild();
-                }
-                changesMade();
+                handleKeyUp(event);
             }
         });
 
     }
 
+    private void handleKeyUp(KeyUpEvent event) {
+        int key = event.getNativeKeyCode();
+        int cursorPos = getCursorPos();
+        System.out.println("HandleKeyUp: "+ key);
+
+        if(KeyCodes.KEY_SPACE != key){
+            return;//always ok
+        }
+
+        //perform formatting
+        String[] numbers = getText().split("[^\\d]+");
+        boolean useScoreDel = true;
+        boolean addDel = false;
+
+        StringBuilder sb = new StringBuilder();
+
+        for (String number : numbers) {
+            if(addDel){
+                sb.append(useScoreDel ? "-" : " ");
+                useScoreDel = !useScoreDel;
+            }
+            sb.append(number);
+            addDel = true;
+        }
+
+        if(!lastCharIsDigit(getText())){
+            sb.append(useScoreDel ? "-" : " ");
+        }
+
+        setText(sb.toString());
+        if(cursorPos < getText().length()){
+            setCursorPos(cursorPos);
+        }
+
+    }
+
     public void load(Result r) {
-        reset();
+        setText("");
         if (r == null) {
             return;
         }
@@ -58,16 +80,10 @@ public class SetEditor2 extends TextBox {
         int index = 0;
         for (Integer home : scoresHome) {
             if(index > 0){
-                items.add(new SetSepItem());
                 sb.append(SetSepItem.SEP_VALUE);
             }
-            items.addAll(getNumberItems(true, home));
             sb.append(home);
-
-            items.add(new NumberSepItem());
             sb.append(NumberSepItem.SEP_VALUE);
-
-            items.addAll(getNumberItems(false, scoresOut.get(index)));
             sb.append(scoresOut.get(index));
             index++;
         }
@@ -76,235 +92,23 @@ public class SetEditor2 extends TextBox {
 
     }
 
-    private List<NumberItem> getNumberItems(boolean isHome, Integer value){
-        String s = String.valueOf(value);
-        List<NumberItem> list = new ArrayList<NumberItem>();
 
-        int index = 0;
-        while(index < s.length()){
-            list.add(new NumberItem(isHome));
-            index++;
-        }
-
-        return list;
-
+    private void handleKeyDown(KeyDownEvent event) {
     }
 
-
-
-    public void reset() {
-        setText("");
+    private boolean lastCharIsDigit(String s) {
+        return s.length() > 0 && KeyUtil.isDigit(s.charAt(s.length()-1));
     }
 
-
-
-    private void removeDoubleSpaces() {
-        int index = 0;
-        StringBuffer sb = new StringBuffer();
-        String text = getText().trim();
-        boolean dontAddNextIfSpace = false;
-        while (index < text.length()){
-            char c = text.charAt(index++);
-            if(c == ' '){
-                if(dontAddNextIfSpace){
-                    //ignore
-                }
-                else{
-                    sb.append(c);
-                    dontAddNextIfSpace = true;
-                }
-            }
-            else{
-                sb.append(c);
-                dontAddNextIfSpace = false;
-            }
-        }
-        setText(sb.toString());
+    private boolean cursorPositionAtEnd(int cursorPos) {
+        return getText().length() == cursorPos;
     }
 
-    private void rebuild() {
-        items = new ArrayList<SetItem>();
-        items.add(new StartItem());
-
-        String text = getText();
-        int index = 0;
-        boolean isHome = true;
-        SetItem lastItem;
-        while(index < text.length()){
-            char c = text.charAt(index++);
-            if(c == ' '){
-                items.add(new SetSepItem());
-                isHome = true;
-
-            }
-            else if(c == '-'){
-                items.add(new NumberSepItem());
-                isHome = false;
-            }
-            else{
-                items.add(new NumberItem(isHome));
-            }
-        }
-
-    }
-
-    private void keyPressed(KeyDownEvent event) {
-        int cursorPos = getCursorPos();
-        int key = event.getNativeKeyCode();
-
-        //prevent selection
-        if(getSelectionLength() > 0){
-            return;
-        }
-
-        if (KeyUtil.isArrow(key)) {
-            return;
-        }
-        if (KeyUtil.isBackSpace(key)) {
-            handleBackspace(cursorPos);
-            return;
-        }
-        if (KeyUtil.isDelete(key)) {
-            handleDelete(cursorPos);
-            return;
-        }
-
-        SetItem setItem = items.get(cursorPos);
-        SetItem next = setItem.next(key, items, cursorPos);
-
-        if (next == null) {
-            event.preventDefault();
-        }
-        else {
-            items.add(cursorPos + 1, next);
-            String replaceStr = next.getStringForReplace();
-            if (replaceStr != null) {
-                event.preventDefault();
-                String text = getText();
-                setText(text.substring(0, cursorPos) + replaceStr + text.substring(cursorPos));
-            }
-        }
-    }
-
-
-
-    private void handleDelete(int cursorPos) {
-        removeItem(cursorPos+1);
-    }
-
-
-    private void handleBackspace(int cursorPos) {
-        removeItem(cursorPos);
-    }
-
-    private void removeItem(int cursorPos) {
-        if (cursorPos == 0 || cursorPos == items.size()) {
-            return;
-        }
-        SetItem removed = items.remove(cursorPos);
-        if (removed instanceof NumberSepItem) {
-            convertRestToHomeResult(cursorPos);
-        }
-        if (removed instanceof SetSepItem) {
-            convertRestToOutResult(cursorPos);
-
-        }
-    }
-
-    private void convertRestToHomeResult(int index) {
-        if (index == items.size()) {
-            return;
-        }
-        SetItem item = items.get(index++);
-        while (item instanceof NumberItem) {
-            NumberItem ni = (NumberItem) item;
-            if (ni.isHome()) {
-                return;
-            }
-            ni.setHome(true);
-            if (index == items.size()) {
-                return;
-            }
-            item = items.get(index++);
-        }
-    }
-
-    private void convertRestToOutResult(int index) {
-        if (index == items.size()) {
-            return;
-        }
-        SetItem item = items.get(index++);
-        while (item instanceof NumberItem) {
-            NumberItem ni = (NumberItem) item;
-            if (!ni.isHome()) {
-                return;
-            }
-            ni.setHome(false);
-            if (index == items.size()) {
-                return;
-            }
-            item = items.get(index++);
-        }
-    }
-
-
-    private void changesMade() {
-        SetEditorState.State newState = calculateNewState();
-        if (newState != state) {
-            SetEditorListener.SetEditorEvent event = new SetEditorListener.SetEditorEvent(newState, state);
-            this.state = newState;
-            for (SetEditorListener listener : listeners) {
-                listener.onChange(event);
-            }
-        }
-    }
-
-    private SetEditorState.State calculateNewState() {
-        SetEditorState setEditorState = new SetEditorState(getText(), items);
-        return setEditorState.getState();
-
-    }
-
-    public SetEditorState.State getState() {
-        return state;
+    private boolean isSeparator(int key) {
+        return KeyUtil.isSpace(key) || KeyUtil.isSepLine(key)|| KeyUtil.isComma(key);
     }
 
     public Result getResult() {
-        if(state == SetEditorState.State.reset){
-            return null;
-        }
-
-        List<Integer> homeResult = new ArrayList<Integer>();
-        List<Integer> outResult = new ArrayList<Integer>();
-        String text = getText();
-        int index = 0;
-        StringBuffer sb = new StringBuffer();
-        boolean home = true;
-        while (index < text.length()){
-            char c = text.charAt(index++);
-            if(Character.isDigit(c)){
-                sb.append(c);
-            }
-            else{
-                if(sb.length() != 0){
-                    Integer value = Integer.valueOf(sb.toString());
-                    if(home){
-                        homeResult.add(value);
-                        home = false;
-                    }
-                    else{
-                        outResult.add(Integer.valueOf(sb.toString()));
-                        home = true;
-                    }
-
-                    sb = new StringBuffer();
-                }
-            }
-        }
-        //in case out has not been emptied
-        if(sb.length() != 0){
-            outResult.add(Integer.valueOf(sb.toString()));
-        }
-        return Result.newInstance(homeResult, outResult);
+        return null;
     }
 }

@@ -1,12 +1,14 @@
 package com.bracketbird.client.gui.rtc.matches;
 
 
-import com.bracketbird.client.gui.rtc.RTC;
-import com.bracketbird.client.model.tournament.*;
-import com.google.gwt.event.dom.client.*;
+import com.bracketbird.client.model.tournament.Match;
 import com.bracketbird.clientcore.gui.*;
 import com.bracketbird.clientcore.style.*;
-import com.bracketbird.clientcore.util.*;
+import com.bracketbird.clientcore.util.KeyUtil;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.KeyDownEvent;
+import com.google.gwt.event.dom.client.KeyDownHandler;
 
 /**
  *
@@ -41,11 +43,6 @@ public class MatchEditor extends VerticalComponent implements KeyDownHandler {
     private MatchEditor() {
         super();
         setEditor = new SetEditor();
-        setEditor.addListener(new SetEditorListener() {
-            public void onChange(SetEditorEvent event) {
-                editorEvent(event);
-            }
-        });
 
         add(getTeamNames(), new TextLayout(null, "100%"));
         add(new LabelComponent("Result:"), new TextLayout(5, 0, 4, 10).sizeSmall().colorBaseDark().italic());
@@ -65,26 +62,6 @@ public class MatchEditor extends VerticalComponent implements KeyDownHandler {
         StyleIt.add(this, new TextLayout());
     }
 
-    private void editorEvent(SetEditorListener.SetEditorEvent event) {
-        if (event.getNewState() == SetEditorState.State.unknown) {
-            matchIsUnknown();
-        }
-        else if (event.getNewState() == SetEditorState.State.draw) {
-            matchIsDraw();
-        }
-        else if (event.getNewState() == SetEditorState.State.outIsWinning) {
-            matchOutIsWinning();
-        }
-        else if (event.getNewState() == SetEditorState.State.homeIsWinning) {
-            matchHomeIsWinning();
-        }
-        else if(event.getNewState() == SetEditorState.State.reset){
-            matchIsReset();
-        }
-        else {
-            matchIsIllegal();
-        }
-    }
 
     public HorizontalComponent getTeamNames() {
         if (teamNames == null) {
@@ -263,19 +240,7 @@ public class MatchEditor extends VerticalComponent implements KeyDownHandler {
     }
 
     private void save() {
-        SetEditorState.State state = setEditor.getState();
-        if (!drawAllowed && state == SetEditorState.State.draw) {
-            return;
-        }
-        if (state == SetEditorState.State.unknown) {
-            return;
-        }
-        if (state == SetEditorState.State.illegal) {
-            return;
-        }
 
-        RTC.getInstance().updateMatchResult(match.getId(), setEditor.getResult());
-        PopupManager.hide();
     }
 
 
