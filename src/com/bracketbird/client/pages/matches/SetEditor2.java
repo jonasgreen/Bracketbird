@@ -1,4 +1,4 @@
-package com.bracketbird.client.gui.rtc.matches;
+package com.bracketbird.client.pages.matches;
 
 import com.bracketbird.client.model.tournament.Result;
 import com.bracketbird.clientcore.util.KeyUtil;
@@ -18,30 +18,24 @@ public class SetEditor2 extends TextBox {
 
     public SetEditor2() {
         super();
-        addKeyDownHandler(new KeyDownHandler() {
-            public void onKeyDown(KeyDownEvent event) {
-                handleKeyDown(event);
-            }
-        });
 
         addKeyUpHandler(new KeyUpHandler() {
             public void onKeyUp(KeyUpEvent event) {
                 handleKeyUp(event);
             }
         });
-
     }
 
     private void handleKeyUp(KeyUpEvent event) {
         int key = event.getNativeKeyCode();
-        int cursorPos = getCursorPos();
-        System.out.println("HandleKeyUp: "+ key);
-
-        if(KeyCodes.KEY_SPACE != key){
-            return;//always ok
+        if(KeyCodes.KEY_SPACE == key){
+            formatText();
         }
+    }
 
-        //perform formatting
+    private void formatText() {
+        int cursorPos = getCursorPos();
+
         String[] numbers = getText().split("[^\\d]+");
         boolean useScoreDel = true;
         boolean addDel = false;
@@ -50,7 +44,7 @@ public class SetEditor2 extends TextBox {
 
         for (String number : numbers) {
             if(addDel){
-                sb.append(useScoreDel ? "-" : " ");
+                sb.append(useScoreDel ? SCORE_SEP : SET_SEP);
                 useScoreDel = !useScoreDel;
             }
             sb.append(number);
@@ -65,7 +59,6 @@ public class SetEditor2 extends TextBox {
         if(cursorPos < getText().length()){
             setCursorPos(cursorPos);
         }
-
     }
 
     public void load(Result r) {
@@ -80,32 +73,20 @@ public class SetEditor2 extends TextBox {
         int index = 0;
         for (Integer home : scoresHome) {
             if(index > 0){
-                sb.append(SetSepItem.SEP_VALUE);
+                sb.append(SET_SEP);
             }
             sb.append(home);
-            sb.append(NumberSepItem.SEP_VALUE);
+            sb.append(SCORE_SEP);
             sb.append(scoresOut.get(index));
             index++;
         }
         setText(sb.toString());
-        setFocus(true);
-
     }
 
 
-    private void handleKeyDown(KeyDownEvent event) {
-    }
 
     private boolean lastCharIsDigit(String s) {
         return s.length() > 0 && KeyUtil.isDigit(s.charAt(s.length()-1));
-    }
-
-    private boolean cursorPositionAtEnd(int cursorPos) {
-        return getText().length() == cursorPos;
-    }
-
-    private boolean isSeparator(int key) {
-        return KeyUtil.isSpace(key) || KeyUtil.isSepLine(key)|| KeyUtil.isComma(key);
     }
 
     public Result getResult() {
