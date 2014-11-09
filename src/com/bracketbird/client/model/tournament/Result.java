@@ -1,11 +1,11 @@
 package com.bracketbird.client.model.tournament;
 
 
-import com.bracketbird.clientcore.appcontrol.*;
-import com.bracketbird.clientcore.util.CU;
+import com.bracketbird.clientcore.appcontrol.SystemException;
 
-import java.io.*;
-import java.util.*;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -22,7 +22,6 @@ public class Result implements Serializable {
     private int setWonByOut;
 
     public Result() {
-
     }
 
     private Result(List<Integer> scoresHome, List<Integer> scoresOut) {
@@ -48,7 +47,6 @@ public class Result implements Serializable {
         }
         setWonByHome = hWon;
         setWonByOut = oWon;
-
 
     }
 

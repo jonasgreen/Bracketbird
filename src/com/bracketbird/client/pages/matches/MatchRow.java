@@ -49,7 +49,7 @@ public class MatchRow extends FlowPanel {
         });
 
         onMatchChange();
-        addDomHandler(new ClickHandler() {
+        addDomHandler(  new ClickHandler() {
             @Override
             public void onClick(ClickEvent event) {
                 handleClick();
@@ -125,27 +125,17 @@ public class MatchRow extends FlowPanel {
 
     public void onMatchChange() {
         //updating result
-        //getResultTextBox().setText(match.resultAsString());
-        getFieldTextBox().setText(match.getField());
-        getTeamHomeLabel().setText(match.getTeamHome().getName());
+        getResultTextBox().load(match.getResult());
+       // getFieldTextBox().setText(match.getField());
+       /* getTeamHomeLabel().setText(match.getTeamHome().getName());
         getTeamOutLabel().setText(match.getTeamOut().getName());
         //update teams
 
         if (match.isFinish()) {
-            if (match.getWinningTeam().equals(match.getTeamHome())) {
-                //StyleIt.add(getTeamHomeCol(), MatchComponent.tWinnner);
-                //StyleIt.add(getTeamOutCol(), MatchComponent.tLoser);
-            }
-            else {
-                //StyleIt.add(getTeamHomeCol(), MatchComponent.tLoser);
-                //StyleIt.add(getTeamOutCol(), MatchComponent.tWinnner);
-            }
         }
         else {
-            //StyleIt.add(getTeamHomeCol(), MatchComponent.tNormal);
-            //StyleIt.add(getTeamOutCol(), MatchComponent.tNormal);
         }
-
+*/
 
     }
 

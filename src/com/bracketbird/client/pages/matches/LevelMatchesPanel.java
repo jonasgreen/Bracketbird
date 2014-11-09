@@ -41,7 +41,7 @@ public class LevelMatchesPanel extends FlowPanel {
         this.levelCount = levelCount;
         this.level = l;
 
-        if(RTC.getInstance().getTournament().getLevels().size() > 1) {
+        if (RTC.getInstance().getTournament().getLevels().size() > 1) {
             FlowPanel hp = new FlowPanel();
             hp.setStyleName("levelMatchesHeader");
             hp.add(getHeaderLabel());
@@ -75,7 +75,7 @@ public class LevelMatchesPanel extends FlowPanel {
             showFinalRanking(level.getEndingTeams());
         }
         else if (level.isInProgress()) {
-            showLevelInProgress();
+            showMatchesLayedoutPanel();
         }
     }
 
@@ -89,7 +89,7 @@ public class LevelMatchesPanel extends FlowPanel {
                 List<Team> losingTeams = new ArrayList<Team>();
                 for (Match match : matches) {
                     Team t = match.getLosingTeam();
-                    if(t.isARealTeam()){
+                    if (t.isARealTeam()) {
                         losingTeams.add(t);
                     }
                 }
@@ -98,10 +98,10 @@ public class LevelMatchesPanel extends FlowPanel {
                 for (Team losingTeam : losingTeams) {
                     teams[ii++] = losingTeam.getId();
                 }
-                endingTeams.add(0,teams);
+                endingTeams.add(0, teams);
             }
 
-            Team winner = level.getRounds().get(level.getRounds().size()-1).getMatches().get(0).getWinningTeam();
+            Team winner = level.getRounds().get(level.getRounds().size() - 1).getMatches().get(0).getWinningTeam();
             endingTeams.add(0, new TeamId[]{winner.getId()});
             RTC.getInstance().levelFinished(level.getId(), endingTeams);
         }
@@ -146,14 +146,14 @@ public class LevelMatchesPanel extends FlowPanel {
 
         int index = 1;
         for (Team[] teams : finalRankOfTeams) {
-            if(teams.length == 1){
+            if (teams.length == 1) {
                 panel.add(new FinalRankRow(teams[0], index++));
             }
-            else{
+            else {
                 for (Team team : teams) {
                     panel.add(new FinalRankRow(team, index + "-" + (index + teams.length - 1)));
                 }
-                index = index+teams.length;
+                index = index + teams.length;
             }
         }
 
@@ -168,8 +168,10 @@ public class LevelMatchesPanel extends FlowPanel {
     }
 
     public void showMatchesLayedoutPanel() {
-        reset();
-        matchesHolder.add(new MatchesTable(level));
+        if(!matchesHolder.iterator().hasNext()){
+            reset();
+            matchesHolder.add(new MatchesTable(level));
+        }
     }
 
     public void showLevelEmptyPanel() {
@@ -185,10 +187,6 @@ public class LevelMatchesPanel extends FlowPanel {
         });
 
         levelEmptyPanelHolder.add(b);
-    }
-
-    private void showLevelInProgress() {
-        finalRankingHolder.clear();
     }
 
 

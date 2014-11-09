@@ -1154,12 +1154,14 @@ box-shadow:         inset 0px 5px 5px -5px rgba(150, 150, 150, 0.15);
     background-color:white;
 }
 
+.matchRow_result_error{
+    border-color:rgb(176,0,0);
+}
+
 .matchRow_result_readOnly{
     background-color: lightblue;
     opacity: 0.5;
 }
-
-
 
 .matchRow_result::-moz-placeholder{
     color: #3B9EBF;

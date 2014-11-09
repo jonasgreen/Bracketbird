@@ -425,6 +425,7 @@ public class Tournament extends Model<TournamentId> {
                 matchUpdated = level.updateMatchResult(event);
             }
             else{
+                System.out.println("clear level");
                 level.clear(false, true);
             }
         }

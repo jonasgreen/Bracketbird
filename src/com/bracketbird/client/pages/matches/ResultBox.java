@@ -1,8 +1,9 @@
 package com.bracketbird.client.pages.matches;
 
-import com.bracketbird.client.gui.rtc.matches.SetEditor2;
+import com.bracketbird.client.gui.rtc.RTC;
 import com.bracketbird.client.model.tournament.Match;
 import com.bracketbird.clientcore.appcontrol.TournamentContext;
+import com.bracketbird.clientcore.util.StringUtil;
 import com.google.gwt.event.dom.client.*;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
@@ -13,7 +14,7 @@ public class ResultBox extends SetEditor2 {
     private MatchRow row;
     private MatchesTable table;
 
-    public ResultBox(Match match, MatchesTable table,  MatchRow matchRow) {
+    public ResultBox(Match match, MatchesTable table, MatchRow matchRow) {
         this.match = match;
         this.row = matchRow;
         this.table = table;
@@ -50,11 +51,25 @@ public class ResultBox extends SetEditor2 {
     }
 
     private void handleValueChanged() {
-        System.out.println("Value changed");
+        if (StringUtil.isEmpty(getText())) {
+            removeStyleName("matchRow_result_error");
+            RTC.getInstance().updateMatchResult(match.getId(), null);
+        }
+        else {
+            ResultValidator val = ResultValidator.create(getNumbers());
+            if (val.isValid()) {
+                removeStyleName("matchRow_result_error");
+                RTC.getInstance().updateMatchResult(match.getId(), val.getResult());
+            }
+            else {
+                addStyleName("matchRow_result_error");
+            }
+        }
+
     }
 
     private void handleBlur() {
-        if(match.getResult() == null) {
+        if (match.getResult() == null) {
             getElement().setAttribute("placeholder", "Result");
         }
         row.removeStyleName("matchRow_focus");
@@ -68,16 +83,14 @@ public class ResultBox extends SetEditor2 {
 
     private void handleKeyEvent(KeyDownEvent event) {
         int keyCode = event.getNativeKeyCode();
-        if (KeyCodes.KEY_UP == keyCode) {
+        if (KeyCodes.KEY_UP == keyCode && !event.isShiftKeyDown()) {
             table.up(row);
         }
-        else if (KeyCodes.KEY_DOWN == keyCode) {
+        else if (KeyCodes.KEY_DOWN == keyCode && !event.isShiftKeyDown()) {
             table.down(row);
         }
         else if (KeyCodes.KEY_ENTER == keyCode) {
             table.down(row);
-            event.stopPropagation();
-            event.preventDefault();
         }
     }
 

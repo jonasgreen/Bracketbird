@@ -36,7 +36,7 @@ public class SetEditor2 extends TextBox {
     private void formatText() {
         int cursorPos = getCursorPos();
 
-        String[] numbers = getText().split("[^\\d]+");
+        String[] numbers = getNumbers();
         boolean useScoreDel = true;
         boolean addDel = false;
 
@@ -61,9 +61,13 @@ public class SetEditor2 extends TextBox {
         }
     }
 
+    protected String[] getNumbers() {
+        return getText().split("[^\\d]+");
+    }
+
     public void load(Result r) {
-        setText("");
         if (r == null) {
+        	setText("");
             return;
         }
         List<Integer> scoresHome = r.getScoresHome();
@@ -89,7 +93,5 @@ public class SetEditor2 extends TextBox {
         return s.length() > 0 && KeyUtil.isDigit(s.charAt(s.length()-1));
     }
 
-    public Result getResult() {
-        return null;
-    }
+
 }
