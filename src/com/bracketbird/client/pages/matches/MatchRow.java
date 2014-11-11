@@ -126,16 +126,29 @@ public class MatchRow extends FlowPanel {
     public void onMatchChange() {
         //updating result
         getResultTextBox().load(match.getResult());
-       // getFieldTextBox().setText(match.getField());
-       /* getTeamHomeLabel().setText(match.getTeamHome().getName());
-        getTeamOutLabel().setText(match.getTeamOut().getName());
-        //update teams
 
-        if (match.isFinish()) {
+        getTeamHomeLabel().setText(match.getTeamHome().getName());
+        getTeamOutLabel().setText(match.getTeamOut().getName());
+
+        //reset
+        getTeamHomeLabel().removeStyleName("matchRow_team_loser");
+        getTeamHomeLabel().removeStyleName("matchRow_team_winner");
+        getTeamOutLabel().removeStyleName("matchRow_team_loser");
+        getTeamOutLabel().removeStyleName("matchRow_team_winner");
+
+        if(match.getResult() == null || match.getResult().isDraw()){
+            return;
         }
-        else {
+        if(match.getResult().homeIsWinning()){
+            getTeamHomeLabel().addStyleName("matchRow_team_winner");
+            getTeamOutLabel().addStyleName("matchRow_team_loser");
         }
-*/
+        else{
+            getTeamHomeLabel().addStyleName("matchRow_team_loser");
+            getTeamOutLabel().addStyleName("matchRow_team_winner");
+
+        }
+
 
     }
 

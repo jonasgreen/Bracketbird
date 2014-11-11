@@ -10,28 +10,28 @@ public class ResultValidator {
     private boolean isValid = false;
     private Result result;
 
-    public static ResultValidator create(String[] numbers) {
+    public static ResultValidator create(List<Integer> numbers, boolean drawAllowed) {
         List<Integer> home = new ArrayList<Integer>();
         List<Integer> out = new ArrayList<Integer>();
 
         boolean isHome = true;
-        for (String n : numbers) {
+        for (Integer n : numbers) {
             if (isHome) {
-                home.add(new Integer(n));
+                home.add(n);
             }
             else {
-                out.add(new Integer(n));
+                out.add(n);
             }
             isHome = !isHome;
         }
-        return create(home, out);
+        return create(home, out, drawAllowed);
     }
 
-    public static ResultValidator create(List<Integer> scoresHome, List<Integer> scoresOut) {
-        return new ResultValidator(scoresHome, scoresOut);
+    public static ResultValidator create(List<Integer> scoresHome, List<Integer> scoresOut, boolean drawAllowed) {
+        return new ResultValidator(scoresHome, scoresOut, drawAllowed);
     }
 
-    public ResultValidator(List<Integer> scoresHome, List<Integer> scoresOut) {
+    public ResultValidator(List<Integer> scoresHome, List<Integer> scoresOut, boolean drawAllowed) {
         if (!validatePreConditions(scoresHome, scoresOut)) {
             return;
         }
@@ -46,7 +46,7 @@ public class ResultValidator {
                 oWon++;
             }
             else {
-                if (scoresHome.size() > 1) {
+                if (!drawAllowed || scoresHome.size() > 1) {
                     return; // a result can not have more than one set and a draw set.
                 }
             }

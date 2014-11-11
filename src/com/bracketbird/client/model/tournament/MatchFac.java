@@ -19,6 +19,7 @@ public class MatchFac {
         m.setGroupName(groupName);
         m.setTeamHome(teamHome);
         m.setTeamOut(teamOut);
+        m.initState();
         return m;
     }
 
@@ -32,6 +33,8 @@ public class MatchFac {
         m.setGroupName(groupName);
         m.setTeamHome(teamHome);
         m.setTeamOut(teamOut);
+        m.initState();
+
         return m;
     }
 

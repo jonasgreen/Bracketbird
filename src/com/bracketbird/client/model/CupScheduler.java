@@ -98,7 +98,7 @@ public class CupScheduler extends Scheduler<CupRound> {
         while (count < previousRound.size()){
             CupMatch one = previousRound.get(count++);
             CupMatch two = previousRound.get(count++);
-            CupMatch m = MatchFac.createCup(level, null, roundNumber, matchNumber++, new SeedingTeam(one.getName()), new SeedingTeam(two.getName()));
+            CupMatch m = MatchFac.createCup(level, null, roundNumber, matchNumber++, new SeedingTeam(), new SeedingTeam());
             m.setName((""+c)+nameIndex++);
             list.add(m);
         }

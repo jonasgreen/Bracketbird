@@ -5,6 +5,7 @@ import com.bracketbird.clientcore.util.KeyUtil;
 import com.google.gwt.event.dom.client.*;
 import com.google.gwt.user.client.ui.TextBox;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -36,13 +37,13 @@ public class SetEditor2 extends TextBox {
     private void formatText() {
         int cursorPos = getCursorPos();
 
-        String[] numbers = getNumbers();
+
         boolean useScoreDel = true;
         boolean addDel = false;
 
         StringBuilder sb = new StringBuilder();
 
-        for (String number : numbers) {
+        for (Integer number : getNumbers()) {
             if(addDel){
                 sb.append(useScoreDel ? SCORE_SEP : SET_SEP);
                 useScoreDel = !useScoreDel;
@@ -61,8 +62,17 @@ public class SetEditor2 extends TextBox {
         }
     }
 
-    protected String[] getNumbers() {
-        return getText().split("[^\\d]+");
+    protected List<Integer> getNumbers() {
+        List<Integer> list = new ArrayList<Integer>();
+        for (String s : getText().split("[^\\d]+")) {
+            try{
+                list.add(new Integer(s));
+            }
+            catch (NumberFormatException e){
+                //ignore
+            }
+        }
+        return list;
     }
 
     public void load(Result r) {

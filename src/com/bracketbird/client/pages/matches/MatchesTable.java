@@ -22,14 +22,18 @@ public class MatchesTable extends FlowPanel {
         super();
         this.level = tl;
         boolean firstRound = true;
+        int i = 1;
         for (Round round : level.getRounds()) {
             if(!firstRound){
                 addEmptyLine();
             }
             for (Match match : round.getMatches()) {
-                MatchRow row = new MatchRow(match, this);
-                rows.add(row);
-                add(row);
+                if(!match.isWalkover()) {
+                    match.setName("" + i++);
+                    MatchRow row = new MatchRow(match, this);
+                    rows.add(row);
+                    add(row);
+                }
             }
             firstRound = false;
         }

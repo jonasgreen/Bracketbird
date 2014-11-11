@@ -212,17 +212,20 @@ public class Match extends Model<MatchId> {
     }
 
     public void updateOutTeam(Team out, boolean fromClient) {
-        this.teamOut = out == null ? new SeedingTeam("") : out;
+        this.teamOut = out == null ? new SeedingTeam() : out;
         this.state = calculateState();
         fireMatchChangedEvent(fromClient);
     }
 
     public void updateHomeTeam(Team home, boolean fromClient) {
-        this.teamHome = home == null ? new SeedingTeam("") : home;
+        this.teamHome = home == null ? new SeedingTeam() : home;
         this.state = calculateState();
         fireMatchChangedEvent(fromClient);
     }
 
+    public void initState(){
+        this.state = calculateState();
+    }
 
     private MatchState calculateState(){
         if(teamHome.isSeedingTeam() || teamOut.isSeedingTeam()){
@@ -238,6 +241,7 @@ public class Match extends Model<MatchId> {
     }
 
 
+
     @Override
     public String toString() {
         return "Match{" + teamHome.getName() + " - " + teamOut.getName() + '}';
@@ -249,6 +253,10 @@ public class Match extends Model<MatchId> {
 
     public boolean isReady(){
         return state instanceof MatchReady;
+    }
+
+    public boolean isNotReady(){
+        return state instanceof MatchNotReady;
     }
 
     public MatchState getState() {

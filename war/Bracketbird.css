@@ -1137,7 +1137,13 @@ box-shadow:         inset 0px 5px 5px -5px rgba(150, 150, 150, 0.15);
 .matchRow_team{
     min-width: 200px;
     width: 200px;
+}
 
+.matchRow_team_winner{
+}
+
+.matchRow_team_loser{
+    opacity: 0.5;
 }
 
 .matchRow_result{
@@ -1152,6 +1158,12 @@ box-shadow:         inset 0px 5px 5px -5px rgba(150, 150, 150, 0.15);
 
 .matchRow_result:focus{
     background-color:white;
+     border: 1px solid rgb(192, 192, 192);
+        border-top-color: rgb(192, 192, 192);
+        border-right-color: rgb(217, 217, 217);
+        border-bottom-color: rgb(217, 217, 217);
+        border-left-color: rgb(217, 217, 217);
+
 }
 
 .matchRow_result_error{
@@ -1202,7 +1214,13 @@ box-shadow:         inset 0px 5px 5px -5px rgba(150, 150, 150, 0.15);
 }
 
 .matches_emptyLine{
-    height: 15px;
+    height: 20px;
+}
+
+.matches_roundName{
+    height: 30px;
+    font-size: 10px;
+    opacity:0.5;
 }
 
 

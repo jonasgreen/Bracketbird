@@ -1,6 +1,7 @@
 package com.bracketbird.client.pages.matches;
 
 import com.bracketbird.client.gui.rtc.RTC;
+import com.bracketbird.client.model.tournament.CupMatch;
 import com.bracketbird.client.model.tournament.Match;
 import com.bracketbird.clientcore.appcontrol.TournamentContext;
 import com.bracketbird.clientcore.util.StringUtil;
@@ -19,7 +20,10 @@ public class ResultBox extends SetEditor2 {
         this.row = matchRow;
         this.table = table;
 
+
         setStyleName("matchRow_result");
+
+        getElement().setAttribute("placeholder", "Enter result");
 
         addKeyDownHandler(new KeyDownHandler() {
             @Override
@@ -47,16 +51,15 @@ public class ResultBox extends SetEditor2 {
             }
         });
         handleBlur();
-
     }
 
-    private void handleValueChanged() {
+    public void handleValueChanged() {
         if (StringUtil.isEmpty(getText())) {
             removeStyleName("matchRow_result_error");
             RTC.getInstance().updateMatchResult(match.getId(), null);
         }
         else {
-            ResultValidator val = ResultValidator.create(getNumbers());
+            ResultValidator val = ResultValidator.create(getNumbers(), !(match instanceof CupMatch));
             if (val.isValid()) {
                 removeStyleName("matchRow_result_error");
                 RTC.getInstance().updateMatchResult(match.getId(), val.getResult());

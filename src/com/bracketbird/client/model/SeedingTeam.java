@@ -10,11 +10,8 @@ public class SeedingTeam extends Team {
     private static final long serialVersionUID = -8413373363468003258L;
     private static int idCount = 1;
 
-    protected SeedingTeam() {
-    }
-
-    public SeedingTeam(String sname) {
-        name = sname;
+    public SeedingTeam() {
+        name = "------";
         setId(new TeamId("seedingTeamId "+idCount++));
     }
 
