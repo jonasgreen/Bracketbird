@@ -89,18 +89,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="SetEditor2.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/bracketbird/client/pages/matches/SetEditor2.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1605">
-              <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="MatchRow.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/bracketbird/client/pages/matches/MatchRow.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -114,8 +102,34 @@
       <file leaf-file-name="MatchesTable.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/bracketbird/client/pages/matches/MatchesTable.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.49250534" vertical-offset="70" max-vertical-offset="945">
-              <caret line="27" column="31" selection-start-line="27" selection-start-column="31" selection-end-line="27" selection-end-column="31" />
+            <state vertical-scroll-proportion="0.6788009" vertical-offset="193" max-vertical-offset="1080">
+              <caret line="42" column="43" selection-start-line="42" selection-start-column="43" selection-end-line="42" selection-end-column="43" />
+              <folding>
+                <element signature="e#1210#1724#0" expanded="true" />
+                <element signature="e#1723#1724#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UIObject.java" pinned="false" current-in-tab="false">
+        <entry file="jar://$USER_HOME$/gwt-2.6.1/gwt-user.jar!/com/google/gwt/user/client/ui/UIObject.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="7810" max-vertical-offset="13680">
+              <caret line="567" column="13" selection-start-line="567" selection-start-column="13" selection-end-line="567" selection-end-column="13" />
+              <folding>
+                <element signature="e#19638#19639#0" expanded="true" />
+                <element signature="e#19698#19699#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Scheduler.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/bracketbird/client/model/Scheduler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="450">
+              <caret line="8" column="22" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -124,8 +138,8 @@
       <file leaf-file-name="Bracketbird.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/war/Bracketbird.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="16725" max-vertical-offset="17276">
-              <caret line="1221" column="20" selection-start-line="1221" selection-start-column="20" selection-end-line="1221" selection-end-column="20" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="16837" max-vertical-offset="17388">
+              <caret line="1220" column="1" selection-start-line="1220" selection-start-column="1" selection-end-line="1220" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -184,16 +198,6 @@
                 <element signature="e#1453#1643#0" expanded="true" />
                 <element signature="e#1642#1643#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EnterResultsPage.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/bracketbird/client/gui/rtc/matches/EnterResultsPage.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="30" max-vertical-offset="1215">
-              <caret line="69" column="22" selection-start-line="69" selection-start-column="22" selection-end-line="69" selection-end-column="22" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -1683,26 +1687,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/bracketbird/clientcore/util/KeyUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="415" max-vertical-offset="1065">
-          <caret line="50" column="26" selection-start-line="50" selection-start-column="26" selection-end-line="50" selection-end-column="26" />
-          <folding>
-            <element signature="e#1056#1057#0" expanded="true" />
-            <element signature="e#1093#1094#0" expanded="true" />
-            <element signature="e#1144#1145#0" expanded="true" />
-            <element signature="e#1181#1182#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/bracketbird/client/gui/rtc/matches/MatchEditor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="595" max-vertical-offset="3525">
-          <caret line="64" column="0" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/bracketbird/client/gui/rtc/matches/SetEditor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="15" max-vertical-offset="4245">
@@ -2087,17 +2071,39 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/war/Bracketbird.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="16725" max-vertical-offset="17276">
-          <caret line="1221" column="20" selection-start-line="1221" selection-start-column="20" selection-end-line="1221" selection-end-column="20" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="16837" max-vertical-offset="17388">
+          <caret line="1220" column="1" selection-start-line="1220" selection-start-column="1" selection-end-line="1220" selection-end-column="1" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/bracketbird/client/model/Scheduler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="450">
+          <caret line="8" column="22" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/gwt-2.6.1/gwt-user.jar!/com/google/gwt/user/client/ui/UIObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="7810" max-vertical-offset="13680">
+          <caret line="567" column="13" selection-start-line="567" selection-start-column="13" selection-end-line="567" selection-end-column="13" />
+          <folding>
+            <element signature="e#19638#19639#0" expanded="true" />
+            <element signature="e#19698#19699#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/bracketbird/client/pages/matches/MatchesTable.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.49250534" vertical-offset="70" max-vertical-offset="945">
-          <caret line="27" column="31" selection-start-line="27" selection-start-column="31" selection-end-line="27" selection-end-column="31" />
-          <folding />
+        <state vertical-scroll-proportion="0.6788009" vertical-offset="193" max-vertical-offset="1080">
+          <caret line="42" column="43" selection-start-line="42" selection-start-column="43" selection-end-line="42" selection-end-column="43" />
+          <folding>
+            <element signature="e#1210#1724#0" expanded="true" />
+            <element signature="e#1723#1724#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

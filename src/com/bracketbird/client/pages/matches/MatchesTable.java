@@ -4,6 +4,7 @@ package com.bracketbird.client.pages.matches;
 import com.bracketbird.client.model.tournament.Match;
 import com.bracketbird.client.model.tournament.Round;
 import com.bracketbird.client.model.tournament.TournamentLevel;
+import com.google.gwt.dom.client.Style;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 
@@ -21,30 +22,39 @@ public class MatchesTable extends FlowPanel {
     public MatchesTable(TournamentLevel tl) {
         super();
         this.level = tl;
-        boolean firstRound = true;
         int i = 1;
-        for (Round round : level.getRounds()) {
-            if(!firstRound){
-                addEmptyLine();
-            }
+        for (final Round round : level.getRounds()) {
+            final FlowPanel roundPanel = createRoundPanel(round.getName());
+            add(roundPanel);
+
             for (Match match : round.getMatches()) {
                 if(!match.isWalkover()) {
                     match.setName("" + i++);
                     MatchRow row = new MatchRow(match, this);
                     rows.add(row);
-                    add(row);
+                    roundPanel.add(row);
                 }
             }
-            firstRound = false;
+
+            com.google.gwt.core.client.Scheduler.get().scheduleDeferred(new com.google.gwt.core.client.Scheduler.ScheduledCommand() {
+                @Override
+                public void execute() {
+                    Label w = new Label(round.getName());
+                    w.setStyleName("matches_roundName");
+                    double top = ((double)roundPanel.getOffsetHeight()) /2;
+                    System.out.println("top: "+top);
+                    w.getElement().getStyle().setTop(8, Style.Unit.PX);
+                    roundPanel.add(w);
+                }
+            });
         }
     }
 
 
-    protected void addEmptyLine(){
+    protected FlowPanel createRoundPanel(String roundName){
         FlowPanel fl = new FlowPanel();
-        fl.setStyleName("matches_emptyLine");
-        fl.add(new Label(""));
-        add(fl);
+        fl.setStyleName("matchesTable_roundPanel");
+        return fl;
     }
 
 

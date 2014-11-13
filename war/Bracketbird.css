@@ -1215,12 +1215,20 @@ box-shadow:         inset 0px 5px 5px -5px rgba(150, 150, 150, 0.15);
 
 .matches_emptyLine{
     height: 20px;
+    position:relative;
+}
+
+.matchesTable_roundPanel{
+    position:relative;
+        margin-bottom: 20px;
 }
 
 .matches_roundName{
-    height: 30px;
     font-size: 10px;
     opacity:0.5;
+    position:absolute;
+    top:0px;
+    left:-70px;
 }
 
 
