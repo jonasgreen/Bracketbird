@@ -6,7 +6,6 @@ import com.bracketbird.client.model.tournament.LevelSettings;
 import com.bracketbird.client.model.tournament.TournamentLevel;
 import com.bracketbird.client.rules.AtLeast;
 import com.bracketbird.client.rules.LargerThan;
-import com.bracketbird.clientcore.gui.OnClose;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 
@@ -29,8 +28,8 @@ public class GroupSettingsPanel extends SettingsPanel {
 
 
 
-    public GroupSettingsPanel(TournamentLevel l, OnClose onClose) {
-        super(l, onClose);
+    public GroupSettingsPanel(TournamentLevel l) {
+        super(l);
 
         addStyleName("groupSettingsPanel");
         addRow(getNumberOfGroupsLabel(), getNumberOfGroupsTextBox());
@@ -38,7 +37,6 @@ public class GroupSettingsPanel extends SettingsPanel {
         addRow(getPointsDrawLabel(), getPointsDrawTextBox());
         addEmptyLine();
         addRow(getMaxTeamsLabel(), getMaxTeamsTextBox());
-        addButtons();
 
     }
 
@@ -93,7 +91,7 @@ public class GroupSettingsPanel extends SettingsPanel {
     }
 
     @Override
-    protected void save() {
+    protected void ok() {
         getErrorPanel().clear();
         validator.removeErrorStyles();
 

@@ -55,6 +55,7 @@ public class MatchRow extends FlowPanel {
                 handleClick();
             }
         }, ClickEvent.getType());
+
     }
 
     private void handleClick() {

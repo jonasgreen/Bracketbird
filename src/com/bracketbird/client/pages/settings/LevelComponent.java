@@ -2,11 +2,13 @@ package com.bracketbird.client.pages.settings;
 
 import com.bracketbird.client.gui.rtc.RTC;
 import com.bracketbird.client.model.tournament.TournamentLevel;
-import com.bracketbird.clientcore.gui.OnClose;
 import com.google.gwt.event.dom.client.*;
+import com.google.gwt.event.logical.shared.CloseEvent;
+import com.google.gwt.event.logical.shared.CloseHandler;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.PopupPanel;
 
 /**
  *
@@ -78,14 +80,16 @@ public class LevelComponent extends FlowPanel {
     private void onclick() {
         onMouseOut();
         if (level != null) {
-            OnClose onClose = new OnClose() {
+            CloseHandler<PopupPanel> onClose = new CloseHandler<PopupPanel>() {
                 @Override
-                public void onClose() {
+                public void onClose(CloseEvent event) {
                     getInnerPanel().setWidth("80px");
                     getInnerPanel().removeStyleName("levelComponent_innerPanel_edit");
                 }
             };
-            final SettingsPanel p = level.isKnockout() ? new KnockoutSettingsPanel(level, onClose) : new GroupSettingsPanel(level, onClose);
+
+            final SettingsPanel p = level.isKnockout() ? new KnockoutSettingsPanel(level) : new GroupSettingsPanel(level);
+            p.addCloseHandler(onClose);
             getInnerPanel().setWidth("340px");
             getInnerPanel().addStyleName("levelComponent_innerPanel_edit");
 

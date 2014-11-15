@@ -49,8 +49,8 @@ public class TeamsPageController extends PageController<TeamsPage> {
     }
 
 
-
-    public void beginListening(){
+    @Override
+    public void afterFirstLoad() {
         RTC.getInstance().getTournament().addTeamsListener(new TournamentListener<TournamentTeamEvent>() {
 
             public void onChange(TournamentTeamEvent event) {
@@ -65,12 +65,10 @@ public class TeamsPageController extends PageController<TeamsPage> {
             }
         });
 
-        /*RTC.getInstance().getTournament().addSeedingListener(new TournamentListener<SeedingChangedEvent>() {
-            public void onChange(SeedingChangedEvent event) {
-                seedingChanged();
-            }
-        });
-        */
+        for (Team team : RTC.getInstance().getTournament().getTeams()) {
+            getPage().addTeam(team, false);
+        }
+
     }
 
 }

@@ -5,7 +5,6 @@ import com.bracketbird.client.gui.rtc.RTC;
 import com.bracketbird.client.model.tournament.LevelSettings;
 import com.bracketbird.client.model.tournament.TournamentLevel;
 import com.bracketbird.client.rules.LargerThan;
-import com.bracketbird.clientcore.gui.OnClose;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 
@@ -22,17 +21,16 @@ public class KnockoutSettingsPanel extends SettingsPanel {
     public Label eliminationType;
 
 
-    public KnockoutSettingsPanel(TournamentLevel l, OnClose onClose) {
-        super(l, onClose);
+    public KnockoutSettingsPanel(TournamentLevel l) {
+        super(l);
 
         addStyleName("knockoutSettingsPanel");
         addRow(eliminationTypeLabel, getEliminationType());
         addRow(getMaxTeamsLabel(), getMaxTeamsTextBox());
-        addButtons();
     }
 
     @Override
-    protected void save() {
+    protected void ok() {
         getErrorPanel().clear();
         validator.removeErrorStyles();
 

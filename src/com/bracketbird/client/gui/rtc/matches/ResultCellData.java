@@ -44,7 +44,7 @@ public class ResultCellData extends PopUpCellData {
         }
         if (shouldWarn()) {
             final Warning w = new Warning("Changing the result of this match, will affect the final ranking of this stage and reset any following stages.");
-            PopupManager.show(w, new OnClose() {
+            /*PopupManager.show(w, new OnClose() {
                 public void onClose() {
                     if (w.isProceed()) {
                         doShowMatch();
@@ -54,6 +54,7 @@ public class ResultCellData extends PopUpCellData {
                     }
                 }
             });
+            */
 
         }
         else {

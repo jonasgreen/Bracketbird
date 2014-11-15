@@ -425,9 +425,9 @@ input:focus, select:focus, textarea:focus, button:focus {
   box-shadow: 4px 4px 5px #d2d8d5; }
 
 .shadow {
-  -moz-box-shadow: 4px 4px 5px #d2d8d5;
-  -webkit-box-shadow: 4px 4px 5px #d2d8d5;
-  box-shadow: 4px 4px 5px #d2d8d5; }
+  -moz-box-shadow: 0px 3px 3px rgba(55,71,79, 0.4);
+  -webkit-box-shadow: 0px 3px 3px rgba(55,71,79, 0.4);
+  box-shadow: 0px 3px 3px rgba(55,71,79, 0.4); }
 
 .shadowreset {
   -moz-box-shadow: 0px 0px 0px; }
@@ -1030,10 +1030,31 @@ box-shadow:         inset 0px 5px 5px -5px rgba(150, 150, 150, 0.15);
 
 .popupBracketBird{
     background-color: white;
-    border: 2px solid #73BCD4;
+    border: 1px solid rgba(55,71,79, 0.4);
+    z-index: 50;
+}
 
-    border-radius: 0px 0px 5px 5px;
+.popupBracketBird_contentPanel{
+    padding: 30px 20px;
+}
+
+.popupBracketBird_headerPanel{
     padding: 20px;
+    font-size: 22px;
+    background:orange;
+}
+
+.popupBracketBird_buttonsPanel{
+    padding: 20px;
+}
+
+.proceedWarning{
+    width: 400px;
+}
+
+.settingsPanel{
+    border: 2px solid #73BCD4;
+    border-radius: 0px 0px 5px 5px;
 }
 
 
@@ -1084,6 +1105,7 @@ box-shadow:         inset 0px 5px 5px -5px rgba(150, 150, 150, 0.15);
 .glass{
   background-color: #9A9999;
   opacity: 0.5;
+  z-index:40;
 }
 
 .errorPanel{
@@ -1116,6 +1138,7 @@ box-shadow:         inset 0px 5px 5px -5px rgba(150, 150, 150, 0.15);
     padding-right:2px;
     padding-left:4px;
 }
+
 
 .matchRow_focus{
     background-color: lightblue;
@@ -1219,16 +1242,14 @@ box-shadow:         inset 0px 5px 5px -5px rgba(150, 150, 150, 0.15);
 }
 
 .matchesTable_roundPanel{
-    position:relative;
-        margin-bottom: 20px;
+    height: 45px;
+    padding-right:2px;
+    padding-left:4px;
 }
 
 .matches_roundName{
     font-size: 10px;
     opacity:0.5;
-    position:absolute;
-    top:0px;
-    left:-70px;
 }
 
 

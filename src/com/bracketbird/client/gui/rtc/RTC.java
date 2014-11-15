@@ -13,10 +13,10 @@ import com.bracketbird.client.model.keys.MatchId;
 import com.bracketbird.client.model.keys.TeamId;
 import com.bracketbird.client.model.keys.TournamentLevelId;
 import com.bracketbird.client.model.tournament.*;
+import com.bracketbird.client.pages.livescores.LiveScoresPageController;
 import com.bracketbird.client.pages.matches.MatchesPageController;
 import com.bracketbird.client.pages.teams.TeamsPageController;
 import com.bracketbird.clientcore.appcontrol.Application;
-import com.bracketbird.clientcore.gui.PopupManager;
 import com.bracketbird.clientcore.util.CU;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.user.client.Window;
@@ -142,9 +142,10 @@ public class RTC {
 
     private void initGuiListeners(Tournament t) {
         if (!t.isViewOnly()) {
-            TeamsPageController.getInstance().beginListening();
+            TeamsPageController.getInstance().getPage();
             SettingsPageController.getInstance().getPage();
             MatchesPageController.getInstance().getPage();
+            LiveScoresPageController.getInstance().getPage();
         }
         RankingViewPageController.getInstance().getPage();
     }
@@ -232,10 +233,10 @@ public class RTC {
     public void layoutMatches(TournamentLevelId levelId) {
         TournamentLevel previousLevel = getTournament().getPreviousLevel(getTournament().getLevel(levelId));
         if (previousLevel != null && !(previousLevel.getState() instanceof LevelStateInFinished)) {
-            OkWarning gc = new OkWarning("You cannot layout matches of a level before the previous level is finished");
-            gc.getHeader().setText("Please finish previous level first");
-            PopupManager.show(gc, null);
-            gc.getOkButton().getButton().setFocus(true);
+            ProceedWarning gc = new ProceedWarning("You cannot layout matches of a level before the previous level is finished");
+            gc.getHeaderLabel().setText("Please finish previous level first");
+            gc.getOkButton().setFocus(true);
+            gc.center();
         }
         else {
             executeEvent(new LayoutMatchesEvent(null, levelId));

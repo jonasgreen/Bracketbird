@@ -161,7 +161,7 @@ public class TeamsPage extends Page<TeamsPageController> {
                     public void execute() {
                         updatePositions();
                         getEnterTeamBox().setText("");
-                        TournamentContext.get().getPageContainer().ensureVisible(getEnterTeamBox());
+                        //TournamentContext.get().getPageContainer().ensureVisible(getEnterTeamBox());
                     }
                 });
             }

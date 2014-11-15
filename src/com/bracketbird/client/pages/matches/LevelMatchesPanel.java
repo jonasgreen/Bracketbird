@@ -41,12 +41,6 @@ public class LevelMatchesPanel extends FlowPanel {
         this.levelCount = levelCount;
         this.level = l;
 
-        if (RTC.getInstance().getTournament().getLevels().size() > 1) {
-            FlowPanel hp = new FlowPanel();
-            hp.setStyleName("levelMatchesHeader");
-            hp.add(getHeaderLabel());
-            add(hp);
-        }
 
         add(levelEmptyPanelHolder);
         add(matchesHolder);
@@ -176,8 +170,8 @@ public class LevelMatchesPanel extends FlowPanel {
 
     public void showLevelEmptyPanel() {
         reset();
-
-        Button b = new Button("Layout matches");
+        //TODO - if one stage - only layout matches + add listeners
+        Button b = new Button("Layout matches - "+ (level.isKnockout() ? "knockout" : "'group'") +" stage");
         b.setStyleName("primaryButton");
         b.addClickHandler(new ClickHandler() {
             @Override

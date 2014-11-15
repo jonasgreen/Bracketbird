@@ -43,7 +43,7 @@ public class UUIDService {
 
     private void loadUUIDs() {
         /*DeferredCommand.addCommand(new Command() {
-            public void execute() {
+            public void handle() {
                 Service.getUUID(50, new SilentCallBack<UUIDResult>() {
                     @Override
                     public void success(UUIDResult result) {

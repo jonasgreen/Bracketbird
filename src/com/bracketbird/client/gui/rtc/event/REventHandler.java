@@ -1,10 +1,9 @@
 package com.bracketbird.client.gui.rtc.event;
 
 import com.bracketbird.client.gui.rtc.EventManager;
+import com.bracketbird.client.gui.rtc.Handler;
+import com.bracketbird.client.gui.rtc.ProceedWarning;
 import com.bracketbird.client.gui.rtc.RTC;
-import com.bracketbird.client.gui.rtc.Warning;
-import com.bracketbird.clientcore.gui.OnClose;
-import com.bracketbird.clientcore.gui.PopupManager;
 
 /**
  *
@@ -17,14 +16,14 @@ public abstract class REventHandler<E extends REvent<?,?>> {
 
     public void handleEvent(final E event) {
         if (event.isFromClient() && shouldWarn(event)) {
-            final Warning w = new Warning(getWarning());
-            PopupManager.show(w, new OnClose() {
-                public void onClose() {
-                    if (w.isProceed()) {
-                        executeEvent(event);
-                    }
+            final ProceedWarning pop = new ProceedWarning(getWarning());
+            pop.addOkHandler(new Handler() {
+                @Override
+                public void handle() {
+                    executeEvent(event);
                 }
             });
+            pop.center();
         }
         else {
             executeEvent(event);

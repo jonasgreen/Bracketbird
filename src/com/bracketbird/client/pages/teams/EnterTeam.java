@@ -2,10 +2,11 @@ package com.bracketbird.client.pages.teams;
 
 import com.bracketbird.client.Css;
 import com.bracketbird.client.gui.rtc.RTC;
-import com.bracketbird.clientcore.appcontrol.TournamentContext;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.*;
-import com.google.gwt.user.client.ui.*;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.TextBox;
 
 /**
  *
@@ -109,7 +110,7 @@ public class EnterTeam extends FlowPanel {
     }
 
     public void setFocus(boolean focus) {
-        TournamentContext.get().getPageContainer().ensureVisible(this);
+        //TournamentContext.get().getPageContainer().ensureVisible(this);
         textBox.setFocus(focus);
     }
 

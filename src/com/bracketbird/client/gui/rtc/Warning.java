@@ -1,16 +1,20 @@
 package com.bracketbird.client.gui.rtc;
 
 
-import com.google.gwt.event.dom.client.*;
 import com.bracketbird.clientcore.gui.*;
-import com.bracketbird.clientcore.style.*;
-import com.bracketbird.clientcore.util.*;
+import com.bracketbird.clientcore.util.KeyUtil;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.KeyDownEvent;
+import com.google.gwt.event.dom.client.KeyDownHandler;
+import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.Label;
 
 /**
  *
  */
-public class Warning extends VerticalComponent implements KeyDownHandler {
-    protected LabelComponent header;
+public class Warning extends FlowPanel implements KeyDownHandler {
+    protected Label header;
     private String text;
     private boolean proceed = false;
     protected ButtonPanel buttonPanel;
@@ -23,24 +27,12 @@ public class Warning extends VerticalComponent implements KeyDownHandler {
     }
 
     private void init() {
-        add(getHeader(), getHeaderLayout());
+        add(getHeader());
         SimplePanelComponent sp = new SimplePanelComponent();
-        sp.add(getContent(), getTextLayout());
-        add(sp, getBackgroundLayout());
-        add(getButtonPanel(), new TextLayout(null, "100%").padding(20));
+        sp.add(getContent());
+        add(sp);
+        add(getButtonPanel());
         addDomHandler(this, KeyDownEvent.getType());
-    }
-
-    protected TextLayout getTextLayout() {
-        return new TextLayout(null, "500px").sizeNormal().colorBaseDark().padding(20);
-    }
-
-    protected TextLayout getHeaderLayout() {
-        return new TextLayout().sizeH2().colorBaseDark().padding(20);
-    }
-
-    protected TextLayout getBackgroundLayout() {
-        return new TextLayout(null, "100%").backgroundCompl();
     }
 
 
@@ -51,9 +43,9 @@ public class Warning extends VerticalComponent implements KeyDownHandler {
         return guiComponent;
     }
 
-    public LabelComponent getHeader() {
+    public Label getHeader() {
         if (header == null) {
-            header = new LabelComponent("WARNING!");
+            header = new Label("WARNING!");
         }
         return header;
     }

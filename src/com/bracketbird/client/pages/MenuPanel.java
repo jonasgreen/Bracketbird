@@ -3,7 +3,7 @@ package com.bracketbird.client.pages;
 import com.bracketbird.client.Css;
 import com.bracketbird.client.gui.rtc.RTC;
 import com.bracketbird.client.gui.rtc.ShareComponent;
-import com.bracketbird.client.gui.rtc.ranking.RankingViewPageController;
+import com.bracketbird.client.pages.livescores.LiveScoresPageController;
 import com.bracketbird.client.pages.matches.MatchesPageController;
 import com.bracketbird.client.pages.settings.SettingsPageController;
 import com.bracketbird.client.pages.teams.TeamsPageController;
@@ -30,7 +30,7 @@ public class MenuPanel extends FlowPanel{
         content.add(new MenuItem("TEAMS", TeamsPageController.getInstance()));
         content.add(new MenuItem("SETTINGS", SettingsPageController.getInstance()));
         content.add(new MenuItem("MATCHES", MatchesPageController.getInstance()));
-        content.add(new MenuItem("LIVE SCORES", RankingViewPageController.getInstance()));
+        content.add(new MenuItem("LIVE SCORES", LiveScoresPageController.getInstance()));
 
         //secondary menu items to the right
         FlowPanel sp = Css.style(new FlowPanel(), "menuPanel_secondaryPanel");
