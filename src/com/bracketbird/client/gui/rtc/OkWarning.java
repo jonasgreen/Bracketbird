@@ -7,9 +7,9 @@ import com.google.gwt.user.client.ui.Label;
 /**
  *
  */
-public class ProceedWarning extends PopupBracketBird {
+public class OkWarning extends PopupBracketBird {
 
-    public ProceedWarning(String text) {
+    public OkWarning(String text) {
         super(false, true);
         setGlassEnabled(true);
         setGlassStyleName("glass");

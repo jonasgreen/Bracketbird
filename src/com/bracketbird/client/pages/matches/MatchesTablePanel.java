@@ -13,13 +13,14 @@ import java.util.List;
 /**
  *
  */
-public class MatchesTable extends FlowPanel {
+public class MatchesTablePanel extends FlowPanel {
 
     private TournamentLevel level;
     private List<MatchRow> rows = new ArrayList<MatchRow>();
 
-    public MatchesTable(TournamentLevel tl) {
+    public MatchesTablePanel(TournamentLevel tl) {
         super();
+        setStyleName("matchesTable");
         this.level = tl;
         int i = 1;
         for (final Round round : level.getRounds()) {
