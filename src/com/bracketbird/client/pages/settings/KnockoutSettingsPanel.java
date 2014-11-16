@@ -47,6 +47,11 @@ public class KnockoutSettingsPanel extends SettingsPanel {
         }
     }
 
+    @Override
+    protected void setFocus() {
+        getMaxTeamsTextBox().setFocus(true);
+    }
+
 
     public Label getMaxTeamsLabel() {
         if (maxTeamsLabel == null) {

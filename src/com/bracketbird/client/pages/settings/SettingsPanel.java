@@ -5,6 +5,9 @@ import com.bracketbird.client.ErrorPanel;
 import com.bracketbird.client.PopupBracketBird;
 import com.bracketbird.client.model.tournament.TournamentLevel;
 import com.bracketbird.client.validation.GuiValidator;
+import com.google.gwt.event.dom.client.KeyCodes;
+import com.google.gwt.event.dom.client.KeyUpEvent;
+import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
@@ -19,6 +22,17 @@ public abstract class SettingsPanel extends PopupBracketBird {
     protected SettingsPanel(TournamentLevel level) {
         super(false, true);
         this.level = level;
+
+        addDomHandler(new KeyUpHandler() {
+            @Override
+            public void onKeyUp(KeyUpEvent event) {
+                if(KeyCodes.KEY_MAC_ENTER == event.getNativeKeyCode() || KeyCodes.KEY_ENTER == event.getNativeKeyCode()) {
+                    ok();
+                }
+            }
+        }, KeyUpEvent.getType());
+
+        getHeaderPanel().removeFromParent();
         getContentPanel().add(getErrorPanel());
         addStyleName("settingsPanel");
     }

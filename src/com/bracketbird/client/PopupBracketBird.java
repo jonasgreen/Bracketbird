@@ -1,6 +1,7 @@
 package com.bracketbird.client;
 
 import com.bracketbird.client.gui.rtc.Handler;
+import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyCodes;
@@ -99,11 +100,6 @@ public abstract class PopupBracketBird extends PopupPanel {
                     event.getNativeEvent().preventDefault();
                     event.getNativeEvent().stopPropagation();
                 }
-                else if(keyCode == KeyCodes.KEY_ENTER || keyCode == KeyCodes.KEY_MAC_ENTER){
-                    ok();
-                    event.getNativeEvent().preventDefault();
-                    event.getNativeEvent().stopPropagation();
-                }
             }
         });
     }
@@ -155,6 +151,7 @@ public abstract class PopupBracketBird extends PopupPanel {
         for (Handler e : okHandlers) {
             e.handle();
         }
+        hide();
     }
 
     public void addOkHandler(Handler h){
@@ -162,9 +159,25 @@ public abstract class PopupBracketBird extends PopupPanel {
     }
 
 
+    public void show(){
+        super.show();
+        setFocusElement();
+    }
+
+    private void setFocusElement() {
+        Scheduler.get().scheduleDeferred(new Scheduler.ScheduledCommand() {
+            @Override
+            public void execute() {
+                setFocus();
+            }
+        });
+    }
 
     public void center() {
         super.center();
         setPopupPosition(getAbsoluteLeft(), 150);
+        setFocusElement();
     }
+
+    protected abstract void setFocus();
 }

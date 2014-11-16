@@ -96,7 +96,7 @@ public class LevelComponent extends FlowPanel {
             Timer t = new Timer() {
                 @Override
                 public void run() {
-                    p.setWidth("300px");
+                    p.setWidth("340px");
                     p.setPopupPosition(getInnerPanel().getAbsoluteLeft(), getInnerPanel().getAbsoluteTop() + 50);
                     p.show();
                 }

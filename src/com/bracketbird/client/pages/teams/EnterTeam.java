@@ -54,10 +54,9 @@ public class EnterTeam extends FlowPanel {
     }
 
     private void keyUp(KeyUpEvent event) {
-        if (KeyCodes.KEY_ENTER == event.getNativeKeyCode()) {
+        if (KeyCodes.KEY_ENTER == event.getNativeKeyCode() && event.getSource() == textBox) {
             createTeam();
             stopEvent(event);
-
         }
     }
 
@@ -70,7 +69,6 @@ public class EnterTeam extends FlowPanel {
                 @Override
                 public void onClick(ClickEvent event) {
                     createTeam();
-                    textBox.setFocus(true);
                 }
             });
             addTeamButton.getElement().getStyle().setPosition(Style.Position.ABSOLUTE);

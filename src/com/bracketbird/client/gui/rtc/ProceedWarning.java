@@ -15,9 +15,13 @@ public class ProceedWarning extends PopupBracketBird {
         setGlassStyleName("glass");
         addStyleName("shadow");
         addStyleName("proceedWarning");
-        getHeaderLabel().setText("Warning");
+        getHeaderLabel().setText("Watch out!");
         getContentPanel().add(new Label(text));
         getOkButton().setText("Proceed");
     }
 
+    @Override
+    protected void setFocus() {
+        //ignore
+    }
 }

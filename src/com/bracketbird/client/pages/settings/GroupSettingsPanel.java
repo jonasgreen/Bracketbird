@@ -111,6 +111,11 @@ public class GroupSettingsPanel extends SettingsPanel {
         }
     }
 
+    @Override
+    protected void setFocus() {
+        getNumberOfGroupsTextBox().setFocus(true);
+    }
+
 
     public Label getMaxTeamsLabel() {
         if (maxTeamsLabel == null) {
