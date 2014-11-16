@@ -4,12 +4,10 @@ package com.bracketbird.client.pages.matches;
 import com.bracketbird.client.gui.rtc.RTC;
 import com.bracketbird.client.gui.rtc.matches.FinalGroupRankingPanel;
 import com.bracketbird.client.gui.rtc.matches.FinalRankRow;
+import com.bracketbird.client.gui.rtc.matches.LevelEmptyPanel;
 import com.bracketbird.client.model.Team;
 import com.bracketbird.client.model.keys.TeamId;
 import com.bracketbird.client.model.tournament.*;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.SimplePanel;
@@ -164,23 +162,13 @@ public class LevelMatchesPanel extends FlowPanel {
     public void showMatchesLayedoutPanel() {
         if(!matchesHolder.iterator().hasNext()){
             reset();
-            matchesHolder.add(new MatchesTable(level));
+            matchesHolder.add(new MatchesTablePanel(level));
         }
     }
 
     public void showLevelEmptyPanel() {
         reset();
-        //TODO - if one stage - only layout matches + add listeners
-        Button b = new Button("Layout matches - "+ (level.isKnockout() ? "knockout" : "'group'") +" stage");
-        b.setStyleName("primaryButton");
-        b.addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(ClickEvent event) {
-                RTC.getInstance().layoutMatches(level.getId());
-            }
-        });
-
-        levelEmptyPanelHolder.add(b);
+        levelEmptyPanelHolder.add(new LevelEmptyPanel(level));
     }
 
 

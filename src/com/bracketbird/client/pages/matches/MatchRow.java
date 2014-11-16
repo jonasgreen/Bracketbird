@@ -24,9 +24,9 @@ public class MatchRow extends FlowPanel {
     private ResultBox resultTextBox;
     private TextBox fieldTextBox;
 
-    private MatchesTable table;
+    private MatchesTablePanel table;
 
-    public MatchRow(Match match, MatchesTable table) {
+    public MatchRow(Match match, MatchesTablePanel table) {
         this.match = match;
         this.table = table;
 

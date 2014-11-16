@@ -20,7 +20,7 @@ public class MatchesTablePanel extends FlowPanel {
 
     public MatchesTablePanel(TournamentLevel tl) {
         super();
-        setStyleName("matchesTable");
+        setStyleName("matchesTablePanel");
         this.level = tl;
         int i = 1;
         for (final Round round : level.getRounds()) {
@@ -65,5 +65,9 @@ public class MatchesTablePanel extends FlowPanel {
         if(index > 0){
             rows.get(index-1).getResultTextBox().setFocus(true);
         }
+    }
+
+    public List<MatchRow> getRows() {
+        return rows;
     }
 }

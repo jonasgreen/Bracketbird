@@ -255,7 +255,7 @@ input:focus, select:focus, textarea:focus, button:focus {
 */
 
 .settingsPage{
-    padding-top:38px;
+    padding-top:50px;
 }
 
 
@@ -1130,7 +1130,7 @@ box-shadow:         inset 0px 5px 5px -5px rgba(150, 150, 150, 0.15);
 }
 
 .matchesPage{
-    padding-top: 38px;
+    padding-top: 50px;
 }
 
 .matchRow{
@@ -1250,6 +1250,14 @@ box-shadow:         inset 0px 5px 5px -5px rgba(150, 150, 150, 0.15);
 .matches_roundName{
     font-size: 10px;
     opacity:0.5;
+}
+
+.levelEmptyPanel{
+    padding-bottom: 40px;
+}
+
+.matchesTablePanel{
+    padding-bottom: 40px;
 }
 
 

@@ -13,9 +13,9 @@ public class ResultBox extends SetEditor2 {
 
     private Match match;
     private MatchRow row;
-    private MatchesTable table;
+    private MatchesTablePanel table;
 
-    public ResultBox(Match match, MatchesTable table, MatchRow matchRow) {
+    public ResultBox(Match match, MatchesTablePanel table, MatchRow matchRow) {
         this.match = match;
         this.row = matchRow;
         this.table = table;
@@ -81,7 +81,11 @@ public class ResultBox extends SetEditor2 {
     private void handleFocus() {
         getElement().removeAttribute("placeholder");
         row.addStyleName("matchRow_focus");
-        TournamentContext.get().getPageContainer().ensureVisible(this);
+
+        //if first or last row - ensure visible (extra scroll)
+        if(table.getRows().get(0).equals(row) || table.getRows().get(table.getRows().size()-1).equals(row)){
+            TournamentContext.get().getPageContainer().ensureVisible(this);
+        }
     }
 
     private void handleKeyEvent(KeyDownEvent event) {

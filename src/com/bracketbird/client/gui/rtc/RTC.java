@@ -232,10 +232,12 @@ public class RTC {
     //MATCHES
     public void layoutMatches(TournamentLevelId levelId) {
         TournamentLevel previousLevel = getTournament().getPreviousLevel(getTournament().getLevel(levelId));
-        if (previousLevel != null && !(previousLevel.getState() instanceof LevelStateInFinished)) {
-            ProceedWarning gc = new ProceedWarning("You cannot layout matches of a level before the previous level is finished");
-            gc.getHeaderLabel().setText("Please finish previous level first");
-            gc.getOkButton().setFocus(true);
+        if(RTC.getInstance().getTournament().getTeams().size() < 2){
+            OkWarning gc = new OkWarning("Please add some teams", "There has to be at least two teams to create a tournament.");
+            gc.center();
+        }
+        else if (previousLevel != null && !(previousLevel.getState() instanceof LevelStateInFinished)) {
+            OkWarning gc = new OkWarning("Please finish previous level first", "You cannot layout matches of a level before the previous level is finished");
             gc.center();
         }
         else {

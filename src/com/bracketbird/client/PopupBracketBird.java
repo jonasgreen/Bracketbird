@@ -116,7 +116,7 @@ public abstract class PopupBracketBird extends PopupPanel {
         return buttonsPanel;
     }
 
-    protected Label getCancelButton() {
+    public Label getCancelButton() {
         if (cancelButton == null) {
             cancelButton = Css.style(new Label("Cancel"), "secondaryButton", "settingsPanelButton");
             cancelButton.addClickHandler(new ClickHandler() {

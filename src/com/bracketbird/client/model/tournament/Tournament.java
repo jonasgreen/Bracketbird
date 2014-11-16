@@ -345,33 +345,37 @@ public class Tournament extends Model<TournamentId> {
     }
 
     private void fireSeedingChanged(SeedingChangedEvent e) {
-        for (TournamentListener<SeedingChangedEvent> l : seedingListener) {
+        for (TournamentListener<SeedingChangedEvent> l : getConcurrentSafeList(seedingListener)) {
             l.onChange(e);
         }
     }
 
     private void fireTeamsChanged(TournamentTeamEvent event) {
-        for (TournamentListener<TournamentTeamEvent> listener : teamListener) {
+        for (TournamentListener<TournamentTeamEvent> listener : getConcurrentSafeList(teamListener)) {
             listener.onChange(event);
         }
     }
 
 
     private void fireStateChanged(TournamentStateChangedEvent event) {
-        for (TournamentListener<TournamentStateChangedEvent> listener : stateListener) {
+        for (TournamentListener<TournamentStateChangedEvent> listener : getConcurrentSafeList(stateListener)) {
             listener.onChange(event);
         }
     }
 
     private void fireLevelEvent(TournamentLevelEvent event) {
-        for (TournamentListener<TournamentLevelEvent> listener : levelListener) {
-            listener.onChange(event);
+        for (TournamentListener<TournamentLevelEvent> l : getConcurrentSafeList(levelListener)) {
+            l.onChange(event);
         }
+    }
+
+    private <K> List<K> getConcurrentSafeList(List<K> list){
+        return new ArrayList<K>(list);
     }
 
 
     private void fireNameChanged(TournamentNameChangedEvent event) {
-        for (TournamentListener<TournamentNameChangedEvent> listener : nameListener) {
+        for (TournamentListener<TournamentNameChangedEvent> listener : getConcurrentSafeList(nameListener)) {
             listener.onChange(event);
         }
     }

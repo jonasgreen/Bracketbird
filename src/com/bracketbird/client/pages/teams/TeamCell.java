@@ -78,7 +78,7 @@ public class TeamCell extends TextBox{
     public void setFocus(boolean focus){
         //if first row - ensure visible (extra scroll)
         List<TeamRow> rows = TeamsPageController.getInstance().getPage().getTeamRows();
-        if(!rows.isEmpty() && rows.get(0).getTeam().equals(team)){
+        if(rows.get(0).getTeam().equals(team) || rows.get(rows.size()-1).getTeam().equals(team)){
             TournamentContext.get().getPageContainer().ensureVisible(this);
         }
         super.setFocus(focus);

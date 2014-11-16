@@ -2,7 +2,7 @@ package com.bracketbird.client.gui.rtc.event;
 
 import com.bracketbird.client.gui.rtc.EventManager;
 import com.bracketbird.client.gui.rtc.Handler;
-import com.bracketbird.client.gui.rtc.ProceedWarning;
+import com.bracketbird.client.gui.rtc.ProceedOrCancelWarning;
 import com.bracketbird.client.gui.rtc.RTC;
 
 /**
@@ -16,7 +16,7 @@ public abstract class REventHandler<E extends REvent<?,?>> {
 
     public void handleEvent(final E event) {
         if (event.isFromClient() && shouldWarn(event)) {
-            final ProceedWarning pop = new ProceedWarning(getWarning());
+            final ProceedOrCancelWarning pop = new ProceedOrCancelWarning(getWarning());
             pop.addOkHandler(new Handler() {
                 @Override
                 public void handle() {

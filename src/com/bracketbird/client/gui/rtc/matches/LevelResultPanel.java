@@ -174,7 +174,7 @@ public class LevelResultPanel extends VerticalComponent {
 
     public void showLevelEmptyPanel() {
         reset();
-        levelEmptyPanelHolder.add(new LevelEmptyPanel(level));
+        //levelEmptyPanelHolder.add(new LevelEmptyPanel(level));
     }
 
     private void showLevelInProgress() {

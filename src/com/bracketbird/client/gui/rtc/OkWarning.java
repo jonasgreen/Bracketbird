@@ -1,27 +1,20 @@
 package com.bracketbird.client.gui.rtc;
 
 
-import com.bracketbird.client.PopupBracketBird;
-import com.google.gwt.user.client.ui.Label;
-
 /**
  *
  */
-public class OkWarning extends PopupBracketBird {
+public class OkWarning extends ProceedOrCancelWarning {
 
-    public OkWarning(String text) {
-        super(false, true);
-        setGlassEnabled(true);
-        setGlassStyleName("glass");
-        addStyleName("shadow");
-        addStyleName("proceedWarning");
-        getHeaderLabel().setText("Watch out!");
-        getContentPanel().add(new Label(text));
-        getOkButton().setText("Proceed");
+    public OkWarning(String header, String text) {
+        super((text));
+        getHeaderLabel().setText(header);
+        getOkButton().setText("Ok");
+        getCancelButton().removeFromParent();
     }
 
     @Override
     protected void setFocus() {
-        //ignore
+        getOkButton().setFocus(true);
     }
 }
