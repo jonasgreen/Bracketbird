@@ -23,10 +23,10 @@ Odd number of teams
 
 public class GroupScheduler extends Scheduler<GroupRound>{
     private List<GroupRound> rounds = new ArrayList<GroupRound>();
-    private TournamentLevel level;
+    private GroupStage stage;
 
-    public GroupScheduler(TournamentLevel level, List<AGroup> groups) {
-        this.level = level;
+    public GroupScheduler(GroupStage stage, List<Group> groups) {
+        this.stage = stage;
         build(groups);
     }
 
@@ -34,9 +34,9 @@ public class GroupScheduler extends Scheduler<GroupRound>{
         return rounds;
     }
 
-    private void build(List<AGroup> groups) {
-        for (AGroup group : groups) {
-            appendRounds(new AGroupScheduler(group, level).getRounds());
+    private void build(List<Group> groups) {
+        for (Group group : groups) {
+            appendRounds(new AGroupScheduler(group, stage).getRounds());
         }
 
         int matchNumber = 1;
@@ -54,7 +54,7 @@ public class GroupScheduler extends Scheduler<GroupRound>{
                 rounds.get(roundNumber).getMatches().addAll(r.getMatches());
             }
             else{//no round exist - round is added
-                GroupRound gr = new GroupRound(r.getName());
+                GroupRound gr = new GroupRound(stage, r.getRoundNumber());
                 gr.getMatches().addAll(r.getMatches());
                 rounds.add(gr);
             }

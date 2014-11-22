@@ -15,7 +15,7 @@ public class DeleteLevelEventHandler extends REventHandler<DeleteLevelEvent> {
 
     @Override
     protected boolean shouldWarn(DeleteLevelEvent event) {
-        return RTC.getInstance().getTournament().getLevel(event.getModelId()).getState().hasStartet();
+        return RTC.getInstance().getTournament().getLevel(event.getModelId()).isInProgress();
     }
 
 

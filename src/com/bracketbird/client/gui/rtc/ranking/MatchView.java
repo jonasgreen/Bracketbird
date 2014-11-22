@@ -1,5 +1,7 @@
 package com.bracketbird.client.gui.rtc.ranking;
 
+import com.bracketbird.client.gui.rtc.event.ModelEvent;
+import com.bracketbird.client.gui.rtc.event.ModelEventHandler;
 import com.bracketbird.client.model.tournament.*;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -34,10 +36,10 @@ public class MatchView extends FlowPanel {
         this.match = match;
         setStyleName("aMatchView");
 
-        match.addMatchChangedListener(new TournamentListener<MatchEvent>() {
+        match.matchEventHandlers.addHandler(new ModelEventHandler<Match>() {
             @Override
-            public void onChange(MatchEvent event) {
-                matchChanged(event.getMatch());
+            public void handleEvent(ModelEvent<Match> event) {
+                matchChanged(event.getAfter());
             }
         });
 

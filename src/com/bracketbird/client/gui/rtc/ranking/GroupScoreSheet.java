@@ -14,9 +14,9 @@ public class GroupScoreSheet extends VerticalComponent {
     private static P color = P.COLOR_WHITE_ALMOST;
 
     private List<Position> positions;
-    private AGroup group;
+    private Group group;
 
-    public GroupScoreSheet(AGroup gr, List<Position> positions) {
+    public GroupScoreSheet(Group gr, List<Position> positions) {
         super();
         this.group = gr;
         this.positions = positions;

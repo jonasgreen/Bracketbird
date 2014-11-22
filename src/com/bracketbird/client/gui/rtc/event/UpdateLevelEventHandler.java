@@ -15,7 +15,7 @@ public class UpdateLevelEventHandler extends REventHandler<UpdateLevelEvent> {
 
     @Override
     protected boolean shouldWarn(UpdateLevelEvent event) {
-        return RTC.getInstance().getTournament().getLevel(event.getModelId()).getState().hasStartet();
+        return RTC.getInstance().getTournament().getLevel(event.getModelId()).isInProgress();
     }
 
     @Override

@@ -14,12 +14,13 @@ public class CupScheduler extends Scheduler<CupRound> {
 
     private List<CupRound> allRounds = new ArrayList<CupRound>();
     private List<Team> teams;
-    private TournamentLevel level;
     private int matchNumber = 1;
 
-    public CupScheduler(List<Team> teams, TournamentLevel level) {
+    private KnockoutStage stage;
+
+    public CupScheduler(List<Team> teams, KnockoutStage stage) {
         this.teams = teams;
-        this.level = level;
+        this.stage = stage;
         build();
     }
 
@@ -29,12 +30,13 @@ public class CupScheduler extends Scheduler<CupRound> {
 
         List<Team> bTeamList = createTeamList(binaryTeamCount);
 
+        CupRound firstRound = new CupRound(stage, 1);
 
         List<CupMatch> left = new ArrayList<CupMatch>();
         List<CupMatch> right = new ArrayList<CupMatch>();
 
 
-        left.add(createMatch(bTeamList, 1));
+        left.add(createMatch(bTeamList, firstRound));
         List<CupMatch> pointer = right;
         int count = 0;
         while (!bTeamList.isEmpty()){
@@ -42,17 +44,16 @@ public class CupScheduler extends Scheduler<CupRound> {
                 count = 0;
                 pointer = pointer == right ? left : right;
             }
-            pointer.add(createMatch(bTeamList, 1));
+            pointer.add(createMatch(bTeamList, firstRound));
             count++;
         }
 
         Collections.reverse(right);
-        List<CupMatch> allCupMatchesFirstRound = new ArrayList<CupMatch>();
+        List<Match> allCupMatchesFirstRound = new ArrayList<Match>();
         allCupMatchesFirstRound.addAll(left);
         allCupMatchesFirstRound.addAll(right);
-        addNames(allCupMatchesFirstRound, 0);
 
-        CupRound firstRound = new CupRound(allCupMatchesFirstRound);
+        firstRound.setMatches(allCupMatchesFirstRound);
 
         List<CupRound> rounds = new ArrayList<CupRound>();
         rounds.add(firstRound);
@@ -72,42 +73,33 @@ public class CupScheduler extends Scheduler<CupRound> {
         }
     }
 
-    private void appendChilds(List<CupMatch> parents, List<CupMatch> childs){
+    private void appendChilds(List<Match> parents, List<Match> childs){
         int childCount = 0;
-        for (CupMatch child : childs) {
+        for (Match child : childs) {
             int parentIndex = childCount*2;
-            parents.get(parentIndex).setParent(child);
-            parents.get(parentIndex+1).setParent(child);
+            ((CupMatch)parents.get(parentIndex)).setParent((CupMatch)child);
+            ((CupMatch)parents.get(parentIndex+1)).setParent((CupMatch)child);
            childCount++;
-        }
-    }
-
-    private void addNames(List<CupMatch> allCupMatchesFirstRound, int charNameIndex) {
-        char c = charNames[charNameIndex];
-        int i = 1;
-        for (CupMatch m : allCupMatchesFirstRound) {
-            m.setName((""+c)+i++);
         }
     }
 
     private CupRound buildNextRound(CupRound previousRound, int roundNumber) {
         List<CupMatch> list = new ArrayList<CupMatch>();
-        char c = charNames[(int)roundNumber];
+        CupRound round = new CupRound(stage, roundNumber);
+        char c = charNames[roundNumber];
         int nameIndex = 1;
         int count = 0;
         while (count < previousRound.size()){
-            CupMatch one = previousRound.get(count++);
-            CupMatch two = previousRound.get(count++);
-            CupMatch m = MatchFac.createCup(level, null, roundNumber, matchNumber++, new SeedingTeam(), new SeedingTeam());
+            CupMatch m = MatchFac.createCup(round, matchNumber++, new SeedingTeam(), new SeedingTeam());
             m.setName((""+c)+nameIndex++);
             list.add(m);
         }
-        return new CupRound(list);
+        return round;
 
     }
 
-    private CupMatch createMatch(List<Team> list, long roundNumber){
-        return MatchFac.createCup(level, null, roundNumber, matchNumber++, list.remove(0), list.remove(list.size() - 1));
+    private CupMatch createMatch(List<Team> list, CupRound round){
+        return MatchFac.createCup(round, matchNumber++, list.remove(0), list.remove(list.size() - 1));
     }
 
 

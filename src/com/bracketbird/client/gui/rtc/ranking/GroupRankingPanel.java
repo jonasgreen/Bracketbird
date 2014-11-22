@@ -1,7 +1,6 @@
 package com.bracketbird.client.gui.rtc.ranking;
 
 
-import com.bracketbird.client.gui.rtc.RTC;
 import com.bracketbird.client.gui.rtc.RTCLayoutFac2;
 import com.bracketbird.client.model.tournament.*;
 import com.bracketbird.clientcore.gui.*;
@@ -10,7 +9,6 @@ import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.logical.shared.ResizeEvent;
 import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.Label;
 
 import java.util.*;
 
@@ -19,7 +17,7 @@ import java.util.*;
  */
 public class GroupRankingPanel extends FlowComponent implements RankingPanel {
 
-    private TournamentLevel level;
+    private TournamentStage level;
 
 
 
@@ -33,7 +31,7 @@ public class GroupRankingPanel extends FlowComponent implements RankingPanel {
         }
     };
 
-    public TournamentLevel getLevel() {
+    public TournamentStage getLevel() {
         return level;
     }
 
@@ -41,7 +39,7 @@ public class GroupRankingPanel extends FlowComponent implements RankingPanel {
         return this;
     }
 
-    public GroupRankingPanel(TournamentLevel l) {
+    public GroupRankingPanel(TournamentStage l) {
         super();
         this.level = l;
 
@@ -51,7 +49,7 @@ public class GroupRankingPanel extends FlowComponent implements RankingPanel {
     }
 
     private void init() {
-        matchesViewPanel = new MatchesViewPanel((Group) level);
+        matchesViewPanel = new MatchesViewPanel((GroupStage) level);
         groupPanel.getElement().getStyle().setFloat(Style.Float.LEFT);
         matchesViewPanel.getElement().getStyle().setFloat(Style.Float.RIGHT);
 
@@ -61,13 +59,13 @@ public class GroupRankingPanel extends FlowComponent implements RankingPanel {
 
     private void bindMathces() {
         for (Match m : level.getMatches()) {
-            m.addMatchChangedListener(matchListener);
+            //m.addMatchChangedListener(matchListener);
         }
     }
 
     private void initialSetup() {
         bindMathces();
-        if (level.isEmpty()) {
+        if (level.isNotReady()) {
             layoutNoRanking();
         }
         else {
@@ -117,8 +115,8 @@ public class GroupRankingPanel extends FlowComponent implements RankingPanel {
 
     private void layoutGroupRanking() {
         StringBuffer sb = new StringBuffer();
-        List<AGroup> grs = ((Group) level).getGroups();
-        for (AGroup gr : grs) {
+        List<Group> grs = ((GroupStage) level).getGroups();
+        for (Group gr : grs) {
             RankingSheet sheet = new RankingSheet(gr.getMatches(), level.getStageSettings());
             GroupScoreSheet gs = new GroupScoreSheet(gr, sheet.getPositions());
             gs.generateHtml(sb);

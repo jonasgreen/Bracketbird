@@ -1,9 +1,9 @@
 package com.bracketbird.client.pages.matches;
 
 import com.bracketbird.client.gui.rtc.RTC;
-import com.bracketbird.client.model.tournament.TournamentLevel;
-import com.bracketbird.client.model.tournament.TournamentLevelEvent;
-import com.bracketbird.client.model.tournament.TournamentListener;
+import com.bracketbird.client.gui.rtc.event.ModelEvent;
+import com.bracketbird.client.gui.rtc.event.ModelEventHandler;
+import com.bracketbird.client.model.tournament.TournamentStage;
 import com.bracketbird.clientcore.appcontrol.PageController;
 
 /**
@@ -30,18 +30,20 @@ public class MatchesPageController extends PageController<MatchesPage> {
     @Override
     public void afterFirstLoad() {
 
-        RTC.getInstance().getTournament().addLevelListener(new TournamentListener<TournamentLevelEvent>() {
-            public void onChange(TournamentLevelEvent event) {
-                if (event.getAction() == TournamentLevelEvent.LevelAction.create) {
-                    getPage().createMatchesPanel(event.getLevel());
+        RTC.getInstance().getTournament().levelsEventHandlers.addHandler(new ModelEventHandler<TournamentStage>() {
+            @Override
+            public void handleEvent(ModelEvent<TournamentStage> event) {
+                if (event.isCreate()) {
+                    getPage().createMatchesPanel(event.getAfter());
                 }
-                else if (event.getAction() == TournamentLevelEvent.LevelAction.delete) {
-                    getPage().deleteMatchesPanel(event.getLevel());
+                else if (event.isDelete()) {
+                    getPage().deleteMatchesPanel(event.getBefore());
                 }
             }
         });
 
-        for (TournamentLevel l : RTC.getInstance().getTournament().getLevels()) {
+
+        for (TournamentStage l : RTC.getInstance().getTournament().getLevels()) {
             getPage().createMatchesPanel(l);
         }
     }

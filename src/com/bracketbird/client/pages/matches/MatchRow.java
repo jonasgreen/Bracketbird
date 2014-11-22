@@ -1,11 +1,7 @@
 package com.bracketbird.client.pages.matches;
 
-import com.bracketbird.client.gui.rtc.event.REvent;
-import com.bracketbird.client.gui.rtc.event.REventListener;
-import com.bracketbird.client.gui.rtc.event.UpdateTeamNameEvent;
+import com.bracketbird.client.gui.rtc.event.*;
 import com.bracketbird.client.model.tournament.Match;
-import com.bracketbird.client.model.tournament.MatchEvent;
-import com.bracketbird.client.model.tournament.TournamentListener;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -41,9 +37,9 @@ public class MatchRow extends FlowPanel {
         add(getResultTextBox());
         //add(getFieldTextBox());
 
-        match.addMatchChangedListener(new TournamentListener<MatchEvent>() {
+        match.matchEventHandlers.addHandler(new ModelEventHandler<Match>() {
             @Override
-            public void onChange(MatchEvent event) {
+            public void handleEvent(ModelEvent<Match> event) {
                 onMatchChange();
             }
         });
@@ -65,7 +61,7 @@ public class MatchRow extends FlowPanel {
 
     public Label getMatchNumberLabel() {
         if (matchNoLabel == null) {
-            matchNoLabel = new Label(match.getName());
+            matchNoLabel = new Label("" + match.getMatchNo());
             matchNoLabel.setStyleName("matchRow_no");
         }
         return matchNoLabel;

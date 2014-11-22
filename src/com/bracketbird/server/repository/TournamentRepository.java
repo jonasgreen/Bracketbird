@@ -52,7 +52,7 @@ public class TournamentRepository extends Repository<TournamentJDO, Tournament, 
 
         Tournament tournament = getConverter().convert(jdo);
 
-        //create first event for RTCEventLog.
+        //createGroupMatch first event for RTCEventLog.
         REvent initEvent = new InitEvent(1L, tournament.getId());
         initEvent.setStateId(0L);
         RTCEventJDO eventJdo = new RTCEventConverter().create(tournament.getId(), initEvent);

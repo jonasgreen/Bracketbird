@@ -10,8 +10,8 @@ import java.util.*;
  *
  */
 public class TournamentLevelFac {
-    public static TournamentLevel create(Tournament t, LevelType type) {
-        TournamentLevel level;
+    public static TournamentStage create(Tournament t, LevelType type) {
+        TournamentStage level;
         if (LevelType.knockout == type) {
             level = createCup(t);
         }
@@ -24,9 +24,9 @@ public class TournamentLevelFac {
         return level;
     }
 
-    public static Group createGroup(Tournament t) {
-        Group level = new Group(t);
-        LevelSettings ss = new LevelSettings();
+    public static GroupStage createGroup(Tournament t) {
+        GroupStage level = new GroupStage(t);
+        StageSettings ss = new StageSettings();
 
         ss.setPointsOfVictory(2);
         ss.setPointsOfDraw(1);
@@ -41,9 +41,9 @@ public class TournamentLevelFac {
         return level;
     }
 
-    public static Knockout createCup(Tournament t) {
-        Knockout level = new Knockout(t);
-        LevelSettings ss = new LevelSettings();
+    public static KnockoutStage createCup(Tournament t) {
+        KnockoutStage level = new KnockoutStage(t);
+        StageSettings ss = new StageSettings();
         ss.setEliminationType(1);//single elim
 
         level.setStageSettings(ss);

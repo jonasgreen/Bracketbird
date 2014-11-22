@@ -2,7 +2,6 @@ package com.bracketbird.client.model;
 
 
 public enum LevelType {
-    missing("?"),
     group("Group"),
     knockout("Knockout");
 

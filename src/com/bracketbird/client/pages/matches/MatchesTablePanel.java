@@ -3,7 +3,7 @@ package com.bracketbird.client.pages.matches;
 
 import com.bracketbird.client.model.tournament.Match;
 import com.bracketbird.client.model.tournament.Round;
-import com.bracketbird.client.model.tournament.TournamentLevel;
+import com.bracketbird.client.model.tournament.TournamentStage;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 
@@ -15,10 +15,10 @@ import java.util.List;
  */
 public class MatchesTablePanel extends FlowPanel {
 
-    private TournamentLevel level;
+    private TournamentStage level;
     private List<MatchRow> rows = new ArrayList<MatchRow>();
 
-    public MatchesTablePanel(TournamentLevel tl) {
+    public MatchesTablePanel(TournamentStage tl) {
         super();
         setStyleName("matchesTablePanel");
         this.level = tl;

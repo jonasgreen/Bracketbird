@@ -15,7 +15,7 @@ public class CreateTeamEventHandler extends REventHandler<CreateTeamEvent> {
 
     @Override
     protected boolean shouldWarn(CreateTeamEvent event) {
-        return RTC.getInstance().getTournament().getState().isStartet();
+        return RTC.getInstance().getTournament().isInProgress();
     }
 
     @Override

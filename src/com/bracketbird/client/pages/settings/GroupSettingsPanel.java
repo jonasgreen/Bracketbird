@@ -2,8 +2,8 @@ package com.bracketbird.client.pages.settings;
 
 
 import com.bracketbird.client.gui.rtc.RTC;
-import com.bracketbird.client.model.tournament.LevelSettings;
-import com.bracketbird.client.model.tournament.TournamentLevel;
+import com.bracketbird.client.model.tournament.StageSettings;
+import com.bracketbird.client.model.tournament.TournamentStage;
 import com.bracketbird.client.rules.AtLeast;
 import com.bracketbird.client.rules.LargerThan;
 import com.google.gwt.user.client.ui.Label;
@@ -24,11 +24,11 @@ public class GroupSettingsPanel extends SettingsPanel {
     private Label maxTeamsLabel;
     public TextBox maxTeamsTextBox;
     private String maxTeamsTitle = "Maximal number of teams that can qualify to this stage of the tournament. \n" +
-            "leave empty for unlimited teams";
+            "leave notReady for unlimited teams";
 
 
 
-    public GroupSettingsPanel(TournamentLevel l) {
+    public GroupSettingsPanel(TournamentStage l) {
         super(l);
 
         addStyleName("groupSettingsPanel");
@@ -51,7 +51,7 @@ public class GroupSettingsPanel extends SettingsPanel {
         if (pointsDrawTextBox == null) {
             pointsDrawTextBox = new TextBox();
             pointsDrawTextBox.setStyleName("settingsIntegerInput");
-            pointsDrawTextBox.setValue(getLevel().getLevelSettings().getPointsOfDraw()+"");
+            pointsDrawTextBox.setValue(getLevel().getStageSettings().getPointsOfDraw()+"");
         }
         return pointsDrawTextBox;
     }
@@ -67,7 +67,7 @@ public class GroupSettingsPanel extends SettingsPanel {
         if (pointsWinningTextBox == null) {
             pointsWinningTextBox = new TextBox();
             pointsWinningTextBox.setStyleName("settingsIntegerInput");
-            pointsWinningTextBox.setValue(getLevel().getLevelSettings().getPointsOfVictory()+"");
+            pointsWinningTextBox.setValue(getLevel().getStageSettings().getPointsOfVictory()+"");
         }
         return pointsWinningTextBox;
     }
@@ -85,7 +85,7 @@ public class GroupSettingsPanel extends SettingsPanel {
             numberOfGroupsTextBox = new TextBox();
             numberOfGroupsTextBox.setTitle(numberOfGroupsTitle);
             numberOfGroupsTextBox.setStyleName("settingsIntegerInput");
-            numberOfGroupsTextBox.setValue(""+getLevel().getLevelSettings().getNumberOfGroups());
+            numberOfGroupsTextBox.setValue(""+getLevel().getStageSettings().getNumberOfGroups());
         }
         return numberOfGroupsTextBox;
     }
@@ -96,7 +96,7 @@ public class GroupSettingsPanel extends SettingsPanel {
         validator.removeErrorStyles();
 
         try {
-            LevelSettings ls = new LevelSettings();
+            StageSettings ls = new StageSettings();
             ls.setNumberOfGroups(validator.toInteger(getNumberOfGroupsTextBox(), getNumberOfGroupsLabel(), true, new LargerThan(0)));
             ls.setPointsOfVictory(validator.toInteger(getPointsWinningTextBox(), getPointsWinningLabel(), true, new LargerThan(0)));
             ls.setPointsOfDraw(validator.toInteger(getPointsDrawTextBox(), getPointsDrawLabel(), true, new AtLeast(0)));
@@ -130,7 +130,7 @@ public class GroupSettingsPanel extends SettingsPanel {
             maxTeamsTextBox = new TextBox();
             maxTeamsTextBox.setTitle(maxTeamsTitle);
             maxTeamsTextBox.setStyleName("settingsIntegerInput");
-            Integer mnt = getLevel().getLevelSettings().getMaxNumberOfTeams();
+            Integer mnt = getLevel().getStageSettings().getMaxNumberOfTeams();
             if(mnt != null){
                 maxTeamsTextBox.setValue(""+mnt);
             }

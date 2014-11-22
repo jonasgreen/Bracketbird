@@ -11,19 +11,21 @@ import java.util.List;
 public class GroupBuilder {
 
     private GroupName groupNames = new GroupName();
-    private List<AGroup> groups = new ArrayList<AGroup>();
+    private List<Group> groups = new ArrayList<Group>();
     private List<Team> teams;
 
     private int index = 0;
     private boolean goingRight = false;
     private boolean hasBeenAtTurningPoint = true;
+    private GroupStage stage;
 
-    public GroupBuilder(int numberOfGroups, List<Team> teams) {
+    public GroupBuilder(GroupStage stage, List<Team> teams) {
         super();
+        this.stage = stage;
         this.teams = teams;
         int i = 0;
-        while (i < numberOfGroups) {
-            groups.add(new AGroup(groupNames.next()));
+        while (i < stage.getStageSettings().getNumberOfGroups()) {
+            groups.add(new Group(groupNames.next()));
             i++;
         }
         buildGroups();
@@ -33,7 +35,7 @@ public class GroupBuilder {
     private void buildGroups() {
         //added to the same group
         if(groups.size() == 1){
-            AGroup aGroup = groups.get(0);
+            Group aGroup = groups.get(0);
             for (Team team : teams) {
                 aGroup.add(team);
             }
@@ -81,7 +83,7 @@ public class GroupBuilder {
     }
 
 
-    public List<AGroup> getGroups() {
+    public List<Group> getGroups() {
         return groups;
     }
 }

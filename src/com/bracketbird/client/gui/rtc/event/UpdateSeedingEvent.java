@@ -2,8 +2,6 @@ package com.bracketbird.client.gui.rtc.event;
 
 import com.bracketbird.client.model.keys.TeamId;
 import com.bracketbird.client.model.keys.TournamentId;
-import com.bracketbird.client.model.keys.TournamentLevelId;
-import com.bracketbird.client.model.tournament.LevelSettings;
 
 import java.util.ArrayList;
 import java.util.List;

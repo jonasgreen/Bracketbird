@@ -67,13 +67,13 @@ public class Result implements Serializable {
 
     public static Result newInstance(List<Integer> homeSetResults, List<Integer> outSetResults) {
         if (homeSetResults == null || outSetResults == null) {
-            throw new SystemException("Cannot create a result with no set values");
+            throw new SystemException("Cannot createGroupMatch a result with no set values");
         }
         if (homeSetResults.isEmpty() || outSetResults.isEmpty()) {
-            throw new SystemException("Cannot create a result where personal sets and out sets are empty.");
+            throw new SystemException("Cannot createGroupMatch a result where personal sets and out sets are notReady.");
         }
         if (homeSetResults.size() != homeSetResults.size()) {
-            throw new SystemException("Cannot create a result where personal sets and out sets are of different size");
+            throw new SystemException("Cannot createGroupMatch a result where personal sets and out sets are of different size");
         }
 
 

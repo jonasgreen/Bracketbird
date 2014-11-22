@@ -3,11 +3,14 @@ package com.bracketbird.client.gui.rtc.ranking;
 
 import com.bracketbird.client.gui.rtc.RTC;
 import com.bracketbird.client.gui.rtc.RTCLayoutFac2;
-import com.bracketbird.client.gui.rtc.matches.FinalRankRow;
 import com.bracketbird.client.model.Team;
-import com.bracketbird.client.model.tournament.*;
-import com.bracketbird.clientcore.appcontrol.*;
-import com.bracketbird.clientcore.gui.*;
+import com.bracketbird.client.model.tournament.Tournament;
+import com.bracketbird.client.model.tournament.TournamentStage;
+import com.bracketbird.clientcore.appcontrol.FlowPanelPage;
+import com.bracketbird.clientcore.appcontrol.Page;
+import com.bracketbird.clientcore.gui.LabelComponent;
+import com.bracketbird.clientcore.gui.SimpleFlowComponent;
+import com.bracketbird.clientcore.gui.VerticalComponent;
 import com.bracketbird.clientcore.style.TextLayout;
 
 import java.util.ArrayList;
@@ -21,7 +24,7 @@ import java.util.List;
 public class RankingViewPage extends FlowPanelPage<RankingViewPageController> {
 
     private SimpleFlowComponent content;
-    private TournamentLevel activeLevel;
+    private TournamentStage activeLevel;
     private RankingPanel rankingPanel;
 
     public RankingViewPage() {
@@ -41,7 +44,7 @@ public class RankingViewPage extends FlowPanelPage<RankingViewPageController> {
 
         RTC.getInstance().getTournament().addLevelListener(new TournamentListener<TournamentLevelEvent>() {
             public void onChange(TournamentLevelEvent event) {
-                if (event.getAction() == TournamentLevelEvent.LevelAction.create) {
+                if (event.getAction() == TournamentLevelEvent.LevelAction.createGroupMatch) {
                     final TournamentLevel level = event.getLevel();
 
                     level.addStateListener(new TournamentListener<LevelStateEvent>() {
@@ -72,7 +75,7 @@ public class RankingViewPage extends FlowPanelPage<RankingViewPageController> {
 */
     }
 
-    private void levelFinished(TournamentLevel level) {
+    private void levelFinished(TournamentStage level) {
 
     }
 
@@ -82,7 +85,7 @@ public class RankingViewPage extends FlowPanelPage<RankingViewPageController> {
         rankingPanel = null;
     }
 
-    private void matchesLayedOut(TournamentLevel level) {
+    private void matchesLayedOut(TournamentStage level) {
         clear();
         activeLevel = level;
         rankingPanel = createPanel(activeLevel);
@@ -99,18 +102,18 @@ public class RankingViewPage extends FlowPanelPage<RankingViewPageController> {
     }
 
 
-    public void repaint(TournamentStateChangedEvent event) {
+    public void repaint() {
         Tournament t = RTC.getInstance().getTournament();
         if (t.isReady() || t.isNotReady()) {
             content.add(new ViewTeamsPanel());//show teams
         }
 
-        else if (t.isFinish()) {
+        else if (t.isFinished()) {
             List<Team[]> allTeams = new ArrayList<Team[]>();
 
-            TournamentLevel previous = null;
+            TournamentStage previous = null;
             for (int i = t.getLevels().size() - 1; i >= 0; i--) {
-                TournamentLevel level = t.getLevels().get(i);
+                TournamentStage level = t.getLevels().get(i);
                 if(previous != null){
                     allTeams.addAll(removeTeams(level, previous));
                 }
@@ -124,14 +127,14 @@ public class RankingViewPage extends FlowPanelPage<RankingViewPageController> {
             content.add(buildFinalRankingCup(allTeams));
         }
         else {
-            TournamentLevel levelInPogress = t.getLevelInPogress();
+            TournamentStage levelInPogress = t.getLevelInPogress();
             if (levelInPogress != null) {
                 matchesLayedOut(levelInPogress);
             }
         }
     }
 
-    private Collection<? extends Team[]> removeTeams(TournamentLevel level, TournamentLevel previous) {
+    private Collection<? extends Team[]> removeTeams(TournamentStage level, TournamentStage previous) {
         List<Team[]> teams = new ArrayList<Team[]>();
         if(previous.getStartingTeams().size() == level.getStartingTeams().size()){
             return teams;
@@ -170,11 +173,11 @@ public class RankingViewPage extends FlowPanelPage<RankingViewPageController> {
         int index = 1;
         for (Team[] teams : finalRankOfTeams) {
             if (teams.length == 1) {
-                vc.add(new FinalRankRow(teams[0], index++), rLayout);
+               // vc.add(new FinalRankRow(teams[0], index++), rLayout);
             }
             else {
                 for (Team team : teams) {
-                    vc.add(new FinalRankRow(team, index + "-" + (index + teams.length - 1)), rLayout);
+                 //   vc.add(new FinalRankRow(team, index + "-" + (index + teams.length - 1)), rLayout);
                 }
                 index = index + teams.length;
             }
@@ -184,7 +187,7 @@ public class RankingViewPage extends FlowPanelPage<RankingViewPageController> {
     }
 
 
-    private RankingPanel createPanel(TournamentLevel level) {
+    private RankingPanel createPanel(TournamentStage level) {
         if (level.isKnockout()) {
             return new CupRankingPanel(level);
         }

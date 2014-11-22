@@ -3,11 +3,9 @@ package com.bracketbird.client.gui.rtc;
 import com.bracketbird.client.gui.rtc.event.REvent;
 import com.bracketbird.client.gui.rtc.event.REventListener;
 import com.bracketbird.client.gui.rtc.event.UpdateTeamNameEvent;
-import com.bracketbird.client.model.Team;
-import com.bracketbird.client.model.tournament.*;
+import com.bracketbird.client.model.tournament.Match;
 import com.bracketbird.clientcore.gui.FlowComponent;
-import com.bracketbird.clientcore.gui.LabelComponent;
-import com.bracketbird.clientcore.style.*;
+import com.bracketbird.clientcore.style.P;
 import com.google.gwt.dom.client.Style;
 
 /**
@@ -23,11 +21,14 @@ public class ViewMatch extends FlowComponent{
 
     public ViewMatch(Match match){
         this.match = match;
+
+        /*
         match.addMatchChangedListener(new TournamentListener<MatchEvent>() {
             public void onChange(MatchEvent event) {
                 updateComponent();
             }
         });
+        */
         this.setStyleName("matchView");
         add(getUpperTeamComp());
         add(getLine());

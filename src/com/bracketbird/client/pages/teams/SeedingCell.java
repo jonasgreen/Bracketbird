@@ -14,7 +14,7 @@ public class SeedingCell extends Label {
     public SeedingCell(Team team){
         this.team = team;
         setStyleName("teamsRow_seeding");
-        setText("" + (RTC.getInstance().getTournament().getTeams().size() + 1));
+        setText("" + (RTC.getInstance().getTournament().getTeams().size()));
         //setEnabled(false);
     }
 }

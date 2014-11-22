@@ -7,34 +7,26 @@ import com.bracketbird.client.model.keys.MatchId;
  *
  */
 public class MatchFac {
+
     private static int countId = 1;
 
-    public static Match create(TournamentLevel level, String groupName, long round, int order, Team teamHome, Team teamOut){
-        Match m = new Match();
+    public static Match createGroupMatch(GroupRound round, int matchNo, Team teamHome, Team teamOut){
+        Match m = new GroupMatch(round, matchNo);
         m.setCountId(countId);
         m.setId(new MatchId("matchId "+countId++));
-        m.setLevel(level);
-        m.setRound(round);
-        m.setOrder(order);
-        m.setGroupName(groupName);
         m.setTeamHome(teamHome);
         m.setTeamOut(teamOut);
         m.initState();
         return m;
     }
 
-    public static CupMatch createCup(TournamentLevel level, String groupName, long round, int order, Team teamHome, Team teamOut){
-        CupMatch m = new CupMatch();
+    public static CupMatch createCup(CupRound round, int matchNo, Team teamHome, Team teamOut){
+        CupMatch m = new CupMatch(round, matchNo);
         m.setCountId(countId);
         m.setId(new MatchId("matchId "+countId++));
-        m.setLevel(level);
-        m.setRound(round);
-        m.setOrder(order);
-        m.setGroupName(groupName);
         m.setTeamHome(teamHome);
         m.setTeamOut(teamOut);
         m.initState();
-
         return m;
     }
 

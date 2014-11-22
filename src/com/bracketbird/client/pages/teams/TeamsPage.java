@@ -38,7 +38,7 @@ public class TeamsPage extends Page<TeamsPageController> {
 
     public void init() {
         setStyleName("teamsPage");
-        //teams are added/removed by controller listening for create/delete team events.
+        //teams are added/removed by controller listening for createGroupMatch/delete team events.
         add(getEnterTeamBox());
         updatePositions();
         Window.addResizeHandler(new ResizeHandler() {

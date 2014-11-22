@@ -1,34 +1,24 @@
 package com.bracketbird.client.model.tournament;
 
-import com.bracketbird.client.gui.rtc.event.UpdateMatchFieldEvent;
-import com.bracketbird.client.gui.rtc.event.UpdateMatchResultEvent;
+import com.bracketbird.client.gui.rtc.event.*;
 import com.bracketbird.client.model.*;
 import com.bracketbird.client.model.keys.*;
 import com.bracketbird.clientcore.model.*;
-
-import java.util.*;
+import com.bracketbird.clientcore.util.StringUtil;
 
 /**
  *
  */
-public class Match extends Model<MatchId> {
+public abstract class Match extends PlayableModel<MatchId> implements HasLevelState{
     private static final long serialVersionUID = -8624209794497350221L;
 
-    private transient List<TournamentListener<MatchEvent>> matchListener = new ArrayList<TournamentListener<MatchEvent>>();
-
-    private transient MatchState state = new MatchNotReady();
+    public transient ModelHandlerList<Match> matchEventHandlers = new ModelHandlerList<Match>();
 
 
-    private TournamentLevel level;
-
-    //used in group-play
-    private String groupName;
-
-    //what round does this match belong to
-    private Long round;
+    private Round round;
 
     //the order of the match in a subtournament
-    private Integer order;
+    private int matchNo;
 
     //used in knockout - to reference between mathces (who meets who).
     private String name;
@@ -38,17 +28,16 @@ public class Match extends Model<MatchId> {
     private Team teamOut;
 
 
-    private Date createdDate;
-
-    private Date lastChangeDate;
-
     private Result result;
 
     private String field;
 
     private Integer countId;
 
-    public Match() {
+
+    public Match(Round round, int matchNo) {
+        this.round = round;
+        this.matchNo = matchNo;
     }
 
     public Team getTeamHome() {
@@ -65,59 +54,16 @@ public class Match extends Model<MatchId> {
 
     public void setTeamOut(Team teamOut) {
         this.teamOut = teamOut;
-
     }
 
-    public String getGroupName() {
-        return groupName;
-    }
-
-    public void setGroupName(String groupName) {
-        this.groupName = groupName;
-    }
-
-    public Long getRound() {
+    @Override
+    public Round getParent() {
         return round;
     }
 
-    public void setRound(Long round) {
-        this.round = round;
-    }
-
-    public Integer getOrder() {
-        return order;
-    }
-
-    public void setOrder(Integer order) {
-        this.order = order;
-    }
-
-
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public Date getLastChangeDate() {
-        return lastChangeDate;
-    }
-
-    public void setLastChangeDate(Date lastChangeDate) {
-        this.lastChangeDate = lastChangeDate;
-    }
-
-    public void addMatchChangedListener(TournamentListener<MatchEvent> l) {
-        this.matchListener.add(l);
-    }
 
     private void fireMatchChangedEvent(boolean fromClient) {
-        MatchEvent event = new MatchEvent(fromClient, this);
-        for (TournamentListener<MatchEvent> l : matchListener) {
-            l.onChange(event);
-        }
+        matchEventHandlers.fireEvent(new UpdateModelEvent<Match>(fromClient, this, this));
     }
 
 
@@ -176,68 +122,66 @@ public class Match extends Model<MatchId> {
         return result != null || isWalkover();
     }
 
-    public TournamentLevel getLevel() {
-        return level;
-    }
-
-    public void setLevel(TournamentLevel level) {
-        this.level = level;
-    }
-
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-
     public boolean isWalkover() {
         return getTeamHome() instanceof WalkOverTeam || getTeamOut() instanceof WalkOverTeam;
     }
 
-
-    protected void update(UpdateMatchResultEvent event) {
-        this.result = Result.newInstance(event.getHomeScores(), event.getOutScores());
-        this.state = calculateState();
-        fireMatchChangedEvent(event.isFromClient());
+    public void updateResult(int[] homeScores, int[] outScores, boolean fromClient) {
+        Result newResult = Result.newInstance(homeScores, outScores);
+        if(newResult.equals(result)){
+            return;
+        }
+        this.result = newResult;
+        fireMatchChangedEvent(fromClient);
+        updateState(fromClient);
     }
 
-    void update(UpdateMatchFieldEvent event) {
-        this.field = event.getField();
-        this.state = calculateState();
-        fireMatchChangedEvent(event.isFromClient());
+    void updateField(String field, boolean isFromClient) {
+        if(StringUtil.equals(this.field, field)){
+            return;
+        }
+        this.field = field;
+        fireMatchChangedEvent(isFromClient);
+        updateState(isFromClient);
+    }
+
+    public int getMatchNo() {
+        return matchNo;
+    }
+
+    public void setMatchNo(int matchNo) {
+        this.matchNo = matchNo;
     }
 
     public void updateOutTeam(Team out, boolean fromClient) {
         this.teamOut = out == null ? new SeedingTeam() : out;
-        this.state = calculateState();
         fireMatchChangedEvent(fromClient);
+        updateState(fromClient);
     }
 
     public void updateHomeTeam(Team home, boolean fromClient) {
         this.teamHome = home == null ? new SeedingTeam() : home;
-        this.state = calculateState();
         fireMatchChangedEvent(fromClient);
+        updateState(fromClient);
     }
 
     public void initState(){
-        this.state = calculateState();
+        updateState(true);
     }
 
-    private MatchState calculateState(){
+    public LevelState calculateState(){
         if(teamHome.isSeedingTeam() || teamOut.isSeedingTeam()){
-            return new MatchNotReady();
+            return LevelState.notReady;
         }
-        if(teamHome.isWalkover() || teamOut.isWalkover()){
-             return new MatchFinished();
+        if(teamHome.isWalkover() || teamOut.isWalkover() || result != null){
+             return LevelState.finished;
         }
-        if(result != null){
-            return new MatchFinished();
-        }
-        return (field == null || field.isEmpty()) ? new MatchReady() : new MatchInProgress();
+        return (field == null || field.isEmpty()) ? LevelState.ready : LevelState.inProgress;
     }
 
 
@@ -247,20 +191,9 @@ public class Match extends Model<MatchId> {
         return "Match{" + teamHome.getName() + " - " + teamOut.getName() + '}';
     }
 
-    public boolean isInProgress(){
-        return state instanceof MatchInProgress;
-    }
 
-    public boolean isReady(){
-        return state instanceof MatchReady;
-    }
-
-    public boolean isNotReady(){
-        return state instanceof MatchNotReady;
-    }
-
-    public MatchState getState() {
-        return state;
+    public void childHasChangedState(boolean fromClient) {
+        //Nothing below - Match is the lowest level.
     }
 
     public Integer getCountId() {
@@ -269,5 +202,13 @@ public class Match extends Model<MatchId> {
 
     public void setCountId(Integer countId) {
         this.countId = countId;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Round getRound() {
+        return round;
     }
 }

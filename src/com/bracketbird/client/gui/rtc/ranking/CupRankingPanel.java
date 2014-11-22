@@ -14,13 +14,13 @@ import java.util.List;
  */
 public class CupRankingPanel extends FlowComponent implements RankingPanel {
 
-    private final Knockout level;
+    private final KnockoutStage level;
     private List<DivColumn> columns = new ArrayList<DivColumn>();
 
-    public CupRankingPanel(TournamentLevel l) {
-        this.level = (Knockout) l;
+    public CupRankingPanel(TournamentStage l) {
+        this.level = (KnockoutStage) l;
         this.getStyleElement().getStyle().setDisplay(Style.Display.INLINE);
-        level.addStateListener(new TournamentListener<LevelStateEvent>() {
+        /*level.addStateListener(new TournamentListener<LevelStateEvent>() {
             public void onChange(LevelStateEvent event) {
                 if (event.getNewState() instanceof LevelStateInFinished) {
                     //    RankingViewPageController.getInstance().getPage().repaint(event);
@@ -33,6 +33,7 @@ public class CupRankingPanel extends FlowComponent implements RankingPanel {
                 }
             }
         });
+        */
         layoutPanel();
     }
 
@@ -52,7 +53,7 @@ public class CupRankingPanel extends FlowComponent implements RankingPanel {
 
     }
 
-    private String getHeader(Knockout level, int round, List<Round> rounds) {
+    private String getHeader(KnockoutStage level, int round, List<Round> rounds) {
         if (round == rounds.size()) {
             return "The final";
         }
@@ -65,7 +66,7 @@ public class CupRankingPanel extends FlowComponent implements RankingPanel {
 
     }
 
-    public Knockout getLevel() {
+    public KnockoutStage getLevel() {
         return level;
     }
 

@@ -1,7 +1,6 @@
 package com.bracketbird.client.model.tournament;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -10,46 +9,25 @@ import java.util.List;
 public class CupRound extends Round {
     private static final long serialVersionUID = 7856387235373392743L;
 
-    private CupMatch[] matches;
 
 
-    public CupRound(List<CupMatch> ms) {
-        super(ms.size() == 1 ? "The final" : "1/"+(ms.size())+ " finals");
-        matches = new CupMatch[ms.size()];
-        int i = 0;
-        for (CupMatch m : ms) {
-            matches[i++] = m;
-        }
-    }
-
-    public List<CupMatch> getMatches() {
-        List<CupMatch> list = new ArrayList<CupMatch>();
-        list.addAll(Arrays.asList(matches));
-        return list;
-    }
-
-    public Match getMatch(int index){
-        return matches[index];
+    public CupRound(KnockoutStage stage, int roundNo) {
+        super(stage, roundNo);
     }
 
     @Override
-    public int indexOf(Match m) {
-        int index = 0;
-        for (Match match : matches) {
-            if(match.equals(m)){
-                return index;
-            }
-            index++;
-        }
-        return -1;
+    public String getName() {
+        return getMatches().size() == 1 ? "The final" : "1/"+(getMatches().size())+ " finals";
     }
+
+
+    public CupMatch getMatch(int index){
+        return (CupMatch) getMatches().get(index);
+    }
+
 
     public int size(){
-        return matches.length;
-    }
-
-    public CupMatch get(int index){
-        return matches[index];
+        return getMatches().size();
     }
 
 
@@ -71,7 +49,7 @@ public class CupRound extends Round {
 
     public List<Match> getFinishedMatches() {
         List<Match> finished = new ArrayList<Match>();
-        for (Match m : matches) {
+        for (Match m : getMatches()) {
             if(m.isFinish()){
                 finished.add(m);
             }
@@ -82,7 +60,8 @@ public class CupRound extends Round {
     @Override
     public String toString() {
         return "CupRound{" +
-                "matches=" + (matches == null ? null : Arrays.asList(matches)) +
+                "matches=" + (getMatches() == null ? null :getMatches()) +
                 '}';
     }
+
 }

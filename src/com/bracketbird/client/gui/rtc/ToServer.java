@@ -89,7 +89,7 @@ public class ToServer {
         }
         else {
             dirtyGui = true;
-            //wait for server to send the update through channel
+            //wait for server to send the updateResult through channel
         }
     }
 

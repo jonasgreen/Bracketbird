@@ -11,12 +11,12 @@ import java.util.Set;
 public class RankingSheet {
 
     private Map<Team, TeamResultSum> teamResultMap = new HashMap<Team, TeamResultSum>();
-    private LevelSettings settings;
+    private StageSettings settings;
     private List<Position> positions = new ArrayList<Position>();
 
 
     //creates positioning only for the given teams - as long as the match does not contain any illigal teams
-    public RankingSheet(List<Match> matches, List<Team> teams, List<Team> illegalTeams, LevelSettings settings){
+    public RankingSheet(List<Match> matches, List<Team> teams, List<Team> illegalTeams, StageSettings settings){
         initTeamResultMap(teams);
         this.settings = settings;
         for (Match m : matches) {
@@ -31,12 +31,12 @@ public class RankingSheet {
                 }
             }
         }
-        //update list
+        //updateField list
         findPosistions();
     }
 
     //creates all the teams in the given matches
-    public RankingSheet(List<Match> matches, LevelSettings settings) {
+    public RankingSheet(List<Match> matches, StageSettings settings) {
     	java.util.Set<Team> teams = new HashSet<Team>();
         for (Match match : matches) {
             addTeam(teams, match.getTeamHome());
@@ -50,7 +50,7 @@ public class RankingSheet {
             updateRanking(m, m.getTeamOut(), false);
         }
 
-        //update list
+        //updateField list
         findPosistions();
     }
 

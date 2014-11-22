@@ -28,18 +28,18 @@ public class AGroupScheduler {
     private int matchesPrRound;
     private int numberOfMatches;
     private int numberOfRounds;
+
     private boolean oddNumberOfTeams;
     private List<Round> rounds;
-    private int number = 1;
     private List<Team> teams;
-    private TournamentLevel level;
+    private GroupStage stage;
     private int matchNumber = 1;
-    private AGroup agroup;
+    private Group group;
 
-    public AGroupScheduler(AGroup ag, TournamentLevel level) {
-        this.agroup = ag;
+    public AGroupScheduler(Group ag, GroupStage stage) {
+        this.group = ag;
         this.teams = ag.getTeams();
-        this.level = level;
+        this.stage = stage;
         numberOfMatches = (teams.size() * (teams.size() - 1)) / 2;
         matchesPrRound = teams.size() / 2;
         numberOfRounds = numberOfMatches / matchesPrRound;
@@ -90,14 +90,17 @@ public class AGroupScheduler {
     }
 
     private Round buildRound(List<Team> upper, List<Team> lower, int roundNumber) {
-        GroupRound gr = new GroupRound(roundNumber + ". round");
+        GroupRound group = new GroupRound(stage, roundNumber);
+        List<Match> matches = new ArrayList<Match>();
+
         int count = 0;
         for (Team teamUp : upper) {
-            Match m = MatchFac.create(level, agroup.getName(), roundNumber, matchNumber++, teamUp, lower.get(count++));
-            m.setName("" + number++);
-            gr.add(m);
+            Match m = MatchFac.createGroupMatch(group, matchNumber, teamUp, lower.get(count++));
+            matches.add(m);
         }
-        return gr;
+
+        group.setMatches(matches);
+        return group;
     }
 
 

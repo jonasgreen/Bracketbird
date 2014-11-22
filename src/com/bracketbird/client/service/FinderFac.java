@@ -28,13 +28,13 @@ public class FinderFac {
 
 
     public static Finder findByTournamentAndIdEqualTo(TournamentId tournamentId, Long id) {
-        //minus one day to compensate for the fact that events and news are create at hh:mm = 00:00
+        //minus one day to compensate for the fact that events and news are createGroupMatch at hh:mm = 00:00
         return findByEntityId(tournamentId).and(findById(id, SingleFinder.Operator.EQUAL_TO));
     }
 
 
     public static Finder findByTournamentAndIdGreaterThan(TournamentId tournamentId, Long id) {
-        //minus one day to compensate for the fact that events and news are create at hh:mm = 00:00
+        //minus one day to compensate for the fact that events and news are createGroupMatch at hh:mm = 00:00
         return findByEntityId(tournamentId).and(findById(id, SingleFinder.Operator.GREATER_THAN));
     }
 

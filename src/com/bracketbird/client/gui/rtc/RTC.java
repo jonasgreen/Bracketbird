@@ -4,9 +4,7 @@ package com.bracketbird.client.gui.rtc;
 import com.bracketbird.client.Bracketbird;
 import com.bracketbird.client.gui.rtc.event.*;
 import com.bracketbird.client.gui.rtc.health.LogPageController;
-import com.bracketbird.client.gui.rtc.matches.EnterResultsPageController;
 import com.bracketbird.client.gui.rtc.ranking.RankingViewPageController;
-import com.bracketbird.client.gui.rtc.settings.SettingsPageController;
 import com.bracketbird.client.gui.util.UID;
 import com.bracketbird.client.model.LevelType;
 import com.bracketbird.client.model.keys.MatchId;
@@ -15,6 +13,7 @@ import com.bracketbird.client.model.keys.TournamentLevelId;
 import com.bracketbird.client.model.tournament.*;
 import com.bracketbird.client.pages.livescores.LiveScoresPageController;
 import com.bracketbird.client.pages.matches.MatchesPageController;
+import com.bracketbird.client.pages.settings.SettingsPageController;
 import com.bracketbird.client.pages.teams.TeamsPageController;
 import com.bracketbird.clientcore.appcontrol.Application;
 import com.bracketbird.clientcore.util.CU;
@@ -38,32 +37,6 @@ public class RTC {
 
     private Map<Class<?>, REventHandler<REvent<?, ?>>> handlers = new HashMap<Class<?>, REventHandler<REvent<?, ?>>>();
     private FromServer from;
-
-    //listeners for state events that should be notified to server.
-    private TournamentListener<TournamentStateChangedEvent> tournamentStateListener = new TournamentListener<TournamentStateChangedEvent>() {
-        public void onChange(TournamentStateChangedEvent event) {
-            if (!event.isClientEvent()) {
-                return;
-            }
-            TournamentState newState = event.getNewState();
-            TournamentState oldState = event.getOldState();
-            //server should not be notified if stateshift is between ready and notready.
-            if ((newState.equals(new NotReady()) || newState.equals(new Ready())) && (oldState.equals(new NotReady()) || oldState.equals(new Ready()))) {
-                return;
-            }
-
-            //serverSync.stateChanged(event);
-        }
-    };
-
-    private TournamentListener<LevelStateEvent> levelStateListener = new TournamentListener<LevelStateEvent>() {
-        public void onChange(LevelStateEvent event) {
-            if (!event.isClientEvent()) {
-                return;
-            }
-            // serverSync.stateChanged(event);
-        }
-    };
 
 
     private EventManager sync;
@@ -117,7 +90,6 @@ public class RTC {
             Document.get().getBody().getStyle().setBackgroundColor("black");
         }
         this.tournament = t;
-        tournament.addStateListener(tournamentStateListener);
 
         //init gui and set listeners
         initGuiListeners(t);
@@ -221,7 +193,7 @@ public class RTC {
         executeEvent(new CreateLevelEvent(null, levelType, new TournamentLevelId(UID.getUID())));
     }
 
-    public void updateLevelSettings(TournamentLevelId levelId, LevelSettings ls) {
+    public void updateLevelSettings(TournamentLevelId levelId, StageSettings ls) {
         executeEvent(new UpdateLevelEvent(null, levelId, ls));
     }
 
@@ -231,12 +203,12 @@ public class RTC {
 
     //MATCHES
     public void layoutMatches(TournamentLevelId levelId) {
-        TournamentLevel previousLevel = getTournament().getPreviousLevel(getTournament().getLevel(levelId));
+        TournamentStage previousLevel = getTournament().getPreviousLevel(getTournament().getLevel(levelId));
         if(RTC.getInstance().getTournament().getTeams().size() < 2){
-            OkWarning gc = new OkWarning("Please add some teams", "There has to be at least two teams to create a tournament.");
+            OkWarning gc = new OkWarning("Please add some teams", "There has to be at least two teams to createGroupMatch a tournament.");
             gc.center();
         }
-        else if (previousLevel != null && !(previousLevel.getState() instanceof LevelStateInFinished)) {
+        else if (previousLevel != null && !(previousLevel.isFinished())) {
             OkWarning gc = new OkWarning("Please finish previous level first", "You cannot layout matches of a level before the previous level is finished");
             gc.center();
         }
@@ -276,7 +248,6 @@ public class RTC {
         t.setId(tournament.getId());
         t.setName(tournament.getName());
         tournament = t;
-        tournament.addStateListener(tournamentStateListener);
 
         MatchFac.reset();
         //clean gui
@@ -290,9 +261,6 @@ public class RTC {
 
     private void clearGui() {
         TeamsPageController.getInstance().clear();
-        SettingsPageController.getInstance().clear();
-        EnterResultsPageController.getInstance().clear();
-        RankingViewPageController.getInstance().clear();
 
         initGuiListeners(getTournament());
         Application.show(Application.get().activePageController());

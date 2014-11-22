@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../coregwt/FrameworkGwt/FrameworkGwt.iml" filepath="$PROJECT_DIR$/../coregwt/FrameworkGwt/FrameworkGwt.iml" />
       <module fileurl="file://$PROJECT_DIR$/bracketbird.iml" filepath="$PROJECT_DIR$/bracketbird.iml" />
     </modules>
   </component>
 </project>
-

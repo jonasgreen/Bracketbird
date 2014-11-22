@@ -12,16 +12,14 @@ import java.util.*;
 /**
  *
  */
-public class Tournament extends Model<TournamentId> {
+public class Tournament extends PlayableModel<TournamentId>{
     private static final long serialVersionUID = 5951730875833184507L;
 
-    private transient List<TournamentListener<TournamentStateChangedEvent>> stateListener = new ArrayList<TournamentListener<TournamentStateChangedEvent>>();
-    private transient List<TournamentListener<TournamentNameChangedEvent>> nameListener = new ArrayList<TournamentListener<TournamentNameChangedEvent>>();
-    private transient List<TournamentListener<TournamentLevelEvent>> levelListener = new ArrayList<TournamentListener<TournamentLevelEvent>>();
-    private transient List<TournamentListener<TournamentTeamEvent>> teamListener = new ArrayList<TournamentListener<TournamentTeamEvent>>();
-    private transient List<TournamentListener<SeedingChangedEvent>> seedingListener = new ArrayList<TournamentListener<SeedingChangedEvent>>();
+    public transient ModelHandlerList<String> nameEventHandlers = new ModelHandlerList<String>();
+    public transient ModelHandlerList<TournamentStage> levelsEventHandlers = new ModelHandlerList<TournamentStage>();
+    public transient ModelHandlerList<Team> teamsEventHandlers = new ModelHandlerList<Team>();
 
-    private transient TournamentState state = new NotReady();
+    private transient LevelState state = LevelState.notReady;
 
     private String name;
     private String url;
@@ -29,60 +27,44 @@ public class Tournament extends Model<TournamentId> {
     private TournamentChannelId tournamentChannelId;
     private boolean viewOnly;
 
-    private List<TournamentLevel> levels = new ArrayList<TournamentLevel>();
+    private List<TournamentStage> levels = new ArrayList<TournamentStage>();
     private List<Team> teams = new ArrayList<Team>();
-
-    private String password;
-    private Date createdDate;
-
-    private Date lastChangeDate;
 
 
     public Tournament() {
     }
 
-    public List<TournamentLevel> getLevels() {
+    public List<TournamentStage> getLevels() {
         return levels;
     }
 
-    public void setLevels(List<TournamentLevel> tournamentLevels) {
-        this.levels = tournamentLevels;
+    public void setLevels(List<TournamentStage> tournamentStages) {
+        this.levels = tournamentStages;
     }
 
-    public TournamentState getState() {
+    @Override
+    public HasLevelState getParent() {
+        return null;
+    }
+
+    public LevelState getState() {
         return state;
     }
 
-    public void setState(TournamentState state) {
-        this.state = state;
+    @Override
+    public void childHasChangedState(boolean fromClient) {
+
     }
 
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public Date getLastChangeDate() {
-        return lastChangeDate;
-    }
-
-    public void setLastChangeDate(Date lastChangeDate) {
-        this.lastChangeDate = lastChangeDate;
-    }
-
-
-    public void replace(int index, TournamentLevel st) {
+    public void replace(int index, TournamentStage st) {
         getLevels().remove(index);
         getLevels().add(index, st);
 
     }
 
-    public int getIndexOf(TournamentLevel st) {
+    public int getIndexOf(TournamentStage st) {
         int index = 0;
-        for (TournamentLevel stTemp : levels) {
+        for (TournamentStage stTemp : levels) {
             if (stTemp.equals(st)) {
                 return index;
             }
@@ -108,14 +90,9 @@ public class Tournament extends Model<TournamentId> {
     }
 
     public void updateName(String name, boolean fromClient) {
+        String oldName = this.name;
         this.name = name;
-        fireNameChanged(new TournamentNameChangedEvent(name, fromClient));
-
-    }
-
-
-    public boolean isSettingUp() {
-        return state instanceof NotReady || state instanceof Ready;
+        nameEventHandlers.fireEvent(new UpdateModelEvent<String>(fromClient, oldName, name));
     }
 
 
@@ -137,61 +114,38 @@ public class Tournament extends Model<TournamentId> {
     }
 
     public boolean hasLevels() {
-        List<TournamentLevel> list = getLevels();
+        List<TournamentStage> list = getLevels();
         return list != null && !list.isEmpty();
     }
 
-    public void updateState(boolean fromClient) {
-        TournamentState newState = calculateState();
-        if (newState.equals(state)) {
-            return;
-        }
-        TournamentStateChangedEvent event = new TournamentStateChangedEvent(state, newState, fromClient);
-        state = newState;
-        fireStateChanged(event);
-    }
-
-    private TournamentState calculateState() {
+    public LevelState calculateState() {
         if (hasLevels()) {
             if (!hasTeams()) {
-                return new NotReady(false, true);
+                return LevelState.notReady;
             }
             int countEmpty = 0;
             int countFinish = 0;
-            for (TournamentLevel l : levels) {
-                if (l.isFinish()) {
+            for (TournamentStage l : levels) {
+                if (l.isFinished()) {
                     countFinish++;
                 }
-                else if (l.isEmpty()) {
+                else if (l.isNotReady()) {
                     countEmpty++;
                 }
             }
             if (countFinish == levels.size()) {//all levels are finished
-                return new Finished();
+                return LevelState.finished;
             }
-            else if (countEmpty == levels.size()) {//all levels are empty
-                return new Ready();
+            else if (countEmpty == levels.size()) {//all levels are notReady
+                return LevelState.ready;
             }
             else {
-                return new InProgress();
+                return LevelState.inProgress;
             }
         }
         else {
-            return new NotReady(hasTeams(), false);
+            return LevelState.notReady;
         }
-    }
-
-
-    public boolean isFinish() {
-        return state instanceof Finished;
-    }
-
-    public boolean isNotReady() {
-        return state instanceof NotReady;
-    }
-
-    public boolean isReady() {
-        return state instanceof Ready;
     }
 
 
@@ -208,10 +162,9 @@ public class Tournament extends Model<TournamentId> {
         team.setId(event.getModelId());
         team.setEventLogId(event.getEventId());
         teams.add(team);
-        fireTeamsChanged(new TournamentTeamEvent(event.isFromClient(), team, TournamentTeamEvent.Action.create));
+        teamsEventHandlers.fireEvent(new CreateModelEvent<Team>(event.isFromClient(), team));
         clearAllLevels(event.isFromClient());
         updateState(event.isFromClient());
-
         updateSeedingAfterCreate(team);
     }
 
@@ -227,9 +180,8 @@ public class Tournament extends Model<TournamentId> {
         }
         teams.remove(team);
         clearAllLevels(fromClient);
-        fireTeamsChanged(new TournamentTeamEvent(fromClient, team, TournamentTeamEvent.Action.delete));
+        teamsEventHandlers.fireEvent(new DeleteModelEvent<Team>(fromClient, team));
         updateState(fromClient);
-
         updateSeedingAfterDelete(team);
     }
 
@@ -250,8 +202,8 @@ public class Tournament extends Model<TournamentId> {
         return null;
     }
 
-    public TournamentLevel getLevel(TournamentLevelId id) {
-        for (TournamentLevel level : levels) {
+    public TournamentStage getLevel(TournamentLevelId id) {
+        for (TournamentStage level : levels) {
             if (level.getId().equals(id)) {
                 return level;
             }
@@ -260,36 +212,33 @@ public class Tournament extends Model<TournamentId> {
     }
 
     private void clearAllLevels(boolean fromClient) {
-        for (TournamentLevel l : levels) {
-            l.clear(false, fromClient);
+        for (TournamentStage l : levels) {
+            l.clear(fromClient);
         }
     }
 
 
-    public boolean allowDeleteTeam() {
-        return true;
-    }
 
     public void createLevel(CreateLevelEvent event) {
-        TournamentLevel tl = TournamentLevelFac.create(this, event.getLevelType());
+        TournamentStage tl = TournamentLevelFac.create(this, event.getLevelType());
         tl.setId(event.getModelId());
         levels.add(tl);
-        fireLevelEvent(new TournamentLevelEvent(tl, TournamentLevelEvent.LevelAction.create, event.isFromClient()));
+        levelsEventHandlers.fireEvent(new CreateModelEvent<TournamentStage>(event.isFromClient(), tl));
         updateState(event.isFromClient());
     }
 
     public void deleteLevel(TournamentLevelId levelId, boolean fromClient) {
-        TournamentLevel level = getLevel(levelId);
+        TournamentStage level = getLevel(levelId);
         if (level == null) {
             return;
         }
         levels.remove(level);
-        fireLevelEvent(new TournamentLevelEvent(level, TournamentLevelEvent.LevelAction.delete, fromClient));
+        levelsEventHandlers.fireEvent(new DeleteModelEvent<TournamentStage>(fromClient, level));
         updateState(fromClient);
     }
 
     public void updateLevel(UpdateLevelEvent event) {
-        TournamentLevel level = getLevel(event.getModelId());
+        TournamentStage level = getLevel(event.getModelId());
         if (level == null) {
             return;
         }
@@ -298,15 +247,15 @@ public class Tournament extends Model<TournamentId> {
         //clear the following
         index++;
         while (index < levels.size()) {
-            levels.get(index).clear(false, event.isFromClient());
+            levels.get(index).clear(event.isFromClient());
             index++;
         }
         updateState(event.isFromClient());
     }
 
 
-    public boolean updateLevelAllowed(TournamentLevel l) {
-        return l.isEmpty();
+    public boolean updateLevelAllowed(TournamentStage l) {
+        return l.isNotReady();
     }
 
 
@@ -320,74 +269,15 @@ public class Tournament extends Model<TournamentId> {
     }
 
 
-    //LISTENERS
 
-    public void addStateListener(TournamentListener<TournamentStateChangedEvent> l) {
-        stateListener.add(l);
-    }
-
-    public void addLevelListener(TournamentListener<TournamentLevelEvent> l) {
-        levelListener.add(l);
-    }
-
-
-    public void addNameListener(TournamentListener<TournamentNameChangedEvent> l) {
-        nameListener.add(l);
-    }
-
-
-    public void addTeamsListener(TournamentListener<TournamentTeamEvent> l) {
-        teamListener.add(l);
-    }
-
-    public void addSeedingListener(TournamentListener<SeedingChangedEvent> l) {
-        seedingListener.add(l);
-    }
-
-    private void fireSeedingChanged(SeedingChangedEvent e) {
-        for (TournamentListener<SeedingChangedEvent> l : getConcurrentSafeList(seedingListener)) {
-            l.onChange(e);
-        }
-    }
-
-    private void fireTeamsChanged(TournamentTeamEvent event) {
-        for (TournamentListener<TournamentTeamEvent> listener : getConcurrentSafeList(teamListener)) {
-            listener.onChange(event);
-        }
-    }
-
-
-    private void fireStateChanged(TournamentStateChangedEvent event) {
-        for (TournamentListener<TournamentStateChangedEvent> listener : getConcurrentSafeList(stateListener)) {
-            listener.onChange(event);
-        }
-    }
-
-    private void fireLevelEvent(TournamentLevelEvent event) {
-        for (TournamentListener<TournamentLevelEvent> l : getConcurrentSafeList(levelListener)) {
-            l.onChange(event);
-        }
-    }
-
-    private <K> List<K> getConcurrentSafeList(List<K> list){
-        return new ArrayList<K>(list);
-    }
-
-
-    private void fireNameChanged(TournamentNameChangedEvent event) {
-        for (TournamentListener<TournamentNameChangedEvent> listener : getConcurrentSafeList(nameListener)) {
-            listener.onChange(event);
-        }
-    }
-
-    public int getMaxNumberOfTeams(TournamentLevel tournamentLevel) {
+    public int getMaxNumberOfTeams(TournamentStage tournamentStage) {
         int min = getTeams().size();
-        for (TournamentLevel l : levels) {
+        for (TournamentStage l : levels) {
             Integer maxTeams = l.getStageSettings().getMaxNumberOfTeams();
             if (maxTeams != null && maxTeams < min) {
                 min = maxTeams;
             }
-            if (l == tournamentLevel) {
+            if (l == tournamentStage) {
                 return min;
             }
         }
@@ -410,34 +300,30 @@ public class Tournament extends Model<TournamentId> {
     }
 
     public void layoutMatches(LayoutMatchesEvent event) {
-        TournamentLevel level = getLevel(event.getModelId());
+        TournamentStage level = getLevel(event.getModelId());
         if (level == null) {
             return;
         }
         level.layoutMatches(event.isFromClient());
     }
 
-    public boolean layoutMatchesAllowed(TournamentLevel tl) {
-        return CU.get(levels, tl).layoutMatchesAllowed();
-    }
-
 
     public void updateMatchResult(UpdateMatchResultEvent event) {
         boolean matchUpdated = false;
-        for (TournamentLevel level : levels) {
+        for (TournamentStage level : levels) {
             if(!matchUpdated){
                 matchUpdated = level.updateMatchResult(event);
             }
             else{
                 System.out.println("clear level");
-                level.clear(false, true);
+                level.clear(true);
             }
         }
         updateState(true);
     }
 
     public void updateMatchField(UpdateMatchFieldEvent event) {
-        for (TournamentLevel level : levels) {
+        for (TournamentStage level : levels) {
             if (level.updateMatchField(event)) {
                 return;
             }
@@ -446,7 +332,7 @@ public class Tournament extends Model<TournamentId> {
 
 
     public void finishedLevel(LevelFinishedEvent event) {
-        TournamentLevel level = getLevel(event.getModelId());
+        TournamentStage level = getLevel(event.getModelId());
         if (level == null) {
             return;
         }
@@ -455,7 +341,7 @@ public class Tournament extends Model<TournamentId> {
     }
 
 
-    public TournamentLevel getNextLevel(TournamentLevel current) {
+    public TournamentStage getNextLevel(TournamentStage current) {
         int index = getIndexOf(current);
         if (!isLastLevel(index)) {
             return levels.get(index + 1);
@@ -463,7 +349,7 @@ public class Tournament extends Model<TournamentId> {
         return null;
     }
 
-    public TournamentLevel getPreviousLevel(TournamentLevel current) {
+    public TournamentStage getPreviousLevel(TournamentStage current) {
         int index = getIndexOf(current);
         if (index == 0) {
             return null;
@@ -480,17 +366,10 @@ public class Tournament extends Model<TournamentId> {
         this.tournamentChannelId = tournamentChannelId;
     }
 
-    public boolean isLastLevel(TournamentLevel current) {
+    public boolean isLastLevel(TournamentStage current) {
         return CU.isLast(levels, current);
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     public String getUrl() {
         return url;
@@ -510,7 +389,7 @@ public class Tournament extends Model<TournamentId> {
 
     public void updateSeeding(UpdateSeedingEvent event) {
         changeTeamsAccordingToSeeding(event.getSeedings());
-        fireSeedingChanged(new SeedingChangedEvent(event.isFromClient(), event.getSeedings()));
+        //fireSeedingChanged(new SeedingChangedEvent(event.isFromClient(), event.getSeedings()));
         clearAllLevels(event.isFromClient());
         updateState(event.isFromClient());
     }
@@ -562,11 +441,11 @@ public class Tournament extends Model<TournamentId> {
         this.viewOnly = viewOnly;
     }
 
-    public TournamentLevel getLevelInPogress() {
-        if(state instanceof InProgress){
-            for (TournamentLevel tournamentLevel : getLevels()) {
-                if(tournamentLevel.getState() instanceof LevelStateInProgress){
-                    return tournamentLevel;
+    public TournamentStage getLevelInPogress() {
+        if(state.isInProgress()){
+            for (TournamentStage tournamentStage : getLevels()) {
+                if(tournamentStage.isInProgress()){
+                    return tournamentStage;
                 }
             }
         }

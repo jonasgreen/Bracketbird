@@ -15,7 +15,7 @@ public class DeleteTeamEventHandler extends REventHandler<DeleteTeamEvent> {
 
     @Override
     protected boolean shouldWarn(DeleteTeamEvent event) {
-        return RTC.getInstance().getTournament().getState().isStartet();
+        return RTC.getInstance().getTournament().isInProgress();
     }
 
     @Override

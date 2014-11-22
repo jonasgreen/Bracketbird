@@ -1,14 +1,15 @@
 package com.bracketbird.client.model;
 
 
-import com.bracketbird.client.model.keys.*;
-import com.bracketbird.clientcore.model.*;
+import com.bracketbird.client.model.keys.TournamentChannelId;
+import com.bracketbird.clientcore.model.Model;
 
-import java.io.*;
-import java.util.*;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- *
+ *  //TODO should not be a model
  */
 public class TournamentChannel extends Model<TournamentChannelId> implements Serializable {
 
@@ -16,28 +17,8 @@ public class TournamentChannel extends Model<TournamentChannelId> implements Ser
 
     private List<String> clients = new ArrayList<String>();
 
-    private Date createdDate;
-
-    private Date lastChangeDate;
-
     public TournamentChannel() {
         super();
-    }
-
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public Date getLastChangeDate() {
-        return lastChangeDate;
-    }
-
-    public void setLastChangeDate(Date lastChangeDate) {
-        this.lastChangeDate = lastChangeDate;
     }
 
     public List<String> getClients() {
@@ -47,4 +28,5 @@ public class TournamentChannel extends Model<TournamentChannelId> implements Ser
     public void setClients(List<String> clients) {
         this.clients = clients;
     }
+
 }

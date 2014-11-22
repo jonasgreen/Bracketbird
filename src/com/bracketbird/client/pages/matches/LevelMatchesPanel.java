@@ -2,9 +2,8 @@ package com.bracketbird.client.pages.matches;
 
 
 import com.bracketbird.client.gui.rtc.RTC;
-import com.bracketbird.client.gui.rtc.matches.FinalGroupRankingPanel;
-import com.bracketbird.client.gui.rtc.matches.FinalRankRow;
-import com.bracketbird.client.gui.rtc.matches.LevelEmptyPanel;
+import com.bracketbird.client.gui.rtc.event.ModelEvent;
+import com.bracketbird.client.gui.rtc.event.ModelEventHandler;
 import com.bracketbird.client.model.Team;
 import com.bracketbird.client.model.keys.TeamId;
 import com.bracketbird.client.model.tournament.*;
@@ -20,7 +19,7 @@ import java.util.List;
  */
 public class LevelMatchesPanel extends FlowPanel {
 
-    private TournamentLevel level;
+    private TournamentStage level;
 
     private SimplePanel levelEmptyPanelHolder = new SimplePanel();
     private SimplePanel matchesHolder = new SimplePanel();
@@ -34,18 +33,18 @@ public class LevelMatchesPanel extends FlowPanel {
         finalRankingHolder.clear();
     }
 
-    public LevelMatchesPanel(TournamentLevel l, int levelCount) {
+    public LevelMatchesPanel(TournamentStage l, int levelCount) {
         super();
         this.levelCount = levelCount;
         this.level = l;
-
 
         add(levelEmptyPanelHolder);
         add(matchesHolder);
         add(finalRankingHolder);
 
-        level.addStateListener(new TournamentListener<LevelStateEvent>() {
-            public void onChange(LevelStateEvent event) {
+        level.stateHandlers.addHandler(new ModelEventHandler<LevelState>() {
+            @Override
+            public void handleEvent(ModelEvent<LevelState> event) {
                 handleStateChange();
             }
         });
@@ -54,16 +53,22 @@ public class LevelMatchesPanel extends FlowPanel {
     }
 
     private void handleStateChange() {
-        if (level.isMatchesLayedOut()) {
+        if (level.isReady()) {
             showMatchesLayedoutPanel();
         }
-        else if (level.isEmpty()) {
+        else if (level.isNotReady()) {
             showLevelEmptyPanel();
         }
-        else if (level.isAllMatchesPlayed()) {
+        else if (level.isDonePlaying()) {
+            if(!matchesHolder.iterator().hasNext()){
+                showMatchesLayedoutPanel();
+            }
             showAllMatchesPlayedRanking();
         }
-        else if (level.isFinish()) {
+        else if (level.isFinished()) {
+            if(!matchesHolder.iterator().hasNext()){
+                showMatchesLayedoutPanel();
+            }
             showFinalRanking(level.getEndingTeams());
         }
         else if (level.isInProgress()) {
@@ -73,7 +78,6 @@ public class LevelMatchesPanel extends FlowPanel {
 
     public void showAllMatchesPlayedRanking() {
         if (level.isKnockout()) {
-
             //find ranking and set ending teams
             List<TeamId[]> endingTeams = new ArrayList<TeamId[]>();
             for (Round round : level.getRounds()) {
@@ -98,7 +102,8 @@ public class LevelMatchesPanel extends FlowPanel {
             RTC.getInstance().levelFinished(level.getId(), endingTeams);
         }
         else {
-            FinalGroupRankingPanel fr = new FinalGroupRankingPanel((Group) level);
+            GroupLevelRankingPanel fr = new GroupLevelRankingPanel((GroupStage) level);
+            finalRankingHolder.clear();
             finalRankingHolder.add(fr);
             fr.build();
         }
@@ -127,6 +132,7 @@ public class LevelMatchesPanel extends FlowPanel {
                 panel.add(new FinalRankRow(team, positionCount++));
             }
         }
+        finalRankingHolder.clear();
         finalRankingHolder.add(panel);
 
     }
@@ -148,7 +154,7 @@ public class LevelMatchesPanel extends FlowPanel {
                 index = index + teams.length;
             }
         }
-
+        finalRankingHolder.clear();
         finalRankingHolder.add(panel);
     }
 
@@ -172,7 +178,7 @@ public class LevelMatchesPanel extends FlowPanel {
     }
 
 
-    public TournamentLevel getLevel() {
+    public TournamentStage getLevel() {
         return level;
     }
 }

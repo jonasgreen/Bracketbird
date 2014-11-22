@@ -7,9 +7,15 @@ import com.bracketbird.client.model.Team;
  *
  */
 public class CupMatch extends Match {
+    private static final long serialVersionUID = 6944560675227729797L;
+
     private CupMatch parent;
 
-    public CupMatch getParent() {
+    public CupMatch(CupRound round, int matchNo) {
+        super(round, matchNo);
+    }
+
+    public CupMatch getParentMatch() {
         return parent;
     }
 
@@ -20,7 +26,7 @@ public class CupMatch extends Match {
 
     protected void update(UpdateMatchResultEvent event) {
         Result oldResult = getResult();
-        super.update(event);
+        super.updateResult(event.getHomeScores(), event.getOutScores(), event.isFromClient());
 
         if (parent == null || hasSameWinner(oldResult, getResult())) {
             return;
@@ -51,7 +57,9 @@ public class CupMatch extends Match {
 
 
     private boolean isUpperInNextRound() {
-        Round r = getLevel().getRounds().get((int) getRound().longValue()-1);
+        //Hmmm
+        Round parentRound = getParent();
+        Round r = parentRound.getParent().getRounds().get(parentRound.getRoundNumber() -1);
         int indexInRound = r.indexOf(this);
         return indexInRound % 2 == 0;
     }

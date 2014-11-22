@@ -39,17 +39,17 @@ public class TournamentChannelRepository extends Repository<TournamentChannelJDO
         if(users.size() > 1){
             throw new SystemException("Data error - "+users.size() +" users with same email exist. Email="+email);
         }
-        return users.isEmpty() ? null : users.iterator().next();
+        return users.isNotReady() ? null : users.iterator().next();
     }
 
-    public User update(User user) {
+    public User updateResult(User user) {
         UserJDO jdo = dao.read(user.getId());
         //jdo.setWallEventId(user.getWallEventId());
         jdo.setLastChangeDate(new Date());
         //jdo.setNationality(user.getNationality());
         jdo.setPhone(user.getPhone());
         jdo.setPassword(user.getPassword());
-        return conv.updateJDO(dao.update(jdo));
+        return conv.updateJDO(dao.updateResult(jdo));
     }
     */
 }

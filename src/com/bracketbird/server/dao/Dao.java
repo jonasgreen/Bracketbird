@@ -37,7 +37,7 @@ public class Dao<J extends JDO> {
             }
         }
         catch (Throwable t) {
-            throw log("create", jdo, t);
+            throw log("createGroupMatch", jdo, t);
         }
     }
 
@@ -57,7 +57,7 @@ public class Dao<J extends JDO> {
             }
         }
         catch (Throwable t) {
-            throw log("create", jdos, t);
+            throw log("createGroupMatch", jdos, t);
         }
     }
 
@@ -111,7 +111,7 @@ public class Dao<J extends JDO> {
             }
         }
         catch (Throwable t) {
-            throw log("update", jdo, t);
+            throw log("updateResult", jdo, t);
         }
     }
 

@@ -1,5 +1,7 @@
 package com.bracketbird.client.gui.rtc.ranking;
 
+import com.bracketbird.client.gui.rtc.event.ModelEvent;
+import com.bracketbird.client.gui.rtc.event.ModelEventHandler;
 import com.bracketbird.client.model.tournament.*;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.event.logical.shared.ResizeEvent;
@@ -7,7 +9,6 @@ import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.Widget;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +24,7 @@ public class MatchesViewPanel extends FlowPanel{
     private NotFinishedMatches notFinishedMatches;
     private FlowPanel matchesPlayedPanel = new FlowPanel();
 
-    public MatchesViewPanel(final Group level) {
+    public MatchesViewPanel(final GroupStage level) {
         add(matchesPlayedPanel);
         final List<MatchView> finishedList = new ArrayList<MatchView>();
         final List<MatchView> notFinishedList = new ArrayList<MatchView>();
@@ -63,9 +64,9 @@ public class MatchesViewPanel extends FlowPanel{
 
         matchesPlayedPanel.setStyleName("matchesPlayedPanel");
         for (Match m : level.getMatches()) {
-            m.addMatchChangedListener(new TournamentListener<MatchEvent>() {
+            m.matchEventHandlers.addHandler(new ModelEventHandler<Match>() {
                 @Override
-                public void onChange(MatchEvent event) {
+                public void handleEvent(ModelEvent<Match> event) {
                     updateMatchesPlayedPanel(level);
                 }
             });
@@ -74,7 +75,7 @@ public class MatchesViewPanel extends FlowPanel{
         updateMatchesPlayedPanel(level);
     }
 
-    private void updateMatchesPlayedPanel(TournamentLevel level) {
+    private void updateMatchesPlayedPanel(TournamentStage level) {
         List<Match> matches = level.getMatches();
 
         int mathcesPlayed = 0;
