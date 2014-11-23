@@ -164,7 +164,7 @@ public class StageSettings implements Serializable {
         return result;
     }
 
-    public TournamentLevelVO createVO(TournamentStage l) {
+    public TournamentLevelVO createVO(Stage l) {
         TournamentLevelVO vo = new TournamentLevelVO();
         vo.setEliminationType(getEliminationType());
         vo.setMaxNumberOfTeams(getMaxNumberOfTeams());

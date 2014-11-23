@@ -72,11 +72,13 @@ public class MatchRow extends FlowPanel {
             teamHomeLabel = new Label(match.getTeamHome().getName());
             teamHomeLabel.setStyleName("matchRow_team");
             teamHomeLabel.addStyleName("flex_grow_1");
-            match.getTeamHome().addListener(new REventListener() {
-                public void onChange(REvent<?, ?> event) {
-                    teamHomeLabel.setText(match.getTeamHome().getName());
+
+            match.getTeamHome().nameHandlers.addHandler(new ModelEventHandler<String>() {
+                @Override
+                public void handleEvent(ModelEvent<String> event) {
+                    teamHomeLabel.setText(event.getAfter());
                 }
-            }, new UpdateTeamNameEvent());
+            });
         }
         return teamHomeLabel;
     }
@@ -94,11 +96,13 @@ public class MatchRow extends FlowPanel {
             teamOutLabel = new Label(match.getTeamOut().getName());
             teamOutLabel.setStyleName("matchRow_team");
             teamOutLabel.addStyleName("flex_grow_1");
-            match.getTeamOut().addListener(new REventListener() {
-                public void onChange(REvent<?, ?> event) {
-                    teamOutLabel.setText(match.getTeamOut().getName());
+
+            match.getTeamOut().nameHandlers.addHandler(new ModelEventHandler<String>() {
+                @Override
+                public void handleEvent(ModelEvent<String> event) {
+                    teamOutLabel.setText(event.getAfter());
                 }
-            }, new UpdateTeamNameEvent());
+            });
         }
         return teamOutLabel;
     }

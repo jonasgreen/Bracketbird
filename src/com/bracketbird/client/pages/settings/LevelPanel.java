@@ -1,7 +1,7 @@
 package com.bracketbird.client.pages.settings;
 
 import com.bracketbird.client.gui.rtc.RTC;
-import com.bracketbird.client.model.tournament.TournamentStage;
+import com.bracketbird.client.model.tournament.Stage;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -81,7 +81,7 @@ public class LevelPanel extends FlowPanel {
     }
 
 
-    public void addLevel(final TournamentStage level) {
+    public void addLevel(final Stage level) {
         if (levelComponents.isEmpty()) {
             getLevelHolder().clear();
         }
@@ -110,10 +110,10 @@ public class LevelPanel extends FlowPanel {
 
     private void updateButtonText() {
 
-        getButton().setText(RTC.getInstance().getTournament().getLevels().isEmpty() ? "Add stage/level" : "Add another stage/level");
+        getButton().setText(RTC.getInstance().getTournament().getStages().isEmpty() ? "Add stage/level" : "Add another stage/level");
     }
 
-    public void removeLevel(TournamentStage level) {
+    public void removeLevel(Stage level) {
         LevelComponent found = null;
         for (LevelComponent lc : levelComponents) {
             if (lc.getLevel().equals(level)) {

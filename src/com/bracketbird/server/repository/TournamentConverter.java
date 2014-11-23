@@ -3,8 +3,6 @@ package com.bracketbird.server.repository;
 import com.bracketbird.client.model.tournament.CreateTournament;
 import com.bracketbird.client.model.tournament.Tournament;
 import com.bracketbird.server.jdo.club.TournamentJDO;
-import com.bracketbird.server.repository.Converter;
-import com.bracketbird.server.repository.KeyFac;
 import com.bracketbird.server.util.RandomPass;
 import com.google.appengine.api.datastore.Key;
 

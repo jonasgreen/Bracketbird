@@ -6,12 +6,12 @@ import java.util.List;
 /**
  *
  */
-public class CupRound extends Round {
+public class KnockoutRound extends StageRound {
     private static final long serialVersionUID = 7856387235373392743L;
 
 
 
-    public CupRound(KnockoutStage stage, int roundNo) {
+    public KnockoutRound(KnockoutStage stage, int roundNo) {
         super(stage, roundNo);
     }
 
@@ -21,8 +21,8 @@ public class CupRound extends Round {
     }
 
 
-    public CupMatch getMatch(int index){
-        return (CupMatch) getMatches().get(index);
+    public KnockoutMatch getMatch(int index){
+        return (KnockoutMatch) getMatches().get(index);
     }
 
 
@@ -62,6 +62,12 @@ public class CupRound extends Round {
         return "CupRound{" +
                 "matches=" + (getMatches() == null ? null :getMatches()) +
                 '}';
+    }
+
+
+    @Override
+    public Stage getParent() {
+        return stage;
     }
 
 }

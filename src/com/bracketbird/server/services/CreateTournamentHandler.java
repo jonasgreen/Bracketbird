@@ -44,8 +44,14 @@ public class CreateTournamentHandler extends AbstractActionHandler implements Ac
         finally {
             PMF.endTransaction();
         }
-        
-        return new TournamentResult(t, evevntList);
+
+        TournamentResult result = new TournamentResult(evevntList);
+        result.setChannelId(t.getTournamentChannelId());
+        result.setTournamentId(t.getId());
+        result.setTournamentUrl(t.getUrl());
+        result.setTournamentViewUrl(t.getViewUrl());
+        result.setViewOnly(false);
+        return result;
     }
 
     public Class<CreateTournamentAction> getActionType() {

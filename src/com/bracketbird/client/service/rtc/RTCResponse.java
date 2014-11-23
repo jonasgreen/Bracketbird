@@ -1,10 +1,7 @@
 package com.bracketbird.client.service.rtc;
 
 
-import com.bracketbird.client.gui.rtc.event.REvent;
-
-import java.io.*;
-import java.util.*;
+import java.io.Serializable;
 
 /**
  *
@@ -18,8 +15,8 @@ public class RTCResponse implements Serializable {
 
     private static final long serialVersionUID = 2736070612470978092L;
 
-    private long eventId;
-    private long stateId;
+    private Long eventId;
+    private Long stateId;
     private State state;
 
     public RTCResponse() {
@@ -35,11 +32,11 @@ public class RTCResponse implements Serializable {
         this.state = state;
     }
 
-    public long getEventId() {
+    public Long getEventId() {
         return eventId;
     }
 
-    public long getStateId() {
+    public Long getStateId() {
         return stateId;
     }
 

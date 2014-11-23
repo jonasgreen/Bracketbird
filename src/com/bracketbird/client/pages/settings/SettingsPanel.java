@@ -3,7 +3,7 @@ package com.bracketbird.client.pages.settings;
 
 import com.bracketbird.client.ErrorPanel;
 import com.bracketbird.client.PopupBracketBird;
-import com.bracketbird.client.model.tournament.TournamentStage;
+import com.bracketbird.client.model.tournament.Stage;
 import com.bracketbird.client.validation.GuiValidator;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
@@ -16,10 +16,10 @@ public abstract class SettingsPanel extends PopupBracketBird {
 
     protected GuiValidator validator = new GuiValidator();
 
-    private TournamentStage level;
+    private Stage level;
     private ErrorPanel errorPanel;
 
-    protected SettingsPanel(TournamentStage level) {
+    protected SettingsPanel(Stage level) {
         super(false, true);
         this.level = level;
 
@@ -45,7 +45,7 @@ public abstract class SettingsPanel extends PopupBracketBird {
     }
 
 
-    public TournamentStage getLevel() {
+    public Stage getLevel() {
         return level;
     }
 

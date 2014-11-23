@@ -1,7 +1,7 @@
 package com.bracketbird.client.pages.settings;
 
 import com.bracketbird.client.gui.rtc.RTC;
-import com.bracketbird.client.model.tournament.TournamentStage;
+import com.bracketbird.client.model.tournament.Stage;
 import com.google.gwt.event.dom.client.*;
 import com.google.gwt.event.logical.shared.CloseEvent;
 import com.google.gwt.event.logical.shared.CloseHandler;
@@ -22,10 +22,10 @@ public class LevelComponent extends FlowPanel {
     private FlowPanel rightEar;
     private FlowPanel leftEar;
 
-    private TournamentStage level;
+    private Stage level;
     private FlowPanel deleteIcon;
 
-    public LevelComponent(TournamentStage level) {
+    public LevelComponent(Stage level) {
         setStyleName("flex_center_center");
         this.level = level;
         setTitle("Edit stage");
@@ -167,7 +167,7 @@ public class LevelComponent extends FlowPanel {
     }
 
 
-    public TournamentStage getLevel() {
+    public Stage getLevel() {
         return level;
     }
 }

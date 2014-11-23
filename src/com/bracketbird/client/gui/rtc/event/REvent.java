@@ -1,8 +1,6 @@
 package com.bracketbird.client.gui.rtc.event;
 
-import com.bracketbird.client.gui.rtc.matches.SetEditorState;
 import com.bracketbird.clientcore.model.keys.EntityId;
-
 
 import java.io.Serializable;
 import java.util.Date;

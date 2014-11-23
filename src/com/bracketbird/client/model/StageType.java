@@ -1,13 +1,13 @@
 package com.bracketbird.client.model;
 
 
-public enum LevelType {
+public enum StageType {
     group("Group"),
     knockout("Knockout");
 
     private String levelName;
 
-    LevelType(String name) {
+    StageType(String name) {
         this.levelName = name;
     }
 

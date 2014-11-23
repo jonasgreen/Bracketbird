@@ -1,16 +1,16 @@
 package com.bracketbird.client.model.tournament;
 
-import com.bracketbird.client.model.CupScheduler;
-import com.bracketbird.client.model.LevelType;
-import com.bracketbird.client.model.Scheduler;
+import com.bracketbird.client.model.KnockoutRoundsBuilder;
+import com.bracketbird.client.model.StageType;
 import com.bracketbird.client.model.Team;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  */
-public class KnockoutStage extends TournamentStage {
+public class KnockoutStage extends Stage {
 
 
     private static final long serialVersionUID = 2056092174233628140L;
@@ -20,7 +20,7 @@ public class KnockoutStage extends TournamentStage {
     }
 
     public KnockoutStage(Tournament t) {
-        super(t, LevelType.knockout);
+        super(t, StageType.knockout);
     }
 
 
@@ -34,8 +34,8 @@ public class KnockoutStage extends TournamentStage {
 
     protected void handleWalkover(Match m) {
         if (m.isFinish() && hasNextRound(m)) {
-            CupRound nextRound = (CupRound) getRounds().get(m.getRound().getRoundNumber());
-            CupRound thisRound = (CupRound) getRounds().get((int) (m.getRound().getRoundNumber() - 1));
+            KnockoutRound nextRound = (KnockoutRound) getRounds().get(m.getRound().getRoundNumber());
+            KnockoutRound thisRound = (KnockoutRound) getRounds().get((int) (m.getRound().getRoundNumber() - 1));
 
             Match nextMatch = nextRound.getMatch(thisRound.getMatchIndexInNextRound(m));
 
@@ -62,12 +62,11 @@ public class KnockoutStage extends TournamentStage {
         return count / 2;
     }
 
-
     public void handleWalkovers() {
         if (getRounds().size() < 2) {
             return;
         }
-        CupRound thisRound = (CupRound) getRounds().get(0);
+        KnockoutRound thisRound = (KnockoutRound) getRounds().get(0);
         //index of match to be updated with winning team.
         int indexNextRound;
         List<Match> fms = thisRound.getFinishedMatches();
@@ -78,10 +77,14 @@ public class KnockoutStage extends TournamentStage {
     }
 
 
-
     @Override
-    public Scheduler getScheduler() {
-        return new CupScheduler(startingTeams, this);
+    public void layoutMatches(boolean fromClient) {
+        setupStartingTeams();
+
+        rounds = new ArrayList<StageRound>(new KnockoutRoundsBuilder(startingTeams, this).getRounds());
+
+        handleWalkovers();
+        updateState(fromClient);
     }
 
 

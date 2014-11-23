@@ -6,20 +6,20 @@ import com.bracketbird.client.model.Team;
 /**
  *
  */
-public class CupMatch extends Match {
+public class KnockoutMatch extends Match {
     private static final long serialVersionUID = 6944560675227729797L;
 
-    private CupMatch parent;
+    private KnockoutMatch parent;
 
-    public CupMatch(CupRound round, int matchNo) {
+    public KnockoutMatch(KnockoutRound round, int matchNo) {
         super(round, matchNo);
     }
 
-    public CupMatch getParentMatch() {
+    public KnockoutMatch getParentMatch() {
         return parent;
     }
 
-    public void setParent(CupMatch parent) {
+    public void setParent(KnockoutMatch parent) {
         this.parent = parent;
     }
 
@@ -59,7 +59,7 @@ public class CupMatch extends Match {
     private boolean isUpperInNextRound() {
         //Hmmm
         Round parentRound = getParent();
-        Round r = parentRound.getParent().getRounds().get(parentRound.getRoundNumber() -1);
+        Round r = parentRound.getStage().getRounds().get(parentRound.getRoundNumber() -1);
         int indexInRound = r.indexOf(this);
         return indexInRound % 2 == 0;
     }
@@ -68,4 +68,6 @@ public class CupMatch extends Match {
     public String toString() {
         return super.toString() + " - child: " + parent;
     }
+
+
 }

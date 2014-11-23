@@ -1,7 +1,7 @@
 package com.bracketbird.client.pages.matches;
 
 
-import com.bracketbird.client.model.tournament.TournamentStage;
+import com.bracketbird.client.model.tournament.Stage;
 import com.bracketbird.clientcore.appcontrol.Page;
 
 import java.util.ArrayList;
@@ -22,13 +22,13 @@ public class MatchesPage extends Page<MatchesPageController> {
     }
 
 
-    public void createMatchesPanel(TournamentStage l) {
+    public void createMatchesPanel(Stage l) {
         LevelMatchesPanel lp = new LevelMatchesPanel(l, levelMatchesPanels.size() + 1);
         add(lp);
         levelMatchesPanels.add(lp);
     }
 
-    public void deleteMatchesPanel(TournamentStage level) {
+    public void deleteMatchesPanel(Stage level) {
         Iterator<LevelMatchesPanel> it = levelMatchesPanels.iterator();
         while (it.hasNext()){
             LevelMatchesPanel panel = it.next();

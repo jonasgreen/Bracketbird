@@ -12,7 +12,7 @@ import com.bracketbird.clientcore.util.StringUtil;
 public abstract class Match extends PlayableModel<MatchId> implements HasLevelState{
     private static final long serialVersionUID = -8624209794497350221L;
 
-    public transient ModelHandlerList<Match> matchEventHandlers = new ModelHandlerList<Match>();
+    public transient ModelHandlerList<Match> matchEventHandlers;
 
 
     private Round round;
@@ -38,6 +38,8 @@ public abstract class Match extends PlayableModel<MatchId> implements HasLevelSt
     public Match(Round round, int matchNo) {
         this.round = round;
         this.matchNo = matchNo;
+
+        matchEventHandlers = new ModelHandlerList<Match>("Match "+matchNo + " (matchHandler)");
     }
 
     public Team getTeamHome() {
@@ -141,7 +143,7 @@ public abstract class Match extends PlayableModel<MatchId> implements HasLevelSt
         updateState(fromClient);
     }
 
-    void updateField(String field, boolean isFromClient) {
+    public void updateField(String field, boolean isFromClient) {
         if(StringUtil.equals(this.field, field)){
             return;
         }
@@ -171,7 +173,7 @@ public abstract class Match extends PlayableModel<MatchId> implements HasLevelSt
     }
 
     public void initState(){
-        updateState(true);
+        this.state = calculateState();
     }
 
     public LevelState calculateState(){
@@ -192,10 +194,6 @@ public abstract class Match extends PlayableModel<MatchId> implements HasLevelSt
     }
 
 
-    public void childHasChangedState(boolean fromClient) {
-        //Nothing below - Match is the lowest level.
-    }
-
     public Integer getCountId() {
         return countId;
     }
@@ -210,5 +208,10 @@ public abstract class Match extends PlayableModel<MatchId> implements HasLevelSt
 
     public Round getRound() {
         return round;
+    }
+
+    @Override
+    protected void stateChanged() {
+
     }
 }

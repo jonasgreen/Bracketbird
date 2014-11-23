@@ -1,9 +1,7 @@
 package com.bracketbird.client.pages.teams;
 
 import com.bracketbird.client.gui.rtc.RTC;
-import com.bracketbird.client.gui.rtc.event.REvent;
-import com.bracketbird.client.gui.rtc.event.REventListener;
-import com.bracketbird.client.gui.rtc.event.UpdateTeamNameEvent;
+import com.bracketbird.client.gui.rtc.event.*;
 import com.bracketbird.client.model.Team;
 import com.bracketbird.clientcore.appcontrol.TournamentContext;
 import com.bracketbird.clientcore.util.StringUtil;
@@ -31,13 +29,13 @@ public class TeamCell extends TextBox{
         this.team = team;
         setStyleName("teamsRow_team");
         setText(team.getName());
-        team.addListener(new REventListener() {
-            @Override
-            public void onChange(REvent<?, ?> event) {
-                setText(TeamCell.this.team.getName());
-            }
-        }, new UpdateTeamNameEvent());
 
+        team.nameHandlers.addHandler(new ModelEventHandler<String>() {
+            @Override
+            public void handleEvent(ModelEvent<String> event) {
+                setText(event.getAfter());
+            }
+        });
 
         addKeyDownHandler(new KeyDownHandler() {
             @Override

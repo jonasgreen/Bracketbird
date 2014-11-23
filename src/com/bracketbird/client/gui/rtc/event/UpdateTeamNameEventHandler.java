@@ -28,10 +28,9 @@ public class UpdateTeamNameEventHandler extends REventHandler<UpdateTeamNameEven
 
     protected void updateTournament(UpdateTeamNameEvent event) {
         Team team = RTC.getInstance().getTournament().getTeam(event.getModelId());
-        if(team == null){
-            return;
+        if(team != null){
+            team.updateName(event.getName(), event.isFromClient());
         }
-        team.setName(event);
     }
 
 

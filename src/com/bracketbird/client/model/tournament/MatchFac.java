@@ -20,8 +20,8 @@ public class MatchFac {
         return m;
     }
 
-    public static CupMatch createCup(CupRound round, int matchNo, Team teamHome, Team teamOut){
-        CupMatch m = new CupMatch(round, matchNo);
+    public static KnockoutMatch createCup(KnockoutRound round, int matchNo, Team teamHome, Team teamOut){
+        KnockoutMatch m = new KnockoutMatch(round, matchNo);
         m.setCountId(countId);
         m.setId(new MatchId("matchId "+countId++));
         m.setTeamHome(teamHome);

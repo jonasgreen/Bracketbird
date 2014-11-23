@@ -41,7 +41,14 @@ public class GetTournamentHandler extends AbstractActionHandler  implements Acti
         t.setViewOnly(viewOnly);
         List<REvent> events = rep.getTournamentLog(t.getId());
 
-        return new TournamentResult(t, events);
+        TournamentResult result = new TournamentResult(events);
+        result.setTournamentId(t.getId());
+        result.setChannelId(t.getTournamentChannelId());
+        result.setTournamentViewUrl(t.getViewUrl());
+        result.setTournamentUrl(t.getUrl());
+        result.setViewOnly(t.isViewOnly());
+
+        return result;
     }
 
     public Class<GetTournamentAction> getActionType() {

@@ -11,8 +11,10 @@ import com.bracketbird.clientcore.model.*;
 public class Team extends Model<TeamId> {
     private static final long serialVersionUID = -8413373363468003258L;
 
+    public ModelHandlerList<String> nameHandlers;
+    public ModelHandlerList<Integer> seedingHandlers;
+
     protected String name;
-    protected String info;
     protected Integer seeding;
 
     protected Team() {
@@ -22,37 +24,44 @@ public class Team extends Model<TeamId> {
         super();
         this.name = name;
         this.seeding = seeding;
+
+        nameHandlers = new ModelHandlerList<String>("Team "+name + " (nameHandler)");
+        seedingHandlers = new ModelHandlerList<Integer>("Team "+name + " (seedingHandler)");
+
     }
 
     public Integer getSeeding() {
         return seeding;
     }
 
-    public void setSeeding(UpdateTeamSeedingEvent event) {
-        this.seeding = event.getSeeding();
-        fireEvent(event);
+    public void setSeeding(Integer seeding) {
+        this.seeding = seeding;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(UpdateTeamNameEvent event) {
-        this.name = event.getName();
-        fireEvent(event);
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void updateSeeding(Integer seeding, boolean fromClient) {
+        Integer oldSeeding = this.seeding;
+        this.seeding = seeding;
+
+        seedingHandlers.fireEvent(new UpdateModelEvent<Integer>(fromClient, oldSeeding, seeding));
+    }
+
+    public void updateName(String name, boolean fromClient) {
+        String oldName = this.name;
+        this.name = name;
+
+        nameHandlers.fireEvent(new UpdateModelEvent<String>(fromClient, oldName, name));
     }
 
     public boolean isEmpty() {
         return name == null || name.equals("");
-    }
-
-    public String getInfo() {
-        return info;
-    }
-
-    public void setInfo(UpdateTeamInfoEvent event) {
-        this.info = event.getInfo();
-        fireEvent(event);
     }
 
     public boolean isWalkover() {

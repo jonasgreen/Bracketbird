@@ -8,17 +8,17 @@ import java.util.Collections;
 import java.util.List;
 
 
-public class CupScheduler extends Scheduler<CupRound> {
+public class KnockoutRoundsBuilder {
 
     private static char[] charNames = new char[]{'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','X','Y','Z'};
 
-    private List<CupRound> allRounds = new ArrayList<CupRound>();
+    private List<KnockoutRound> allRounds = new ArrayList<KnockoutRound>();
     private List<Team> teams;
     private int matchNumber = 1;
 
     private KnockoutStage stage;
 
-    public CupScheduler(List<Team> teams, KnockoutStage stage) {
+    public KnockoutRoundsBuilder(List<Team> teams, KnockoutStage stage) {
         this.teams = teams;
         this.stage = stage;
         build();
@@ -30,14 +30,14 @@ public class CupScheduler extends Scheduler<CupRound> {
 
         List<Team> bTeamList = createTeamList(binaryTeamCount);
 
-        CupRound firstRound = new CupRound(stage, 1);
+        KnockoutRound firstRound = new KnockoutRound(stage, 1);
 
-        List<CupMatch> left = new ArrayList<CupMatch>();
-        List<CupMatch> right = new ArrayList<CupMatch>();
+        List<KnockoutMatch> left = new ArrayList<KnockoutMatch>();
+        List<KnockoutMatch> right = new ArrayList<KnockoutMatch>();
 
 
         left.add(createMatch(bTeamList, firstRound));
-        List<CupMatch> pointer = right;
+        List<KnockoutMatch> pointer = right;
         int count = 0;
         while (!bTeamList.isEmpty()){
             if(count == 2){
@@ -55,11 +55,11 @@ public class CupScheduler extends Scheduler<CupRound> {
 
         firstRound.setMatches(allCupMatchesFirstRound);
 
-        List<CupRound> rounds = new ArrayList<CupRound>();
+        List<KnockoutRound> rounds = new ArrayList<KnockoutRound>();
         rounds.add(firstRound);
 
         int roundNumber = 2;
-        CupRound tempRound = firstRound;
+        KnockoutRound tempRound = firstRound;
         while (tempRound.size() > 1){
             tempRound = buildNextRound(tempRound, roundNumber++);
             rounds.add(tempRound);
@@ -77,28 +77,29 @@ public class CupScheduler extends Scheduler<CupRound> {
         int childCount = 0;
         for (Match child : childs) {
             int parentIndex = childCount*2;
-            ((CupMatch)parents.get(parentIndex)).setParent((CupMatch)child);
-            ((CupMatch)parents.get(parentIndex+1)).setParent((CupMatch)child);
+            ((KnockoutMatch)parents.get(parentIndex)).setParent((KnockoutMatch)child);
+            ((KnockoutMatch)parents.get(parentIndex+1)).setParent((KnockoutMatch)child);
            childCount++;
         }
     }
 
-    private CupRound buildNextRound(CupRound previousRound, int roundNumber) {
-        List<CupMatch> list = new ArrayList<CupMatch>();
-        CupRound round = new CupRound(stage, roundNumber);
+    private KnockoutRound buildNextRound(KnockoutRound previousRound, int roundNumber) {
+        List<Match> list = new ArrayList<Match>();
+        KnockoutRound round = new KnockoutRound(stage, roundNumber);
         char c = charNames[roundNumber];
         int nameIndex = 1;
         int count = 0;
         while (count < previousRound.size()){
-            CupMatch m = MatchFac.createCup(round, matchNumber++, new SeedingTeam(), new SeedingTeam());
+            KnockoutMatch m = MatchFac.createCup(round, matchNumber++, new SeedingTeam(), new SeedingTeam());
             m.setName((""+c)+nameIndex++);
             list.add(m);
         }
+        round.setMatches(list);
         return round;
 
     }
 
-    private CupMatch createMatch(List<Team> list, CupRound round){
+    private KnockoutMatch createMatch(List<Team> list, KnockoutRound round){
         return MatchFac.createCup(round, matchNumber++, list.remove(0), list.remove(list.size() - 1));
     }
 
@@ -126,8 +127,7 @@ public class CupScheduler extends Scheduler<CupRound> {
     }
 
 
-    @Override
-    public List<CupRound> getRounds() {
+    public List<KnockoutRound> getRounds() {
         return allRounds;
     }
 

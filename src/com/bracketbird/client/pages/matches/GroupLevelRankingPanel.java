@@ -34,7 +34,7 @@ public class GroupLevelRankingPanel extends FlowPanel {
         boolean samePosition = false;
 
         for (Group gr : grs) {
-            GroupPositions gp = new GroupPositions(gr, level.getStageSettings());
+            GroupPositions gp = new GroupPositions(gr, level.getSettings());
             allGroupsPositions.add(gp);
             if (gp.hasTeamsWithSamePosition()) {
                 samePosition = true;
@@ -137,14 +137,14 @@ public class GroupLevelRankingPanel extends FlowPanel {
             for (List<Team> teams : finalGroupRankings) {
                 verticalList.add(teams.get(count));
             }
-            RankingSheet rs = new RankingSheet(matches, verticalList, restTeams, tl.getStageSettings());
+            RankingSheet rs = new RankingSheet(matches, verticalList, restTeams, tl.getSettings());
             positions.addAll(rs.getPositions());
             count++;
         }
 
         //adding the rest teams
         if (!isHomogen) {
-            RankingSheet rs = new RankingSheet(matches, restTeams, new ArrayList<Team>(), tl.getStageSettings());
+            RankingSheet rs = new RankingSheet(matches, restTeams, new ArrayList<Team>(), tl.getSettings());
             positions.addAll(rs.getPositions());
         }
 

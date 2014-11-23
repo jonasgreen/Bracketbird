@@ -1,7 +1,7 @@
 package com.bracketbird.client.pages.matches;
 
 import com.bracketbird.client.gui.rtc.RTC;
-import com.bracketbird.client.model.tournament.CupMatch;
+import com.bracketbird.client.model.tournament.KnockoutMatch;
 import com.bracketbird.client.model.tournament.Match;
 import com.bracketbird.clientcore.appcontrol.TournamentContext;
 import com.bracketbird.clientcore.util.StringUtil;
@@ -59,7 +59,7 @@ public class ResultBox extends SetEditor2 {
             RTC.getInstance().updateMatchResult(match.getId(), null);
         }
         else {
-            ResultValidator val = ResultValidator.create(getNumbers(), !(match instanceof CupMatch));
+            ResultValidator val = ResultValidator.create(getNumbers(), !(match instanceof KnockoutMatch));
             if (val.isValid()) {
                 removeStyleName("matchRow_result_error");
                 RTC.getInstance().updateMatchResult(match.getId(), val.getResult());

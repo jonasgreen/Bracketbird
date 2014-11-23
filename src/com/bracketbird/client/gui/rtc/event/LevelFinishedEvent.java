@@ -1,14 +1,14 @@
 package com.bracketbird.client.gui.rtc.event;
 
 import com.bracketbird.client.model.keys.TeamId;
-import com.bracketbird.client.model.keys.TournamentLevelId;
+import com.bracketbird.client.model.keys.StageId;
 
 import java.util.List;
 
 /**
  *
  */
-public class LevelFinishedEvent extends REvent<LevelFinishedEventHandler, TournamentLevelId>{
+public class LevelFinishedEvent extends REvent<LevelFinishedEventHandler, StageId>{
 
     private static final long serialVersionUID = -5592485995369867791L;
 
@@ -17,7 +17,7 @@ public class LevelFinishedEvent extends REvent<LevelFinishedEventHandler, Tourna
     private LevelFinishedEvent() {
     }
 
-    public LevelFinishedEvent(Long eventId, TournamentLevelId id, List<TeamId[]> finalRank) {
+    public LevelFinishedEvent(Long eventId, StageId id, List<TeamId[]> finalRank) {
         super(eventId, id);
         setChangeState(true);
         this.finalRank = finalRank;

@@ -2,19 +2,20 @@ package com.bracketbird.client.gui.rtc.event;
 
 
 import com.bracketbird.client.gui.rtc.RTC;
+import com.bracketbird.client.model.tournament.Stage;
 
 /**
  *
  */
-public class UpdateLevelEventHandler extends REventHandler<UpdateLevelEvent> {
+public class UpdateStageEventHandler extends REventHandler<UpdateStageEvent> {
 
-    public UpdateLevelEventHandler() {
+    public UpdateStageEventHandler() {
         super();
     }
 
 
     @Override
-    protected boolean shouldWarn(UpdateLevelEvent event) {
+    protected boolean shouldWarn(UpdateStageEvent event) {
         return RTC.getInstance().getTournament().getLevel(event.getModelId()).isInProgress();
     }
 
@@ -24,9 +25,11 @@ public class UpdateLevelEventHandler extends REventHandler<UpdateLevelEvent> {
     }
 
 
-
-    protected void updateTournament(UpdateLevelEvent event) {
-        RTC.getInstance().getTournament().updateLevel(event);
+    protected void updateTournament(UpdateStageEvent event) {
+        Stage stage = RTC.getInstance().getTournament().getStage(event.getModelId());
+        if(stage != null){
+            stage.updateSettings(event.getStageSettings(), event.isFromClient());
+        }
     }
 
 

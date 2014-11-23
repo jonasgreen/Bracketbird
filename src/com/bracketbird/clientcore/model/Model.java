@@ -1,8 +1,5 @@
 package com.bracketbird.clientcore.model;
 
-import com.bracketbird.client.gui.rtc.event.REvent;
-import com.bracketbird.client.gui.rtc.event.REventListener;
-import com.bracketbird.client.gui.rtc.event.REventManager;
 import com.bracketbird.clientcore.model.keys.EntityId;
 
 import java.io.Serializable;
@@ -13,8 +10,6 @@ import java.util.Date;
  */
 public abstract class Model<E extends EntityId> implements Serializable{
     private static final long serialVersionUID = 8465595286369175756L;
-
-    private transient REventManager eventManager = new REventManager();
 
     //lognumber from rtcevent log. Used to see which objects are newest.
     private Long eventLogId;
@@ -27,16 +22,6 @@ public abstract class Model<E extends EntityId> implements Serializable{
 
     public E getId() {
         return id;
-    }
-
-    public void addListener(REventListener l, REvent<?, ?>... types) {
-        for (REvent<?, ?> t : types) {
-            eventManager.addListener(l, t);
-        }
-    }
-
-    public void fireEvent(REvent<?, ?> event) {
-        eventManager.fireEvents(event);
     }
 
 

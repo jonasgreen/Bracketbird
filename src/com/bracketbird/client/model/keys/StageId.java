@@ -5,13 +5,13 @@ import com.bracketbird.clientcore.model.keys.*;
 /**
  *
  */
-public class TournamentLevelId extends EntityId {
+public class StageId extends EntityId {
     private static final long serialVersionUID = 4167975269781064059L;
 
-    public TournamentLevelId() {
+    public StageId() {
     }
 
-    public TournamentLevelId(String encodedKey) {
+    public StageId(String encodedKey) {
         super(encodedKey, "tournamentLevelKey");
     }
 }

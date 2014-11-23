@@ -22,44 +22,41 @@ Odd number of teams
 
 */
 
-public class AGroupScheduler {
-
+public class GroupRoundsFactory {
 
     private int matchesPrRound;
     private int numberOfMatches;
     private int numberOfRounds;
-
     private boolean oddNumberOfTeams;
-    private List<Round> rounds;
-    private List<Team> teams;
-    private GroupStage stage;
+
+    private List<GroupRound> rounds;
     private int matchNumber = 1;
     private Group group;
 
-    public AGroupScheduler(Group ag, GroupStage stage) {
-        this.group = ag;
-        this.teams = ag.getTeams();
-        this.stage = stage;
+    public GroupRoundsFactory(Group group) {
+        this.group = group;
+
+        List<Team> teams = group.getTeams();
         numberOfMatches = (teams.size() * (teams.size() - 1)) / 2;
         matchesPrRound = teams.size() / 2;
         numberOfRounds = numberOfMatches / matchesPrRound;
         oddNumberOfTeams = (teams.size() == 3) || teams.size() % matchesPrRound == 1;
 
         rounds = build();
-        ag.setRounds(rounds);
     }
 
-    public List<Round> getRounds() {
+    public List<GroupRound> getRounds() {
         return rounds;
     }
 
-    private List<Round> build() {
-        List<Round> grRounds = new ArrayList<Round>();
+    private List<GroupRound> build() {
+        List<GroupRound> rounds = new ArrayList<GroupRound>();
+
         List<Team> upper = new ArrayList<Team>();
         List<Team> lower = new ArrayList<Team>();
 
         int i = 0;
-        for (Team pt : teams) {
+        for (Team pt : group.getTeams()) {
             if (i < matchesPrRound) {
                 upper.add(pt);
             }
@@ -71,11 +68,11 @@ public class AGroupScheduler {
 
         int count = 0;
         while (count < numberOfRounds) {
-            grRounds.add(buildRound(upper, lower, count + 1));
+            rounds.add(buildRound(upper, lower, count + 1));
             rotate(upper, lower);
             count++;
         }
-        return grRounds;
+        return rounds;
     }
 
     private void rotate(List<Team> upper, List<Team> lower) {
@@ -89,18 +86,19 @@ public class AGroupScheduler {
         }
     }
 
-    private Round buildRound(List<Team> upper, List<Team> lower, int roundNumber) {
-        GroupRound group = new GroupRound(stage, roundNumber);
+    private GroupRound buildRound(List<Team> upper, List<Team> lower, int roundNumber) {
+        GroupRound round = new GroupRound(group, roundNumber);
         List<Match> matches = new ArrayList<Match>();
 
         int count = 0;
         for (Team teamUp : upper) {
-            Match m = MatchFac.createGroupMatch(group, matchNumber, teamUp, lower.get(count++));
+            Match m = MatchFac.createGroupMatch(round, matchNumber, teamUp, lower.get(count++));
             matches.add(m);
         }
 
-        group.setMatches(matches);
-        return group;
+        round.setMatches(matches);
+        round.initState();
+        return round;
     }
 
 

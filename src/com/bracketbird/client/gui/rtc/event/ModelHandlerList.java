@@ -11,23 +11,30 @@ import java.util.List;
  */
 public class ModelHandlerList<T> {
 
-    private List<ModelEventHandler<T>> listeners = new ArrayList<ModelEventHandler<T>>();
+    private String name;
 
+    public ModelHandlerList(String name) {
+        this.name = name;
+    }
+
+    private List<ModelEventHandler<T>> handlers = new ArrayList<ModelEventHandler<T>>();
 
     public HandlerRegistration addHandler(final ModelEventHandler<T> handler){
-        listeners.add(handler);
+        handlers.add(handler);
 
         return new HandlerRegistration() {
             @Override
             public void removeHandler() {
-                listeners.remove(handler);
+                handlers.remove(handler);
             }
         };
     }
 
     public void fireEvent(ModelEvent<T> event){
+        System.out.println(name + " - FIRE EVENT (handlers.size = " + handlers.size() + ")");
+
         //createGroupMatch new list to avoid concurrent modification exception
-        for (ModelEventHandler<T> l : new ArrayList<ModelEventHandler<T>>(listeners)) {
+        for (ModelEventHandler<T> l : new ArrayList<ModelEventHandler<T>>(handlers)) {
             l.handleEvent(event);
         }
     }

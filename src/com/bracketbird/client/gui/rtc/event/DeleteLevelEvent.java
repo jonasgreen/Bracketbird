@@ -1,18 +1,18 @@
 package com.bracketbird.client.gui.rtc.event;
 
-import com.bracketbird.client.model.keys.TournamentLevelId;
+import com.bracketbird.client.model.keys.StageId;
 
 /**
  *
  */
-public class DeleteLevelEvent extends REvent<DeleteLevelEventHandler, TournamentLevelId>{
+public class DeleteLevelEvent extends REvent<DeleteLevelEventHandler, StageId>{
 
     private static final long serialVersionUID = -2655835684157046604L;
 
     private DeleteLevelEvent() {
     }
 
-    public DeleteLevelEvent(Long eventId, TournamentLevelId id) {
+    public DeleteLevelEvent(Long eventId, StageId id) {
         super(eventId, id);
     }
 

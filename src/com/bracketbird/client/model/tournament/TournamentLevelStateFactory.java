@@ -4,7 +4,7 @@ import java.util.List;
 
 public class TournamentLevelStateFactory {
 
-    public LevelState createState(TournamentStage level){
+    public LevelState createState(Stage level){
         if (level.hasEndingTeams()) {
             return LevelState.finished;
         }

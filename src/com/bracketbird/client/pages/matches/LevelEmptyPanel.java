@@ -5,7 +5,7 @@ import com.bracketbird.client.Css;
 import com.bracketbird.client.gui.rtc.RTC;
 import com.bracketbird.client.gui.rtc.event.ModelEvent;
 import com.bracketbird.client.gui.rtc.event.ModelEventHandler;
-import com.bracketbird.client.model.tournament.TournamentStage;
+import com.bracketbird.client.model.tournament.Stage;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
@@ -16,18 +16,18 @@ import com.google.gwt.user.client.ui.FlowPanel;
  */
 public class LevelEmptyPanel extends FlowPanel {
 
-    private TournamentStage level;
+    private Stage level;
     private Button button;
 
-    public LevelEmptyPanel(TournamentStage tl) {
+    public LevelEmptyPanel(Stage tl) {
         super();
         this.level = tl;
         setStyleName("levelEmptyPanel");
 
 
-        RTC.getInstance().getTournament().levelsEventHandlers.addHandler(new ModelEventHandler<TournamentStage>() {
+        RTC.getInstance().getTournament().stagesEventHandlers.addHandler(new ModelEventHandler<Stage>() {
             @Override
-            public void handleEvent(ModelEvent<TournamentStage> event) {
+            public void handleEvent(ModelEvent<Stage> event) {
                 getButton().setText(getButtonName());
             }
         });
@@ -49,8 +49,8 @@ public class LevelEmptyPanel extends FlowPanel {
     }
 
     private String getButtonName() {
-        if(RTC.getInstance().getTournament().getLevels().size() > 1){
-            System.out.println("SIZE: "+RTC.getInstance().getTournament().getLevels().size());
+        if(RTC.getInstance().getTournament().getStages().size() > 1){
+            System.out.println("SIZE: "+RTC.getInstance().getTournament().getStages().size());
             return "Layout matches - " + level.getName() + " stage";
         }
         return "Layout matches";

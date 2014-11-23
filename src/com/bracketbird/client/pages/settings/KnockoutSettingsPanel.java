@@ -3,7 +3,7 @@ package com.bracketbird.client.pages.settings;
 
 import com.bracketbird.client.gui.rtc.RTC;
 import com.bracketbird.client.model.tournament.StageSettings;
-import com.bracketbird.client.model.tournament.TournamentStage;
+import com.bracketbird.client.model.tournament.Stage;
 import com.bracketbird.client.rules.LargerThan;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
@@ -21,7 +21,7 @@ public class KnockoutSettingsPanel extends SettingsPanel {
     public Label eliminationType;
 
 
-    public KnockoutSettingsPanel(TournamentStage l) {
+    public KnockoutSettingsPanel(Stage l) {
         super(l);
 
         addStyleName("knockoutSettingsPanel");
@@ -67,7 +67,7 @@ public class KnockoutSettingsPanel extends SettingsPanel {
             maxTeamsTextBox = new TextBox();
             maxTeamsTextBox.setTitle(maxTeamsTitle);
             maxTeamsTextBox.setStyleName("settingsIntegerInput");
-            Integer mnt = getLevel().getStageSettings().getMaxNumberOfTeams();
+            Integer mnt = getLevel().getSettings().getMaxNumberOfTeams();
             if(mnt != null){
                 maxTeamsTextBox.setValue(""+mnt);
             }

@@ -17,7 +17,7 @@ public class CupRankingPanel extends FlowComponent implements RankingPanel {
     private final KnockoutStage level;
     private List<DivColumn> columns = new ArrayList<DivColumn>();
 
-    public CupRankingPanel(TournamentStage l) {
+    public CupRankingPanel(Stage l) {
         this.level = (KnockoutStage) l;
         this.getStyleElement().getStyle().setDisplay(Style.Display.INLINE);
         /*level.addStateListener(new TournamentListener<LevelStateEvent>() {
@@ -38,7 +38,7 @@ public class CupRankingPanel extends FlowComponent implements RankingPanel {
     }
 
     private void layoutPanel() {
-        List<Round> rounds = level.getRounds();
+        /*List<Round> rounds = level.getRounds();
         if (rounds.isEmpty()) {
             return;
         }
@@ -51,6 +51,7 @@ public class CupRankingPanel extends FlowComponent implements RankingPanel {
             addRound(round, getHeader(level, i, rounds));
         }
 
+*/
     }
 
     private String getHeader(KnockoutStage level, int round, List<Round> rounds) {

@@ -1,6 +1,6 @@
 package com.bracketbird.client.model.tournament;
 
-import com.bracketbird.client.model.LevelType;
+import com.bracketbird.client.model.StageType;
 import com.bracketbird.clientcore.appcontrol.*;
 import com.bracketbird.clientcore.model.*;
 
@@ -10,12 +10,12 @@ import java.util.*;
  *
  */
 public class TournamentLevelFac {
-    public static TournamentStage create(Tournament t, LevelType type) {
-        TournamentStage level;
-        if (LevelType.knockout == type) {
+    public static Stage create(Tournament t, StageType type) {
+        Stage level;
+        if (StageType.knockout == type) {
             level = createCup(t);
         }
-        else if (LevelType.group == type) {
+        else if (StageType.group == type) {
             level = createGroup(t);
         }
         else {
@@ -37,7 +37,7 @@ public class TournamentLevelFac {
         rules.add(FindingRankingConstant.GOALS_DIFFERENCE.getValue());
         ss.setRankingRules(rules);
 
-        level.setStageSettings(ss);
+        level.setSettings(ss);
         return level;
     }
 
@@ -46,7 +46,7 @@ public class TournamentLevelFac {
         StageSettings ss = new StageSettings();
         ss.setEliminationType(1);//single elim
 
-        level.setStageSettings(ss);
+        level.setSettings(ss);
         return level;
     }
 }

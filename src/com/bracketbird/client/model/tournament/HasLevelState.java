@@ -5,8 +5,8 @@ public interface HasLevelState {
     public <T extends HasLevelState> HasLevelState getParent();
 
     public LevelState getState();
+    public void updateState(boolean fromClient);
     public LevelState calculateState();
-    public void childHasChangedState(boolean fromClient);
 
     public boolean isNotReady();
     public boolean isReady();

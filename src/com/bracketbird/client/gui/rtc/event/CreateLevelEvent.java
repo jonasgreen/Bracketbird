@@ -1,27 +1,27 @@
 package com.bracketbird.client.gui.rtc.event;
 
-import com.bracketbird.client.model.LevelType;
-import com.bracketbird.client.model.keys.TournamentLevelId;
+import com.bracketbird.client.model.StageType;
+import com.bracketbird.client.model.keys.StageId;
 
 /**
  *
  */
-public class CreateLevelEvent extends REvent<CreateLevelEventHandler, TournamentLevelId>{
+public class CreateLevelEvent extends REvent<CreateLevelEventHandler, StageId>{
 
     private static final long serialVersionUID = -2655835684157046604L;
 
-    private LevelType levelType;
+    private StageType stageType;
 
     public CreateLevelEvent() {
     }
 
-    public CreateLevelEvent(Long eventId, LevelType leveltype, TournamentLevelId id) {
+    public CreateLevelEvent(Long eventId, StageType type, StageId id) {
         super(eventId, id);
-        this.levelType = leveltype;
+        this.stageType = type;
     }
 
-    public LevelType getLevelType() {
-        return levelType;
+    public StageType getStageType() {
+        return stageType;
     }
 
     @Override

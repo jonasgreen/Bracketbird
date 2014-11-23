@@ -1,20 +1,20 @@
 package com.bracketbird.client.gui.rtc.event;
 
-import com.bracketbird.client.model.keys.TournamentLevelId;
+import com.bracketbird.client.model.keys.StageId;
 import com.bracketbird.client.model.tournament.StageSettings;
 
 /**
  *
  */
-public class UpdateLevelEvent extends REvent<UpdateLevelEventHandler, TournamentLevelId>{
+public class UpdateStageEvent extends REvent<UpdateStageEventHandler, StageId>{
 
     private static final long serialVersionUID = -2655835684157046604L;
     private StageSettings stageSettings;
 
-    public UpdateLevelEvent() {
+    public UpdateStageEvent() {
     }
 
-    public UpdateLevelEvent(Long id, TournamentLevelId tlId, StageSettings ls) {
+    public UpdateStageEvent(Long id, StageId tlId, StageSettings ls) {
         super(id, tlId);
         this.stageSettings = ls;
     }
@@ -24,8 +24,8 @@ public class UpdateLevelEvent extends REvent<UpdateLevelEventHandler, Tournament
     }
 
     @Override
-    public Class<UpdateLevelEventHandler> getHandler() {
-        return UpdateLevelEventHandler.class;
+    public Class<UpdateStageEventHandler> getHandler() {
+        return UpdateStageEventHandler.class;
     }
 
     @Override

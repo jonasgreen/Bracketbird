@@ -26,7 +26,7 @@ public class CreateLevelEventHandler extends REventHandler<CreateLevelEvent> {
 
 
     protected void updateTournament(CreateLevelEvent event) {
-        RTC.getInstance().getTournament().createLevel(event);
+        RTC.getInstance().getTournament().createLevel(event.getStageType(), event.getModelId(), event.getEventId(), event.isFromClient());
     }
 
 

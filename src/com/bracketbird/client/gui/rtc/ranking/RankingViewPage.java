@@ -5,7 +5,7 @@ import com.bracketbird.client.gui.rtc.RTC;
 import com.bracketbird.client.gui.rtc.RTCLayoutFac2;
 import com.bracketbird.client.model.Team;
 import com.bracketbird.client.model.tournament.Tournament;
-import com.bracketbird.client.model.tournament.TournamentStage;
+import com.bracketbird.client.model.tournament.Stage;
 import com.bracketbird.clientcore.appcontrol.FlowPanelPage;
 import com.bracketbird.clientcore.appcontrol.Page;
 import com.bracketbird.clientcore.gui.LabelComponent;
@@ -24,7 +24,7 @@ import java.util.List;
 public class RankingViewPage extends FlowPanelPage<RankingViewPageController> {
 
     private SimpleFlowComponent content;
-    private TournamentStage activeLevel;
+    private Stage activeLevel;
     private RankingPanel rankingPanel;
 
     public RankingViewPage() {
@@ -75,7 +75,7 @@ public class RankingViewPage extends FlowPanelPage<RankingViewPageController> {
 */
     }
 
-    private void levelFinished(TournamentStage level) {
+    private void levelFinished(Stage level) {
 
     }
 
@@ -85,7 +85,7 @@ public class RankingViewPage extends FlowPanelPage<RankingViewPageController> {
         rankingPanel = null;
     }
 
-    private void matchesLayedOut(TournamentStage level) {
+    private void matchesLayedOut(Stage level) {
         clear();
         activeLevel = level;
         rankingPanel = createPanel(activeLevel);
@@ -111,9 +111,9 @@ public class RankingViewPage extends FlowPanelPage<RankingViewPageController> {
         else if (t.isFinished()) {
             List<Team[]> allTeams = new ArrayList<Team[]>();
 
-            TournamentStage previous = null;
-            for (int i = t.getLevels().size() - 1; i >= 0; i--) {
-                TournamentStage level = t.getLevels().get(i);
+            Stage previous = null;
+            for (int i = t.getStages().size() - 1; i >= 0; i--) {
+                Stage level = t.getStages().get(i);
                 if(previous != null){
                     allTeams.addAll(removeTeams(level, previous));
                 }
@@ -127,14 +127,14 @@ public class RankingViewPage extends FlowPanelPage<RankingViewPageController> {
             content.add(buildFinalRankingCup(allTeams));
         }
         else {
-            TournamentStage levelInPogress = t.getLevelInPogress();
+            Stage levelInPogress = t.getLevelInPogress();
             if (levelInPogress != null) {
                 matchesLayedOut(levelInPogress);
             }
         }
     }
 
-    private Collection<? extends Team[]> removeTeams(TournamentStage level, TournamentStage previous) {
+    private Collection<? extends Team[]> removeTeams(Stage level, Stage previous) {
         List<Team[]> teams = new ArrayList<Team[]>();
         if(previous.getStartingTeams().size() == level.getStartingTeams().size()){
             return teams;
@@ -187,7 +187,7 @@ public class RankingViewPage extends FlowPanelPage<RankingViewPageController> {
     }
 
 
-    private RankingPanel createPanel(TournamentStage level) {
+    private RankingPanel createPanel(Stage level) {
         if (level.isKnockout()) {
             return new CupRankingPanel(level);
         }

@@ -53,7 +53,7 @@ public class FrontPageController extends PageController<FrontPage> {
         }
         else{
             Application.get().shiftApplicationContext(TournamentContext.get());
-            RTC.getInstance().loadTournament(tournamentResult.getTournament(), tournamentResult.getEventLogs(), true);
+            RTC.getInstance().loadTournament(tournamentResult, tournamentResult.getEventLogs(), true);
             Application.show(TeamsPageController.getInstance());
         }
     }

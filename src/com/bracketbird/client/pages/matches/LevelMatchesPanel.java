@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class LevelMatchesPanel extends FlowPanel {
 
-    private TournamentStage level;
+    private Stage level;
 
     private SimplePanel levelEmptyPanelHolder = new SimplePanel();
     private SimplePanel matchesHolder = new SimplePanel();
@@ -33,7 +33,7 @@ public class LevelMatchesPanel extends FlowPanel {
         finalRankingHolder.clear();
     }
 
-    public LevelMatchesPanel(TournamentStage l, int levelCount) {
+    public LevelMatchesPanel(Stage l, int levelCount) {
         super();
         this.levelCount = levelCount;
         this.level = l;
@@ -178,7 +178,7 @@ public class LevelMatchesPanel extends FlowPanel {
     }
 
 
-    public TournamentStage getLevel() {
+    public Stage getLevel() {
         return level;
     }
 }

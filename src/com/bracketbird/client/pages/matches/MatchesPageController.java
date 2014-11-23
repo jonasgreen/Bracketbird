@@ -3,7 +3,7 @@ package com.bracketbird.client.pages.matches;
 import com.bracketbird.client.gui.rtc.RTC;
 import com.bracketbird.client.gui.rtc.event.ModelEvent;
 import com.bracketbird.client.gui.rtc.event.ModelEventHandler;
-import com.bracketbird.client.model.tournament.TournamentStage;
+import com.bracketbird.client.model.tournament.Stage;
 import com.bracketbird.clientcore.appcontrol.PageController;
 
 /**
@@ -30,9 +30,9 @@ public class MatchesPageController extends PageController<MatchesPage> {
     @Override
     public void afterFirstLoad() {
 
-        RTC.getInstance().getTournament().levelsEventHandlers.addHandler(new ModelEventHandler<TournamentStage>() {
+        RTC.getInstance().getTournament().stagesEventHandlers.addHandler(new ModelEventHandler<Stage>() {
             @Override
-            public void handleEvent(ModelEvent<TournamentStage> event) {
+            public void handleEvent(ModelEvent<Stage> event) {
                 if (event.isCreate()) {
                     getPage().createMatchesPanel(event.getAfter());
                 }
@@ -43,7 +43,7 @@ public class MatchesPageController extends PageController<MatchesPage> {
         });
 
 
-        for (TournamentStage l : RTC.getInstance().getTournament().getLevels()) {
+        for (Stage l : RTC.getInstance().getTournament().getStages()) {
             getPage().createMatchesPanel(l);
         }
     }

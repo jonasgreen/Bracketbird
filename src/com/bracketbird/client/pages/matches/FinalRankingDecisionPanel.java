@@ -5,7 +5,7 @@ import com.bracketbird.client.gui.rtc.RTC;
 import com.bracketbird.client.model.Team;
 import com.bracketbird.client.model.keys.TeamId;
 import com.bracketbird.client.model.tournament.Position;
-import com.bracketbird.client.model.tournament.TournamentStage;
+import com.bracketbird.client.model.tournament.Stage;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
@@ -27,9 +27,9 @@ public class FinalRankingDecisionPanel extends FlowPanel {
     private SimplePanel errorsPanel = new SimplePanel();
     private RankingPanel finalRow = null;
     private List<Position> positions;
-    private TournamentStage level;
+    private Stage level;
 
-    public FinalRankingDecisionPanel(TournamentStage tl, List<Position> positions) {
+    public FinalRankingDecisionPanel(Stage tl, List<Position> positions) {
         super();
         setStyleName("finalRanking_decisionPanel");
         this.level = tl;

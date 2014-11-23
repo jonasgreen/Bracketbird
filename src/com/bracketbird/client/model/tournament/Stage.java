@@ -1,48 +1,49 @@
 package com.bracketbird.client.model.tournament;
 
-import com.bracketbird.client.gui.rtc.event.*;
-import com.bracketbird.client.model.LevelType;
-import com.bracketbird.client.model.Scheduler;
+import com.bracketbird.client.gui.rtc.event.ModelHandlerList;
+import com.bracketbird.client.gui.rtc.event.UpdateMatchFieldEvent;
+import com.bracketbird.client.gui.rtc.event.UpdateModelEvent;
 import com.bracketbird.client.model.SeedingTeam;
+import com.bracketbird.client.model.StageType;
 import com.bracketbird.client.model.Team;
+import com.bracketbird.client.model.keys.MatchId;
+import com.bracketbird.client.model.keys.StageId;
 import com.bracketbird.client.model.keys.TeamId;
-import com.bracketbird.client.model.keys.TournamentLevelId;
 import com.bracketbird.clientcore.model.PlayableModel;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 /**
  *
  */
-public abstract class TournamentStage extends PlayableModel<TournamentLevelId> implements HasLevelState {
+public abstract class Stage extends PlayableModel<StageId> implements HasLevelState {
     private static final long serialVersionUID = -8838821453128489654L;
 
-    private LevelType type;
+    private StageType type;
 
     protected Tournament tournament;
-    private LevelState state = LevelState.notReady;
-    public transient StateHandlerList stateHandlers = new StateHandlerList();
+    public ModelHandlerList<StageSettings> settingsHandler;
 
     //each round holds all the matches in one round (from all groups).
-    protected List<Round> rounds = new ArrayList<Round>();
-    private StageSettings stageSettings = new StageSettings();
+    protected List<StageRound> rounds = new ArrayList<StageRound>();
+    private StageSettings settings = new StageSettings();
 
     protected List<Team> startingTeams = new ArrayList<Team>();
     protected List<Team[]> endingTeams = new ArrayList<Team[]>();
 
-    protected TournamentStage() {
+    protected Stage() {
     }
 
 
-    protected TournamentStage(Tournament tournament, LevelType type) {
+    protected Stage(Tournament tournament, StageType type) {
         this.type = type;
         this.tournament = tournament;
-    }
 
-    public abstract Scheduler getScheduler();
+        settingsHandler = new ModelHandlerList<StageSettings>("Stage " + type.getLevelName() + " (settingshandler)");
+
+    }
 
     public List<Team> getStartingTeams() {
         return startingTeams;
@@ -64,39 +65,19 @@ public abstract class TournamentStage extends PlayableModel<TournamentLevelId> i
     }
 
     public void clearMatches() {
-        rounds = new ArrayList<Round>();
+        rounds = new ArrayList<StageRound>();
     }
 
-    public LevelType getType() {
+    public StageType getType() {
         return type;
     }
 
-    public void layoutMatches(boolean fromClient) {
-        setupStartingTeams();
-        //createGroupMatch matches
-        Scheduler m = getScheduler();
-        rounds = m.getRounds();
-        handleWalkovers();
-
-        updateState(fromClient);
-
-    }
+    public abstract void layoutMatches(boolean fromClient);
 
     protected void setupStartingTeams() {
-        TournamentStage previous = tournament.getPreviousLevel(this);
+        Stage previous = tournament.getPreviousLevel(this);
         //with first level playing teams are taken from tournament
         if (previous == null) {
-            //CU.sortByEventLogNr(getTournament().getTeams());
-            //removing notReady teams
-            Iterator<Team> iterator = getTournament().getTeams().iterator();
-            while (iterator.hasNext()) {
-                Team t = iterator.next();
-                if (t.getName() == null || t.getName().equals("")) {
-                    //    iterator.remove();TODO
-                    // TeamsPageController.getInstance().getPage().getTeamsTable().teamDeleted(t, false);
-                }
-            }
-
             this.startingTeams = new SeedingHelper().seed(getTournament().getTeams());
         }
         else {
@@ -110,7 +91,7 @@ public abstract class TournamentStage extends PlayableModel<TournamentLevelId> i
                 for (Team[] teams : previous.getEndingTeams()) {
                     Collections.addAll(startTeams, teams);
                 }
-                Integer maxNumberOfTeams = getStageSettings().getMaxNumberOfTeams();
+                Integer maxNumberOfTeams = getSettings().getMaxNumberOfTeams();
                 //remove last item until max number of teams is satisfied.
                 if (maxNumberOfTeams != null) {
                     while (startTeams.size() > maxNumberOfTeams) {
@@ -123,9 +104,9 @@ public abstract class TournamentStage extends PlayableModel<TournamentLevelId> i
     }
 
 
-    public void finished(LevelFinishedEvent event) {
+    public void finished(List<TeamId[]> finalRank, boolean fromClient) {
         List<Team[]> teams = new ArrayList<Team[]>();
-        for (TeamId[] teamIds : event.getFinalRank()) {
+        for (TeamId[] teamIds : finalRank) {
             Team[] tempTeams = new Team[teamIds.length];
             int i = 0;
             for (TeamId id : teamIds) {
@@ -134,7 +115,7 @@ public abstract class TournamentStage extends PlayableModel<TournamentLevelId> i
             teams.add(tempTeams);
         }
         this.endingTeams = teams;
-        updateState(event.isFromClient());
+        updateState(fromClient);
     }
 
 
@@ -165,43 +146,9 @@ public abstract class TournamentStage extends PlayableModel<TournamentLevelId> i
         if (hasEndingTeams()) {
             return LevelState.finished;
         }
-        if (hasMatches()) {
-            boolean someIsNonFinished = false;
-            boolean someIsFinished = false;
-
-            List<Match> matches = getMatches();
-
-            for (Match match : matches) {
-                //matches that are walkovers should be treated first
-                if (match.isWalkover()) {
-                    //ignore
-                }
-                else if (match.isFinish()) {
-                    someIsFinished = true;
-                }
-                else {
-                    someIsNonFinished = true;
-                }
-            }
-            //all matches are finished or is walkover - ending teams had not been set though
-            if (!someIsNonFinished) {
-                //if(isKnockout()){
-                //  return new LevelStateInFinished();
-                //}
-                return LevelState.donePlaying;
-            }
-            //if non is finished - matches is layed out.
-            else if (!someIsFinished) {
-                return LevelState.ready;
-            }
-            else {
-                return LevelState.inProgress;
-            }
-        }
-        else {//Not Ready
-            return LevelState.notReady;
-        }
+        return calculateState(rounds);
     }
+
 
     protected boolean hasEndingTeams() {
         return !getEndingTeams().isEmpty();
@@ -237,14 +184,15 @@ public abstract class TournamentStage extends PlayableModel<TournamentLevelId> i
                 "}";
     }
 
-    public void setStageSettings(StageSettings ss) {
-        this.stageSettings = ss;
+    public void setSettings(StageSettings ss) {
+        this.settings = ss;
     }
 
-    public void updateStageSettings(UpdateLevelEvent event) {
-        this.stageSettings = event.getStageSettings();
-        fireEvent(event);
-        clear(event.isFromClient());
+    public void updateSettings(StageSettings stageSettings, boolean fromClient) {
+        StageSettings oldSettings = settings;
+        this.settings = stageSettings;
+
+        settingsHandler.fireEvent(new UpdateModelEvent<StageSettings>(fromClient, oldSettings, settings));
     }
 
 
@@ -252,17 +200,13 @@ public abstract class TournamentStage extends PlayableModel<TournamentLevelId> i
         return type.getLevelName();
     }
 
-    public List<Round> getRounds() {
+    public List<StageRound> getRounds() {
         return rounds;
     }
 
-    public void setRounds(List<Round> rounds) {
+    public void setRounds(List<StageRound> rounds) {
         this.rounds = rounds;
     }
-
-
-
-
 
 
     public int getMaxNumberOfTeams() {
@@ -288,21 +232,15 @@ public abstract class TournamentStage extends PlayableModel<TournamentLevelId> i
 
 
     public TournamentLevelVO createVO() {
-        return getStageSettings().createVO(this);
+        return getSettings().createVO(this);
     }
 
 
-
-    public boolean updateMatchResult(UpdateMatchResultEvent event) {
-        Match m = findMatch(event);
+    public boolean updateMatchResult(MatchId id, int[] homeScores, int[] outScores, boolean fromClient) {
+        Match m = findMatch(id);
 
         if (m != null) {
-            if (hasEndingTeams()) {
-                endingTeams = new ArrayList<Team[]>();
-            }
-
-            m.updateResult(event.getHomeScores(), event.getOutScores(), event.isFromClient());
-            updateState(true);
+            m.updateResult(homeScores, outScores, fromClient);
         }
         return m != null;
     }
@@ -311,14 +249,9 @@ public abstract class TournamentStage extends PlayableModel<TournamentLevelId> i
     protected void handleWalkover(Match m) {
     }
 
-    @Override
-    public void childHasChangedState(boolean fromClient) {
-
-    }
-
-    protected Match findMatch(UpdateMatchResultEvent event) {
+    protected Match findMatch(MatchId id) {
         for (Match match : getMatches()) {
-            if (match.getId().equals(event.getModelId())) {
+            if (match.getId().equals(id)) {
                 return match;
             }
         }
@@ -349,20 +282,27 @@ public abstract class TournamentStage extends PlayableModel<TournamentLevelId> i
         return state;
     }
 
-    public void handleWalkovers() {
-
-    }
-
     public boolean isKnockout() {
         return this instanceof KnockoutStage;
     }
 
-    public StageSettings getStageSettings() {
-        return stageSettings;
+    public StageSettings getSettings() {
+        return settings;
     }
 
     @Override
     public Tournament getParent() {
         return tournament;
+    }
+
+    @Override
+    protected void stateChanged() {
+        if (getState().equals(LevelState.donePlaying)) {
+            //TODO set ending teams
+        }
+
+        if (state.isBelow(LevelState.finished)) {
+            endingTeams = new ArrayList<Team[]>();
+        }
     }
 }

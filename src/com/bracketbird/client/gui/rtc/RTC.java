@@ -6,18 +6,18 @@ import com.bracketbird.client.gui.rtc.event.*;
 import com.bracketbird.client.gui.rtc.health.LogPageController;
 import com.bracketbird.client.gui.rtc.ranking.RankingViewPageController;
 import com.bracketbird.client.gui.util.UID;
-import com.bracketbird.client.model.LevelType;
+import com.bracketbird.client.model.StageType;
 import com.bracketbird.client.model.keys.MatchId;
+import com.bracketbird.client.model.keys.StageId;
 import com.bracketbird.client.model.keys.TeamId;
-import com.bracketbird.client.model.keys.TournamentLevelId;
 import com.bracketbird.client.model.tournament.*;
 import com.bracketbird.client.pages.livescores.LiveScoresPageController;
 import com.bracketbird.client.pages.matches.MatchesPageController;
 import com.bracketbird.client.pages.settings.SettingsPageController;
 import com.bracketbird.client.pages.teams.TeamsPageController;
+import com.bracketbird.client.service.TournamentResult;
 import com.bracketbird.clientcore.appcontrol.Application;
 import com.bracketbird.clientcore.util.CU;
-import com.google.gwt.dom.client.Document;
 import com.google.gwt.user.client.Window;
 
 import java.util.HashMap;
@@ -54,7 +54,6 @@ public class RTC {
         //Teams
         add(new CreateTeamEventHandler());
         add(new UpdateTeamNameEventHandler());
-        add(new UpdateTeamInfoEventHandler());
         add(new UpdateTeamSeedingEventHandler());
         add(new DeleteTeamEventHandler());
 
@@ -62,7 +61,7 @@ public class RTC {
 
         //Level settings
         add(new CreateLevelEventHandler());
-        add(new UpdateLevelEventHandler());
+        add(new UpdateStageEventHandler());
         add(new DeleteLevelEventHandler());
         add(new LevelFinishedEventHandler());
         //set teamranking(ids[])
@@ -85,28 +84,29 @@ public class RTC {
     }
 
 
-    public void loadTournament(Tournament t, List<REvent> events, boolean justCreated) {
-        if(t.isViewOnly()){
-            Document.get().getBody().getStyle().setBackgroundColor("black");
-        }
-        this.tournament = t;
+    public void loadTournament(TournamentResult r, List<REvent> events, boolean justCreated) {
+        this.tournament = new Tournament();
+        tournament.setViewOnly(r.isViewOnly());
+        tournament.setTournamentChannelId(r.getChannelId());
+        tournament.setUrl(r.getTournamentUrl());
+        tournament.setViewUrl(r.getTournamentViewUrl());
+        tournament.setId(r.getTournamentId());
 
         //init gui and set listeners
-        initGuiListeners(t);
+        initGuiListeners(tournament);
 
-        String tName = t.getName();
-        Window.setTitle(tName);
+        Window.setTitle("Tournament");
         //RunningTournamentTop.getInstance().getTournamentName().setText(tName);
 
         RTC.getInstance().loadServerSync(events, justCreated);
 
         //PopupManager.hide();
 
-        String url = t.isViewOnly() ? t.getViewUrl() : t.getUrl();
+        String url = tournament.isViewOnly() ? tournament.getViewUrl() : tournament.getUrl();
         Bracketbird.tournamentUrl =  url;
         com.google.gwt.user.client.History.newItem(url, false);
 
-        if(t.isViewOnly()){
+        if(tournament.isViewOnly()){
             //RunningTournamentTop.getInstance().getTournamentName().getElement().getStyle().setColor("white");
         }
 
@@ -175,11 +175,6 @@ public class RTC {
     }
 
 
-    public void updateTeamInfo(TeamId id, String info) {
-        executeEvent(new UpdateTeamInfoEvent(null, id, info));
-    }
-
-
     public void updateTeamSeeding(TeamId id, Integer seeding) {
         executeEvent(new UpdateTeamSeedingEvent(null, id, seeding));
     }
@@ -189,21 +184,21 @@ public class RTC {
     }
 
     //LEVELS
-    public void createLevel(LevelType levelType) {
-        executeEvent(new CreateLevelEvent(null, levelType, new TournamentLevelId(UID.getUID())));
+    public void createLevel(StageType levelType) {
+        executeEvent(new CreateLevelEvent(null, levelType, new StageId(UID.getUID())));
     }
 
-    public void updateLevelSettings(TournamentLevelId levelId, StageSettings ls) {
-        executeEvent(new UpdateLevelEvent(null, levelId, ls));
+    public void updateLevelSettings(StageId levelId, StageSettings ls) {
+        executeEvent(new UpdateStageEvent(null, levelId, ls));
     }
 
-    public void deleteLevel(TournamentLevelId levelId) {
+    public void deleteLevel(StageId levelId) {
         executeEvent(new DeleteLevelEvent(null, levelId));
     }
 
     //MATCHES
-    public void layoutMatches(TournamentLevelId levelId) {
-        TournamentStage previousLevel = getTournament().getPreviousLevel(getTournament().getLevel(levelId));
+    public void layoutMatches(StageId levelId) {
+        Stage previousLevel = getTournament().getPreviousLevel(getTournament().getLevel(levelId));
         if(RTC.getInstance().getTournament().getTeams().size() < 2){
             OkWarning gc = new OkWarning("Please add some teams", "There has to be at least two teams to createGroupMatch a tournament.");
             gc.center();
@@ -231,7 +226,7 @@ public class RTC {
     }
 
 
-    public void levelFinished(TournamentLevelId levelId, List<TeamId[]> finalRanking) {
+    public void levelFinished(StageId levelId, List<TeamId[]> finalRanking) {
         executeEvent(new LevelFinishedEvent(null, levelId, finalRanking));
     }
 

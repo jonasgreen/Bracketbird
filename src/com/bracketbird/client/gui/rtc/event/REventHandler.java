@@ -4,6 +4,7 @@ import com.bracketbird.client.gui.rtc.EventManager;
 import com.bracketbird.client.gui.rtc.Handler;
 import com.bracketbird.client.gui.rtc.ProceedOrCancelWarning;
 import com.bracketbird.client.gui.rtc.RTC;
+import com.bracketbird.client.model.tournament.PrintStateTree;
 
 /**
  *
@@ -44,6 +45,9 @@ public abstract class REventHandler<E extends REvent<?,?>> {
             else {
                 updateTournament(event);
             }
+
+            PrintStateTree printStateTree = new PrintStateTree();
+            printStateTree.print(RTC.getInstance().getTournament());
         }
         catch (Exception e) {
             handleFailure(e, event);

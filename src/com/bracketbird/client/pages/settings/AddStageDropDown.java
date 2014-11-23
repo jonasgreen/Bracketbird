@@ -1,7 +1,7 @@
 package com.bracketbird.client.pages.settings;
 
 import com.bracketbird.client.gui.rtc.RTC;
-import com.bracketbird.client.model.LevelType;
+import com.bracketbird.client.model.StageType;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -41,7 +41,7 @@ public class AddStageDropDown extends PopupPanel{
             groupPanel.addDomHandler(new ClickHandler() {
                 @Override
                 public void onClick(ClickEvent event) {
-                    RTC.getInstance().createLevel(LevelType.group);
+                    RTC.getInstance().createLevel(StageType.group);
                     hide();
                 }
             }, ClickEvent.getType());
@@ -59,7 +59,7 @@ public class AddStageDropDown extends PopupPanel{
             knockoutPanel.addDomHandler(new ClickHandler() {
                 @Override
                 public void onClick(ClickEvent event) {
-                    RTC.getInstance().createLevel(LevelType.knockout);
+                    RTC.getInstance().createLevel(StageType.knockout);
                     hide();
                 }
             }, ClickEvent.getType());

@@ -24,8 +24,8 @@ public class GroupBuilder {
         this.stage = stage;
         this.teams = teams;
         int i = 0;
-        while (i < stage.getStageSettings().getNumberOfGroups()) {
-            groups.add(new Group(groupNames.next()));
+        while (i < stage.getSettings().getNumberOfGroups()) {
+            groups.add(new Group(stage, groupNames.next()));
             i++;
         }
         buildGroups();

@@ -28,10 +28,9 @@ public class UpdateTeamSeedingEventHandler extends REventHandler<UpdateTeamSeedi
 
     protected void updateTournament(UpdateTeamSeedingEvent event) {
         Team team = RTC.getInstance().getTournament().getTeam(event.getModelId());
-        if(team == null){
-            return;
+        if(team != null){
+            team.updateSeeding(event.getSeeding(), event.isFromClient());
         }
-        team.setSeeding(event);
     }
 
 

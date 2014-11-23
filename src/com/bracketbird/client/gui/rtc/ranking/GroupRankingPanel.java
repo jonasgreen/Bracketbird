@@ -17,7 +17,7 @@ import java.util.*;
  */
 public class GroupRankingPanel extends FlowComponent implements RankingPanel {
 
-    private TournamentStage level;
+    private Stage level;
 
 
 
@@ -31,7 +31,7 @@ public class GroupRankingPanel extends FlowComponent implements RankingPanel {
         }
     };
 
-    public TournamentStage getLevel() {
+    public Stage getLevel() {
         return level;
     }
 
@@ -39,7 +39,7 @@ public class GroupRankingPanel extends FlowComponent implements RankingPanel {
         return this;
     }
 
-    public GroupRankingPanel(TournamentStage l) {
+    public GroupRankingPanel(Stage l) {
         super();
         this.level = l;
 
@@ -117,7 +117,7 @@ public class GroupRankingPanel extends FlowComponent implements RankingPanel {
         StringBuffer sb = new StringBuffer();
         List<Group> grs = ((GroupStage) level).getGroups();
         for (Group gr : grs) {
-            RankingSheet sheet = new RankingSheet(gr.getMatches(), level.getStageSettings());
+            RankingSheet sheet = new RankingSheet(gr.getMatches(), level.getSettings());
             GroupScoreSheet gs = new GroupScoreSheet(gr, sheet.getPositions());
             gs.generateHtml(sb);
         }

@@ -1,8 +1,5 @@
 package com.bracketbird.client.gui.rtc;
 
-import com.bracketbird.client.gui.rtc.event.REvent;
-import com.bracketbird.client.gui.rtc.event.REventListener;
-import com.bracketbird.client.gui.rtc.event.UpdateTeamNameEvent;
 import com.bracketbird.client.model.tournament.Match;
 import com.bracketbird.clientcore.gui.FlowComponent;
 import com.bracketbird.clientcore.style.P;
@@ -35,7 +32,7 @@ public class ViewMatch extends FlowComponent{
         add(getLowerTeamComp());
 
 
-        match.getTeamHome().addListener(new REventListener() {
+     /*   match.getTeamHome().addListener(new REventListener() {
             public void onChange(REvent<?, ?> event) {
                 updateComponent();
             }
@@ -46,7 +43,7 @@ public class ViewMatch extends FlowComponent{
                 updateComponent();
             }
         }, new UpdateTeamNameEvent());
-
+*/
 
         updateComponent();
     }

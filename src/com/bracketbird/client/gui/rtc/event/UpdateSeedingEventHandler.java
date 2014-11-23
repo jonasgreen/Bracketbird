@@ -26,7 +26,7 @@ public class UpdateSeedingEventHandler extends REventHandler<UpdateSeedingEvent>
 
 
     protected void updateTournament(UpdateSeedingEvent event) {
-        RTC.getInstance().getTournament().updateSeeding(event);
+        RTC.getInstance().getTournament().updateSeeding(event.getSeedings(), event.isFromClient());
     }
 
 

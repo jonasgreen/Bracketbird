@@ -3,7 +3,7 @@ package com.bracketbird.client.pages.settings;
 import com.bracketbird.client.gui.rtc.RTC;
 import com.bracketbird.client.gui.rtc.event.ModelEvent;
 import com.bracketbird.client.gui.rtc.event.ModelEventHandler;
-import com.bracketbird.client.model.tournament.TournamentStage;
+import com.bracketbird.client.model.tournament.Stage;
 import com.bracketbird.clientcore.appcontrol.PageController;
 
 /**
@@ -35,13 +35,13 @@ public class SettingsPageController extends PageController<SettingsPage> {
     public void afterFirstLoad() {
         System.out.println("FIRST LOAD");
 
-        for (TournamentStage level : RTC.getInstance().getTournament().getLevels()) {
+        for (Stage level : RTC.getInstance().getTournament().getStages()) {
             addLevel(level);
         }
 
-        RTC.getInstance().getTournament().levelsEventHandlers.addHandler(new ModelEventHandler<TournamentStage>() {
+        RTC.getInstance().getTournament().stagesEventHandlers.addHandler(new ModelEventHandler<Stage>() {
             @Override
-            public void handleEvent(ModelEvent<TournamentStage> event) {
+            public void handleEvent(ModelEvent<Stage> event) {
                 if (event.isCreate()) {
                     addLevel(event.getAfter());
                 }
@@ -53,11 +53,11 @@ public class SettingsPageController extends PageController<SettingsPage> {
     }
 
 
-    private void removeLevel(TournamentStage level) {
+    private void removeLevel(Stage level) {
         getPage().getLevelPanel().removeLevel(level);
     }
 
-    private void addLevel(TournamentStage level) {
+    private void addLevel(Stage level) {
         getPage().getLevelPanel().addLevel(level);
     }
 

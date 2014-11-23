@@ -73,11 +73,11 @@ public class Bracketbird extends com.bracketbird.clientcore.appcontrol.AppEntry 
         BBService.getTournament(token, true, new CallBack<TournamentResult>() {
             @Override
             public void success(TournamentResult r) {
-                if (r.getTournament() == null) {
+                if (r.getTournamentId() == null) {
                     loadErrorPage(token);
                 }
                 else {
-                    RTC.getInstance().loadTournament(r.getTournament(), r.getEventLogs(), false);
+                    RTC.getInstance().loadTournament(r, r.getEventLogs(), false);
                 }
             }
 

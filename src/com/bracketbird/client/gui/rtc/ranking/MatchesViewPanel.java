@@ -75,7 +75,7 @@ public class MatchesViewPanel extends FlowPanel{
         updateMatchesPlayedPanel(level);
     }
 
-    private void updateMatchesPlayedPanel(TournamentStage level) {
+    private void updateMatchesPlayedPanel(Stage level) {
         List<Match> matches = level.getMatches();
 
         int mathcesPlayed = 0;

@@ -26,7 +26,7 @@ public class CreateTeamEventHandler extends REventHandler<CreateTeamEvent> {
 
 
     protected void updateTournament(CreateTeamEvent event) {
-        RTC.getInstance().getTournament().createTeam(event);
+        RTC.getInstance().getTournament().createTeam(event.getEventId(), event.getModelId(), event.getTeamName(), event.getSeeding(), event.isFromClient());
     }
 
 

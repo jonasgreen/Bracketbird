@@ -3,7 +3,7 @@ package com.bracketbird.client.gui.rtc.matches;
 
 import com.bracketbird.client.model.tournament.Match;
 import com.bracketbird.client.model.tournament.Round;
-import com.bracketbird.client.model.tournament.TournamentStage;
+import com.bracketbird.client.model.tournament.Stage;
 import com.bracketbird.clientcore.gui.VerticalComponent;
 
 /**
@@ -11,9 +11,9 @@ import com.bracketbird.clientcore.gui.VerticalComponent;
  */
 public class LevelMatchesLayedOutPanel extends VerticalComponent {
 
-    private TournamentStage level;
+    private Stage level;
 
-    public LevelMatchesLayedOutPanel(TournamentStage tl) {
+    public LevelMatchesLayedOutPanel(Stage tl) {
         super();
         this.level = tl;
         init();

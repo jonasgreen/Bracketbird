@@ -2,6 +2,7 @@ package com.bracketbird.client.gui.rtc.event;
 
 
 import com.bracketbird.client.gui.rtc.RTC;
+import com.bracketbird.client.model.tournament.Match;
 
 /**
  *
@@ -24,9 +25,11 @@ public class UpdateMatchResultEventHandler extends REventHandler<UpdateMatchResu
     }
 
 
-
     protected void updateTournament(UpdateMatchResultEvent event) {
-        RTC.getInstance().getTournament().updateMatchResult(event);
+        Match match = RTC.getInstance().getTournament().findMatch(event.getModelId());
+        if(match != null){
+            match.updateResult(event.getHomeScores(), event.getOutScores(), event.isFromClient());
+        }
     }
 
 

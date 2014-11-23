@@ -2,6 +2,7 @@ package com.bracketbird.client.gui.rtc.event;
 
 
 import com.bracketbird.client.gui.rtc.RTC;
+import com.bracketbird.client.model.tournament.Stage;
 
 /**
  *
@@ -24,7 +25,10 @@ public class LevelFinishedEventHandler extends REventHandler<LevelFinishedEvent>
     }
 
     protected void updateTournament(LevelFinishedEvent event) {
-        RTC.getInstance().getTournament().finishedLevel(event);
+        Stage stage = RTC.getInstance().getTournament().getStage(event.getModelId());
+        if(stage != null){
+            stage.finished(event.getFinalRank(), event.isFromClient());
+        }
     }
 
 
