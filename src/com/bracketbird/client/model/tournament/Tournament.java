@@ -1,6 +1,7 @@
 package com.bracketbird.client.model.tournament;
 
 
+import com.bracketbird.client.gui.rtc.RTC;
 import com.bracketbird.client.gui.rtc.event.*;
 import com.bracketbird.client.model.*;
 import com.bracketbird.client.model.keys.*;
@@ -12,7 +13,7 @@ import java.util.*;
 /**
  *
  */
-public class Tournament extends PlayableModel<TournamentId>{
+public class Tournament extends PlayableModel<TournamentId> {
     private static final long serialVersionUID = 5951730875833184507L;
 
     public transient ModelHandlerList<String> nameEventHandlers;
@@ -28,6 +29,7 @@ public class Tournament extends PlayableModel<TournamentId>{
 
     private transient List<Stage> stages = new ArrayList<Stage>();
     private transient List<Team> teams = new ArrayList<Team>();
+    private transient List<List<Team>> endingTeams = new ArrayList<List<Team>>();
 
 
     public Tournament() {
@@ -38,8 +40,12 @@ public class Tournament extends PlayableModel<TournamentId>{
     }
 
     @Override
-    protected void stateChanged() {
-        //TODO
+    protected LevelState stateChanged(LevelState oldState, LevelState newState) {
+        endingTeams = new ArrayList<List<Team>>();
+        if(newState.isFinished()){
+            endingTeams = getStages().get(getStages().size()-1).getEndingTeams();
+        }
+        return newState;
     }
 
     public List<Stage> getStages() {
@@ -122,35 +128,8 @@ public class Tournament extends PlayableModel<TournamentId>{
     }
 
     public LevelState calculateState() {
-        if (hasLevels()) {
-            if (!hasTeams()) {
-                return LevelState.notReady;
-            }
-            int countEmpty = 0;
-            int countFinish = 0;
-            for (Stage l : stages) {
-                if (l.isFinished()) {
-                    countFinish++;
-                }
-                else if (l.isNotReady()) {
-                    countEmpty++;
-                }
-            }
-            if (countFinish == stages.size()) {//all stages are finished
-                return LevelState.finished;
-            }
-            else if (countEmpty == stages.size()) {//all stages are notReady
-                return LevelState.ready;
-            }
-            else {
-                return LevelState.inProgress;
-            }
-        }
-        else {
-            return LevelState.notReady;
-        }
+        return calculateState(stages);
     }
-
 
 
     public void createTeam(Long eventId, TeamId id, String name, Integer seeding, Boolean fromClient) {
@@ -164,7 +143,6 @@ public class Tournament extends PlayableModel<TournamentId>{
     }
 
 
-
     public void deleteTeam(TeamId id, boolean fromClient) {
         Team team = getTeam(id);
         if (team == null) {
@@ -173,10 +151,18 @@ public class Tournament extends PlayableModel<TournamentId>{
         teams.remove(team);
         updateSeeding(getTeamIds(), fromClient);
         teamsEventHandlers.fireEvent(new DeleteModelEvent<Team>(fromClient, team));
+
+        clearAllStages(fromClient);
         updateState(fromClient);
     }
 
-    public List<TeamId> getTeamIds(){
+    private void clearAllStages(boolean fromClient) {
+        for (Stage stage : stages) {
+            stage.clear(fromClient);
+        }
+    }
+
+    public List<TeamId> getTeamIds() {
         List<TeamId> ids = new ArrayList<TeamId>();
         for (Team team : teams) {
             ids.add(team.getId());
@@ -202,13 +188,7 @@ public class Tournament extends PlayableModel<TournamentId>{
         return null;
     }
 
-    private void clearAllLevels(boolean fromClient) {
-        for (Stage l : stages) {
-            l.clear(fromClient);
-        }
-    }
-
-    public void createLevel(StageType type, StageId id, Long eventId, boolean fromClient) {
+    public void createStage(StageType type, StageId id, Long eventId, boolean fromClient) {
         Stage tl = TournamentLevelFac.create(this, type);
         tl.setId(id);
         tl.setEventLogId(eventId);
@@ -227,17 +207,13 @@ public class Tournament extends PlayableModel<TournamentId>{
         updateState(fromClient);
     }
 
-    public Stage getStage(StageId id){
+    public Stage getStage(StageId id) {
         for (Stage stage : stages) {
-            if(stage.getId().equals(id)){
+            if (stage.getId().equals(id)) {
                 return stage;
             }
         }
         return null;
-    }
-
-    public boolean updateLevelAllowed(Stage l) {
-        return l.isNotReady();
     }
 
     public int getMaxNumberOfTeams(Stage tournamentStage) {
@@ -270,11 +246,10 @@ public class Tournament extends PlayableModel<TournamentId>{
     }
 
 
-
     public Match findMatch(MatchId id) {
         for (Stage stage : stages) {
             Match m = stage.findMatch(id);
-            if(m != null){
+            if (m != null) {
                 return m;
             }
         }
@@ -389,9 +364,9 @@ public class Tournament extends PlayableModel<TournamentId>{
     }
 
     public Stage getLevelInPogress() {
-        if(state.isInProgress()){
+        if (state.isInProgress()) {
             for (Stage tournamentStage : getStages()) {
-                if(tournamentStage.isInProgress()){
+                if (tournamentStage.isInProgress()) {
                     return tournamentStage;
                 }
             }
@@ -400,12 +375,59 @@ public class Tournament extends PlayableModel<TournamentId>{
     }
 
 
-    @Override
+    protected LevelState calculateState(List<? extends HasLevelState> children){
+        return super.calculateState(children);
+    }
+
+
+
+        @Override
     public String toString() {
         return "Tournament{" +
                 "\n  subtournaments=" + StringUtil.toString(stages) +
                 "  Teams=" + StringUtil.toString(teams) +
                 "}\n";
+    }
+
+    public void updateStage(StageId stageId, StageSettings stageSettings, boolean isFromClient) {
+        Stage stage = getStage(stageId);
+        if (stage == null) {
+            return;
+        }
+        //clear following stages
+        clearFollowingStages(isFromClient, stage);
+        stage.updateSettings(stageSettings, isFromClient);
+    }
+
+    private void clearFollowingStages(boolean isFromClient, Stage stage) {
+        if (getStages().size() > 1) {
+            int next = getIndexOf(stage) + 1;
+            while (next < getStages().size() - 1) {
+                Stage nextStage = getStages().get(next++);
+                nextStage.clear(isFromClient);
+            }
+        }
+    }
+
+    public void updateMatchResult(MatchId matchId, int[] homeScores, int[] outScores, boolean fromClient) {
+        Match match = RTC.getInstance().getTournament().findMatch(matchId);
+        if(match == null) {
+            return;
+        }
+        clearFollowingStages(fromClient, match.getParent().getStage());
+        match.updateResult(homeScores, outScores, fromClient);
+    }
+
+    public Group getGroup(GroupId modelId) {
+        for (Stage stage : stages) {
+            if(stage.isGroupStage()){
+                Group g = ((GroupStage) stage).getGroup(modelId);
+                if(g != null){
+                    return g;
+                }
+            }
+        }
+        return null;
     }
 }
 

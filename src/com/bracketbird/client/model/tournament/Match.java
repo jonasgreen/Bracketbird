@@ -1,5 +1,6 @@
 package com.bracketbird.client.model.tournament;
 
+import com.bracketbird.client.EqualsUtil;
 import com.bracketbird.client.gui.rtc.event.*;
 import com.bracketbird.client.model.*;
 import com.bracketbird.client.model.keys.*;
@@ -135,7 +136,7 @@ public abstract class Match extends PlayableModel<MatchId> implements HasLevelSt
 
     public void updateResult(int[] homeScores, int[] outScores, boolean fromClient) {
         Result newResult = Result.newInstance(homeScores, outScores);
-        if(newResult.equals(result)){
+        if(EqualsUtil.equals(newResult, result)){
             return;
         }
         this.result = newResult;
@@ -211,7 +212,7 @@ public abstract class Match extends PlayableModel<MatchId> implements HasLevelSt
     }
 
     @Override
-    protected void stateChanged() {
-
+    protected LevelState stateChanged(LevelState old, LevelState newState) {
+        return newState;
     }
 }

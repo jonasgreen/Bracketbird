@@ -14,7 +14,7 @@ public class WalkOverTeam extends Team {
 
 
     public WalkOverTeam(String wName) {
-        this.name = wName;
+        super(wName, -1);
         setId(new TeamId("walkoverTeamId "+idCount++));
     }
 

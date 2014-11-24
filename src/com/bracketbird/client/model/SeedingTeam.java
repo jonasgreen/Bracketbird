@@ -11,14 +11,12 @@ public class SeedingTeam extends Team {
     private static int idCount = 1;
 
     public SeedingTeam() {
-        name = "------";
+        super("------", -1);
         setId(new TeamId("seedingTeamId "+idCount++));
     }
 
     public SeedingTeam(int seed) {
-        super();
-        this.seeding = seed;
-        this.name = "Seed "+seed;
+        super("Seed "+seed, seed);
         setId(new TeamId("seedingTeamId "+idCount++));
     }
 

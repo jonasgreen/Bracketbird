@@ -28,14 +28,14 @@ public class TournamentLevelStateFactory {
                 someIsNonFinished = true;
             }
         }
-        //all matches are finished or is walkover - ending teams had not been set though
+        //all matches are updateEndingTeams or is walkover - ending teams had not been set though
         if (!someIsNonFinished) {
-            //if(isKnockout()){
+            //if(isKnockoutStage()){
             //  return new LevelStateInFinished();
             //}
             return LevelState.donePlaying;
         }
-        //if non is finished - matches is layed out.
+        //if non is updateEndingTeams - matches is layed out.
         else if (!someIsFinished) {
             return LevelState.ready;
         }

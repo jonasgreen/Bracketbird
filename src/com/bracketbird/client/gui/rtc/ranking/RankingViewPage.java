@@ -118,7 +118,7 @@ public class RankingViewPage extends FlowPanelPage<RankingViewPageController> {
                     allTeams.addAll(removeTeams(level, previous));
                 }
                 else{
-                    allTeams.addAll(level.getEndingTeams());
+                    //allTeams.addAll(level.getEndingTeams());
                 }
                 previous =level;
             }
@@ -143,7 +143,7 @@ public class RankingViewPage extends FlowPanelPage<RankingViewPageController> {
         HashSet<Team> teamsToRemove = new HashSet<Team>();
         teamsToRemove.addAll(previous.getStartingTeams());
 
-        for (Team[] ts : level.getEndingTeams()) {
+        for (List<Team> ts : level.getEndingTeams()) {
             List<Team> list = new ArrayList<Team>();
             for (Team t : ts) {
                 if(!teamsToRemove.contains(t)){
@@ -188,7 +188,7 @@ public class RankingViewPage extends FlowPanelPage<RankingViewPageController> {
 
 
     private RankingPanel createPanel(Stage level) {
-        if (level.isKnockout()) {
+        if (level.isKnockoutStage()) {
             return new CupRankingPanel(level);
         }
         else {

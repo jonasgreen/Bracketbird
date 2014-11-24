@@ -14,7 +14,7 @@ public class PrintStateTree {
                     sb.append("            ").append("match: ").append(name(match.getState()));
                 }
             }
-            if(!stage.isKnockout()){
+            if(!stage.isKnockoutStage()){
                 GroupStage gstage = (GroupStage) stage;
                 for (Group group : gstage.getGroups()) {
                     sb.append("        ").append("GROUP ").append(group.getName()).append(": ").append(name(group.getState()));

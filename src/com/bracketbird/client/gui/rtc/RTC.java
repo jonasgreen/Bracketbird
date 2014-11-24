@@ -48,8 +48,6 @@ public class RTC {
     }
 
     private void initHandlers() {
-        //tournament
-        //createTournament (name)
 
         //Teams
         add(new CreateTeamEventHandler());
@@ -59,12 +57,12 @@ public class RTC {
 
         add(new UpdateSeedingEventHandler());
 
-        //Level settings
-        add(new CreateLevelEventHandler());
+        //Stages
+        add(new CreateStageEventHandler());
         add(new UpdateStageEventHandler());
         add(new DeleteLevelEventHandler());
-        add(new LevelFinishedEventHandler());
-        //set teamranking(ids[])
+        add(new UpdateStageEndingTeamsEventHandler());
+        add(new UpdateGroupEndingTeamsEventHandler());
 
         //Matches
         add(new LayoutMatchesEventHandler());
@@ -204,7 +202,7 @@ public class RTC {
             gc.center();
         }
         else if (previousLevel != null && !(previousLevel.isFinished())) {
-            OkWarning gc = new OkWarning("Please finish previous level first", "You cannot layout matches of a level before the previous level is finished");
+            OkWarning gc = new OkWarning("Please finish previous level first", "You cannot layout matches of a level before the previous level is updateEndingTeams");
             gc.center();
         }
         else {
@@ -227,7 +225,7 @@ public class RTC {
 
 
     public void levelFinished(StageId levelId, List<TeamId[]> finalRanking) {
-        executeEvent(new LevelFinishedEvent(null, levelId, finalRanking));
+        executeEvent(new UpdateStageEndingTeamsEvent(null, levelId, finalRanking));
     }
 
 

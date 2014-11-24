@@ -8,24 +8,24 @@ import java.util.List;
 /**
  *
  */
-public class LevelFinishedEvent extends REvent<LevelFinishedEventHandler, StageId>{
+public class UpdateStageEndingTeamsEvent extends REvent<UpdateStageEndingTeamsEventHandler, StageId>{
 
     private static final long serialVersionUID = -5592485995369867791L;
 
     private List<TeamId[]> finalRank;
 
-    private LevelFinishedEvent() {
+    private UpdateStageEndingTeamsEvent() {
     }
 
-    public LevelFinishedEvent(Long eventId, StageId id, List<TeamId[]> finalRank) {
+    public UpdateStageEndingTeamsEvent(Long eventId, StageId id, List<TeamId[]> finalRank) {
         super(eventId, id);
         setChangeState(true);
         this.finalRank = finalRank;
     }
 
     @Override
-    public Class<LevelFinishedEventHandler> getHandler() {
-        return LevelFinishedEventHandler.class;
+    public Class<UpdateStageEndingTeamsEventHandler> getHandler() {
+        return UpdateStageEndingTeamsEventHandler.class;
     }
 
     public List<TeamId[]> getFinalRank() {

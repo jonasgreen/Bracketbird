@@ -12,7 +12,7 @@ import java.util.List;
 
 public class AllGroupsRankingPanel extends FlowPanel {
 
-    private List<RankingPanel> rankPanels = new ArrayList<RankingPanel>();
+    private List<GroupRankingPanel> rankPanels = new ArrayList<GroupRankingPanel>();
     private FlowPanel errorPanelHolder = new FlowPanel();
     private Button okButton;
 
@@ -24,10 +24,11 @@ public class AllGroupsRankingPanel extends FlowPanel {
 
         setStyleName("allGroupsRankingPanel");
         for (GroupPositions gr : groupsPositions) {
-            RankingPanel rp = new RankingPanel(gr.getGroup().getName(), gr.getPositionOfTeams());
+            /*GroupRankingPanel rp = new GroupRankingPanel(gr.getGroup().getName(), gr.getPositionOfTeams());
             rp.setWidth("280px");
             rankPanels.add(rp);
             add(rp);
+            */
         }
 
         FlowPanel buttonPanel = new FlowPanel();
@@ -47,7 +48,7 @@ public class AllGroupsRankingPanel extends FlowPanel {
             okButton.addClickHandler(new ClickHandler() {
                 public void onClick(ClickEvent event) {
                     List<String> errors = new ArrayList<String>();
-                    for (RankingPanel rp : rankPanels) {
+                    for (GroupRankingPanel rp : rankPanels) {
                         errors.addAll(rp.validate());
                     }
                     if (!errors.isEmpty()) {
@@ -74,7 +75,7 @@ public class AllGroupsRankingPanel extends FlowPanel {
 
     private void rankingIsDone() {
         List<List<Team>> finalGroupRankings = new ArrayList<List<Team>>();
-        for (RankingPanel rp : rankPanels) {
+        for (GroupRankingPanel rp : rankPanels) {
             finalGroupRankings.add(rp.done());
         }
 

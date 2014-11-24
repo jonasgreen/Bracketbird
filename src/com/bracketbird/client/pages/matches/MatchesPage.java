@@ -14,25 +14,24 @@ import java.util.List;
  */
 public class MatchesPage extends Page<MatchesPageController> {
 
-    private List<LevelMatchesPanel> levelMatchesPanels = new ArrayList<LevelMatchesPanel>();
+    private List<StagePanel> levelMatchesPanels = new ArrayList<StagePanel>();
 
     @Override
     protected void init() {
         setStyleName("matchesPage");
     }
 
-
-    public void createMatchesPanel(Stage l) {
-        LevelMatchesPanel lp = new LevelMatchesPanel(l, levelMatchesPanels.size() + 1);
-        add(lp);
-        levelMatchesPanels.add(lp);
+    public void addStagePanel(Stage l) {
+        StagePanel panel = new StagePanel(l);
+        add(panel);
+        levelMatchesPanels.add(panel);
     }
 
-    public void deleteMatchesPanel(Stage level) {
-        Iterator<LevelMatchesPanel> it = levelMatchesPanels.iterator();
+    public void deleteStagePanel(Stage stage) {
+        Iterator<StagePanel> it = levelMatchesPanels.iterator();
         while (it.hasNext()){
-            LevelMatchesPanel panel = it.next();
-            if(panel.getLevel().equals(level)){
+            StagePanel panel = it.next();
+            if(panel.getStage().equals(stage)){
                 panel.removeFromParent();
                 it.remove();
                 return;

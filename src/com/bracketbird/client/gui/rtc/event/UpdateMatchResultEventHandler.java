@@ -16,20 +16,21 @@ public class UpdateMatchResultEventHandler extends REventHandler<UpdateMatchResu
 
     @Override
     protected boolean shouldWarn(UpdateMatchResultEvent event) {
+        Match match = RTC.getInstance().getTournament().findMatch(event.getModelId());
+        if(match != null){
+            return match.getParent().getStage().getState().isBeyondReady();
+        }
         return false;
     }
 
     @Override
     protected String getWarning() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return "Stage is updateEndingTeams. Changing the result will reopen this stage, and reset any following stages";
     }
 
 
     protected void updateTournament(UpdateMatchResultEvent event) {
-        Match match = RTC.getInstance().getTournament().findMatch(event.getModelId());
-        if(match != null){
-            match.updateResult(event.getHomeScores(), event.getOutScores(), event.isFromClient());
-        }
+        RTC.getInstance().getTournament().updateMatchResult(event.getModelId(), event.getHomeScores(), event.getOutScores(), event.isFromClient());
     }
 
 

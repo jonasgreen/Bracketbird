@@ -69,7 +69,7 @@ public class LevelMatchesPanel extends FlowPanel {
             if(!matchesHolder.iterator().hasNext()){
                 showMatchesLayedoutPanel();
             }
-            showFinalRanking(level.getEndingTeams());
+            //showFinalRanking(level.getEndingTeams());
         }
         else if (level.isInProgress()) {
             showMatchesLayedoutPanel();
@@ -77,7 +77,7 @@ public class LevelMatchesPanel extends FlowPanel {
     }
 
     public void showAllMatchesPlayedRanking() {
-        if (level.isKnockout()) {
+        if (level.isKnockoutStage()) {
             //find ranking and set ending teams
             List<TeamId[]> endingTeams = new ArrayList<TeamId[]>();
             for (Round round : level.getRounds()) {
@@ -111,7 +111,7 @@ public class LevelMatchesPanel extends FlowPanel {
     }
 
     public void showFinalRanking(List<Team[]> finalRankOfTeams) {
-        if (level.isKnockout()) {
+        if (level.isKnockoutStage()) {
             buildFinalRankingCup(finalRankOfTeams);
         }
         else {

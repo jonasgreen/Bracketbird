@@ -33,8 +33,7 @@ public abstract class PlayableModel<E extends EntityId> extends Model<E> impleme
             return;
         }
         LevelState oldState = this.state;
-        this.state = newState;
-        stateChanged();
+        this.state = stateChanged(oldState, newState);
         stateHandlers.fireEvent(new StateChangedEvent(fromClient, oldState, newState));
         if(getParent() != null){
             getParent().updateState(fromClient);
@@ -47,6 +46,13 @@ public abstract class PlayableModel<E extends EntityId> extends Model<E> impleme
         }
 
         StateCounter c = createStateCounter(children);
+        if(c.allIsNotReady(children)){
+            return LevelState.notReady;
+        }
+
+        if(c.allIsReady(children)){
+            return LevelState.ready;
+        }
 
         //If a child is in progress - then state is InProgress.
         if (c.getCountInProgress() != 0) {
@@ -77,7 +83,7 @@ public abstract class PlayableModel<E extends EntityId> extends Model<E> impleme
     }
 
 
-    protected abstract void stateChanged();
+    protected abstract LevelState stateChanged(LevelState oldState, LevelState newState);
 
     public boolean isInProgress(){
         return state.isInProgress();

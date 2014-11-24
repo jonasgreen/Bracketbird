@@ -71,6 +71,9 @@ public class KnockoutRoundsBuilder {
             appendChilds(rounds.get(start-1).getMatches(), rounds.get(start).getMatches());
             start--;
         }
+        for (KnockoutRound round : rounds) {
+            round.initState();
+        }
     }
 
     private void appendChilds(List<Match> parents, List<Match> childs){
@@ -90,6 +93,9 @@ public class KnockoutRoundsBuilder {
         int nameIndex = 1;
         int count = 0;
         while (count < previousRound.size()){
+            count++;
+            count++;
+
             KnockoutMatch m = MatchFac.createCup(round, matchNumber++, new SeedingTeam(), new SeedingTeam());
             m.setName((""+c)+nameIndex++);
             list.add(m);

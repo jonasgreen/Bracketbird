@@ -17,8 +17,6 @@ public class Team extends Model<TeamId> {
     protected String name;
     protected Integer seeding;
 
-    protected Team() {
-    }
 
     public Team(String name, int seeding) {
         super();

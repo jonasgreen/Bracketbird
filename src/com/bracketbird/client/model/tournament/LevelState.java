@@ -53,4 +53,12 @@ public abstract class LevelState{
     }
 
     public abstract void handle(StateCounter col);
+
+    public boolean isBeyondReady() {
+        return value > ready.getValue();
+    }
+
+    public boolean isBeyondInProgress() {
+        return value > inProgress.getValue();
+    }
 }

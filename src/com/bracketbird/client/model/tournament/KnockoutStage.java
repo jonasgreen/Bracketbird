@@ -88,5 +88,38 @@ public class KnockoutStage extends Stage {
     }
 
 
+    protected LevelState stateChanged(LevelState oldState, LevelState newState) {
+        endingTeams = new ArrayList<List<Team>>();
+        if (getState().equals(LevelState.finished)) {
+            setEndingTeams();
+        }
+        return newState;
+    }
+
+    private void setEndingTeams() {
+        //find ranking and set ending teams
+        for (Round round : rounds) {
+            List<? extends Match> matches = round.getMatches();
+            List<Team> losingTeams = new ArrayList<Team>();
+            for (Match match : matches) {
+                Team t = match.getLosingTeam();
+                if (t.isARealTeam()) {
+                    losingTeams.add(t);
+                }
+            }
+            List<Team> teams = new ArrayList<Team>();
+            for (Team losingTeam : losingTeams) {
+                teams.add(losingTeam);
+            }
+            endingTeams.add(0, teams);
+        }
+
+        Team winner = rounds.get(rounds.size() - 1).getMatches().get(0).getWinningTeam();
+        List<Team> l = new ArrayList<Team>();
+        l.add(winner);
+        endingTeams.add(0, l);
+    }
+
+
 }
 

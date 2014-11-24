@@ -88,7 +88,7 @@ public class LevelComponent extends FlowPanel {
                 }
             };
 
-            final SettingsPanel p = level.isKnockout() ? new KnockoutSettingsPanel(level) : new GroupSettingsPanel(level);
+            final SettingsPanel p = level.isKnockoutStage() ? new KnockoutSettingsPanel(level) : new GroupSettingsPanel(level);
             p.addCloseHandler(onClose);
             getInnerPanel().setWidth("340px");
             getInnerPanel().addStyleName("levelComponent_innerPanel_edit");

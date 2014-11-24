@@ -7,15 +7,15 @@ import com.bracketbird.client.model.tournament.Stage;
 /**
  *
  */
-public class LevelFinishedEventHandler extends REventHandler<LevelFinishedEvent> {
+public class GroupFinishedEventHandler extends REventHandler<UpdateStageEndingTeamsEvent> {
 
-    public LevelFinishedEventHandler() {
+    public GroupFinishedEventHandler() {
         super();
     }
 
 
     @Override
-    protected boolean shouldWarn(LevelFinishedEvent event) {
+    protected boolean shouldWarn(UpdateStageEndingTeamsEvent event) {
         return false;
     }
 
@@ -24,10 +24,10 @@ public class LevelFinishedEventHandler extends REventHandler<LevelFinishedEvent>
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    protected void updateTournament(LevelFinishedEvent event) {
+    protected void updateTournament(UpdateStageEndingTeamsEvent event) {
         Stage stage = RTC.getInstance().getTournament().getStage(event.getModelId());
         if(stage != null){
-            stage.finished(event.getFinalRank(), event.isFromClient());
+            stage.updateEndingTeams(event.getFinalRank(), event.isFromClient());
         }
     }
 

@@ -34,17 +34,17 @@ public class MatchesPageController extends PageController<MatchesPage> {
             @Override
             public void handleEvent(ModelEvent<Stage> event) {
                 if (event.isCreate()) {
-                    getPage().createMatchesPanel(event.getAfter());
+                    getPage().addStagePanel(event.getAfter());
                 }
                 else if (event.isDelete()) {
-                    getPage().deleteMatchesPanel(event.getBefore());
+                    getPage().deleteStagePanel(event.getBefore());
                 }
             }
         });
 
 
         for (Stage l : RTC.getInstance().getTournament().getStages()) {
-            getPage().createMatchesPanel(l);
+            getPage().addStagePanel(l);
         }
     }
 

@@ -25,7 +25,7 @@ public class StageRoundsFactory{
         int matchNumber = 1;
         for (Round round : rounds) {
             for (Match m : round.getMatches()) {
-                m.setName(""+matchNumber++);
+                m.setMatchNo(matchNumber++);
             }
         }
     }

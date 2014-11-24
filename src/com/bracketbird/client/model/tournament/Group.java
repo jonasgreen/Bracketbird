@@ -3,6 +3,7 @@ package com.bracketbird.client.model.tournament;
 import com.bracketbird.client.model.GroupRoundsFactory;
 import com.bracketbird.client.model.Team;
 import com.bracketbird.client.model.keys.GroupId;
+import com.bracketbird.client.model.keys.TeamId;
 import com.bracketbird.client.pages.matches.GroupPositions;
 import com.bracketbird.clientcore.model.PlayableModel;
 
@@ -20,6 +21,7 @@ public class Group extends PlayableModel<GroupId> {
     private List<GroupRound> rounds = new ArrayList<GroupRound>();
     private List<Team> endingTeams = new ArrayList<Team>();
     private GroupStage stage;
+    private GroupPositions groupPositions;
 
     public Group(GroupStage stage, String name) {
         super();
@@ -72,38 +74,73 @@ public class Group extends PlayableModel<GroupId> {
         return stage;
     }
 
+
+    public void updateEndingTeams(List<TeamId> finalRank, boolean fromClient) {
+        endingTeams = new ArrayList<Team>();
+        for (TeamId id : finalRank) {
+            endingTeams.add(getTeam(id));
+        }
+        updateState(fromClient);
+    }
+
+    public Team getTeam(TeamId id) {
+        for (Team team : teams) {
+            if (id.equals(team.getId())) {
+                return team;
+            }
+        }
+        return null;
+    }
+
+
     @Override
-    public LevelState calculateState() {
-        LevelState state = calculateState(rounds);
-        if (state.isFinished()) {
-            GroupPositions gp = new GroupPositions(this, getParent().getSettings());
-            if (gp.hasTeamsWithSamePosition()) {
-                return LevelState.donePlaying;
+    protected LevelState stateChanged(LevelState oldState, LevelState newState) {
+        groupPositions = null;
+        if (getState().equals(LevelState.finished)) {
+            if (endingTeams.isEmpty()) {
+                //this means all groups are updateEndingTeams (ie has ending teams)
+                GroupPositions gp = new GroupPositions(this, getParent().getSettings());
+                if (gp.hasTeamsWithSamePosition()) {
+                    return LevelState.donePlaying;
+                }
+                else{
+                    for (Position p : gp.getPositionOfTeams()) {
+                        endingTeams.add(p.getPointsCounters().get(0).getTeam());
+                    }
+                    groupPositions = null;
+                    return newState;
+                }
             }
-            List<Team> teams = new ArrayList<Team>();
-            for (Position p : gp.getPositionOfTeams()) {
-                teams.add(p.getPointsCounters().get(0).getTeam());
+            else{
+                //endingTeams has been set by outside
+                return newState;
             }
-            endingTeams = teams;
         }
         else{
             endingTeams = new ArrayList<Team>();
+            return newState;
         }
-        return state;
-    }
-
-    @Override
-    protected void stateChanged() {
-
     }
 
     public void layoutMatches() {
         this.rounds = new GroupRoundsFactory(this).getRounds();
-        initState();
     }
 
-    private void initState() {
+    public void initState() {
         this.state = calculateState();
+    }
+
+    @Override
+    public LevelState calculateState() {
+        return calculateState(rounds);
+    }
+
+    public List<Team> getEndingTeams() {
+        return endingTeams;
+    }
+
+    public GroupPositions getGroupPositions() {
+        return groupPositions;
     }
 }
 

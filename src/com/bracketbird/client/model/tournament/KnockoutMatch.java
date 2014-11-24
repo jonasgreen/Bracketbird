@@ -1,6 +1,5 @@
 package com.bracketbird.client.model.tournament;
 
-import com.bracketbird.client.gui.rtc.event.UpdateMatchResultEvent;
 import com.bracketbird.client.model.Team;
 
 /**
@@ -24,14 +23,13 @@ public class KnockoutMatch extends Match {
     }
 
 
-    protected void update(UpdateMatchResultEvent event) {
+    public void updateResult(int[] homeScores, int[] outScores, boolean fromClient) {
         Result oldResult = getResult();
-        super.updateResult(event.getHomeScores(), event.getOutScores(), event.isFromClient());
+        super.updateResult(homeScores, outScores, fromClient);
 
         if (parent == null || hasSameWinner(oldResult, getResult())) {
             return;
         }
-
 
         boolean isUpperInNextRound = isUpperInNextRound();
         Team winningTeam = getResult() == null ? null : (getResult().homeIsWinning() ? getTeamHome() : getTeamOut());
@@ -42,7 +40,7 @@ public class KnockoutMatch extends Match {
             parent.updateOutTeam(winningTeam, true);
         }
 
-        parent.update(new UpdateMatchResultEvent(null, null, null, null));
+        parent.updateResult(null, null, fromClient);
     }
 
     private boolean hasSameWinner(Result oldResult, Result result) {

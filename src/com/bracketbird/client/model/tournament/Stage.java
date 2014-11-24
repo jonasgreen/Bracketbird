@@ -1,8 +1,6 @@
 package com.bracketbird.client.model.tournament;
 
-import com.bracketbird.client.gui.rtc.event.ModelHandlerList;
 import com.bracketbird.client.gui.rtc.event.UpdateMatchFieldEvent;
-import com.bracketbird.client.gui.rtc.event.UpdateModelEvent;
 import com.bracketbird.client.model.SeedingTeam;
 import com.bracketbird.client.model.StageType;
 import com.bracketbird.client.model.Team;
@@ -12,7 +10,6 @@ import com.bracketbird.client.model.keys.TeamId;
 import com.bracketbird.clientcore.model.PlayableModel;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -24,14 +21,13 @@ public abstract class Stage extends PlayableModel<StageId> implements HasLevelSt
     private StageType type;
 
     protected Tournament tournament;
-    public ModelHandlerList<StageSettings> settingsHandler;
 
     //each round holds all the matches in one round (from all groups).
     protected List<StageRound> rounds = new ArrayList<StageRound>();
     private StageSettings settings = new StageSettings();
 
     protected List<Team> startingTeams = new ArrayList<Team>();
-    protected List<Team[]> endingTeams = new ArrayList<Team[]>();
+    protected List<List<Team>> endingTeams = new ArrayList<List<Team>>();
 
     protected Stage() {
     }
@@ -40,9 +36,6 @@ public abstract class Stage extends PlayableModel<StageId> implements HasLevelSt
     protected Stage(Tournament tournament, StageType type) {
         this.type = type;
         this.tournament = tournament;
-
-        settingsHandler = new ModelHandlerList<StageSettings>("Stage " + type.getLevelName() + " (settingshandler)");
-
     }
 
     public List<Team> getStartingTeams() {
@@ -53,15 +46,19 @@ public abstract class Stage extends PlayableModel<StageId> implements HasLevelSt
         this.startingTeams = startingTeams;
     }
 
-    public void clear(boolean fromClient) {
+    protected void clear() {
         clearTeams();
         clearMatches();
+    }
+
+    public void clear(boolean fromClient){
+        clear();
         updateState(fromClient);
     }
 
     private void clearTeams() {
         startingTeams = new ArrayList<Team>();
-        endingTeams = new ArrayList<Team[]>();
+        endingTeams = new ArrayList<List<Team>>();
     }
 
     public void clearMatches() {
@@ -81,15 +78,15 @@ public abstract class Stage extends PlayableModel<StageId> implements HasLevelSt
             this.startingTeams = new SeedingHelper().seed(getTournament().getTeams());
         }
         else {
-            //not finished
+            //not updateEndingTeams
             if (!previous.isFinished()) {
                 this.startingTeams = createSeedingTeams();
             }
-            //finished
+            //updateEndingTeams
             else {
                 List<Team> startTeams = new ArrayList<Team>();
-                for (Team[] teams : previous.getEndingTeams()) {
-                    Collections.addAll(startTeams, teams);
+                for (List<Team> teams : previous.getEndingTeams()) {
+                    startTeams.addAll(teams);
                 }
                 Integer maxNumberOfTeams = getSettings().getMaxNumberOfTeams();
                 //remove last item until max number of teams is satisfied.
@@ -104,13 +101,12 @@ public abstract class Stage extends PlayableModel<StageId> implements HasLevelSt
     }
 
 
-    public void finished(List<TeamId[]> finalRank, boolean fromClient) {
-        List<Team[]> teams = new ArrayList<Team[]>();
+    public void updateEndingTeams(List<TeamId[]> finalRank, boolean fromClient) {
+        List<List<Team>> teams = new ArrayList<List<Team>>();
         for (TeamId[] teamIds : finalRank) {
-            Team[] tempTeams = new Team[teamIds.length];
-            int i = 0;
+            List<Team> tempTeams = new ArrayList<Team>();
             for (TeamId id : teamIds) {
-                tempTeams[i++] = getTeam(id);
+                tempTeams.add(getTeam(id));
             }
             teams.add(tempTeams);
         }
@@ -143,10 +139,9 @@ public abstract class Stage extends PlayableModel<StageId> implements HasLevelSt
     }
 
     public LevelState calculateState() {
-        if (hasEndingTeams()) {
-            return LevelState.finished;
-        }
-        return calculateState(rounds);
+        LevelState levelState = calculateState(rounds);
+
+        return (levelState.isNotReady() && !rounds.isEmpty()) ? LevelState.ready : levelState;
     }
 
 
@@ -189,10 +184,9 @@ public abstract class Stage extends PlayableModel<StageId> implements HasLevelSt
     }
 
     public void updateSettings(StageSettings stageSettings, boolean fromClient) {
-        StageSettings oldSettings = settings;
         this.settings = stageSettings;
-
-        settingsHandler.fireEvent(new UpdateModelEvent<StageSettings>(fromClient, oldSettings, settings));
+        clear();
+        updateState(fromClient);
     }
 
 
@@ -222,17 +216,8 @@ public abstract class Stage extends PlayableModel<StageId> implements HasLevelSt
         this.tournament = tournament;
     }
 
-    public List<Team[]> getEndingTeams() {
+    public List<List<Team>> getEndingTeams() {
         return endingTeams;
-    }
-
-    public void setEndingTeams(List<Team[]> endingTeams) {
-        this.endingTeams = endingTeams;
-    }
-
-
-    public TournamentLevelVO createVO() {
-        return getSettings().createVO(this);
     }
 
 
@@ -282,8 +267,12 @@ public abstract class Stage extends PlayableModel<StageId> implements HasLevelSt
         return state;
     }
 
-    public boolean isKnockout() {
+    public boolean isKnockoutStage() {
         return this instanceof KnockoutStage;
+    }
+
+    public boolean isGroupStage(){
+        return this instanceof GroupStage;
     }
 
     public StageSettings getSettings() {
@@ -295,14 +284,6 @@ public abstract class Stage extends PlayableModel<StageId> implements HasLevelSt
         return tournament;
     }
 
-    @Override
-    protected void stateChanged() {
-        if (getState().equals(LevelState.donePlaying)) {
-            //TODO set ending teams
-        }
 
-        if (state.isBelow(LevelState.finished)) {
-            endingTeams = new ArrayList<Team[]>();
-        }
-    }
+
 }

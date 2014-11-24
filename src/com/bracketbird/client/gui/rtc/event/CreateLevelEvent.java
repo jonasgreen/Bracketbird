@@ -6,7 +6,7 @@ import com.bracketbird.client.model.keys.StageId;
 /**
  *
  */
-public class CreateLevelEvent extends REvent<CreateLevelEventHandler, StageId>{
+public class CreateLevelEvent extends REvent<CreateStageEventHandler, StageId>{
 
     private static final long serialVersionUID = -2655835684157046604L;
 
@@ -25,8 +25,8 @@ public class CreateLevelEvent extends REvent<CreateLevelEventHandler, StageId>{
     }
 
     @Override
-    public Class<CreateLevelEventHandler> getHandler() {
-        return CreateLevelEventHandler.class;
+    public Class<CreateStageEventHandler> getHandler() {
+        return CreateStageEventHandler.class;
     }
 
 

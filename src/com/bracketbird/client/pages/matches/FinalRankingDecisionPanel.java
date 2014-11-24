@@ -25,7 +25,7 @@ public class FinalRankingDecisionPanel extends FlowPanel {
     private SimplePanel buttonPanel = new SimplePanel();
     private SimplePanel rankingPanel = new SimplePanel();
     private SimplePanel errorsPanel = new SimplePanel();
-    private RankingPanel finalRow = null;
+    private GroupRankingPanel finalRow = null;
     private List<Position> positions;
     private Stage level;
 
@@ -40,9 +40,9 @@ public class FinalRankingDecisionPanel extends FlowPanel {
     private void init() {
         add(rankingPanel);
 
-        finalRow = new RankingPanel(null, positions);
+        /*finalRow = new GroupRankingPanel(null, positions);
         rankingPanel.add(finalRow);
-
+*/
         add(errorsPanel);
         add(buttonPanel);
         buttonPanel.add(getOkButton());

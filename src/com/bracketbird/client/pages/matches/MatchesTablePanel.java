@@ -15,22 +15,22 @@ import java.util.List;
  */
 public class MatchesTablePanel extends FlowPanel {
 
-    private Stage level;
+    private Stage stage;
     private List<MatchRow> rows = new ArrayList<MatchRow>();
 
     public MatchesTablePanel(Stage tl) {
         super();
         setStyleName("matchesTablePanel");
-        this.level = tl;
+        this.stage = tl;
         int i = 1;
-        for (final Round round : level.getRounds()) {
+        for (final Round round : stage.getRounds()) {
             if(i > 1){
                 add(createRoundSeparatorPanel(round.getName()));
             }
 
             for (Match match : round.getMatches()) {
                 if(!match.isWalkover()) {
-                    match.setName("" + i++);
+                    match.setMatchNo(i++);
                     MatchRow row = new MatchRow(match, this);
                     rows.add(row);
                     add(row);

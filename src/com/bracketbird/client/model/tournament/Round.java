@@ -57,15 +57,13 @@ public abstract class Round extends PlayableModel<RoundId> {
     }
 
 
-
     public LevelState calculateState() {
         return calculateState(matches);
     }
 
 
-
-        @Override
-    protected void stateChanged() {
-
+    @Override
+    protected LevelState stateChanged(LevelState old, LevelState newState) {
+        return newState;
     }
 }

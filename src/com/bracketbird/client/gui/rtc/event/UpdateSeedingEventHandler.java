@@ -15,7 +15,7 @@ public class UpdateSeedingEventHandler extends REventHandler<UpdateSeedingEvent>
 
     @Override
     protected boolean shouldWarn(UpdateSeedingEvent event) {
-        return RTC.getInstance().getTournament().isInProgress();
+        return RTC.getInstance().getTournament().getState().isBeyondReady();
     }
 
     @Override
