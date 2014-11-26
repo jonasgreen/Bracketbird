@@ -76,7 +76,7 @@ public class MatchRow extends FlowPanel {
             match.getTeamHome().nameHandlers.addHandler(new ModelEventHandler<String>() {
                 @Override
                 public void handleEvent(ModelEvent<String> event) {
-                    teamHomeLabel.setText(event.getAfter());
+                    teamHomeLabel.setText(event.getNewValue());
                 }
             });
         }
@@ -100,7 +100,7 @@ public class MatchRow extends FlowPanel {
             match.getTeamOut().nameHandlers.addHandler(new ModelEventHandler<String>() {
                 @Override
                 public void handleEvent(ModelEvent<String> event) {
-                    teamOutLabel.setText(event.getAfter());
+                    teamOutLabel.setText(event.getNewValue());
                 }
             });
         }

@@ -43,10 +43,10 @@ public class SettingsPageController extends PageController<SettingsPage> {
             @Override
             public void handleEvent(ModelEvent<Stage> event) {
                 if (event.isCreate()) {
-                    addLevel(event.getAfter());
+                    addLevel(event.getNewValue());
                 }
                 else if (event.isDelete()) {
-                    removeLevel(event.getBefore());
+                    removeLevel(event.getOldValue());
                 }
             }
         });

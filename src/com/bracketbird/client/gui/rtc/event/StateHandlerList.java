@@ -1,22 +1,44 @@
 package com.bracketbird.client.gui.rtc.event;
 
 
-import com.bracketbird.client.model.tournament.LevelState;
+import com.google.gwt.event.shared.HandlerRegistration;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  *
  */
-public class StateHandlerList extends ModelHandlerList<LevelState>{
+public class StateHandlerList {
 
+    private String name;
 
     public StateHandlerList(String name) {
-        super(name);
+        this.name = name;
+    }
+
+    private List<StateHandler> handlers = new ArrayList<StateHandler>();
+
+    public HandlerRegistration addHandler(final StateHandler handler){
+        handlers.add(handler);
+
+        return new HandlerRegistration() {
+            @Override
+            public void removeHandler() {
+                handlers.remove(handler);
+            }
+        };
     }
 
     public void fireEvent(StateChangedEvent event){
-        super.fireEvent(event);
-    }
+        System.out.println(name + " STATEHANDLER - FIRE EVENT (handlers.size = " + handlers.size() + ")");
 
+        //createGroupMatch new list to avoid concurrent modification exception
+        for (StateHandler l : new ArrayList<StateHandler>(handlers)) {
+            l.onChange(event);
+        }
+    }
 
 
 }

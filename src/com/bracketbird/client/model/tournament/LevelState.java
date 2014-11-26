@@ -52,6 +52,10 @@ public abstract class LevelState{
         return this.getValue() < state.getValue();
     }
 
+    public boolean isAbove(LevelState state) {
+        return this.getValue() > state.getValue();
+    }
+
     public abstract void handle(StateCounter col);
 
     public boolean isBeyondReady() {
@@ -60,5 +64,19 @@ public abstract class LevelState{
 
     public boolean isBeyondInProgress() {
         return value > inProgress.getValue();
+    }
+
+    public boolean isBelowReady() {
+        return value < ready.getValue();
+    }
+
+
+    public boolean in(LevelState ... states) {
+        for (LevelState state : states) {
+            if(this.equals(state)){
+                return true;
+            }
+        }
+        return false;
     }
 }

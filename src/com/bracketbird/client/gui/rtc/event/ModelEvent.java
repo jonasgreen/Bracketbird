@@ -8,21 +8,21 @@ public abstract class ModelEvent<T> {
 
     private boolean fromClient;
 
-    private T before;
-    private T after;
+    private T oldValue;
+    private T newValue;
 
-    public ModelEvent(boolean fromClient, T before, T after) {
+    public ModelEvent(boolean fromClient, T oldValue, T newValue) {
         this.fromClient = fromClient;
-        this.before = before;
-        this.after = after;
+        this.oldValue = oldValue;
+        this.newValue = newValue;
     }
 
-    public T getBefore() {
-        return before;
+    public T getOldValue() {
+        return oldValue;
     }
 
-    public T getAfter() {
-        return after;
+    public T getNewValue() {
+        return newValue;
     }
 
     public boolean isFromClient() {

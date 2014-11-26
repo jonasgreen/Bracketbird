@@ -188,7 +188,6 @@ public abstract class Match extends PlayableModel<MatchId> implements HasLevelSt
     }
 
 
-
     @Override
     public String toString() {
         return "Match{" + teamHome.getName() + " - " + teamOut.getName() + '}';

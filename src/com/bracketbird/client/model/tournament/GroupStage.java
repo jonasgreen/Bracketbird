@@ -48,34 +48,57 @@ public class GroupStage extends Stage {
         updateState(fromClient);
     }
 
+    public LevelState calculateState() {
+        return calculateState(groups);
+    }
+
+
     protected LevelState stateChanged(LevelState oldState, LevelState newState) {
         ranker = null;
-        if (getState().equals(LevelState.finished)) {
+        if (newState.equals(LevelState.finished)) {
             if (endingTeams.isEmpty()) {
-                //this means all groups are updateEndingTeams (ie has ending teams)
-                ranker = new FinalGroupStageRanker(this);
-                if (ranker.allTeamsHasUniquePositions()) {
-                    for (Position p : ranker.getPositions()) {
-                        List<Team> oneTeamList = new ArrayList<Team>();
-                        oneTeamList.add(p.getPointsCounters().get(0).getTeam());
-                        endingTeams.add(oneTeamList);
-                    }
-                    ranker = null;
-                    return newState;
+                if (groups.size() == 1) {
+                    return handleOneFinishedGroup(newState);
                 }
-                else{
-                    return LevelState.donePlaying;
+                else {
+                    return handleMultipleFinishedGroups(newState);
                 }
             }
-            else{
+            else {
                 //endingTeams has been set by outside
                 return newState;
             }
         }
-        else{
+        else {
             endingTeams = new ArrayList<List<Team>>();
             return newState;
         }
+    }
+
+    private LevelState handleMultipleFinishedGroups(LevelState newState) {
+        ranker = new FinalGroupStageRanker(this);
+        if (ranker.allTeamsHasUniquePositions()) {
+            for (Position p : ranker.getPositions()) {
+                List<Team> oneTeamList = new ArrayList<Team>();
+                oneTeamList.add(p.getPointsCounters().get(0).getTeam());
+                endingTeams.add(oneTeamList);
+            }
+            ranker = null;
+            return newState;
+        }
+        else {
+            return LevelState.donePlaying;
+        }
+    }
+
+    private LevelState handleOneFinishedGroup(LevelState newState) {
+        //only one team in each list
+        for (Team t : groups.get(0).getEndingTeams()) {
+            List<Team> list = new ArrayList<Team>();
+            list.add(t);
+            endingTeams.add(list);
+        }
+        return newState;
     }
 
 
@@ -93,7 +116,7 @@ public class GroupStage extends Stage {
 
     public Group getGroup(GroupId modelId) {
         for (Group group : groups) {
-            if(group.getId().equals(modelId)){
+            if (group.getId().equals(modelId)) {
                 return group;
             }
         }

@@ -2,7 +2,6 @@ package com.bracketbird.client.gui.rtc.event;
 
 
 import com.bracketbird.client.gui.rtc.RTC;
-import com.bracketbird.client.model.tournament.Match;
 
 /**
  *
@@ -16,16 +15,17 @@ public class UpdateMatchResultEventHandler extends REventHandler<UpdateMatchResu
 
     @Override
     protected boolean shouldWarn(UpdateMatchResultEvent event) {
-        Match match = RTC.getInstance().getTournament().findMatch(event.getModelId());
+        /*Match match = RTC.getInstance().getTournament().findMatch(event.getModelId());
         if(match != null){
-            return match.getParent().getStage().getState().isBeyondReady();
+            return match.getParent().getStage().getState().isBeyondInProgress();
         }
+        */
         return false;
     }
 
     @Override
     protected String getWarning() {
-        return "Stage is updateEndingTeams. Changing the result will reopen this stage, and reset any following stages";
+        return "All matches played. Changing the result will reopen this stage, and reset any following stages";
     }
 
 

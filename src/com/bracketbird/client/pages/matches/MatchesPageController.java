@@ -34,10 +34,10 @@ public class MatchesPageController extends PageController<MatchesPage> {
             @Override
             public void handleEvent(ModelEvent<Stage> event) {
                 if (event.isCreate()) {
-                    getPage().addStagePanel(event.getAfter());
+                    getPage().addStagePanel(event.getNewValue());
                 }
                 else if (event.isDelete()) {
-                    getPage().deleteStagePanel(event.getBefore());
+                    getPage().deleteStagePanel(event.getOldValue());
                 }
             }
         });

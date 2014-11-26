@@ -39,7 +39,7 @@ public class MatchView extends FlowPanel {
         match.matchEventHandlers.addHandler(new ModelEventHandler<Match>() {
             @Override
             public void handleEvent(ModelEvent<Match> event) {
-                matchChanged(event.getAfter());
+                matchChanged(event.getNewValue());
             }
         });
 

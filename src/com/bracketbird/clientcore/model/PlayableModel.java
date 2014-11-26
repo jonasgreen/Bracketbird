@@ -12,45 +12,51 @@ import java.util.List;
 /**
  *
  */
-public abstract class PlayableModel<E extends EntityId> extends Model<E> implements HasLevelState{
+public abstract class PlayableModel<E extends EntityId> extends Model<E> implements HasLevelState {
     private static final long serialVersionUID = -6663910902783234316L;
 
     public transient StateHandlerList stateHandlers;
 
     protected LevelState state = LevelState.notReady;
 
-    public PlayableModel(){
-        stateHandlers = new StateHandlerList(this.getClass().getSimpleName() + " (stateHandler)");
+    public PlayableModel() {
+        stateHandlers = new StateHandlerList(this.getClass().getSimpleName());
     }
 
     public void updateState(boolean fromClient) {
         LevelState newState = calculateState();
 
-        System.out.println(this.getClass().getSimpleName() + ": UPDATE STATE ("+state.getClass().getSimpleName() + " -> "+newState.getClass().getSimpleName()+")");
+        System.out.println(this.getClass().getSimpleName() + ": UPDATE STATE (" + state.getClass().getSimpleName() + " -> " + newState.getClass().getSimpleName() + ")");
 
-        if(this.state.equals(newState)){
+        if (shouldTriggerStateEvent(this.state, newState)) {
+            LevelState oldState = this.state;
+            this.state = stateChanged(oldState, newState);
+            stateHandlers.fireEvent(new StateChangedEvent(fromClient, oldState, newState));
+            if (getParent() != null) {
+                getParent().updateState(fromClient);
+            }
+        }
+        else {
             System.out.println("STOP");
-            return;
         }
-        LevelState oldState = this.state;
-        this.state = stateChanged(oldState, newState);
-        stateHandlers.fireEvent(new StateChangedEvent(fromClient, oldState, newState));
-        if(getParent() != null){
-            getParent().updateState(fromClient);
-        }
+
     }
 
-    protected LevelState calculateState(List<? extends HasLevelState> children){
+    protected boolean shouldTriggerStateEvent(LevelState oldState, LevelState newState) {
+        return oldState.in(LevelState.donePlaying, LevelState.finished) || !oldState.equals(newState);
+    }
+
+    protected LevelState calculateState(List<? extends HasLevelState> children) {
         if (children.isEmpty()) {
             return LevelState.notReady;
         }
 
         StateCounter c = createStateCounter(children);
-        if(c.allIsNotReady(children)){
+        if (c.allIsNotReady(children)) {
             return LevelState.notReady;
         }
 
-        if(c.allIsReady(children)){
+        if (c.allIsReady(children)) {
             return LevelState.ready;
         }
 
@@ -67,14 +73,14 @@ public abstract class PlayableModel<E extends EntityId> extends Model<E> impleme
             return LevelState.ready;
         }
 
-        if(c.getCountDonePlaying() != 0){
+        if (c.getCountDonePlaying() != 0) {
             return LevelState.donePlaying;
         }
 
         return LevelState.finished;
     }
 
-    public StateCounter createStateCounter(List<? extends HasLevelState> list){
+    public StateCounter createStateCounter(List<? extends HasLevelState> list) {
         StateCounter counter = new StateCounter();
         for (HasLevelState item : list) {
             item.getState().handle(counter);
@@ -85,7 +91,7 @@ public abstract class PlayableModel<E extends EntityId> extends Model<E> impleme
 
     protected abstract LevelState stateChanged(LevelState oldState, LevelState newState);
 
-    public boolean isInProgress(){
+    public boolean isInProgress() {
         return state.isInProgress();
     }
 
@@ -97,19 +103,17 @@ public abstract class PlayableModel<E extends EntityId> extends Model<E> impleme
         return state.isFinished();
     }
 
-    public boolean isReady(){
+    public boolean isReady() {
         return state.isReady();
     }
 
-    public boolean isNotReady(){
+    public boolean isNotReady() {
         return state.isNotReady();
     }
 
     public LevelState getState() {
         return state;
     }
-
-
 
 
 }

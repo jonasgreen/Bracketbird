@@ -59,6 +59,7 @@ public class ResultBox extends SetEditor2 {
             RTC.getInstance().updateMatchResult(match.getId(), null);
         }
         else {
+            formatText();
             ResultValidator val = ResultValidator.create(getNumbers(), !(match instanceof KnockoutMatch));
             if (val.isValid()) {
                 removeStyleName("matchRow_result_error");

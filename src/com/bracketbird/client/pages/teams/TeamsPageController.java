@@ -56,10 +56,10 @@ public class TeamsPageController extends PageController<TeamsPage> {
             @Override
             public void handleEvent(ModelEvent<Team> event) {
                 if (event.isCreate()) {
-                    getPage().addTeam(event.getAfter(), event.isFromClient());
+                    getPage().addTeam(event.getNewValue(), event.isFromClient());
                 }
                 else if (event.isDelete()) {
-                    getPage().deleteTeam(event.getBefore(), event.isFromClient());
+                    getPage().deleteTeam(event.getOldValue(), event.isFromClient());
                 }
             }
         });

@@ -2,11 +2,14 @@ package com.bracketbird.client.pages.matches;
 
 
 import com.bracketbird.client.gui.rtc.RTC;
-import com.bracketbird.client.gui.rtc.event.ModelEvent;
-import com.bracketbird.client.gui.rtc.event.ModelEventHandler;
+import com.bracketbird.client.gui.rtc.event.StateChangedEvent;
+import com.bracketbird.client.gui.rtc.event.StateHandler;
 import com.bracketbird.client.model.Team;
 import com.bracketbird.client.model.keys.TeamId;
-import com.bracketbird.client.model.tournament.*;
+import com.bracketbird.client.model.tournament.GroupStage;
+import com.bracketbird.client.model.tournament.Match;
+import com.bracketbird.client.model.tournament.Round;
+import com.bracketbird.client.model.tournament.Stage;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.SimplePanel;
@@ -42,9 +45,9 @@ public class LevelMatchesPanel extends FlowPanel {
         add(matchesHolder);
         add(finalRankingHolder);
 
-        level.stateHandlers.addHandler(new ModelEventHandler<LevelState>() {
+        level.stateHandlers.addHandler(new StateHandler() {
             @Override
-            public void handleEvent(ModelEvent<LevelState> event) {
+            public void onChange(StateChangedEvent event) {
                 handleStateChange();
             }
         });
@@ -55,23 +58,19 @@ public class LevelMatchesPanel extends FlowPanel {
     private void handleStateChange() {
         if (level.isReady()) {
             showMatchesLayedoutPanel();
-        }
-        else if (level.isNotReady()) {
+        } else if (level.isNotReady()) {
             showLevelEmptyPanel();
-        }
-        else if (level.isDonePlaying()) {
-            if(!matchesHolder.iterator().hasNext()){
+        } else if (level.isDonePlaying()) {
+            if (!matchesHolder.iterator().hasNext()) {
                 showMatchesLayedoutPanel();
             }
             showAllMatchesPlayedRanking();
-        }
-        else if (level.isFinished()) {
-            if(!matchesHolder.iterator().hasNext()){
+        } else if (level.isFinished()) {
+            if (!matchesHolder.iterator().hasNext()) {
                 showMatchesLayedoutPanel();
             }
             //showFinalRanking(level.getEndingTeams());
-        }
-        else if (level.isInProgress()) {
+        } else if (level.isInProgress()) {
             showMatchesLayedoutPanel();
         }
     }
@@ -100,8 +99,7 @@ public class LevelMatchesPanel extends FlowPanel {
             Team winner = level.getRounds().get(level.getRounds().size() - 1).getMatches().get(0).getWinningTeam();
             endingTeams.add(0, new TeamId[]{winner.getId()});
             RTC.getInstance().levelFinished(level.getId(), endingTeams);
-        }
-        else {
+        } else {
             GroupLevelRankingPanel fr = new GroupLevelRankingPanel((GroupStage) level);
             finalRankingHolder.clear();
             finalRankingHolder.add(fr);
@@ -113,8 +111,7 @@ public class LevelMatchesPanel extends FlowPanel {
     public void showFinalRanking(List<Team[]> finalRankOfTeams) {
         if (level.isKnockoutStage()) {
             buildFinalRankingCup(finalRankOfTeams);
-        }
-        else {
+        } else {
             buildFinalRankingGroup(finalRankOfTeams);
         }
 
@@ -146,8 +143,7 @@ public class LevelMatchesPanel extends FlowPanel {
         for (Team[] teams : finalRankOfTeams) {
             if (teams.length == 1) {
                 panel.add(new FinalRankRow(teams[0], index++));
-            }
-            else {
+            } else {
                 for (Team team : teams) {
                     panel.add(new FinalRankRow(team, index + "-" + (index + teams.length - 1)));
                 }
@@ -166,7 +162,7 @@ public class LevelMatchesPanel extends FlowPanel {
     }
 
     public void showMatchesLayedoutPanel() {
-        if(!matchesHolder.iterator().hasNext()){
+        if (!matchesHolder.iterator().hasNext()) {
             reset();
             matchesHolder.add(new MatchesTablePanel(level));
         }

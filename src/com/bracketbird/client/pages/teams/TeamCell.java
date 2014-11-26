@@ -33,7 +33,7 @@ public class TeamCell extends TextBox{
         team.nameHandlers.addHandler(new ModelEventHandler<String>() {
             @Override
             public void handleEvent(ModelEvent<String> event) {
-                setText(event.getAfter());
+                setText(event.getNewValue());
             }
         });
 

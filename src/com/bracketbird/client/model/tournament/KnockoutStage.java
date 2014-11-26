@@ -87,10 +87,13 @@ public class KnockoutStage extends Stage {
         updateState(fromClient);
     }
 
+    public LevelState calculateState() {
+        return calculateState(rounds);
+    }
 
     protected LevelState stateChanged(LevelState oldState, LevelState newState) {
         endingTeams = new ArrayList<List<Team>>();
-        if (getState().equals(LevelState.finished)) {
+        if (newState.equals(LevelState.finished)) {
             setEndingTeams();
         }
         return newState;

@@ -6,15 +6,32 @@ import com.bracketbird.client.model.tournament.LevelState;
 /**
  *
  */
-public class StateChangedEvent extends ModelEvent<LevelState>{
+public class StateChangedEvent {
 
-    public StateChangedEvent(boolean fromClient, LevelState before, LevelState after) {
-        super(fromClient, before, after);
+    private boolean fromClient;
+
+    private LevelState oldState;
+    private LevelState newState;
+
+    public StateChangedEvent(boolean fromClient, LevelState oldState, LevelState newState) {
+        this.fromClient = fromClient;
+        this.oldState = oldState;
+        this.newState = newState;
     }
 
-    @Override
-    public boolean isUpdate() {
-        return true;
+    public boolean isFromClient() {
+        return fromClient;
     }
 
+    public LevelState getOldState() {
+        return oldState;
+    }
+
+    public LevelState getNewState() {
+        return newState;
+    }
+
+    public StateCrossing crosses(LevelState toBeCrossed){
+        return new StateCrossing(oldState, newState, toBeCrossed);
+    }
 }

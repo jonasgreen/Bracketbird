@@ -1,8 +1,8 @@
 package com.bracketbird.client.pages.matches;
 
 
-import com.bracketbird.client.gui.rtc.event.ModelEvent;
-import com.bracketbird.client.gui.rtc.event.ModelEventHandler;
+import com.bracketbird.client.gui.rtc.event.StateChangedEvent;
+import com.bracketbird.client.gui.rtc.event.StateHandler;
 import com.bracketbird.client.model.Team;
 import com.bracketbird.client.model.tournament.Group;
 import com.bracketbird.client.model.tournament.LevelState;
@@ -34,10 +34,10 @@ public class GroupRankingPanel extends FlowPanel {
         add(content);
 
 
-        group.stateHandlers.addHandler(new ModelEventHandler<LevelState>() {
+        group.stateHandlers.addHandler(new StateHandler() {
             @Override
-            public void handleEvent(ModelEvent<LevelState> event) {
-                handleStateChange(event.getAfter());
+            public void onChange(StateChangedEvent event) {
+                handleStateChange(event.getNewState());
             }
         });
 
@@ -47,11 +47,9 @@ public class GroupRankingPanel extends FlowPanel {
     private void handleStateChange(LevelState state) {
         if (state.isFinished()) {
             buildFinishedRows(group.getEndingTeams());
-        }
-        else if (state.isDonePlaying()) {
+        } else if (state.isDonePlaying()) {
             buildDonePlayingRows(group.getGroupPositions());
-        }
-        else {
+        } else {
             content.clear();
         }
     }

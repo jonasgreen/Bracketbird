@@ -34,7 +34,7 @@ public class SetEditor2 extends TextBox {
         }
     }
 
-    private void formatText() {
+    public void formatText() {
         int cursorPos = getCursorPos();
 
 

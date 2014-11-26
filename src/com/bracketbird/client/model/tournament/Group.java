@@ -96,9 +96,8 @@ public class Group extends PlayableModel<GroupId> {
     @Override
     protected LevelState stateChanged(LevelState oldState, LevelState newState) {
         groupPositions = null;
-        if (getState().equals(LevelState.finished)) {
+        if (newState.equals(LevelState.finished)) {
             if (endingTeams.isEmpty()) {
-                //this means all groups are updateEndingTeams (ie has ending teams)
                 GroupPositions gp = new GroupPositions(this, getParent().getSettings());
                 if (gp.hasTeamsWithSamePosition()) {
                     return LevelState.donePlaying;

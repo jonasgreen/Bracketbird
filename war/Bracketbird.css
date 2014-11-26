@@ -1163,10 +1163,11 @@ box-shadow:         inset 0px 5px 5px -5px rgba(150, 150, 150, 0.15);
 }
 
 .matchRow_team_winner{
+    font-weight: bold;
 }
 
 .matchRow_team_loser{
-    opacity: 0.5;
+
 }
 
 .matchRow_result{

@@ -138,11 +138,7 @@ public abstract class Stage extends PlayableModel<StageId> implements HasLevelSt
         return false;
     }
 
-    public LevelState calculateState() {
-        LevelState levelState = calculateState(rounds);
-
-        return (levelState.isNotReady() && !rounds.isEmpty()) ? LevelState.ready : levelState;
-    }
+    public abstract LevelState calculateState();
 
 
     protected boolean hasEndingTeams() {
