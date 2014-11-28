@@ -32,18 +32,18 @@ import java.util.Map;
 public class RTC {
 
 
-    private boolean reloading = false;
+    protected boolean reloading = false;
 
 
-    private Map<Class<?>, REventHandler<REvent<?, ?>>> handlers = new HashMap<Class<?>, REventHandler<REvent<?, ?>>>();
-    private FromServer from;
+    protected Map<Class<?>, REventHandler<REvent<?, ?>>> handlers = new HashMap<Class<?>, REventHandler<REvent<?, ?>>>();
+    protected FromServer from;
 
 
     private EventManager sync;
-    private Tournament tournament;
-    private static RTC instance;
+    protected Tournament tournament;
+    protected static RTC instance;
 
-    private RTC() {
+    protected RTC() {
         initHandlers();
     }
 
@@ -110,7 +110,7 @@ public class RTC {
 
     }
 
-    private void initGuiListeners(Tournament t) {
+    protected void initGuiListeners(Tournament t) {
         if (!t.isViewOnly()) {
             TeamsPageController.getInstance().getPage();
             SettingsPageController.getInstance().getPage();
@@ -161,7 +161,7 @@ public class RTC {
 
 
     public void createTeam(String teamName, int seeding) {
-        executeEvent(new CreateTeamEvent(teamName, seeding, new TeamId(UID.getUID())));
+        executeEvent(new CreateTeamEvent(teamName, seeding, new TeamId(nextUUID())));
     }
 
     public void updateTeamName(TeamId id, String name) {
@@ -182,15 +182,15 @@ public class RTC {
     }
 
     //LEVELS
-    public void createLevel(StageType levelType) {
-        executeEvent(new CreateLevelEvent(null, levelType, new StageId(UID.getUID())));
+    public void createStage(StageType levelType) {
+        executeEvent(new CreateLevelEvent(null, levelType, new StageId(nextUUID())));
     }
 
-    public void updateLevelSettings(StageId levelId, StageSettings ls) {
+    public void updateStageSettings(StageId levelId, StageSettings ls) {
         executeEvent(new UpdateStageEvent(null, levelId, ls));
     }
 
-    public void deleteLevel(StageId levelId) {
+    public void deleteStage(StageId levelId) {
         executeEvent(new DeleteLevelEvent(null, levelId));
     }
 
@@ -270,6 +270,10 @@ public class RTC {
             t.printStackTrace();
         }
 
+    }
+
+    protected String nextUUID(){
+        return UID.getUID();
     }
 
 }

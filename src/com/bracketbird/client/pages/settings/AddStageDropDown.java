@@ -41,7 +41,7 @@ public class AddStageDropDown extends PopupPanel{
             groupPanel.addDomHandler(new ClickHandler() {
                 @Override
                 public void onClick(ClickEvent event) {
-                    RTC.getInstance().createLevel(StageType.group);
+                    RTC.getInstance().createStage(StageType.group);
                     hide();
                 }
             }, ClickEvent.getType());
@@ -59,7 +59,7 @@ public class AddStageDropDown extends PopupPanel{
             knockoutPanel.addDomHandler(new ClickHandler() {
                 @Override
                 public void onClick(ClickEvent event) {
-                    RTC.getInstance().createLevel(StageType.knockout);
+                    RTC.getInstance().createStage(StageType.knockout);
                     hide();
                 }
             }, ClickEvent.getType());

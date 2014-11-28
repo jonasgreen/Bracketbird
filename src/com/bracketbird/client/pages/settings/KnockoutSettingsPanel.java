@@ -38,7 +38,7 @@ public class KnockoutSettingsPanel extends SettingsPanel {
             StageSettings ls = new StageSettings();
             ls.setMaxNumberOfTeams(validator.toInteger(getMaxTeamsTextBox(), getMaxTeamsLabel(), false, new LargerThan(1)));
 
-            RTC.getInstance().updateLevelSettings(getLevel().getId(), ls);
+            RTC.getInstance().updateStageSettings(getLevel().getId(), ls);
             hide();
         }
         catch (SettingsValidationException e) {

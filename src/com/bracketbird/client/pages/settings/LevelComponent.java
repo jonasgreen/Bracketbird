@@ -157,7 +157,7 @@ public class LevelComponent extends FlowPanel {
                 @Override
                 public void onClick(ClickEvent event) {
                     deleteIcon.setVisible(false);
-                    RTC.getInstance().deleteLevel(level.getId());
+                    RTC.getInstance().deleteStage(level.getId());
                     event.getNativeEvent().stopPropagation();
                     event.getNativeEvent().preventDefault();
                 }

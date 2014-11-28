@@ -102,7 +102,7 @@ public class GroupSettingsPanel extends SettingsPanel {
             ls.setPointsOfDraw(validator.toInteger(getPointsDrawTextBox(), getPointsDrawLabel(), true, new AtLeast(0)));
             ls.setMaxNumberOfTeams(validator.toInteger(getMaxTeamsTextBox(), getMaxTeamsLabel(), false, new LargerThan(1)));
 
-            RTC.getInstance().updateLevelSettings(getLevel().getId(), ls);
+            RTC.getInstance().updateStageSettings(getLevel().getId(), ls);
             hide();
         }
         catch (SettingsValidationException e) {
