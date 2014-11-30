@@ -29,8 +29,14 @@ public class BracketBirdTest {
         return rtc().getTournament().getStages().get(index);
     }
 
-    protected void updateResult(Match m, int homeScore, int outScore){
+    protected void update(Match m, int homeScore, int outScore){
         rtc().updateMatchResult(m.getId(), Result.newInstance(new int[]{homeScore}, new int[]{outScore}));
     }
+
+    protected void update(Stage stage, StageSettings settings) {
+        RTCTest.getInstance().updateStageSettings(stage.getId(), settings);
+
+    }
+
 
 }
