@@ -1,7 +1,6 @@
 package com.bracketbird.client.model.tournament;
 
 import com.bracketbird.client.model.StageRoundsFactory;
-import com.bracketbird.client.model.StageType;
 import com.bracketbird.client.model.Team;
 import com.bracketbird.client.model.keys.GroupId;
 import com.bracketbird.client.pages.matches.FinalGroupStageRanker;
@@ -12,20 +11,16 @@ import java.util.List;
 /**
  *
  */
-public class GroupStage extends Stage {
+public class GroupStage extends Stage{
     private static final long serialVersionUID = -7946599332097281558L;
 
     private List<Group> groups = new ArrayList<Group>();
     private FinalGroupStageRanker ranker;
 
 
-    private GroupStage() {
-        super();
-    }
-
 
     public GroupStage(Tournament t) {
-        super(t, StageType.group);
+        super(t);
     }
 
     @Override
@@ -49,7 +44,7 @@ public class GroupStage extends Stage {
     }
 
     public LevelState calculateState() {
-        return calculateState(groups);
+        return stateBasedOnChildren(groups);
     }
 
 
@@ -122,5 +117,7 @@ public class GroupStage extends Stage {
         }
         return null;
     }
+
+
 }
 

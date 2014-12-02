@@ -1,5 +1,7 @@
 package com.bracketbird.client.model.tournament;
 
+import com.bracketbird.clientcore.model.StateModel;
+
 import java.util.List;
 
 public class StateCounter {
@@ -51,11 +53,19 @@ public class StateCounter {
         return countFinished;
     }
 
-    public boolean allIsReady(List<? extends HasLevelState> children) {
+    public boolean allIsReady(List<? extends StateModel> children) {
         return children.size() == countReady;
     }
 
-    public boolean allIsNotReady(List<? extends HasLevelState> children) {
+    public boolean allIsNotReady(List<? extends StateModel> children) {
         return children.size() == countNotReady;
+    }
+
+    public boolean allIsBelowInProgress() {
+        return countInProgress == 0 && countDonePlaying == 0 && countFinished == 0;
+    }
+
+    public boolean allIsAboveInProgress() {
+        return countInProgress == 0 && countNotReady == 0 && countReady == 0;
     }
 }

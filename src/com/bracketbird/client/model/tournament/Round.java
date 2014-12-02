@@ -1,7 +1,8 @@
 package com.bracketbird.client.model.tournament;
 
+import com.bracketbird.client.gui.rtc.event.StateChangedEvent;
 import com.bracketbird.client.model.keys.RoundId;
-import com.bracketbird.clientcore.model.PlayableModel;
+import com.bracketbird.clientcore.model.StateModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,20 +10,17 @@ import java.util.List;
 /**
  *
  */
-public abstract class Round extends PlayableModel<RoundId> {
+public abstract class Round extends StateModel<RoundId> {
     private static final long serialVersionUID = -990956812294369030L;
 
     private int roundNumber;
-    protected Stage stage;
     protected List<Match> matches = new ArrayList<Match>();
+    protected Stage stage;
 
     public Round(Stage stage, int roundNo) {
         this.stage = stage;
+        addStateHandler(stage);
         this.roundNumber = roundNo;
-    }
-
-    public Stage getStage() {
-        return stage;
     }
 
     public int getRoundNumber() {
@@ -57,13 +55,23 @@ public abstract class Round extends PlayableModel<RoundId> {
     }
 
 
-    public LevelState calculateState() {
-        return calculateState(matches);
+    @Override
+    public void updateState(boolean fromClient) {
+        LevelState newState = calculateState();
+        setNewState(newState, fromClient);
     }
 
+    public LevelState calculateState() {
+        return new LevelStateCalculator().stateBasedOnChildren(getMatches());
+    }
 
+    //called from a child (match)
     @Override
-    protected LevelState stateChanged(LevelState old, LevelState newState) {
-        return newState;
+    public void onChange(StateChangedEvent event) {
+
+    }
+
+    public Stage getStage() {
+        return stage;
     }
 }

@@ -23,7 +23,7 @@ public class StageRoundsFactory{
         }
 
         int matchNumber = 1;
-        for (Round round : rounds) {
+        for (StageRound round : rounds) {
             for (Match m : round.getMatches()) {
                 m.setMatchNo(matchNumber++);
             }
@@ -34,10 +34,11 @@ public class StageRoundsFactory{
         int roundNumber = 0;
         for (GroupRound r : newRounds) {
             if(rounds.size()-1 >= roundNumber){//matches are added to existing round
-                rounds.get(roundNumber).addMatches(r.getMatches());
+                GroupStageRound stageRound = (GroupStageRound) rounds.get(roundNumber);
+                stageRound.addMatches(r.getMatches());
             }
             else{//no round exist - round is added
-                StageRound gr = new StageRound(r.getStage(), r.getRoundNumber());
+                GroupStageRound gr = new GroupStageRound((GroupStage) r.getStage(), r.getRoundNumber());
                 gr.addMatches(r.getMatches());
                 gr.initState();
                 rounds.add(gr);

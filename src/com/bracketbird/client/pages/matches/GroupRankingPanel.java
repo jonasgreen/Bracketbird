@@ -34,7 +34,7 @@ public class GroupRankingPanel extends FlowPanel {
         add(content);
 
 
-        group.stateHandlers.addHandler(new StateHandler() {
+        group.addStateHandler(new StateHandler() {
             @Override
             public void onChange(StateChangedEvent event) {
                 handleStateChange(event.getNewState());

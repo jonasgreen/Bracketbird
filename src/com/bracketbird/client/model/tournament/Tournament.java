@@ -13,7 +13,7 @@ import java.util.*;
 /**
  *
  */
-public class Tournament extends PlayableModel<TournamentId> {
+public class Tournament extends StateModel<TournamentId> {
     private static final long serialVersionUID = 5951730875833184507L;
 
     public transient ModelHandlerList<String> nameEventHandlers;
@@ -54,11 +54,6 @@ public class Tournament extends PlayableModel<TournamentId> {
 
     public void setStages(List<Stage> tournamentStages) {
         this.stages = tournamentStages;
-    }
-
-    @Override
-    public HasLevelState getParent() {
-        return null;
     }
 
     public LevelState getState() {
@@ -128,7 +123,7 @@ public class Tournament extends PlayableModel<TournamentId> {
     }
 
     public LevelState calculateState() {
-        return calculateState(stages);
+        return stateBasedOnChildren(stages);
     }
 
 
@@ -264,7 +259,7 @@ public class Tournament extends PlayableModel<TournamentId> {
         return null;
     }
 
-    public Stage getPreviousLevel(Stage current) {
+    public Stage getPreviousStage(Stage current) {
         int index = getIndexOf(current);
         if (index == 0) {
             return null;
@@ -375,9 +370,6 @@ public class Tournament extends PlayableModel<TournamentId> {
     }
 
 
-    protected LevelState calculateState(List<? extends HasLevelState> children){
-        return super.calculateState(children);
-    }
 
 
 
@@ -414,7 +406,7 @@ public class Tournament extends PlayableModel<TournamentId> {
         if(match == null) {
             return;
         }
-        clearFollowingStages(fromClient, match.getParent().getStage());
+        clearFollowingStages(fromClient, match.getRound().getStage());
         match.updateResult(homeScores, outScores, fromClient);
     }
 
@@ -428,6 +420,11 @@ public class Tournament extends PlayableModel<TournamentId> {
             }
         }
         return null;
+    }
+
+    @Override
+    public void onChange(StateChangedEvent event) {
+
     }
 }
 

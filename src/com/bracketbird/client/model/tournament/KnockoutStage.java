@@ -1,7 +1,6 @@
 package com.bracketbird.client.model.tournament;
 
 import com.bracketbird.client.model.KnockoutRoundsBuilder;
-import com.bracketbird.client.model.StageType;
 import com.bracketbird.client.model.Team;
 
 import java.util.ArrayList;
@@ -15,12 +14,9 @@ public class KnockoutStage extends Stage {
 
     private static final long serialVersionUID = 2056092174233628140L;
 
-    private KnockoutStage() {
-        super();
-    }
 
     public KnockoutStage(Tournament t) {
-        super(t, StageType.knockout);
+        super(t);
     }
 
 
@@ -34,8 +30,8 @@ public class KnockoutStage extends Stage {
 
     protected void handleWalkover(Match m) {
         if (m.isFinish() && hasNextRound(m)) {
-            KnockoutRound nextRound = (KnockoutRound) getRounds().get(m.getRound().getRoundNumber());
-            KnockoutRound thisRound = (KnockoutRound) getRounds().get((int) (m.getRound().getRoundNumber() - 1));
+            KnockoutStageRound nextRound = (KnockoutStageRound) getRounds().get(m.getRound().getRoundNumber());
+            KnockoutStageRound thisRound = (KnockoutStageRound) getRounds().get((m.getRound().getRoundNumber() - 1));
 
             Match nextMatch = nextRound.getMatch(thisRound.getMatchIndexInNextRound(m));
 
@@ -66,7 +62,7 @@ public class KnockoutStage extends Stage {
         if (getRounds().size() < 2) {
             return;
         }
-        KnockoutRound thisRound = (KnockoutRound) getRounds().get(0);
+        KnockoutStageRound thisRound = (KnockoutStageRound) getRounds().get(0);
         //index of match to be updated with winning team.
         int indexNextRound;
         List<Match> fms = thisRound.getFinishedMatches();
@@ -88,7 +84,7 @@ public class KnockoutStage extends Stage {
     }
 
     public LevelState calculateState() {
-        return calculateState(rounds);
+        return stateBasedOnChildren(rounds);
     }
 
     protected LevelState stateChanged(LevelState oldState, LevelState newState) {
@@ -101,8 +97,8 @@ public class KnockoutStage extends Stage {
 
     private void setEndingTeams() {
         //find ranking and set ending teams
-        for (Round round : rounds) {
-            List<? extends Match> matches = round.getMatches();
+        for (StageRound round : rounds) {
+            List<Match> matches = round.getMatches();
             List<Team> losingTeams = new ArrayList<Team>();
             for (Match match : matches) {
                 Team t = match.getLosingTeam();
@@ -117,7 +113,7 @@ public class KnockoutStage extends Stage {
             endingTeams.add(0, teams);
         }
 
-        Team winner = rounds.get(rounds.size() - 1).getMatches().get(0).getWinningTeam();
+        Team winner = (rounds.get(rounds.size() - 1).getMatches().get(0)).getWinningTeam();
         List<Team> l = new ArrayList<Team>();
         l.add(winner);
         endingTeams.add(0, l);

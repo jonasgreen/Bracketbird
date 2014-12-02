@@ -1,13 +1,13 @@
 package com.bracketbird.client.model.tournament;
 
+import com.bracketbird.client.gui.rtc.event.StateChangedEvent;
 import com.bracketbird.client.gui.rtc.event.UpdateMatchFieldEvent;
 import com.bracketbird.client.model.SeedingTeam;
-import com.bracketbird.client.model.StageType;
 import com.bracketbird.client.model.Team;
 import com.bracketbird.client.model.keys.MatchId;
 import com.bracketbird.client.model.keys.StageId;
 import com.bracketbird.client.model.keys.TeamId;
-import com.bracketbird.clientcore.model.PlayableModel;
+import com.bracketbird.clientcore.model.StateModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,12 +15,8 @@ import java.util.List;
 /**
  *
  */
-public abstract class Stage extends PlayableModel<StageId> implements HasLevelState {
+public abstract class Stage extends StateModel<StageId> {
     private static final long serialVersionUID = -8838821453128489654L;
-
-    private StageType type;
-
-    protected Tournament tournament;
 
     //each round holds all the matches in one round (from all groups).
     protected List<StageRound> rounds = new ArrayList<StageRound>();
@@ -29,12 +25,10 @@ public abstract class Stage extends PlayableModel<StageId> implements HasLevelSt
     protected List<Team> startingTeams = new ArrayList<Team>();
     protected List<List<Team>> endingTeams = new ArrayList<List<Team>>();
 
-    protected Stage() {
-    }
+    protected Tournament tournament;
 
 
-    protected Stage(Tournament tournament, StageType type) {
-        this.type = type;
+    protected Stage(Tournament tournament) {
         this.tournament = tournament;
     }
 
@@ -65,14 +59,11 @@ public abstract class Stage extends PlayableModel<StageId> implements HasLevelSt
         rounds = new ArrayList<StageRound>();
     }
 
-    public StageType getType() {
-        return type;
-    }
 
     public abstract void layoutMatches(boolean fromClient);
 
     protected void setupStartingTeams() {
-        Stage previous = tournament.getPreviousLevel(this);
+        Stage previous = getTournament().getPreviousStage(this);
         //with first level playing teams are taken from tournament
         if (previous == null) {
             this.startingTeams = new SeedingHelper().seed(getTournament().getTeams());
@@ -165,16 +156,6 @@ public abstract class Stage extends PlayableModel<StageId> implements HasLevelSt
         return false;
     }
 
-
-    @Override
-    public String toString() {
-        return "Subtournament{" +
-                ", state=" + state +
-                ", matches=" + getMatches() +
-                ", teams=" + startingTeams +
-                "}";
-    }
-
     public void setSettings(StageSettings ss) {
         this.settings = ss;
     }
@@ -186,11 +167,9 @@ public abstract class Stage extends PlayableModel<StageId> implements HasLevelSt
     }
 
 
-    public String getName() {
-        return type.getLevelName();
-    }
+    public abstract String getName();
 
-    public List<StageRound> getRounds() {
+    public List<? extends StageRound> getRounds() {
         return rounds;
     }
 
@@ -200,16 +179,7 @@ public abstract class Stage extends PlayableModel<StageId> implements HasLevelSt
 
 
     public int getMaxNumberOfTeams() {
-        return tournament.getMaxNumberOfTeams(this);
-    }
-
-
-    public Tournament getTournament() {
-        return tournament;
-    }
-
-    public void setTournament(Tournament tournament) {
-        this.tournament = tournament;
+        return getTournament().getMaxNumberOfTeams(this);
     }
 
     public List<List<Team>> getEndingTeams() {
@@ -276,10 +246,11 @@ public abstract class Stage extends PlayableModel<StageId> implements HasLevelSt
     }
 
     @Override
-    public Tournament getParent() {
-        return tournament;
+    public void onChange(StateChangedEvent event) {
+
     }
 
-
-
+    public Tournament getTournament() {
+        return tournament;
+    }
 }

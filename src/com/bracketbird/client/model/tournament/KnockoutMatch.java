@@ -10,7 +10,7 @@ public class KnockoutMatch extends Match {
 
     private KnockoutMatch parent;
 
-    public KnockoutMatch(KnockoutRound round, int matchNo) {
+    public KnockoutMatch(KnockoutStageRound round, int matchNo) {
         super(round, matchNo);
     }
 
@@ -18,10 +18,9 @@ public class KnockoutMatch extends Match {
         return parent;
     }
 
-    public void setParent(KnockoutMatch parent) {
+    public void setParentMatch(KnockoutMatch parent) {
         this.parent = parent;
     }
-
 
     public void updateResult(int[] homeScores, int[] outScores, boolean fromClient) {
         Result oldResult = getResult();
@@ -55,8 +54,7 @@ public class KnockoutMatch extends Match {
 
 
     private boolean isUpperInNextRound() {
-        //Hmmm
-        Round parentRound = getParent();
+        Round parentRound = getRound();
         Round r = parentRound.getStage().getRounds().get(parentRound.getRoundNumber() -1);
         int indexInRound = r.indexOf(this);
         return indexInRound % 2 == 0;

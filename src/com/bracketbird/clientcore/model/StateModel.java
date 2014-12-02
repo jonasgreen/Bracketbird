@@ -1,25 +1,25 @@
 package com.bracketbird.clientcore.model;
 
 import com.bracketbird.client.gui.rtc.event.StateChangedEvent;
+import com.bracketbird.client.gui.rtc.event.StateHandler;
 import com.bracketbird.client.gui.rtc.event.StateHandlerList;
-import com.bracketbird.client.model.tournament.HasLevelState;
 import com.bracketbird.client.model.tournament.LevelState;
 import com.bracketbird.client.model.tournament.StateCounter;
 import com.bracketbird.clientcore.model.keys.EntityId;
+import com.google.gwt.event.shared.HandlerRegistration;
 
 import java.util.List;
 
 /**
  *
  */
-public abstract class PlayableModel<E extends EntityId> extends Model<E> implements HasLevelState {
+public abstract class StateModel<ID extends EntityId> extends Model<ID> implements StateHandler {
     private static final long serialVersionUID = -6663910902783234316L;
 
-    public transient StateHandlerList stateHandlers;
-
     protected LevelState state = LevelState.notReady;
+    protected StateHandlerList stateHandlers;
 
-    public PlayableModel() {
+    public StateModel() {
         stateHandlers = new StateHandlerList(this.getClass().getSimpleName());
     }
 
@@ -32,21 +32,26 @@ public abstract class PlayableModel<E extends EntityId> extends Model<E> impleme
             LevelState oldState = this.state;
             this.state = stateChanged(oldState, newState);
             stateHandlers.fireEvent(new StateChangedEvent(fromClient, oldState, newState));
-            if (getParent() != null) {
-                getParent().updateState(fromClient);
-            }
+
         }
         else {
             System.out.println("STOP");
         }
+    }
 
+    protected abstract LevelState calculateState();
+
+    protected void setNewState(LevelState newState, boolean fromClient) {
+        LevelState oldState = this.state;
+        this.state = newState;
+        stateHandlers.fireEvent(new StateChangedEvent(fromClient, oldState, newState));
     }
 
     protected boolean shouldTriggerStateEvent(LevelState oldState, LevelState newState) {
         return oldState.in(LevelState.donePlaying, LevelState.finished) || !oldState.equals(newState);
     }
 
-    protected LevelState calculateState(List<? extends HasLevelState> children) {
+    protected LevelState stateBasedOnChildren(List<? extends StateModel> children) {
         if (children.isEmpty()) {
             return LevelState.notReady;
         }
@@ -80,9 +85,9 @@ public abstract class PlayableModel<E extends EntityId> extends Model<E> impleme
         return LevelState.finished;
     }
 
-    public StateCounter createStateCounter(List<? extends HasLevelState> list) {
+    public StateCounter createStateCounter(List<? extends StateModel> list) {
         StateCounter counter = new StateCounter();
-        for (HasLevelState item : list) {
+        for (StateModel item : list) {
             item.getState().handle(counter);
         }
         return counter;
@@ -113,6 +118,10 @@ public abstract class PlayableModel<E extends EntityId> extends Model<E> impleme
 
     public LevelState getState() {
         return state;
+    }
+
+    public HandlerRegistration addStateHandler(StateHandler handler){
+        return stateHandlers.addHandler(handler);
     }
 
 

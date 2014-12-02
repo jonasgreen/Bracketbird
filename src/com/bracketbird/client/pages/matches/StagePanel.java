@@ -26,7 +26,7 @@ public class StagePanel extends FlowPanel {
             matchesPanelHolder.add(new LevelEmptyPanel(stage));
         }
 
-        stage.stateHandlers.addHandler(new StateHandler() {
+        stage.addStateHandler(new StateHandler() {
             @Override
             public void onChange(StateChangedEvent event) {
                 handleStateChange(event);
@@ -35,7 +35,7 @@ public class StagePanel extends FlowPanel {
 
 
         if (stage.isGroupStage()) {
-            stage.stateHandlers.addHandler(new StateHandler() {
+            stage.addStateHandler(new StateHandler() {
                 @Override
                 public void onChange(StateChangedEvent event) {
                     getRankingPanel().setVisible(event.getNewState().isBeyondInProgress());

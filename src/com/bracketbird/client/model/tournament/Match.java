@@ -10,13 +10,11 @@ import com.bracketbird.clientcore.util.StringUtil;
 /**
  *
  */
-public abstract class Match extends PlayableModel<MatchId> implements HasLevelState{
+public class Match extends StateModel<MatchId> {
     private static final long serialVersionUID = -8624209794497350221L;
 
     public transient ModelHandlerList<Match> matchEventHandlers;
 
-
-    private Round round;
 
     //the order of the match in a subtournament
     private int matchNo;
@@ -35,12 +33,13 @@ public abstract class Match extends PlayableModel<MatchId> implements HasLevelSt
 
     private Integer countId;
 
+    private Round round;
 
     public Match(Round round, int matchNo) {
+        super();
         this.round = round;
         this.matchNo = matchNo;
-
-        matchEventHandlers = new ModelHandlerList<Match>("Match "+matchNo + " (matchHandler)");
+        matchEventHandlers = new ModelHandlerList<Match>("Match " + matchNo + " (matchHandler)");
     }
 
     public Team getTeamHome() {
@@ -57,11 +56,6 @@ public abstract class Match extends PlayableModel<MatchId> implements HasLevelSt
 
     public void setTeamOut(Team teamOut) {
         this.teamOut = teamOut;
-    }
-
-    @Override
-    public Round getParent() {
-        return round;
     }
 
 
@@ -136,7 +130,7 @@ public abstract class Match extends PlayableModel<MatchId> implements HasLevelSt
 
     public void updateResult(int[] homeScores, int[] outScores, boolean fromClient) {
         Result newResult = Result.newInstance(homeScores, outScores);
-        if(EqualsUtil.equals(newResult, result)){
+        if (EqualsUtil.equals(newResult, result)) {
             return;
         }
         this.result = newResult;
@@ -145,7 +139,7 @@ public abstract class Match extends PlayableModel<MatchId> implements HasLevelSt
     }
 
     public void updateField(String field, boolean isFromClient) {
-        if(StringUtil.equals(this.field, field)){
+        if (StringUtil.equals(this.field, field)) {
             return;
         }
         this.field = field;
@@ -173,26 +167,40 @@ public abstract class Match extends PlayableModel<MatchId> implements HasLevelSt
         updateState(fromClient);
     }
 
-    public void initState(){
+    public void initState() {
         this.state = calculateState();
     }
 
-    public LevelState calculateState(){
-        if(teamHome.isSeedingTeam() || teamOut.isSeedingTeam()){
+    public void updateState(boolean fromClient) {
+        LevelState newState = calculateState();
+        setNewState(newState, fromClient);
+    }
+
+
+    public LevelState calculateState() {
+        if (teamHome.isSeedingTeam() || teamOut.isSeedingTeam()) {
             return LevelState.notReady;
         }
-        if(teamHome.isWalkover() || teamOut.isWalkover() || result != null){
-             return LevelState.finished;
+        if (teamHome.isWalkover() || teamOut.isWalkover() || result != null) {
+            return LevelState.finished;
         }
         return (field == null || field.isEmpty()) ? LevelState.ready : LevelState.inProgress;
     }
 
 
     @Override
+    public void onChange(StateChangedEvent event) {
+        //TODO - called when child changes
+    }
+
+    public Round getRound() {
+        return round;
+    }
+
+    @Override
     public String toString() {
         return "Match{" + teamHome.getName() + " - " + teamOut.getName() + '}';
     }
-
 
     public Integer getCountId() {
         return countId;
@@ -206,12 +214,9 @@ public abstract class Match extends PlayableModel<MatchId> implements HasLevelSt
         this.name = name;
     }
 
-    public Round getRound() {
-        return round;
-    }
-
     @Override
     protected LevelState stateChanged(LevelState old, LevelState newState) {
         return newState;
     }
-}
+
+    }

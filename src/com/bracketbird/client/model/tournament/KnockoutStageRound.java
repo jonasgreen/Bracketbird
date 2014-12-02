@@ -6,12 +6,12 @@ import java.util.List;
 /**
  *
  */
-public class KnockoutRound extends StageRound {
+public class KnockoutStageRound extends StageRound {
     private static final long serialVersionUID = 7856387235373392743L;
 
 
 
-    public KnockoutRound(KnockoutStage stage, int roundNo) {
+    public KnockoutStageRound(KnockoutStage stage, int roundNo) {
         super(stage, roundNo);
     }
 
@@ -57,17 +57,5 @@ public class KnockoutRound extends StageRound {
         return finished;
     }
 
-    @Override
-    public String toString() {
-        return "CupRound{" +
-                "matches=" + (getMatches() == null ? null :getMatches()) +
-                '}';
-    }
-
-
-    @Override
-    public Stage getParent() {
-        return stage;
-    }
 
 }

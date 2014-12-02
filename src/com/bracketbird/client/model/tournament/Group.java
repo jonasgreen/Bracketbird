@@ -1,11 +1,12 @@
 package com.bracketbird.client.model.tournament;
 
+import com.bracketbird.client.gui.rtc.event.StateChangedEvent;
 import com.bracketbird.client.model.GroupRoundsFactory;
 import com.bracketbird.client.model.Team;
 import com.bracketbird.client.model.keys.GroupId;
 import com.bracketbird.client.model.keys.TeamId;
 import com.bracketbird.client.pages.matches.GroupPositions;
-import com.bracketbird.clientcore.model.PlayableModel;
+import com.bracketbird.clientcore.model.StateModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,18 +14,18 @@ import java.util.List;
 /**
  *
  */
-public class Group extends PlayableModel<GroupId> {
+public class Group extends StateModel<GroupId> {
     private static final long serialVersionUID = -7946599332097281558L;
 
     private String name;
     private List<Team> teams = new ArrayList<Team>();
     private List<GroupRound> rounds = new ArrayList<GroupRound>();
     private List<Team> endingTeams = new ArrayList<Team>();
-    private GroupStage stage;
     private GroupPositions groupPositions;
 
+    private GroupStage stage;
+
     public Group(GroupStage stage, String name) {
-        super();
         this.stage = stage;
         this.name = name;
         this.state = LevelState.ready;
@@ -55,7 +56,7 @@ public class Group extends PlayableModel<GroupId> {
 
     public List<Match> getMatches() {
         List<Match> list = new ArrayList<Match>();
-        for (Round round : rounds) {
+        for (GroupRound round : rounds) {
             list.addAll(round.getMatches());
         }
         return list;
@@ -67,11 +68,6 @@ public class Group extends PlayableModel<GroupId> {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    @Override
-    public GroupStage getParent() {
-        return stage;
     }
 
 
@@ -92,13 +88,18 @@ public class Group extends PlayableModel<GroupId> {
         return null;
     }
 
+    @Override
+    public void updateState(boolean fromClient) {
+        LevelState newState = calculateState();
+        setNewState(newState, fromClient);
+    }
 
     @Override
     protected LevelState stateChanged(LevelState oldState, LevelState newState) {
         groupPositions = null;
         if (newState.equals(LevelState.finished)) {
             if (endingTeams.isEmpty()) {
-                GroupPositions gp = new GroupPositions(this, getParent().getSettings());
+                GroupPositions gp = new GroupPositions(this, getStage().getSettings());
                 if (gp.hasTeamsWithSamePosition()) {
                     return LevelState.donePlaying;
                 }
@@ -129,9 +130,41 @@ public class Group extends PlayableModel<GroupId> {
         this.state = calculateState();
     }
 
+
+
     @Override
     public LevelState calculateState() {
-        return calculateState(rounds);
+        LevelState newState = new LevelStateCalculator().stateBasedOnChildren(getMatches());
+        groupPositions = null;
+
+        //A Groups children can never be in DonePlaying state.
+        if (newState.equals(LevelState.finished)) {
+            if (endingTeams.isEmpty()) {
+                GroupPositions gp = new GroupPositions(this, getStage().getSettings());
+                if (gp.hasTeamsWithSamePosition()) {
+                    return LevelState.donePlaying;
+                }
+                else{
+                    for (Position p : gp.getPositionOfTeams()) {
+                        endingTeams.add(p.getPointsCounters().get(0).getTeam());
+                    }
+                    groupPositions = null;
+                    return newState;
+                }
+            }
+            else{
+                //endingTeams has been set by outside
+                return newState;
+            }
+        }
+        else{
+            endingTeams = new ArrayList<Team>();
+            return newState;
+        }
+    }
+
+    public GroupStage getStage() {
+        return stage;
     }
 
     public List<Team> getEndingTeams() {
@@ -140,6 +173,11 @@ public class Group extends PlayableModel<GroupId> {
 
     public GroupPositions getGroupPositions() {
         return groupPositions;
+    }
+
+    @Override
+    public void onChange(StateChangedEvent event) {
+
     }
 }
 

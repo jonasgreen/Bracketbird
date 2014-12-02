@@ -99,7 +99,7 @@ public class LevelPanel extends FlowPanel {
                 Timer t = new Timer() {
                     @Override
                     public void run() {
-                        lc.getNameLabel().setText(level.getType().getLevelName());
+                        lc.getNameLabel().setText(level.getName());
                     }
                 };
                 t.schedule(300);

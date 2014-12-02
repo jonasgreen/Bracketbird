@@ -6,10 +6,7 @@ import com.bracketbird.client.gui.rtc.event.StateChangedEvent;
 import com.bracketbird.client.gui.rtc.event.StateHandler;
 import com.bracketbird.client.model.Team;
 import com.bracketbird.client.model.keys.TeamId;
-import com.bracketbird.client.model.tournament.GroupStage;
-import com.bracketbird.client.model.tournament.Match;
-import com.bracketbird.client.model.tournament.Round;
-import com.bracketbird.client.model.tournament.Stage;
+import com.bracketbird.client.model.tournament.*;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.SimplePanel;
@@ -45,7 +42,7 @@ public class LevelMatchesPanel extends FlowPanel {
         add(matchesHolder);
         add(finalRankingHolder);
 
-        level.stateHandlers.addHandler(new StateHandler() {
+        level.addStateHandler(new StateHandler() {
             @Override
             public void onChange(StateChangedEvent event) {
                 handleStateChange();

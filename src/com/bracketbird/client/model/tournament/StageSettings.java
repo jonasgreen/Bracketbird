@@ -163,30 +163,4 @@ public class StageSettings implements Serializable {
         result = 31 * result + (rankingRules != null ? rankingRules.hashCode() : 0);
         return result;
     }
-
-    public TournamentLevelVO createVO(Stage l) {
-        TournamentLevelVO vo = new TournamentLevelVO();
-        vo.setEliminationType(getEliminationType());
-        vo.setMaxNumberOfTeams(getMaxNumberOfTeams());
-        vo.setNumberOfGroups(getNumberOfGroups());
-        vo.setNumberOfMatches(getNumberOfMatches());
-        vo.setNumberOfRepeats(getNumberOfRepeats());
-        vo.setPointsOfDraw(getPointsOfDraw());
-        vo.setPointsOfVictory(getPointsOfVictory());
-        vo.setRankingRules(getRankingRules());
-        vo.setTournamentLevelType(l.getType());
-        return vo;
-    }
-
-    public void update(TournamentLevelVO vo) {
-        setEliminationType(vo.getEliminationType());
-        setMaxNumberOfTeams(vo.getMaxNumberOfTeams());
-        setNumberOfGroups(vo.getNumberOfGroups());
-        setNumberOfMatches(vo.getNumberOfMatches());
-        setNumberOfRepeats(vo.getNumberOfRepeats());
-        setPointsOfDraw(vo.getPointsOfDraw());
-        setPointsOfVictory(vo.getPointsOfVictory());
-        setRankingRules(vo.getRankingRules());
-
-    }
 }

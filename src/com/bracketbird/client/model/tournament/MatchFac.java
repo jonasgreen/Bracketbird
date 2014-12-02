@@ -17,16 +17,21 @@ public class MatchFac {
         m.setTeamHome(teamHome);
         m.setTeamOut(teamOut);
         m.initState();
+
+        m.addStateHandler(round);
         return m;
     }
 
-    public static KnockoutMatch createCup(KnockoutRound round, int matchNo, Team teamHome, Team teamOut){
+    public static KnockoutMatch createCup(KnockoutStageRound round, int matchNo, Team teamHome, Team teamOut){
         KnockoutMatch m = new KnockoutMatch(round, matchNo);
         m.setCountId(countId);
         m.setId(new MatchId("matchId "+countId++));
         m.setTeamHome(teamHome);
         m.setTeamOut(teamOut);
         m.initState();
+
+        m.addStateHandler(round);
+
         return m;
     }
 
