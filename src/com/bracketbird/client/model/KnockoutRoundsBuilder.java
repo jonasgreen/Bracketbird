@@ -12,7 +12,7 @@ public class KnockoutRoundsBuilder {
 
     private static char[] charNames = new char[]{'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','X','Y','Z'};
 
-    private List<KnockoutStageRound> allRounds = new ArrayList<KnockoutStageRound>();
+    private List<Round> allRounds = new ArrayList<Round>();
     private List<Team> teams;
     private int matchNumber = 1;
 
@@ -30,7 +30,7 @@ public class KnockoutRoundsBuilder {
 
         List<Team> bTeamList = createTeamList(binaryTeamCount);
 
-        KnockoutStageRound firstRound = new KnockoutStageRound(stage, 1);
+        Round firstRound = new Round(stage, 1);
 
         List<KnockoutMatch> left = new ArrayList<KnockoutMatch>();
         List<KnockoutMatch> right = new ArrayList<KnockoutMatch>();
@@ -55,12 +55,12 @@ public class KnockoutRoundsBuilder {
 
         firstRound.setMatches(allCupMatchesFirstRound);
 
-        List<KnockoutStageRound> rounds = new ArrayList<KnockoutStageRound>();
+        List<Round> rounds = new ArrayList<Round>();
         rounds.add(firstRound);
 
         int roundNumber = 2;
-        KnockoutStageRound tempRound = firstRound;
-        while (tempRound.size() > 1){
+        Round tempRound = firstRound;
+        while (tempRound.getMatches().size() > 1){
             tempRound = buildNextRound(tempRound, roundNumber++);
             rounds.add(tempRound);
         }
@@ -71,7 +71,7 @@ public class KnockoutRoundsBuilder {
             appendChilds(rounds.get(start-1).getMatches(), rounds.get(start).getMatches());
             start--;
         }
-        for (KnockoutStageRound round : rounds) {
+        for (Round round : rounds) {
             round.initState();
         }
     }
@@ -86,13 +86,13 @@ public class KnockoutRoundsBuilder {
         }
     }
 
-    private KnockoutStageRound buildNextRound(KnockoutStageRound previousRound, int roundNumber) {
+    private Round buildNextRound(Round previousRound, int roundNumber) {
         List<Match> list = new ArrayList<Match>();
-        KnockoutStageRound round = new KnockoutStageRound(stage, roundNumber);
+        Round round = new Round(stage, roundNumber);
         char c = charNames[roundNumber];
         int nameIndex = 1;
         int count = 0;
-        while (count < previousRound.size()){
+        while (count < previousRound.getMatches().size()){
             count++;
             count++;
 
@@ -105,7 +105,7 @@ public class KnockoutRoundsBuilder {
 
     }
 
-    private KnockoutMatch createMatch(List<Team> list, KnockoutStageRound round){
+    private KnockoutMatch createMatch(List<Team> list, Round round){
         return MatchFac.createCup(round, matchNumber++, list.remove(0), list.remove(list.size() - 1));
     }
 
@@ -133,7 +133,7 @@ public class KnockoutRoundsBuilder {
     }
 
 
-    public List<KnockoutStageRound> getRounds() {
+    public List<Round> getRounds() {
         return allRounds;
     }
 

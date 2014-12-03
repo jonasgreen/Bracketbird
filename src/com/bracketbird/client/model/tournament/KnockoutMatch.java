@@ -10,7 +10,7 @@ public class KnockoutMatch extends Match {
 
     private KnockoutMatch parent;
 
-    public KnockoutMatch(KnockoutStageRound round, int matchNo) {
+    public KnockoutMatch(Round round, int matchNo) {
         super(round, matchNo);
     }
 

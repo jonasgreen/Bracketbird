@@ -19,7 +19,7 @@ public abstract class Stage extends StateModel<StageId> {
     private static final long serialVersionUID = -8838821453128489654L;
 
     //each round holds all the matches in one round (from all groups).
-    protected List<StageRound> rounds = new ArrayList<StageRound>();
+    protected List<Round> rounds = new ArrayList<Round>();
     private StageSettings settings = new StageSettings();
 
     protected List<Team> startingTeams = new ArrayList<Team>();
@@ -56,7 +56,7 @@ public abstract class Stage extends StateModel<StageId> {
     }
 
     public void clearMatches() {
-        rounds = new ArrayList<StageRound>();
+        rounds = new ArrayList<Round>();
     }
 
 
@@ -169,11 +169,11 @@ public abstract class Stage extends StateModel<StageId> {
 
     public abstract String getName();
 
-    public List<? extends StageRound> getRounds() {
+    public List<Round> getRounds() {
         return rounds;
     }
 
-    public void setRounds(List<StageRound> rounds) {
+    public void setRounds(List<Round> rounds) {
         this.rounds = rounds;
     }
 
@@ -253,4 +253,6 @@ public abstract class Stage extends StateModel<StageId> {
     public Tournament getTournament() {
         return tournament;
     }
+
+    public abstract String getRoundName(Round round);
 }

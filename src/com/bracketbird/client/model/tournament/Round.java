@@ -10,7 +10,7 @@ import java.util.List;
 /**
  *
  */
-public abstract class Round extends StateModel<RoundId> {
+public class Round extends StateModel<RoundId> {
     private static final long serialVersionUID = -990956812294369030L;
 
     private int roundNumber;
@@ -19,7 +19,6 @@ public abstract class Round extends StateModel<RoundId> {
 
     public Round(Stage stage, int roundNo) {
         this.stage = stage;
-        addStateHandler(stage);
         this.roundNumber = roundNo;
     }
 
@@ -28,7 +27,7 @@ public abstract class Round extends StateModel<RoundId> {
     }
 
     public String getName() {
-        return roundNumber + ". round";
+        return stage.getRoundName(this);
     }
 
     public void initState() {
@@ -45,7 +44,7 @@ public abstract class Round extends StateModel<RoundId> {
 
     @Override
     public String toString() {
-        return "\nGroupRound{" +
+        return "\nRound{" +
                 "matches=" + getMatches() +
                 '}';
     }
@@ -54,6 +53,9 @@ public abstract class Round extends StateModel<RoundId> {
         return getMatches().indexOf(m);
     }
 
+    public Match getMatch(int index){
+        return matches.get(index);
+    }
 
     @Override
     public void updateState(boolean fromClient) {
@@ -65,6 +67,11 @@ public abstract class Round extends StateModel<RoundId> {
         return new LevelStateCalculator().stateBasedOnChildren(getMatches());
     }
 
+    @Override
+    protected LevelState stateChanged(LevelState oldState, LevelState newState) {
+        return null;
+    }
+
     //called from a child (match)
     @Override
     public void onChange(StateChangedEvent event) {
@@ -73,5 +80,26 @@ public abstract class Round extends StateModel<RoundId> {
 
     public Stage getStage() {
         return stage;
+    }
+
+    public List<Match> getFinishedMatches() {
+        List<Match> finished = new ArrayList<Match>();
+        for (Match m : getMatches()) {
+            if(m.isFinish()){
+                finished.add(m);
+            }
+        }
+        return finished;
+    }
+
+
+
+    public void addMatches(List<Match> matches) {
+        for (Match m : matches) {
+            getMatches().add(m);
+            //When a group match changes state - the stageRound and the groupRound has to be notified.
+            m.addStateHandler(this);
+        }
+
     }
 }

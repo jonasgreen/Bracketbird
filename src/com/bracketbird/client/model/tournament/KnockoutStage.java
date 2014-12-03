@@ -30,20 +30,40 @@ public class KnockoutStage extends Stage {
 
     protected void handleWalkover(Match m) {
         if (m.isFinish() && hasNextRound(m)) {
-            KnockoutStageRound nextRound = (KnockoutStageRound) getRounds().get(m.getRound().getRoundNumber());
-            KnockoutStageRound thisRound = (KnockoutStageRound) getRounds().get((m.getRound().getRoundNumber() - 1));
+            Round nextRound = getRounds().get(m.getRound().getRoundNumber());
+            Round thisRound = getRounds().get((m.getRound().getRoundNumber() - 1));
 
-            Match nextMatch = nextRound.getMatch(thisRound.getMatchIndexInNextRound(m));
+            Match nextMatch = nextRound.getMatch(getMatchIndexInNextRound(thisRound, m));
 
             Team winTeam = m.getWinningTeam();
 
-            if (thisRound.isHomeTeamInNextRound(m)) {
+            if (isHomeTeamInNextRound(thisRound, m)) {
                 nextMatch.updateHomeTeam(winTeam, true);
             }
             else {
                 nextMatch.updateOutTeam(winTeam, true);
             }
         }
+    }
+
+    @Override
+    public String getRoundName(Round round) {
+            return getMatches().size() == 1 ? "The final" : "1/"+(getMatches().size())+ " finals";
+    }
+
+    public int getMatchIndexInNextRound(Round round, Match m){
+        int index = round.indexOf(m);
+
+        if(index%2 != 0){//not equal
+            index = index-1;
+        }
+
+        return index/2;
+    }
+
+
+    public boolean isHomeTeamInNextRound(Round round, Match m){
+        return round.indexOf(m) % 2 == 0;
     }
 
     private boolean hasNextRound(Match m) {
@@ -62,7 +82,7 @@ public class KnockoutStage extends Stage {
         if (getRounds().size() < 2) {
             return;
         }
-        KnockoutStageRound thisRound = (KnockoutStageRound) getRounds().get(0);
+        Round thisRound = (Round) getRounds().get(0);
         //index of match to be updated with winning team.
         int indexNextRound;
         List<Match> fms = thisRound.getFinishedMatches();
@@ -77,7 +97,7 @@ public class KnockoutStage extends Stage {
     public void layoutMatches(boolean fromClient) {
         setupStartingTeams();
 
-        rounds = new ArrayList<StageRound>(new KnockoutRoundsBuilder(startingTeams, this).getRounds());
+        rounds = new ArrayList<Round>(new KnockoutRoundsBuilder(startingTeams, this).getRounds());
 
         handleWalkovers();
         updateState(fromClient);
@@ -97,7 +117,7 @@ public class KnockoutStage extends Stage {
 
     private void setEndingTeams() {
         //find ranking and set ending teams
-        for (StageRound round : rounds) {
+        for (Round round : rounds) {
             List<Match> matches = round.getMatches();
             List<Team> losingTeams = new ArrayList<Team>();
             for (Match match : matches) {

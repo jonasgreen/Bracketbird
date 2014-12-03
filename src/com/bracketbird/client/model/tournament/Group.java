@@ -19,7 +19,7 @@ public class Group extends StateModel<GroupId> {
 
     private String name;
     private List<Team> teams = new ArrayList<Team>();
-    private List<GroupRound> rounds = new ArrayList<GroupRound>();
+    private List<Round> rounds = new ArrayList<Round>();
     private List<Team> endingTeams = new ArrayList<Team>();
     private GroupPositions groupPositions;
 
@@ -39,11 +39,11 @@ public class Group extends StateModel<GroupId> {
         return teams;
     }
 
-    public List<GroupRound> getRounds() {
+    public List<Round> getRounds() {
         return rounds;
     }
 
-    public void setRounds(List<GroupRound> rounds) {
+    public void setRounds(List<Round> rounds) {
         this.rounds = rounds;
     }
 
@@ -56,7 +56,7 @@ public class Group extends StateModel<GroupId> {
 
     public List<Match> getMatches() {
         List<Match> list = new ArrayList<Match>();
-        for (GroupRound round : rounds) {
+        for (Round round : rounds) {
             list.addAll(round.getMatches());
         }
         return list;

@@ -11,7 +11,7 @@ public class PrintStateTree {
         sb.append("Tournament: " + name(t.getState()));
         for (Stage stage : t.getStages()) {
             sb.append("    STAGE ").append(stage.getName().toUpperCase()).append(": ").append(name(stage.getState()));
-            for (StageRound round : stage.getRounds()) {
+            for (Round round : stage.getRounds()) {
                 sb.append("        ").append("round: ").append(name(round.getState()));
                 for (Match match : round.getMatches()) {
                     sb.append("            ").append("match: ").append(name(match.getState()));
@@ -21,7 +21,7 @@ public class PrintStateTree {
                 GroupStage gstage = (GroupStage) stage;
                 for (Group group : gstage.getGroups()) {
                     sb.append("        ").append("GROUP ").append(group.getName()).append(": ").append(name(group.getState()));
-                    for (GroupRound round : group.getRounds()) {
+                    for (Round round : group.getRounds()) {
                         sb.append("            ").append("round: ").append(name(round.getState()));
                         for (Match match : round.getMatches()) {
                             sb.append("                ").append("match: ").append(name(match.getState()));

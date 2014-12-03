@@ -29,7 +29,7 @@ public class GroupRoundsFactory {
     private int numberOfRounds;
     private boolean oddNumberOfTeams;
 
-    private List<GroupRound> rounds;
+    private List<Round> rounds;
     private int matchNumber = 1;
     private Group group;
 
@@ -45,12 +45,12 @@ public class GroupRoundsFactory {
         rounds = build();
     }
 
-    public List<GroupRound> getRounds() {
+    public List<Round> getRounds() {
         return rounds;
     }
 
-    private List<GroupRound> build() {
-        List<GroupRound> rounds = new ArrayList<GroupRound>();
+    private List<Round> build() {
+        List<Round> rounds = new ArrayList<Round>();
 
         List<Team> upper = new ArrayList<Team>();
         List<Team> lower = new ArrayList<Team>();
@@ -86,8 +86,9 @@ public class GroupRoundsFactory {
         }
     }
 
-    private GroupRound buildRound(List<Team> upper, List<Team> lower, int roundNumber) {
-        GroupRound round = new GroupRound(group, roundNumber);
+    private Round buildRound(List<Team> upper, List<Team> lower, int roundNumber) {
+        //no model listens for state change in group rounds. A stage listens for group or knockout rounds.
+        Round round = new Round(group.getStage(), roundNumber);
         List<Match> matches = new ArrayList<Match>();
 
         int count = 0;

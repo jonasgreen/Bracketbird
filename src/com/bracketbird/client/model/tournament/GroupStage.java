@@ -11,12 +11,11 @@ import java.util.List;
 /**
  *
  */
-public class GroupStage extends Stage{
+public class GroupStage extends Stage {
     private static final long serialVersionUID = -7946599332097281558L;
 
     private List<Group> groups = new ArrayList<Group>();
     private FinalGroupStageRanker ranker;
-
 
 
     public GroupStage(Tournament t) {
@@ -102,6 +101,11 @@ public class GroupStage extends Stage{
             return "Groups";
         }
         return groups.size() == 1 ? "1 group" : (groups.size() + " groups");
+    }
+
+    @Override
+    public String getRoundName(Round round) {
+        return round.getRoundNumber() + ". round";
     }
 
     public List<Group> getGroups() {
