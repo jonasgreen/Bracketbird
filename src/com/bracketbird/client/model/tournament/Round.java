@@ -2,7 +2,7 @@ package com.bracketbird.client.model.tournament;
 
 import com.bracketbird.client.gui.rtc.event.StateChangedEvent;
 import com.bracketbird.client.model.keys.RoundId;
-import com.bracketbird.clientcore.model.StateModel;
+import com.bracketbird.clientcore.model.LevelStateModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,8 +10,7 @@ import java.util.List;
 /**
  *
  */
-public class Round extends StateModel<RoundId> {
-    private static final long serialVersionUID = -990956812294369030L;
+public class Round extends LevelStateModel<RoundId> {
 
     private int roundNumber;
     protected List<Match> matches = new ArrayList<Match>();
@@ -42,13 +41,6 @@ public class Round extends StateModel<RoundId> {
         this.matches = matches;
     }
 
-    @Override
-    public String toString() {
-        return "\nRound{" +
-                "matches=" + getMatches() +
-                '}';
-    }
-
     public int indexOf(Match m) {
         return getMatches().indexOf(m);
     }
@@ -57,25 +49,14 @@ public class Round extends StateModel<RoundId> {
         return matches.get(index);
     }
 
-    @Override
-    public void updateState(boolean fromClient) {
-        LevelState newState = calculateState();
-        setNewState(newState, fromClient);
-    }
-
     public LevelState calculateState() {
         return new LevelStateCalculator().stateBasedOnChildren(getMatches());
-    }
-
-    @Override
-    protected LevelState stateChanged(LevelState oldState, LevelState newState) {
-        return null;
     }
 
     //called from a child (match)
     @Override
     public void onChange(StateChangedEvent event) {
-
+        updateState(event.isFromClient());
     }
 
     public Stage getStage() {

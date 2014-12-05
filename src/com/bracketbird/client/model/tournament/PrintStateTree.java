@@ -1,8 +1,6 @@
 package com.bracketbird.client.model.tournament;
 
 
-import java.util.List;
-
 public class PrintStateTree {
 
     public void print(Tournament t){
@@ -14,7 +12,7 @@ public class PrintStateTree {
             for (Round round : stage.getRounds()) {
                 sb.append("        ").append("round: ").append(name(round.getState()));
                 for (Match match : round.getMatches()) {
-                    sb.append("            ").append("match: ").append(name(match.getState()));
+                    sb.append("            ").append(match).append("\n");
                 }
             }
             if(!stage.isKnockoutStage()){
@@ -24,7 +22,7 @@ public class PrintStateTree {
                     for (Round round : group.getRounds()) {
                         sb.append("            ").append("round: ").append(name(round.getState()));
                         for (Match match : round.getMatches()) {
-                            sb.append("                ").append("match: ").append(name(match.getState()));
+                            sb.append("                ").append(match).append("\n");
                         }
                     }
                 }

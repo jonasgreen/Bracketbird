@@ -1,5 +1,6 @@
 package com.bracketbird.client.model.tournament;
 
+import com.bracketbird.client.gui.rtc.event.StateChangedEvent;
 import com.bracketbird.client.model.KnockoutRoundsBuilder;
 import com.bracketbird.client.model.Team;
 
@@ -10,10 +11,6 @@ import java.util.List;
  *
  */
 public class KnockoutStage extends Stage {
-
-
-    private static final long serialVersionUID = 2056092174233628140L;
-
 
     public KnockoutStage(Tournament t) {
         super(t);
@@ -44,6 +41,12 @@ public class KnockoutStage extends Stage {
                 nextMatch.updateOutTeam(winTeam, true);
             }
         }
+    }
+
+    @Override
+    public void onChange(StateChangedEvent event) {
+        endingTeams = new ArrayList<List<Team>>();
+        updateState(event.isFromClient());
     }
 
     @Override
@@ -82,7 +85,7 @@ public class KnockoutStage extends Stage {
         if (getRounds().size() < 2) {
             return;
         }
-        Round thisRound = (Round) getRounds().get(0);
+        Round thisRound = getRounds().get(0);
         //index of match to be updated with winning team.
         int indexNextRound;
         List<Match> fms = thisRound.getFinishedMatches();
@@ -96,23 +99,24 @@ public class KnockoutStage extends Stage {
     @Override
     public void layoutMatches(boolean fromClient) {
         setupStartingTeams();
-
-        rounds = new ArrayList<Round>(new KnockoutRoundsBuilder(startingTeams, this).getRounds());
-
+        setupRounds();
         handleWalkovers();
+
         updateState(fromClient);
     }
 
-    public LevelState calculateState() {
-        return stateBasedOnChildren(rounds);
+    private void setupRounds() {
+        rounds = new ArrayList<Round>(new KnockoutRoundsBuilder(startingTeams, this).getRounds());
     }
 
-    protected LevelState stateChanged(LevelState oldState, LevelState newState) {
-        endingTeams = new ArrayList<List<Team>>();
-        if (newState.equals(LevelState.finished)) {
+
+    public LevelState calculateState() {
+        LevelState childrenState = new LevelStateCalculator().stateBasedOnChildren(rounds);
+        if(childrenState.isFinished()){
             setEndingTeams();
+            return LevelState.finished;
         }
-        return newState;
+        return childrenState;
     }
 
     private void setEndingTeams() {
@@ -138,7 +142,6 @@ public class KnockoutStage extends Stage {
         l.add(winner);
         endingTeams.add(0, l);
     }
-
 
 }
 

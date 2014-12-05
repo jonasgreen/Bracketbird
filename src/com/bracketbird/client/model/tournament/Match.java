@@ -6,14 +6,16 @@ import com.bracketbird.client.model.*;
 import com.bracketbird.client.model.keys.*;
 import com.bracketbird.clientcore.model.*;
 import com.bracketbird.clientcore.util.StringUtil;
+import com.google.gwt.event.shared.HandlerRegistration;
 
 /**
  *
  */
-public class Match extends StateModel<MatchId> {
+public class Match extends LevelStateModel<MatchId> {
     private static final long serialVersionUID = -8624209794497350221L;
 
-    public transient ModelHandlerList<Match> matchEventHandlers;
+    public ModelHandlerList<Match> matchHandlers;
+    public ModelHandlerList<Result> resultHandlers;
 
 
     //the order of the match in a subtournament
@@ -39,7 +41,7 @@ public class Match extends StateModel<MatchId> {
         super();
         this.round = round;
         this.matchNo = matchNo;
-        matchEventHandlers = new ModelHandlerList<Match>("Match " + matchNo + " (matchHandler)");
+        matchHandlers = new ModelHandlerList<Match>();
     }
 
     public Team getTeamHome() {
@@ -60,7 +62,7 @@ public class Match extends StateModel<MatchId> {
 
 
     private void fireMatchChangedEvent(boolean fromClient) {
-        matchEventHandlers.fireEvent(new UpdateModelEvent<Match>(fromClient, this, this));
+        matchHandlers.fireEvent(new UpdateModelEvent<Match>(fromClient, this, this));
     }
 
 
@@ -133,7 +135,10 @@ public class Match extends StateModel<MatchId> {
         if (EqualsUtil.equals(newResult, result)) {
             return;
         }
+        Result oldResult = this.result;
         this.result = newResult;
+
+        resultHandlers.fireEvent(new UpdateModelEvent<Result>(fromClient, oldResult, result));
         fireMatchChangedEvent(fromClient);
         updateState(fromClient);
     }
@@ -171,11 +176,6 @@ public class Match extends StateModel<MatchId> {
         this.state = calculateState();
     }
 
-    public void updateState(boolean fromClient) {
-        LevelState newState = calculateState();
-        setNewState(newState, fromClient);
-    }
-
 
     public LevelState calculateState() {
         if (teamHome.isSeedingTeam() || teamOut.isSeedingTeam()) {
@@ -190,7 +190,7 @@ public class Match extends StateModel<MatchId> {
 
     @Override
     public void onChange(StateChangedEvent event) {
-        //TODO - called when child changes
+        //Ignore - never called
     }
 
     public Round getRound() {
@@ -199,7 +199,7 @@ public class Match extends StateModel<MatchId> {
 
     @Override
     public String toString() {
-        return "Match{" + teamHome.getName() + " - " + teamOut.getName() + '}';
+        return "Match ["+getState()+"]{" + teamHome + " - " + teamOut +  ", "+result+"}";
     }
 
     public Integer getCountId() {
@@ -214,9 +214,24 @@ public class Match extends StateModel<MatchId> {
         this.name = name;
     }
 
-    @Override
-    protected LevelState stateChanged(LevelState old, LevelState newState) {
-        return newState;
+    public boolean isTeamWinning(Team team) {
+        if(result == null || result.isDraw()){
+            return false;
+        }
+        if(team.equals(getTeamHome()) && result.homeIsWinning()){
+            return true;
+        }
+        if(team.equals(getTeamOut()) && result.outIsWinning()){
+            return true;
+        }
+        return false;
     }
 
+    public boolean isHomeTeam(Team team) {
+        return team.equals(teamHome);
     }
+
+    public HandlerRegistration addResultHandler(ModelEventHandler<Result> handler){
+        return resultHandlers.addHandler(handler);
+    }
+}

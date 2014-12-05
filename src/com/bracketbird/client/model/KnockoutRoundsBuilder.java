@@ -30,7 +30,7 @@ public class KnockoutRoundsBuilder {
 
         List<Team> bTeamList = createTeamList(binaryTeamCount);
 
-        Round firstRound = new Round(stage, 1);
+        Round firstRound = createRound(1);
 
         List<KnockoutMatch> left = new ArrayList<KnockoutMatch>();
         List<KnockoutMatch> right = new ArrayList<KnockoutMatch>();
@@ -88,7 +88,7 @@ public class KnockoutRoundsBuilder {
 
     private Round buildNextRound(Round previousRound, int roundNumber) {
         List<Match> list = new ArrayList<Match>();
-        Round round = new Round(stage, roundNumber);
+        Round round = createRound(roundNumber);
         char c = charNames[roundNumber];
         int nameIndex = 1;
         int count = 0;
@@ -103,6 +103,13 @@ public class KnockoutRoundsBuilder {
         round.setMatches(list);
         return round;
 
+    }
+
+    private Round createRound(int roundNumber) {
+        Round round = new Round(stage, roundNumber);
+        round.addStateHandler(round);
+
+        return round;
     }
 
     private KnockoutMatch createMatch(List<Team> list, Round round){

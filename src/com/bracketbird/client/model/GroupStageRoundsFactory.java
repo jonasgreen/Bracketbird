@@ -6,10 +6,10 @@ import com.bracketbird.client.model.tournament.*;
 import java.util.*;
 
 
-public class StageRoundsFactory{
+public class GroupStageRoundsFactory {
     private List<Round> rounds = new ArrayList<Round>();
 
-    public StageRoundsFactory(List<Group> groups) {
+    public GroupStageRoundsFactory(List<Group> groups) {
         build(groups);
     }
 
@@ -34,7 +34,7 @@ public class StageRoundsFactory{
         int roundNumber = 0;
         for (Round r : newRounds) {
             if(rounds.size()-1 >= roundNumber){//matches are added to existing round
-                Round stageRound = (Round) rounds.get(roundNumber);
+                Round stageRound = rounds.get(roundNumber);
                 stageRound.addMatches(r.getMatches());
             }
             else{//no round exist - round is added
@@ -44,6 +44,12 @@ public class StageRoundsFactory{
                 gr.addMatches(r.getMatches());
                 gr.initState();
                 rounds.add(gr);
+
+                //let stage round listen for changes in matches
+                for (Match match : r.getMatches()) {
+                    match.addStateHandler(gr);
+                }
+
             }
             roundNumber++;
         }

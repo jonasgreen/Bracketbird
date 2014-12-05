@@ -9,15 +9,15 @@ import java.util.List;
 /**
  *
  */
-public class ModelHandlerList<T> {
+public class OnChangeHandlerList {
 
 
-    public ModelHandlerList() {
+    public OnChangeHandlerList() {
     }
 
-    private List<ModelEventHandler<T>> handlers = new ArrayList<ModelEventHandler<T>>();
+    private List<OnChangeHandler> handlers = new ArrayList<OnChangeHandler>();
 
-    public HandlerRegistration addHandler(final ModelEventHandler<T> handler){
+    public HandlerRegistration addHandler(final OnChangeHandler handler){
         handlers.add(handler);
 
         return new HandlerRegistration() {
@@ -28,10 +28,10 @@ public class ModelHandlerList<T> {
         };
     }
 
-    public void fireEvent(ModelEvent<T> event){
+    public void fireEvent(){
         //createGroupMatch new list to avoid concurrent modification exception
-        for (ModelEventHandler<T> l : new ArrayList<ModelEventHandler<T>>(handlers)) {
-            l.handleEvent(event);
+        for (OnChangeHandler l : new ArrayList<OnChangeHandler>(handlers)) {
+            l.onChange();
         }
     }
 

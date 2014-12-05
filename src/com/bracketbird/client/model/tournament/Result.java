@@ -177,12 +177,7 @@ public class Result implements Serializable {
 
     @Override
     public String toString() {
-        return "Result{" +
-                "scoresHome=" + scoresHome +
-                ", scoresOut=" + scoresOut +
-                ", setWonByHome=" + setWonByHome +
-                ", setWonByOut=" + setWonByOut +
-                '}';
+        return asString();
     }
 
     public void setScoresHome(List<Integer> scoresHome) {

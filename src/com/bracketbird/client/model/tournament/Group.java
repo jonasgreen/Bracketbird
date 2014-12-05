@@ -6,7 +6,7 @@ import com.bracketbird.client.model.Team;
 import com.bracketbird.client.model.keys.GroupId;
 import com.bracketbird.client.model.keys.TeamId;
 import com.bracketbird.client.pages.matches.GroupPositions;
-import com.bracketbird.clientcore.model.StateModel;
+import com.bracketbird.clientcore.model.LevelStateModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,14 +14,16 @@ import java.util.List;
 /**
  *
  */
-public class Group extends StateModel<GroupId> {
-    private static final long serialVersionUID = -7946599332097281558L;
+public class Group extends LevelStateModel<GroupId> {
 
     private String name;
     private List<Team> teams = new ArrayList<Team>();
     private List<Round> rounds = new ArrayList<Round>();
-    private List<Team> endingTeams = new ArrayList<Team>();
+
     private GroupPositions groupPositions;
+    private List<Team> endingTeams = new ArrayList<Team>();
+    private GroupStatistics statistics;
+
 
     private GroupStage stage;
 
@@ -88,42 +90,9 @@ public class Group extends StateModel<GroupId> {
         return null;
     }
 
-    @Override
-    public void updateState(boolean fromClient) {
-        LevelState newState = calculateState();
-        setNewState(newState, fromClient);
-    }
-
-    @Override
-    protected LevelState stateChanged(LevelState oldState, LevelState newState) {
-        groupPositions = null;
-        if (newState.equals(LevelState.finished)) {
-            if (endingTeams.isEmpty()) {
-                GroupPositions gp = new GroupPositions(this, getStage().getSettings());
-                if (gp.hasTeamsWithSamePosition()) {
-                    return LevelState.donePlaying;
-                }
-                else{
-                    for (Position p : gp.getPositionOfTeams()) {
-                        endingTeams.add(p.getPointsCounters().get(0).getTeam());
-                    }
-                    groupPositions = null;
-                    return newState;
-                }
-            }
-            else{
-                //endingTeams has been set by outside
-                return newState;
-            }
-        }
-        else{
-            endingTeams = new ArrayList<Team>();
-            return newState;
-        }
-    }
-
     public void layoutMatches() {
         this.rounds = new GroupRoundsFactory(this).getRounds();
+        this.statistics = new GroupStatistics(getStage().getSettings(), getMatches());
     }
 
     public void initState() {
@@ -131,35 +100,30 @@ public class Group extends StateModel<GroupId> {
     }
 
 
-
-    @Override
     public LevelState calculateState() {
-        LevelState newState = new LevelStateCalculator().stateBasedOnChildren(getMatches());
         groupPositions = null;
 
+        if (!endingTeams.isEmpty()) {
+            return LevelState.finished;
+        }
+
+        LevelState childrenState = new LevelStateCalculator().stateBasedOnChildren(getMatches());
+
         //A Groups children can never be in DonePlaying state.
-        if (newState.equals(LevelState.finished)) {
-            if (endingTeams.isEmpty()) {
-                GroupPositions gp = new GroupPositions(this, getStage().getSettings());
-                if (gp.hasTeamsWithSamePosition()) {
-                    return LevelState.donePlaying;
-                }
-                else{
-                    for (Position p : gp.getPositionOfTeams()) {
-                        endingTeams.add(p.getPointsCounters().get(0).getTeam());
-                    }
-                    groupPositions = null;
-                    return newState;
-                }
+        if (childrenState.equals(LevelState.finished)) {
+            groupPositions = new GroupPositions(this, getStage().getSettings());
+            if (groupPositions.hasTeamsWithSamePosition()) {
+                return LevelState.donePlaying;
             }
-            else{
-                //endingTeams has been set by outside
-                return newState;
+            else {
+                for (Position p : groupPositions.getPositionOfTeams()) {
+                    endingTeams.add(p.getPointsCounters().get(0).getTeam());
+                }
+                return childrenState;
             }
         }
-        else{
-            endingTeams = new ArrayList<Team>();
-            return newState;
+        else {
+            return childrenState;
         }
     }
 
@@ -175,9 +139,15 @@ public class Group extends StateModel<GroupId> {
         return groupPositions;
     }
 
+    //Called from a child - ie. round.
     @Override
     public void onChange(StateChangedEvent event) {
+        endingTeams = new ArrayList<Team>();
+        updateState(event.isFromClient());
+    }
 
+    public GroupStatistics getStatistics() {
+        return statistics;
     }
 }
 

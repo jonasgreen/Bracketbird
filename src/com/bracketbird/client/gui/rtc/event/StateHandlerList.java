@@ -32,8 +32,6 @@ public class StateHandlerList {
     }
 
     public void fireEvent(StateChangedEvent event){
-        System.out.println(name + " STATEHANDLER - FIRE EVENT (handlers.size = " + handlers.size() + ")");
-
         //createGroupMatch new list to avoid concurrent modification exception
         for (StateHandler l : new ArrayList<StateHandler>(handlers)) {
             l.onChange(event);

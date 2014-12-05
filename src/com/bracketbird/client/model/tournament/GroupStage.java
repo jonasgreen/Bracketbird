@@ -1,6 +1,7 @@
 package com.bracketbird.client.model.tournament;
 
-import com.bracketbird.client.model.StageRoundsFactory;
+import com.bracketbird.client.gui.rtc.event.StateChangedEvent;
+import com.bracketbird.client.model.GroupStageRoundsFactory;
 import com.bracketbird.client.model.Team;
 import com.bracketbird.client.model.keys.GroupId;
 import com.bracketbird.client.pages.matches.FinalGroupStageRanker;
@@ -12,7 +13,6 @@ import java.util.List;
  *
  */
 public class GroupStage extends Stage {
-    private static final long serialVersionUID = -7946599332097281558L;
 
     private List<Group> groups = new ArrayList<Group>();
     private FinalGroupStageRanker ranker;
@@ -38,38 +38,40 @@ public class GroupStage extends Stage {
             group.initState();
         }
 
-        rounds = new StageRoundsFactory(groups).getRounds();
+        rounds = new GroupStageRoundsFactory(groups).getRounds();
         updateState(fromClient);
     }
 
     public LevelState calculateState() {
-        return stateBasedOnChildren(groups);
-    }
-
-
-    protected LevelState stateChanged(LevelState oldState, LevelState newState) {
         ranker = null;
-        if (newState.equals(LevelState.finished)) {
-            if (endingTeams.isEmpty()) {
-                if (groups.size() == 1) {
-                    return handleOneFinishedGroup(newState);
-                }
-                else {
-                    return handleMultipleFinishedGroups(newState);
-                }
+
+        if (!endingTeams.isEmpty()) {
+            return LevelState.finished;
+        }
+
+        LevelState childrenState = new LevelStateCalculator().stateBasedOnChildren(getGroups());
+
+        //A Group Stage can only become in state 'DonePlaying' when all children is Finished and equality between one or more
+        //teams from these children exists.
+        if (childrenState.isDonePlaying()) {
+            return LevelState.inProgress;
+        }
+
+        if (childrenState.isFinished()) {
+            if (groups.size() == 1) {
+                setEndingTeams(groups.get(0).getEndingTeams());
+                return LevelState.finished;
             }
             else {
-                //endingTeams has been set by outside
-                return newState;
+                return handleMultipleFinishedGroups();
             }
         }
-        else {
-            endingTeams = new ArrayList<List<Team>>();
-            return newState;
-        }
+
+        return childrenState;
     }
 
-    private LevelState handleMultipleFinishedGroups(LevelState newState) {
+
+    private LevelState handleMultipleFinishedGroups() {
         ranker = new FinalGroupStageRanker(this);
         if (ranker.allTeamsHasUniquePositions()) {
             for (Position p : ranker.getPositions()) {
@@ -77,22 +79,20 @@ public class GroupStage extends Stage {
                 oneTeamList.add(p.getPointsCounters().get(0).getTeam());
                 endingTeams.add(oneTeamList);
             }
-            ranker = null;
-            return newState;
+            return LevelState.finished;
         }
         else {
             return LevelState.donePlaying;
         }
     }
 
-    private LevelState handleOneFinishedGroup(LevelState newState) {
+    private void setEndingTeams(List<Team> teams) {
         //only one team in each list
-        for (Team t : groups.get(0).getEndingTeams()) {
+        for (Team t : teams) {
             List<Team> list = new ArrayList<Team>();
             list.add(t);
             endingTeams.add(list);
         }
-        return newState;
     }
 
 
@@ -101,6 +101,12 @@ public class GroupStage extends Stage {
             return "Groups";
         }
         return groups.size() == 1 ? "1 group" : (groups.size() + " groups");
+    }
+
+    @Override
+    public void onChange(StateChangedEvent event) {
+        endingTeams = new ArrayList<List<Team>>();
+        updateState(event.isFromClient());
     }
 
     @Override

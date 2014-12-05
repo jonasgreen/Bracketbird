@@ -1,12 +1,12 @@
 package com.bracketbird.client.model.tournament;
 
-import com.bracketbird.clientcore.model.StateModel;
+import com.bracketbird.clientcore.model.LevelStateModel;
 
 import java.util.List;
 
 public class LevelStateCalculator {
 
-    protected LevelState stateBasedOnChildren(List<? extends StateModel> children) {
+    protected LevelState stateBasedOnChildren(List<? extends LevelStateModel> children) {
         if (children.isEmpty()) {
             return LevelState.notReady;
         }
@@ -40,9 +40,9 @@ public class LevelStateCalculator {
     }
 
 
-    public StateCounter createStateCounter(List<? extends StateModel> list) {
+    public StateCounter createStateCounter(List<? extends LevelStateModel> list) {
         StateCounter counter = new StateCounter();
-        for (StateModel item : list) {
+        for (LevelStateModel item : list) {
             item.getState().handle(counter);
         }
         return counter;

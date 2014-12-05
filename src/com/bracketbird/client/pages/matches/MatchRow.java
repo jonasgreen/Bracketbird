@@ -37,7 +37,7 @@ public class MatchRow extends FlowPanel {
         add(getResultTextBox());
         //add(getFieldTextBox());
 
-        match.matchEventHandlers.addHandler(new ModelEventHandler<Match>() {
+        match.matchHandlers.addHandler(new ModelEventHandler<Match>() {
             @Override
             public void handleEvent(ModelEvent<Match> event) {
                 onMatchChange();

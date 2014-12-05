@@ -7,24 +7,24 @@ import java.util.List;
  *
  */
 public class Position{
-    private List<TeamResultSum> teamResultSums = new ArrayList<TeamResultSum>();
+    private List<TeamStatistics> teamStatisticses = new ArrayList<TeamStatistics>();
 
-    public Position(TeamResultSum pc) {
+    public Position(TeamStatistics pc) {
         add(pc);
     }
 
 
-    public void add(TeamResultSum pc){
-        teamResultSums.add(pc);
+    public void add(TeamStatistics pc){
+        teamStatisticses.add(pc);
     }
 
 
     public boolean hasMoreTeams(){
-        return teamResultSums.size() != 1;
+        return teamStatisticses.size() != 1;
     }
 
 
-    public List<TeamResultSum> getPointsCounters() {
-        return teamResultSums;
+    public List<TeamStatistics> getPointsCounters() {
+        return teamStatisticses;
     }
 }

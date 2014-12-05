@@ -10,7 +10,7 @@ import java.util.Set;
  */
 public class RankingSheet {
 
-    private Map<Team, TeamResultSum> teamResultMap = new HashMap<Team, TeamResultSum>();
+    private Map<Team, TeamStatistics> teamResultMap = new HashMap<Team, TeamStatistics>();
     private StageSettings settings;
     private List<Position> positions = new ArrayList<Position>();
 
@@ -72,9 +72,9 @@ public class RankingSheet {
     }
 
     private void findPosistions() {
-        List<TeamResultSum> teamResultSum = new ArrayList<TeamResultSum>();
-        for (TeamResultSum resultSum : teamResultMap.values()) {
-            teamResultSum.add(resultSum);
+        List<TeamStatistics> teamStatistics = new ArrayList<TeamStatistics>();
+        for (TeamStatistics resultSum : teamResultMap.values()) {
+            teamStatistics.add(resultSum);
         }
 
 
@@ -84,12 +84,12 @@ public class RankingSheet {
             calculater.addNext(PositionCalculater.create(r));
         }
 
-        positions = calculater.calculate(teamResultSum);
+        positions = calculater.calculate(teamStatistics);
     }
 
     private void initTeamResultMap(List<Team> teams) {
         for (Team team : teams) {
-            teamResultMap.put(team, new TeamResultSum(team));
+            teamResultMap.put(team, new TeamStatistics(settings, team));
         }
     }
 
@@ -103,7 +103,7 @@ public class RankingSheet {
         if(!m.isFinish()){
             return;
         }
-        TeamResultSum p = getTeamResultSum(t);
+        TeamStatistics p = getTeamResultSum(t);
         Result r = m.getResult();
         p.setPlayedMatches(p.getPlayedMatches()+1);
 
@@ -113,12 +113,12 @@ public class RankingSheet {
                 p.setPoints(p.getPoints() + settings.getPointsOfVictory());
             }
             else {
-                p.setLostMatchs(p.getLostMatchs()+1);
+                p.setLostMatches(p.getLostMatches() + 1);
             }
         }
         else if (r.outIsWinning()) {
             if (isTeamHome) {
-                p.setLostMatchs(p.getLostMatchs()+1);
+                p.setLostMatches(p.getLostMatches() + 1);
             }
             else {
                 p.setWonMatches(p.getWonMatches()+1);
@@ -126,7 +126,7 @@ public class RankingSheet {
             }
         }
         else {
-            p.setDrawMatchs(p.getDrawMatchs()+1);
+            p.setDrawMatches(p.getDrawMatches() + 1);
             p.setPoints(p.getPoints()+ settings.getPointsOfDraw());
         }
         for (Integer g : r.getScoresHome()) {
@@ -151,10 +151,10 @@ public class RankingSheet {
     }
 
 
-    private TeamResultSum getTeamResultSum(Team t) {
-        TeamResultSum p = teamResultMap.get(t);
+    private TeamStatistics getTeamResultSum(Team t) {
+        TeamStatistics p = teamResultMap.get(t);
         if (p == null) {
-            p = new TeamResultSum(t);
+            p = new TeamStatistics(settings, t);
             teamResultMap.put(t, p);
         }
 

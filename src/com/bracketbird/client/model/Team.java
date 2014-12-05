@@ -81,4 +81,9 @@ public class Team extends Model<TeamId> {
     public boolean isARealTeam(){
         return true;
     }
+
+    @Override
+    public String toString() {
+        return getName();
+    }
 }

@@ -12,9 +12,9 @@ public class ScoredGoalsDiffPositionCalculater extends PositionCalculater {
     }
 
 
-    public TreeMap<Integer, Position> sort(List<TeamResultSum> list) {
+    public TreeMap<Integer, Position> sort(List<TeamStatistics> list) {
         TreeMap<Integer, Position> map = new TreeMap<Integer, Position>(positionComp);
-        for (TeamResultSum ps : list) {
+        for (TeamStatistics ps : list) {
             Position p = map.get(ps.getScoredGoalsDiff());
             if (p == null) {
                 p = new Position(ps);

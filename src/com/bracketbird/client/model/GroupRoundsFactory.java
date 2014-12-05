@@ -88,7 +88,7 @@ public class GroupRoundsFactory {
 
     private Round buildRound(List<Team> upper, List<Team> lower, int roundNumber) {
         //no model listens for state change in group rounds. A stage listens for group or knockout rounds.
-        Round round = new Round(group.getStage(), roundNumber);
+        Round round = createRound(roundNumber);
         List<Match> matches = new ArrayList<Match>();
 
         int count = 0;
@@ -99,6 +99,13 @@ public class GroupRoundsFactory {
 
         round.setMatches(matches);
         round.initState();
+        return round;
+    }
+
+    private Round createRound(int roundNumber) {
+        Round round = new Round(group.getStage(), roundNumber);
+        round.addStateHandler(group);
+
         return round;
     }
 

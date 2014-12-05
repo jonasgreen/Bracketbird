@@ -16,10 +16,15 @@ public class GroupTest extends BracketBirdTest {
             update(match, 1, 1);
         }
 
-        Assert.assertEquals(rtc().getTournament().getState(), LevelState.donePlaying);
+        Assert.assertEquals(rtc().getTournament().getState(), LevelState.inProgress);
+
 
         GroupStage g = (GroupStage) getStage(0);
-        Assert.assertEquals(g.getState(), LevelState.donePlaying);
+        Assert.assertEquals(g.getState(), LevelState.inProgress);
+
+        Group group = g.getGroups().get(0);
+        Assert.assertEquals(group.getState(), LevelState.donePlaying);
+
 
         //all mathces finished
         for (Match match : getStage(0).getMatches()) {
@@ -43,9 +48,10 @@ public class GroupTest extends BracketBirdTest {
 
         //////// CHANGING MATCH BACK TO DRAW
         update(getStage(0).getMatches().get(0), 1, 1);
-        Assert.assertEquals(rtc().getTournament().getState(), LevelState.donePlaying);
 
-        Assert.assertEquals(g.getState(), LevelState.donePlaying);
+        Assert.assertEquals(rtc().getTournament().getState(), LevelState.inProgress);
+        Assert.assertEquals(g.getState(), LevelState.inProgress);
+        Assert.assertEquals(group.getState(), LevelState.donePlaying);
 
         //all mathces finished
         for (Match match : getStage(0).getMatches()) {
@@ -78,10 +84,19 @@ public class GroupTest extends BracketBirdTest {
             update(match, 1, 1);
         }
 
-        Assert.assertEquals(rtc().getTournament().getState(), LevelState.donePlaying);
 
-        GroupStage g = (GroupStage) stage;
-        Assert.assertEquals(g.getState(), LevelState.donePlaying);
+
+        Assert.assertEquals(rtc().getTournament().getState(), LevelState.inProgress);
+
+        GroupStage g = stage;
+        Assert.assertEquals(g.getState(), LevelState.inProgress);
+
+        Group groupOne = stage.getGroups().get(0);
+        Group groupTwo = stage.getGroups().get(1);
+
+        Assert.assertEquals(groupOne.getState(), LevelState.donePlaying);
+        Assert.assertEquals(groupTwo.getState(), LevelState.donePlaying);
+
 
         //all mathces finished
         for (Match match : stage.getMatches()) {
@@ -90,15 +105,13 @@ public class GroupTest extends BracketBirdTest {
 
         //////// CHANGING MATCH IN GROUP ONE TO HAVE A WINNER
 
-        Group groupOne = stage.getGroups().get(0);
-        Group groupTwo = stage.getGroups().get(1);
-
 
         update(groupOne.getMatches().get(0), 1, 2);
 
         Assert.assertEquals(groupOne.getState(), LevelState.finished);
         Assert.assertEquals(groupTwo.getState(), LevelState.donePlaying);
-        Assert.assertEquals(rtc().getTournament().getState(), LevelState.donePlaying);
+        Assert.assertEquals(g.getState(), LevelState.inProgress);
+        Assert.assertEquals(rtc().getTournament().getState(), LevelState.inProgress);
 
 
         //all mathces still finished
@@ -113,6 +126,7 @@ public class GroupTest extends BracketBirdTest {
 
         Assert.assertEquals(groupOne.getState(), LevelState.finished);
         Assert.assertEquals(groupTwo.getState(), LevelState.finished);
+        Assert.assertEquals(g.getState(), LevelState.finished);
         Assert.assertEquals(rtc().getTournament().getState(), LevelState.finished);
 
 
@@ -122,6 +136,25 @@ public class GroupTest extends BracketBirdTest {
         }
 
         System.out.println("done");
+
+
+        //////// CHANGING BOTH MATCHES TO HAVE A WINNER - and same scores
+
+        update(groupTwo.getMatches().get(0), 1, 2);
+
+        Assert.assertEquals(groupOne.getState(), LevelState.finished);
+        Assert.assertEquals(groupTwo.getState(), LevelState.finished);
+        Assert.assertEquals(g.getState(), LevelState.donePlaying);
+        Assert.assertEquals(rtc().getTournament().getState(), LevelState.inProgress);
+
+
+        //all mathces still finished
+        for (Match match : stage.getMatches()) {
+            Assert.assertEquals(match.getState(), LevelState.finished);
+        }
+
+        System.out.println("done");
+
 
 
     }

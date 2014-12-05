@@ -37,6 +37,8 @@ public abstract class REventHandler<E extends REvent<?,?>> {
 
     protected void executeEvent(E event) {
         try {
+            System.out.println("Before ----- : "+event.getClass().getSimpleName());
+
             if (event.isFromClient()) {
                 EventManager manager = RTC.getInstance().getSync();
                 manager.add(event);
@@ -46,8 +48,10 @@ public abstract class REventHandler<E extends REvent<?,?>> {
                 updateTournament(event);
             }
 
+            System.out.println("After ------: "+event.getClass().getSimpleName());
             PrintStateTree printStateTree = new PrintStateTree();
             printStateTree.print(RTC.getInstance().getTournament());
+
         }
         catch (Exception e) {
             handleFailure(e, event);

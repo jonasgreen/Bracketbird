@@ -1,6 +1,6 @@
 package com.bracketbird.client.model.tournament;
 
-import com.bracketbird.clientcore.model.StateModel;
+import com.bracketbird.clientcore.model.LevelStateModel;
 
 import java.util.List;
 
@@ -53,11 +53,11 @@ public class StateCounter {
         return countFinished;
     }
 
-    public boolean allIsReady(List<? extends StateModel> children) {
+    public boolean allIsReady(List<? extends LevelStateModel> children) {
         return children.size() == countReady;
     }
 
-    public boolean allIsNotReady(List<? extends StateModel> children) {
+    public boolean allIsNotReady(List<? extends LevelStateModel> children) {
         return children.size() == countNotReady;
     }
 

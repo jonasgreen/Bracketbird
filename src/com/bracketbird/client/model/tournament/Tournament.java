@@ -13,8 +13,7 @@ import java.util.*;
 /**
  *
  */
-public class Tournament extends StateModel<TournamentId> {
-    private static final long serialVersionUID = 5951730875833184507L;
+public class Tournament extends LevelStateModel<TournamentId> {
 
     public transient ModelHandlerList<String> nameEventHandlers;
     public transient ModelHandlerList<Stage> stagesEventHandlers;
@@ -37,15 +36,6 @@ public class Tournament extends StateModel<TournamentId> {
         stagesEventHandlers = new ModelHandlerList<Stage>("Tournament (stageHandler)");
         teamsEventHandlers = new ModelHandlerList<Team>("Tournament (teamsHandler)");
         seedingHandlers = new ModelHandlerList<List<TeamId>>("Tournament (seedingHandler)");
-    }
-
-    @Override
-    protected LevelState stateChanged(LevelState oldState, LevelState newState) {
-        endingTeams = new ArrayList<List<Team>>();
-        if(newState.isFinished()){
-            endingTeams = getStages().get(getStages().size()-1).getEndingTeams();
-        }
-        return newState;
     }
 
     public List<Stage> getStages() {
@@ -123,7 +113,18 @@ public class Tournament extends StateModel<TournamentId> {
     }
 
     public LevelState calculateState() {
-        return stateBasedOnChildren(stages);
+        LevelState childrenState = new LevelStateCalculator().stateBasedOnChildren(getStages());
+
+        if(childrenState.isFinished()){
+            endingTeams = getLastStage().getEndingTeams();
+        }
+        return childrenState;
+
+
+    }
+
+    private Stage getLastStage() {
+        return getStages().get(getStages().size()-1);
     }
 
 
@@ -424,7 +425,8 @@ public class Tournament extends StateModel<TournamentId> {
 
     @Override
     public void onChange(StateChangedEvent event) {
-
+        endingTeams = new ArrayList<List<Team>>();
+        updateState(event.isFromClient());
     }
 }
 

@@ -94,20 +94,20 @@ public class GroupScoreSheet extends VerticalComponent {
     private void appendRows(StringBuffer sb) {
 
         ColorWheel cw = new ColorWheel(P.BACKGROUND_BLACK, P.BACKGROUND_BLACK);
-        List<TeamResultSum> list = new ArrayList<TeamResultSum>();
+        List<TeamStatistics> list = new ArrayList<TeamStatistics>();
 
         for (Position p : positions) {
             list.addAll(p.getPointsCounters());
         }
 
         int pCount = 1;
-        for (TeamResultSum position : list) {
+        for (TeamStatistics position : list) {
             appendRow(list.size() == pCount, sb, position, pCount++, cw.getNext());
         }
 
     }
 
-    private void appendRow(boolean last, StringBuffer sb, TeamResultSum trs, int pCount, P bgColor) {
+    private void appendRow(boolean last, StringBuffer sb, TeamStatistics trs, int pCount, P bgColor) {
         TextLayout tlM = new TextLayout().sizeH3().padding(6, 7, 2, 7).add(color).add(bgColor).alignRight().borderLeft(1).borderColor(P.COLOR_4D).noWrap().colorGrey();
 
         TextLayout tl = new TextLayout().sizeH3().padding(6, 7, 2, 7).add(color).add(bgColor).alignRight().noWrap();
@@ -123,8 +123,8 @@ public class GroupScoreSheet extends VerticalComponent {
         appendTD(sb, tlTeam, trs.getTeam().getName());
         appendTD(sb, tlM, trs.getPlayedMatches());
         //appendTD(sb, tl, trs.getWonMatches());
-        //appendTD(sb, tl, trs.getDrawMatchs());
-        //appendTD(sb, tl, trs.getLostMatchs());
+        //appendTD(sb, tl, trs.getDrawMatches());
+        //appendTD(sb, tl, trs.getLostMatches());
 
 
 

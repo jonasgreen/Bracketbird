@@ -30,7 +30,7 @@ public abstract class PositionCalculater {
         }
     }
 
-    public List<Position> calculate(List<TeamResultSum> list) {
+    public List<Position> calculate(List<TeamStatistics> list) {
         List<Position> positions = new ArrayList<Position>();
 
         for (Position p : sort(list).values()) {
@@ -48,7 +48,7 @@ public abstract class PositionCalculater {
         return positions;
     }
 
-    protected abstract TreeMap<Integer, Position> sort(List<TeamResultSum> list);
+    protected abstract TreeMap<Integer, Position> sort(List<TeamStatistics> list);
 
 
     public PositionCalculater getNext() {

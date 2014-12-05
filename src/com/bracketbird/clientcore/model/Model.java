@@ -2,14 +2,12 @@ package com.bracketbird.clientcore.model;
 
 import com.bracketbird.clientcore.model.keys.EntityId;
 
-import java.io.Serializable;
 import java.util.Date;
 
 /**
  *
  */
-public abstract class Model<E extends EntityId> implements Serializable{
-    private static final long serialVersionUID = 8465595286369175756L;
+public abstract class Model<E extends EntityId>{
 
     //lognumber from rtcevent log. Used to see which objects are newest.
     private Long eventLogId;

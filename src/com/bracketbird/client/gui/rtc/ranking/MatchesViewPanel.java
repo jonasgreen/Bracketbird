@@ -64,7 +64,7 @@ public class MatchesViewPanel extends FlowPanel{
 
         matchesPlayedPanel.setStyleName("matchesPlayedPanel");
         for (Match m : level.getMatches()) {
-            m.matchEventHandlers.addHandler(new ModelEventHandler<Match>() {
+            m.matchHandlers.addHandler(new ModelEventHandler<Match>() {
                 @Override
                 public void handleEvent(ModelEvent<Match> event) {
                     updateMatchesPlayedPanel(level);

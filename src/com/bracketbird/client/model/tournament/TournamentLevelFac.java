@@ -1,10 +1,11 @@
 package com.bracketbird.client.model.tournament;
 
 import com.bracketbird.client.model.StageType;
-import com.bracketbird.clientcore.appcontrol.*;
-import com.bracketbird.clientcore.model.*;
+import com.bracketbird.clientcore.appcontrol.SystemException;
+import com.bracketbird.clientcore.model.FindingRankingConstant;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -25,7 +26,7 @@ public class TournamentLevelFac {
     }
 
     public static GroupStage createGroup(Tournament t) {
-        GroupStage level = new GroupStage(t);
+        GroupStage stage = new GroupStage(t);
         StageSettings ss = new StageSettings();
 
         ss.setPointsOfVictory(2);
@@ -36,17 +37,19 @@ public class TournamentLevelFac {
         List<Integer> rules = new ArrayList<Integer>();
         rules.add(FindingRankingConstant.GOALS_DIFFERENCE.getValue());
         ss.setRankingRules(rules);
+        stage.setSettings(ss);
 
-        level.setSettings(ss);
-        return level;
+        stage.addStateHandler(t);
+        return stage;
     }
 
     public static KnockoutStage createCup(Tournament t) {
-        KnockoutStage level = new KnockoutStage(t);
+        KnockoutStage stage = new KnockoutStage(t);
         StageSettings ss = new StageSettings();
         ss.setEliminationType(1);//single elim
+        stage.setSettings(ss);
 
-        level.setSettings(ss);
-        return level;
+        stage.addStateHandler(t);
+        return stage;
     }
 }

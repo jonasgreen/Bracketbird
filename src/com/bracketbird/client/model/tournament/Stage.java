@@ -1,13 +1,12 @@
 package com.bracketbird.client.model.tournament;
 
-import com.bracketbird.client.gui.rtc.event.StateChangedEvent;
 import com.bracketbird.client.gui.rtc.event.UpdateMatchFieldEvent;
 import com.bracketbird.client.model.SeedingTeam;
 import com.bracketbird.client.model.Team;
 import com.bracketbird.client.model.keys.MatchId;
 import com.bracketbird.client.model.keys.StageId;
 import com.bracketbird.client.model.keys.TeamId;
-import com.bracketbird.clientcore.model.StateModel;
+import com.bracketbird.clientcore.model.LevelStateModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +14,7 @@ import java.util.List;
 /**
  *
  */
-public abstract class Stage extends StateModel<StageId> {
-    private static final long serialVersionUID = -8838821453128489654L;
+public abstract class Stage extends LevelStateModel<StageId> {
 
     //each round holds all the matches in one round (from all groups).
     protected List<Round> rounds = new ArrayList<Round>();
@@ -128,8 +126,6 @@ public abstract class Stage extends StateModel<StageId> {
         }
         return false;
     }
-
-    public abstract LevelState calculateState();
 
 
     protected boolean hasEndingTeams() {
@@ -243,11 +239,6 @@ public abstract class Stage extends StateModel<StageId> {
 
     public StageSettings getSettings() {
         return settings;
-    }
-
-    @Override
-    public void onChange(StateChangedEvent event) {
-
     }
 
     public Tournament getTournament() {

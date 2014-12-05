@@ -2,7 +2,7 @@ package com.bracketbird.client.pages.matches;
 
 
 import com.bracketbird.client.model.Team;
-import com.bracketbird.client.model.tournament.TeamResultSum;
+import com.bracketbird.client.model.tournament.TeamStatistics;
 import com.bracketbird.clientcore.util.StringUtil;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
@@ -14,13 +14,13 @@ import java.util.*;
  */
 public class EqualPointsPanel extends FlowPanel implements FinalRankingTeamHolder {
 
-    private List<TeamResultSum> results;
+    private List<TeamStatistics> results;
     private int start;
     private int end;
     private List<FinalRankRow> rows = new ArrayList<FinalRankRow>();
     private String groupName;
 
-    public EqualPointsPanel(String groupName, List<TeamResultSum> results, int start) {
+    public EqualPointsPanel(String groupName, List<TeamStatistics> results, int start) {
         super();
         setStyleName("equalPointsPanel");
         this.groupName = groupName;
@@ -37,7 +37,7 @@ public class EqualPointsPanel extends FlowPanel implements FinalRankingTeamHolde
         add(w);
         FlowPanel vc = new FlowPanel();
         vc.setStyleName("equalPointsPanel_RowsPanel");
-        for (TeamResultSum r : results) {
+        for (TeamStatistics r : results) {
             FinalRankRow row = new FinalRankRow(r.getTeam(), (String)null);
             rows.add(row);
             vc.add(row);
