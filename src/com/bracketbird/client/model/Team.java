@@ -9,10 +9,9 @@ import com.bracketbird.clientcore.model.*;
  *
  */
 public class Team extends Model<TeamId> {
-    private static final long serialVersionUID = -8413373363468003258L;
 
-    public ModelHandlerList<String> nameHandlers;
-    public ModelHandlerList<Integer> seedingHandlers;
+    public ModelHandlerList<String> nameHandlers = new ModelHandlerList<String>();
+    public ModelHandlerList<Integer> seedingHandlers = new ModelHandlerList<Integer>();
 
     protected String name;
     protected Integer seeding;
@@ -22,10 +21,6 @@ public class Team extends Model<TeamId> {
         super();
         this.name = name;
         this.seeding = seeding;
-
-        nameHandlers = new ModelHandlerList<String>("Team "+name + " (nameHandler)");
-        seedingHandlers = new ModelHandlerList<Integer>("Team "+name + " (seedingHandler)");
-
     }
 
     public Integer getSeeding() {

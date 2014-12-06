@@ -15,10 +15,10 @@ import java.util.*;
  */
 public class Tournament extends LevelStateModel<TournamentId> {
 
-    public transient ModelHandlerList<String> nameEventHandlers;
-    public transient ModelHandlerList<Stage> stagesEventHandlers;
-    public transient ModelHandlerList<Team> teamsEventHandlers;
-    public transient ModelHandlerList<List<TeamId>> seedingHandlers;
+    public transient ModelHandlerList<String> nameEventHandlers = new ModelHandlerList<String>();
+    public transient ModelHandlerList<Stage> stagesEventHandlers = new ModelHandlerList<Stage>();
+    public transient ModelHandlerList<Team> teamsEventHandlers = new ModelHandlerList<Team>();
+    public transient ModelHandlerList<List<TeamId>> seedingHandlers = new ModelHandlerList<List<TeamId>>();
 
     private String name;
     private String url;
@@ -32,10 +32,6 @@ public class Tournament extends LevelStateModel<TournamentId> {
 
 
     public Tournament() {
-        nameEventHandlers = new ModelHandlerList<String>("Tournament (nameHandler)");
-        stagesEventHandlers = new ModelHandlerList<Stage>("Tournament (stageHandler)");
-        teamsEventHandlers = new ModelHandlerList<Team>("Tournament (teamsHandler)");
-        seedingHandlers = new ModelHandlerList<List<TeamId>>("Tournament (seedingHandler)");
     }
 
     public List<Stage> getStages() {

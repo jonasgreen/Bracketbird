@@ -2,9 +2,7 @@ package com.bracketbird.client.model.ranking;
 
 import com.bracketbird.client.model.tournament.TeamStatistics;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public abstract class RankingLadder extends Ranking {
 
@@ -13,44 +11,64 @@ public abstract class RankingLadder extends Ranking {
     //Points to a possible next ladder.
     private LadderWheel wheel;
 
+    public RankingLadder(RankingLadder parent, Integer id) {
+        super(parent, id);
+    }
 
-    public void addAll(List<TeamStatistics> teamStats) {
-        for (TeamStatistics teamStat : teamStats) {
-            add(teamStat);
+
+    public List<RankingStep> getTotalRanking(){
+        List<RankingStep> list = new ArrayList<RankingStep>();
+        appendStepsToList(list);
+        return list;
+    }
+
+    @Override
+    protected void appendStepsToList(List<RankingStep> list){
+        List<Integer> keys = new ArrayList<Integer>(children.keySet());
+        Collections.sort(keys);
+        for (Integer key : keys) {
+            children.get(key).appendStepsToList(list);
         }
     }
 
+
+    @Override
+    public void remove(TeamStatistics teamStat) {
+        Ranking ranking = children.get(getValue(teamStat));
+        if(ranking != null){
+            ranking.remove(teamStat);
+        }
+    }
+
+    @Override
     public void add(TeamStatistics teamStat){
         Integer value = getValue(teamStat);
         Ranking ranking = children.get(value);
         if(ranking == null){
-            ranking = new Step(this, teamStat);
+            ranking = createNext(value);
             children.put(value, ranking);
         }
-        else if(ranking instanceof Step){
-            //Replace step by ladder. If no more ladders exist, add to step.
-            RankingLadder nextLadder = createNextLadder();
-            if(nextLadder != null){
-                children.put(value, nextLadder);
-                //The new Ladder holds the new TeamStatistics and the TeamStatistics from the Step.
-                nextLadder.addAll(((Step)ranking).getTeamStatistics());
-                nextLadder.add(teamStat);
-            }
-            else{
-                //add to existing step
-                ranking.add(teamStat);
-            }
-        }
-        else{
-            ranking.add(teamStat);
+        ranking.add(teamStat);
+    }
+
+    //Called from child, when child is empty.
+    public void removeChild(Ranking child){
+        children.remove(child.getId());
+        if(children.isEmpty() && parent != null){
+            parent.removeChild(this);
         }
     }
 
-    protected RankingLadder createNextLadder(){
+
+
+
+    protected Ranking createNext(Integer id){
+        Ranking next = null;
         if(wheel != null){
-            return wheel.next();
+            next = wheel.next(this, id);
         }
-        return null;
+        //At the end of the RankingLadder line there is one or more RankingSteps
+        return next != null ? next : new RankingStep(id, this);
     }
 
 

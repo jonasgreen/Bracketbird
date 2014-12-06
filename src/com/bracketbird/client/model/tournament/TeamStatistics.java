@@ -10,7 +10,7 @@ import java.util.List;
 public class TeamStatistics {
 
     private StageSettings settings;
-    private Team team;
+    private final Team team;
 
     private int points = 0;
 
@@ -29,7 +29,7 @@ public class TeamStatistics {
     }
 
 
-    public void updateStats(Match match, Result oldResult, Result newResult){
+    public void update(Match match, Result oldResult, Result newResult){
         if(oldResult != null){
             removeResult(match, oldResult);
         }
@@ -141,5 +141,20 @@ public class TeamStatistics {
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
+        TeamStatistics that = (TeamStatistics) o;
+
+        if (!team.equals(that.team)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return team.hashCode();
+    }
 }

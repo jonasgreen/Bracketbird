@@ -105,7 +105,7 @@ public class RankingSheet {
         }
         TeamStatistics p = getTeamResultSum(t);
         Result r = m.getResult();
-        p.setPlayedMatches(p.getPlayedMatches()+1);
+        /*p.setPlayedMatches(p.getPlayedMatches()+1);
 
         if (r.homeIsWinning()) {
             if (isTeamHome) {
@@ -146,7 +146,7 @@ public class RankingSheet {
                 p.setScoredGoals(p.getScoredGoals() + g);
             }
         }
-
+*/
 
     }
 

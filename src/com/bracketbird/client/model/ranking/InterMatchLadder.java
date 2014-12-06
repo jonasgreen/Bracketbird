@@ -2,15 +2,15 @@ package com.bracketbird.client.model.ranking;
 
 import com.bracketbird.client.model.tournament.TeamStatistics;
 
-public class PointLadder extends RankingLadder {
+public class InterMatchLadder extends RankingLadder {
 
 
-    public PointLadder(RankingLadder parent, Integer value) {
+    public InterMatchLadder(RankingLadder parent, Integer value) {
         super(parent, value);
     }
 
     protected Integer getValue(TeamStatistics stat){
-        return stat.getPoints();
+        return stat.getGoalDifference();//TODO
     }
 
 
