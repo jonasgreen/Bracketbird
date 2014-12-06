@@ -2,7 +2,7 @@ package com.bracketbird.client.model.ranking;
 
 import com.bracketbird.client.model.tournament.TeamStatistics;
 
-public abstract class GoalsDifferenceLadder extends Ladder {
+public abstract class ScoreDifferenceLadder extends Ladder {
 
 
 

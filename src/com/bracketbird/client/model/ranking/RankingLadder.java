@@ -6,9 +6,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public abstract class Ladder extends AbstractRanking {
+public abstract class RankingLadder extends Ranking {
 
-    private Map<Integer, AbstractRanking> children = new HashMap<Integer, AbstractRanking>();
+    private Map<Integer, Ranking> children = new HashMap<Integer, Ranking>();
+
+    //Points to a possible next ladder.
+    private LadderWheel wheel;
 
 
     public void addAll(List<TeamStatistics> teamStats) {
@@ -19,14 +22,14 @@ public abstract class Ladder extends AbstractRanking {
 
     public void add(TeamStatistics teamStat){
         Integer value = getValue(teamStat);
-        AbstractRanking ranking = children.get(value);
+        Ranking ranking = children.get(value);
         if(ranking == null){
             ranking = new Step(this, teamStat);
             children.put(value, ranking);
         }
         else if(ranking instanceof Step){
             //Replace step by ladder. If no more ladders exist, add to step.
-            Ladder nextLadder = createNextLadder();
+            RankingLadder nextLadder = createNextLadder();
             if(nextLadder != null){
                 children.put(value, nextLadder);
                 //The new Ladder holds the new TeamStatistics and the TeamStatistics from the Step.
@@ -43,9 +46,21 @@ public abstract class Ladder extends AbstractRanking {
         }
     }
 
-    protected abstract Ladder createNextLadder();
+    protected RankingLadder createNextLadder(){
+        if(wheel != null){
+            return wheel.next();
+        }
+        return null;
+    }
 
 
     protected abstract Integer getValue(TeamStatistics stat);
 
+    public void setWheel(LadderWheel wheel) {
+        this.wheel = wheel;
+    }
+
+    public LadderWheel getWheel() {
+        return wheel;
+    }
 }

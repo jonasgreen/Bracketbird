@@ -4,12 +4,12 @@ import com.bracketbird.client.model.tournament.TeamStatistics;
 
 import java.util.List;
 
-public class Step extends AbstractRanking {
+public class RankingStep extends Ranking {
 
-    private Ladder parent;
+    private RankingLadder parent;
     private List<TeamStatistics> teamStatistics;
 
-    public Step(Ladder parent, TeamStatistics teamStatistics) {
+    public RankingStep(RankingLadder parent, TeamStatistics teamStatistics) {
         this.parent = parent;
         this.teamStatistics.add(teamStatistics);
     }

@@ -8,13 +8,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class GroupStatistics {
+public class GroupRanking {
 
     private Map<Team, TeamStatistics> statisticsMap = new HashMap<Team, TeamStatistics>();
     private StageSettings settings;
     private OnChangeHandlerList changeHandlers = new OnChangeHandlerList();
 
-    public GroupStatistics(StageSettings settings, List<Match> matches) {
+
+    public GroupRanking(StageSettings settings, List<Match> matches) {
         this.settings = settings;
         for (final Match match : matches) {
             match.addResultHandler(new ModelEventHandler<Result>() {
