@@ -6,6 +6,13 @@ import java.util.*;
 
 public abstract class RankingLadder extends Ranking {
 
+    private static Comparator<Integer> sortingComp = new Comparator<Integer>() {
+        @Override
+        public int compare(Integer o1, Integer o2) {
+            return -o1.compareTo(o2);
+        }
+    };
+
     private Map<Integer, Ranking> children = new HashMap<Integer, Ranking>();
 
     //Points to a possible next ladder.
@@ -25,7 +32,8 @@ public abstract class RankingLadder extends Ranking {
     @Override
     protected void appendStepsToList(List<RankingStep> list){
         List<Integer> keys = new ArrayList<Integer>(children.keySet());
-        Collections.sort(keys);
+
+        Collections.sort(keys, sortingComp);
         for (Integer key : keys) {
             children.get(key).appendStepsToList(list);
         }

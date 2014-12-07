@@ -18,6 +18,7 @@ public class LadderWheel {
         if(index < ladders.length){
             RankingLadder ladder = AbstractLadderFactory.get().createLadder(ladders[index++], parent, id);
             ladder.setWheel(this);
+            return ladder;
         }
         return null;
     }

@@ -14,8 +14,8 @@ import com.google.gwt.event.shared.HandlerRegistration;
 public class Match extends LevelStateModel<MatchId> {
     private static final long serialVersionUID = -8624209794497350221L;
 
-    public ModelHandlerList<Match> matchHandlers;
-    public ModelHandlerList<Result> resultHandlers;
+    public ModelHandlerList<Match> matchHandlers = new ModelHandlerList<Match>();
+    public ModelHandlerList<Result> resultHandlers = new ModelHandlerList<Result>();
 
 
     //the order of the match in a subtournament
@@ -41,7 +41,6 @@ public class Match extends LevelStateModel<MatchId> {
         super();
         this.round = round;
         this.matchNo = matchNo;
-        matchHandlers = new ModelHandlerList<Match>();
     }
 
     public Team getTeamHome() {

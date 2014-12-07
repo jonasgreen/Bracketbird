@@ -59,13 +59,20 @@ public class TeamStatistics {
             drawMatches += getValue(isAdding, 1);
             points += settings.getPointsOfDraw();
         }
-        else if (match.isTeamWinning(team)) {
+        else if (isWinningTeam(match, result)) {
             wonMatches += getValue(isAdding, 1);
-            points += settings.getPointsOfVictory();
+            points += getValue(isAdding, settings.getPointsOfVictory());
         }
         else {
             lostMatches += getValue(isAdding, 1);
         }
+    }
+
+    private boolean isWinningTeam(Match m, Result result){
+        if(m.isHomeTeam(team)){
+            return result.homeIsWinning();
+        }
+        return result.outIsWinning();
     }
 
     private int getValue(boolean isAdding, int value) {
@@ -129,16 +136,16 @@ public class TeamStatistics {
 
     @Override
     public String toString() {
-        return "TeamResultSum{" +
-                "playingTeam=" + team +
+        return team.getName()+"\t[" +
+                "points=" + points +
+                ", GoalDiff=" + (scoredGoals - receivedGoals) +
                 ", scoredGoals=" + scoredGoals +
                 ", receivedGoals=" + receivedGoals +
                 ", wonMatches=" + wonMatches +
                 ", lostMatches=" + lostMatches +
                 ", drawMatches=" + drawMatches +
                 ", playedMatches=" + playedMatches +
-                ", points=" + points +
-                '}';
+                ']';
     }
 
     @Override

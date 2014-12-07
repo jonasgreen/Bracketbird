@@ -1,9 +1,13 @@
 package com.bracketbird.client.model.tournament;
 
-import com.bracketbird.client.gui.rtc.event.*;
+import com.bracketbird.client.gui.rtc.event.ModelEvent;
+import com.bracketbird.client.gui.rtc.event.ModelEventHandler;
+import com.bracketbird.client.gui.rtc.event.ModelHandlerList;
+import com.bracketbird.client.gui.rtc.event.UpdateModelEvent;
 import com.bracketbird.client.model.Team;
 import com.bracketbird.client.model.ranking.LadderWheel;
-import com.bracketbird.client.model.ranking.Ranking;
+import com.bracketbird.client.model.ranking.RankingLadder;
+import com.bracketbird.client.model.ranking.RankingStep;
 import com.bracketbird.client.model.ranking.RankingType;
 import com.google.gwt.event.shared.HandlerRegistration;
 
@@ -13,16 +17,16 @@ import java.util.Map;
 
 public class GroupRanking {
 
-    private RankingType[] rankingTypes = new RankingType[]{RankingType.point, RankingType.scoreDifference, RankingType.interMatchWinner};
+    private RankingType[] rankingTypes = new RankingType[]{RankingType.point, RankingType.scoreDifference};
 
     private Map<Team, TeamStatistics> statisticsMap = new HashMap<Team, TeamStatistics>();
-    private StageSettings settings;
+    private Group group;
     private ModelHandlerList<Match> onChangeHandlers = new ModelHandlerList<Match>();
 
-    private Ranking ranking;
+    private RankingLadder ranking;
 
-    public GroupRanking(StageSettings settings, List<Match> matches) {
-        this.settings = settings;
+    public GroupRanking(Group group, List<Match> matches) {
+        this.group = group;
         this.ranking = new LadderWheel(rankingTypes).first();
 
         for (final Match match : matches) {
@@ -43,6 +47,7 @@ public class GroupRanking {
         updateRanking(match.getTeamHome(), match, e.getOldValue(), e.getNewValue());
         updateRanking(match.getTeamOut(), match, e.getOldValue(), e.getNewValue());
 
+        new PrintRankingTree().print(this);
         onChangeHandlers.fireEvent(new UpdateModelEvent<Match>(e.isFromClient(), match, match));
     }
 
@@ -60,7 +65,7 @@ public class GroupRanking {
     private TeamStatistics get(Team t){
         TeamStatistics stats = statisticsMap.get(t);
         if(stats == null){
-            stats = new TeamStatistics(settings, t);
+            stats = new TeamStatistics(group.getStage().getSettings(), t);
             statisticsMap.put(t, stats);
         }
         return stats;
@@ -68,5 +73,13 @@ public class GroupRanking {
 
     public HandlerRegistration addOnChangeHandler(ModelEventHandler<Match> handler){
         return onChangeHandlers.addHandler(handler);
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public List<RankingStep> getRanking(){
+        return ranking.getTotalRanking();
     }
 }

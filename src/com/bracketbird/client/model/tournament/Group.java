@@ -90,9 +90,10 @@ public class Group extends LevelStateModel<GroupId> {
         return null;
     }
 
-    public void layoutMatches() {
+    void layoutMatches() {
         this.rounds = new GroupRoundsFactory(this).getRounds();
-        this.statistics = new GroupRanking(getStage().getSettings(), getMatches());
+        this.statistics = new GroupRanking(this, getMatches());
+
     }
 
     public void initState() {
