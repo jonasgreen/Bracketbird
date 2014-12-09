@@ -460,116 +460,9 @@ input:focus, select:focus, textarea:focus, button:focus {
   background: -webkit-gradient(linear, left top, left bottom, from(#ededed), to(white));
   background: -moz-linear-gradient(top, #ededed, white); }
 
-.colorbutton, .colorbutton:link {
-  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-  background: -moz-linear-gradient(center top, #1d9cd3, #29abe2) repeat scroll 0 0 transparent;
-  background: -webkit-gradient(linear, left top, left bottom, from(#1d9cd3), to(#29abe2));
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#1D9CD3', endColorstr = '#29ABE2');
-  color: #151515;
-  display: inline-block;
-  font-size: 22px;
-  padding: 10px;
-  border: 1px solid black; }
-
-.colorbutton:hover, .colorbutton:visited {
-  background: none repeat scroll 0 0 #29abe2;
-  color: white;
-  cursor: pointer; }
-
-.colorbuttonhelp, .colorbuttonhelp:link {
-  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-  background: -moz-linear-gradient(center top, #29abe2, #29abe2) repeat scroll 0 0 transparent;
-  background: -webkit-gradient(linear, left top, left bottom, from(#29abe2), to(#29abe2));
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#29ABE2', endColorstr = '#29ABE2');
-  color: #151515;
-  display: inline-block;
-  font-size: 22px;
-  padding: 10px;
-  border: 1px solid black; }
-
-.colorbuttonhelp:hover, .colorbuttonhelp:visited {
-  background: none repeat scroll 0 0 #29abe2;
-  color: white;
-  cursor: pointer; }
-
-.colorbutton2, .colorbutton2:link {
-  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-  background: -moz-linear-gradient(center top, #29abe2, #29abe2) repeat scroll 0 0 transparent;
-  background: -webkit-gradient(linear, left top, left bottom, from(#29abe2), to(#29abe2));
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#29ABE2', endColorstr = '#29ABE2');
-  color: white;
-  display: inline-block;
-  font-size: 22px;
-  padding: 15px;
-  font-weight: bold;
-  text-decoration: underline;
-  border: 2px solid black; }
-
-.colorbutton2:hover, .colorbutton2:visited {
-  background: none repeat scroll 0 0 #29abe2;
-  color: white;
-  cursor: pointer; }
-
-.buttoncell {
-  border-top: 1px solid #96d1f8;
-  background: #65a9d7;
-  background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#65a9d7));
-  background: -moz-linear-gradient(top, #3e779d, #65a9d7);
-  -webkit-border-radius: 8px;
-  -moz-border-radius: 8px;
-  border-radius: 8px;
-  -webkit-box-shadow: black 0 1px 0;
-  -moz-box-shadow: black 0 1px 0;
-  box-shadow: black 0 1px 0;
-  text-shadow: rgba(0, 0, 0, 0.4) 0 1px 0;
-  color: white;
-  font-size: 14px;
-  font-family: klavika;
-  text-decoration: none;
-  vertical-align: middle; }
-
-.buttoncell:hover {
-  border-top-color: #28597a;
-  background: #28597a;
-  color: #cccccc; }
-
-.buttoncell:active {
-  border-top-color: #1b435e;
-  background: #1b435e; }
 
 .floatleft {
   float: left; }
-
-.colorbutton3, .colorbutton3:link {
-  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-  background: -moz-linear-gradient(center top, #3B9EBF, #3B9EBF) repeat scroll 0 0 transparent;
-  background: -webkit-gradient(linear, left top, left bottom, from(#3B9EBF), to(#3B9EBF));
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#3B9EBF', endColorstr = '#3B9EBF');
-  color: white;
-  display: inline-block;
-  font-size: 24px;
-  padding-top: 10px;
-  padding-left: 16px;
-  padding-right: 16px;
-  padding-bottom: 6px;
-  font-family: klavika;
-  border: 1px solid #358EAC;
-  border-radius: 2px;
-}
-
-.colorbutton3:hover, .colorbutton3:visited {
-  cursor: pointer;
-  -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
-  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3); }
 
 
 
@@ -582,9 +475,7 @@ input:focus, select:focus, textarea:focus, button:focus {
   -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-  background: -moz-linear-gradient(center top, #3B9EBF, #3B9EBF) repeat scroll 0 0 transparent;
-  background: -webkit-gradient(linear, left top, left bottom, from(#3B9EBF), to(#3B9EBF));
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#3B9EBF', endColorstr = '#3B9EBF');
+  background: #3B9EBF;
   color: white;
   display: inline-block;
   font-size: 16px;
@@ -631,33 +522,6 @@ input:focus, select:focus, textarea:focus, button:focus {
     text-decoration: underline;
 }
 
-
-
-.colorbutton4, .colorbutton4:link {
-  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-  background: -moz-linear-gradient(center top, #29abe2, #1d9cd3) repeat scroll 0 0 transparent;
-  background: -webkit-gradient(linear, left top, left bottom, from(#29abe2), to(#1d9cd3));
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = '#29ABE2', endColorstr = '#1D9CD3');
-  color: #1f1f1f;
-  display: inline-block;
-  font-size: 18px;
-  font-weight: normal;
-  padding-top: 6px;
-  padding-left: 16px;
-  padding-right: 16px;
-  padding-bottom: 4px;
-  font-family: klavika;
-  border: 1px solid #1a8cbc;
-  white-space: nowrap; }
-
-.colorbutton4:hover, .colorbutton4:visited {
-  cursor: pointer;
-  -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
-  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
-  border: 1px solid #146a90; }
 
 .lineShadow {
   -webkit-box-shadow: 0 8px 16px -6px black;
@@ -1303,7 +1167,7 @@ box-shadow:         inset 0px 5px 5px -5px rgba(150, 150, 150, 0.15);
 }
 
 .equalPointsPanel_RowsPanel{
-    float_left:
+    float:left;
 }
 
 .equalPointsPanel_title{
