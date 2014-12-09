@@ -1,8 +1,6 @@
 package com.bracketbird.client.gui.rtc.ranking;
 
-import com.google.gwt.dom.client.Style;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.FlowPanel;
 
 import java.util.*;
 
@@ -73,9 +71,6 @@ public class NotFinishedMatches extends MatchesViewGrouping {
             }
         });
 
-        for (MatchView matchView : notFinished) {
-            System.out.println("NOT FNI: " + matchView.getNumber() + " name: " + matchView.getMatch().getTeamHome().getName());
-        }
 
         notFinished.addAll(0, inProgress);
 

@@ -113,7 +113,6 @@ public abstract class TableRow extends HorizontalComponent {
     }
 
     public void focusLost(CellData cell) {
-        System.out.println("focus lost");
         commit(cell);
         paintFocusLost();
     }

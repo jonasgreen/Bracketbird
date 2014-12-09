@@ -5,7 +5,7 @@ import com.bracketbird.client.model.ranking.RankingStep;
 
 import java.util.List;
 
-public class PrintRankingTree {
+public class PrintRanking {
 
     public void print(GroupRanking groupRanking) {
         StringBuilder sb = new StringBuilder();

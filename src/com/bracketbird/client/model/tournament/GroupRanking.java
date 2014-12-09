@@ -5,10 +5,7 @@ import com.bracketbird.client.gui.rtc.event.ModelEventHandler;
 import com.bracketbird.client.gui.rtc.event.ModelHandlerList;
 import com.bracketbird.client.gui.rtc.event.UpdateModelEvent;
 import com.bracketbird.client.model.Team;
-import com.bracketbird.client.model.ranking.LadderWheel;
-import com.bracketbird.client.model.ranking.RankingLadder;
-import com.bracketbird.client.model.ranking.RankingStep;
-import com.bracketbird.client.model.ranking.RankingType;
+import com.bracketbird.client.model.ranking.*;
 import com.google.gwt.event.shared.HandlerRegistration;
 
 import java.util.HashMap;
@@ -17,7 +14,7 @@ import java.util.Map;
 
 public class GroupRanking {
 
-    private RankingType[] rankingTypes = new RankingType[]{RankingType.point, RankingType.scoreDifference};
+    private RankingLadderType[] rankingTypes = new RankingLadderType[]{RankingLadderType.point, RankingLadderType.scoreDifference, RankingLadderType.scoreTotal};
 
     private Map<Team, TeamStatistics> statisticsMap = new HashMap<Team, TeamStatistics>();
     private Group group;
@@ -27,7 +24,9 @@ public class GroupRanking {
 
     public GroupRanking(Group group, List<Match> matches) {
         this.group = group;
-        this.ranking = new LadderWheel(rankingTypes).first();
+
+        LadderFactory ladderFactory = AbstractLadderFactory.get().getLinkedFactories(rankingTypes);
+        ranking = ladderFactory.create(null, null);
 
         for (final Match match : matches) {
             match.addResultHandler(new ModelEventHandler<Result>() {
@@ -37,17 +36,21 @@ public class GroupRanking {
                 }
             });
 
-            //initialize team statistics for all teams
-            get(match.getTeamHome());
-            get(match.getTeamOut());
+        }
+
+        //initialize team statistics for all teams
+        for (Team team : group.getTeams()) {
+            ranking.add(get(team));
         }
     }
+
 
     private void resultChanged(Match match, ModelEvent<Result> e) {
         updateRanking(match.getTeamHome(), match, e.getOldValue(), e.getNewValue());
         updateRanking(match.getTeamOut(), match, e.getOldValue(), e.getNewValue());
 
-        new PrintRankingTree().print(this);
+        //new PrintRanking().print(this);
+        //new PrintRankingLadder().print(this.ranking);
         onChangeHandlers.fireEvent(new UpdateModelEvent<Match>(e.isFromClient(), match, match));
     }
 

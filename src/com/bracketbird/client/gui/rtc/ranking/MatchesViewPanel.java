@@ -2,8 +2,9 @@ package com.bracketbird.client.gui.rtc.ranking;
 
 import com.bracketbird.client.gui.rtc.event.ModelEvent;
 import com.bracketbird.client.gui.rtc.event.ModelEventHandler;
-import com.bracketbird.client.model.tournament.*;
-import com.google.gwt.core.client.Scheduler;
+import com.bracketbird.client.model.tournament.GroupStage;
+import com.bracketbird.client.model.tournament.Match;
+import com.bracketbird.client.model.tournament.Stage;
 import com.google.gwt.event.logical.shared.ResizeEvent;
 import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.user.client.Window;
@@ -49,18 +50,6 @@ public class MatchesViewPanel extends FlowPanel{
         finishedMatches = new FinishedMatches(this, bottomOfFinishedMatches, finishedList);
         notFinishedMatches = new NotFinishedMatches(this, bottomOfFinishedMatches, notFinishedList);
 
-        Scheduler.get().scheduleDeferred(new Scheduler.ScheduledCommand() {
-            @Override
-            public void execute() {
-                System.out.println("WIDTHER:   **************");
-                for (MatchView matchView : notFinishedList) {
-                    System.out.println(matchView.getTeamPanel().getOffsetWidth());
-                }
-                for (MatchView matchView : finishedList) {
-                    System.out.println(matchView.getTeamPanel().getOffsetWidth());
-                }
-            }
-        });
 
         matchesPlayedPanel.setStyleName("matchesPlayedPanel");
         for (Match m : level.getMatches()) {
@@ -84,7 +73,6 @@ public class MatchesViewPanel extends FlowPanel{
                 mathcesPlayed++;
             }
         }
-        System.out.println("MATCHES PLAYED: "+mathcesPlayed);
         StringBuilder sb = new StringBuilder();
         sb.append(mathcesPlayed);
         sb.append(" of ").append(matches.size()).append(" matches played");
@@ -99,7 +87,6 @@ public class MatchesViewPanel extends FlowPanel{
     }
 
     private static int calculateBottomOfFinishedMatches(){
-        System.out.println("CLIENT HEIGHT: "+ Window.getClientHeight());
         return Window.getClientHeight()/3;
     }
 

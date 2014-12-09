@@ -1,17 +1,13 @@
 package com.bracketbird.client.model.ranking;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class AbstractLadderFactory {
 
-    private Map<RankingType, LadderFactory> factoryMap = new HashMap<RankingType, LadderFactory>();
-
+    private Map<RankingLadderType, FactoryCreator> factoryCreatorMap = new HashMap<RankingLadderType, FactoryCreator>();
 
     private static AbstractLadderFactory instance;
-
 
     public static AbstractLadderFactory get() {
         if (instance == null) {
@@ -20,47 +16,57 @@ public class AbstractLadderFactory {
         return instance;
     }
 
-    private AbstractLadderFactory() {
-        add(RankingType.point, new LadderFactory() {
+    private AbstractLadderFactory(){
+        init();
+    }
+
+    private void init() {
+        add(new FactoryCreator() {
             @Override
-            public RankingLadder create(RankingLadder parent, Integer id) {
-                return new PointLadder(parent, id);
+            public LadderFactory create() {
+                return new PointLadderFactory();
             }
         });
-
-        add(RankingType.scoreDifference, new LadderFactory() {
+        add(new FactoryCreator() {
             @Override
-            public RankingLadder create(RankingLadder parent, Integer id) {
-                return new ScoreDifferenceLadder(parent, id);
+            public LadderFactory create() {
+                return new ScoreTotalLadderFactory();
             }
         });
-
-        add(RankingType.interMatchWinner, new LadderFactory() {
+        add(new FactoryCreator() {
             @Override
-            public RankingLadder create(RankingLadder parent, Integer id) {
-                return new InterMatchLadder(parent, id);
+            public LadderFactory create() {
+                return new ScoreDifferenceLadderFactory();
             }
         });
     }
 
+    private void add(FactoryCreator creator) {
+        factoryCreatorMap.put(creator.create().getType(), creator);
+    }
 
-    private List<LadderFactory> factories = new ArrayList<LadderFactory>();
-    private int index = 0;
+    public LadderFactory getLinkedFactories(RankingLadderType ... types){
+        LadderFactory first = null;
+        LadderFactory last = null;
 
-
-    public LadderFactory next(){
-        if(factories.size() > index){
-            return factories.get(index++);
+        for (RankingLadderType type : types) {
+            FactoryCreator c = factoryCreatorMap.get(type);
+            if(c == null){
+                throw new RuntimeException(type.name() + " " + " not supported in AbstractLadderFactory.");
+            }
+            LadderFactory next = c.create();
+            if(first == null){
+                first = next;
+                last = next;
+            }
+            else{
+                last.setNext(next);
+                last = next;
+            }
         }
-        return null;
+        return first;
+
     }
 
 
-    private void add(RankingType type, LadderFactory factory){
-        factoryMap.put(type, factory);
-    }
-
-    public RankingLadder createLadder(RankingType type, RankingLadder parent, Integer id) {
-        return factoryMap.get(type).create(parent, id);
-    }
 }

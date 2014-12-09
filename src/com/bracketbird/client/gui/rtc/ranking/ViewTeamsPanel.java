@@ -20,7 +20,6 @@ public class ViewTeamsPanel extends FlowComponent {
     }
 
     private void init() {
-        System.out.println("ViewTeamsPanel init");
         add(new LabelComponent("The tournament has not started - registered teams until now are:"), RTCLayoutFac2.h1().padding(20));
         /*RTC.getInstance().getTournament().addSeedingListener(new TournamentListener<SeedingChangedEvent>() {
             public void onChange(SeedingChangedEvent event) {

@@ -1,7 +1,8 @@
 package com.bracketbird.client.model.ranking;
 
-public enum RankingType {
+public enum RankingLadderType {
     point,
     scoreDifference,
+    scoreTotal,
     interMatchWinner,
 }

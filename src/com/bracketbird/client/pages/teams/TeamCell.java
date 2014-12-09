@@ -109,7 +109,6 @@ public class TeamCell extends TextBox{
         if(StringUtil.equals(team.getName(), getText())){
             return;
         }
-        System.out.println("Update Team name");
         RTC.getInstance().updateTeamName(team.getId(), getText());
     }
 

@@ -2,16 +2,17 @@ package com.bracketbird.client.model.ranking;
 
 import com.bracketbird.client.model.tournament.TeamStatistics;
 
-public class PointLadder extends RankingLadder {
+public class ScoreTotalLadder extends RankingLadder {
 
 
-    public PointLadder(LadderFactory factoryOfNext, RankingLadder parent, Integer value) {
+    public ScoreTotalLadder(LadderFactory factoryOfNext, RankingLadder parent, Integer value) {
         super(factoryOfNext, parent, value);
     }
 
     protected Integer getValue(TeamStatistics stat){
-        return stat.getPoints();
+        return stat.getScoredGoals();
     }
+
 
 
 }

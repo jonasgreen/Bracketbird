@@ -84,7 +84,6 @@ public abstract class GuiComponent extends Composite implements RequiresResize, 
     public void setWidth(String width) {
         Widget parent = getParent();
         if (parent == null) {
-            System.out.println("Error not able to set Width");
             //ApplicationController.getInstance().error(getClass().getName() + " Not able to setWidth on component before it is added to parent.");
         }
         else if ((parent instanceof CellPanel)) {
@@ -100,7 +99,6 @@ public abstract class GuiComponent extends Composite implements RequiresResize, 
 
         Widget parent = getParent();
         if (parent == null) {
-            System.out.println("Not able to set heigth");
             //ApplicationController.getInstance().error(getClass().getName() + " Not able to setHeight on component before it is added to parent.");
         }
 

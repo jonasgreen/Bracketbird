@@ -6,20 +6,19 @@ import java.util.*;
 
 public abstract class RankingLadder extends Ranking {
 
-    private static Comparator<Integer> sortingComp = new Comparator<Integer>() {
+    public static Comparator<Integer> sortingComp = new Comparator<Integer>() {
         @Override
         public int compare(Integer o1, Integer o2) {
             return -o1.compareTo(o2);
         }
     };
 
+    private LadderFactory factoryOfNextLadder;
     private Map<Integer, Ranking> children = new HashMap<Integer, Ranking>();
 
-    //Points to a possible next ladder.
-    private LadderWheel wheel;
-
-    public RankingLadder(RankingLadder parent, Integer id) {
+    public RankingLadder(LadderFactory factoryOfNextLadder, RankingLadder parent, Integer id) {
         super(parent, id);
+        this.factoryOfNextLadder = factoryOfNextLadder;
     }
 
 
@@ -66,27 +65,20 @@ public abstract class RankingLadder extends Ranking {
             parent.removeChild(this);
         }
     }
-
-
-
-
+    
     protected Ranking createNext(Integer id){
-        Ranking next = null;
-        if(wheel != null){
-            next = wheel.next(this, id);
+        if(factoryOfNextLadder != null){
+            return factoryOfNextLadder.create(this, id);
         }
+
         //At the end of the RankingLadder line there is one or more RankingSteps
-        return next != null ? next : new RankingStep(id, this);
+        return new RankingStep(id, this);
     }
 
 
     protected abstract Integer getValue(TeamStatistics stat);
 
-    public void setWheel(LadderWheel wheel) {
-        this.wheel = wheel;
-    }
-
-    public LadderWheel getWheel() {
-        return wheel;
+    public Map<Integer, Ranking> getChildren() {
+        return children;
     }
 }

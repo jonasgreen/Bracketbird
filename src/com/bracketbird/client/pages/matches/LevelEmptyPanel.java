@@ -50,7 +50,6 @@ public class LevelEmptyPanel extends FlowPanel {
 
     private String getButtonName() {
         if(RTC.getInstance().getTournament().getStages().size() > 1){
-            System.out.println("SIZE: "+RTC.getInstance().getTournament().getStages().size());
             return "Layout matches - " + level.getName() + " stage";
         }
         return "Layout matches";

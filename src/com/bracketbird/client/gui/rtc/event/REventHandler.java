@@ -4,7 +4,6 @@ import com.bracketbird.client.gui.rtc.EventManager;
 import com.bracketbird.client.gui.rtc.Handler;
 import com.bracketbird.client.gui.rtc.ProceedOrCancelWarning;
 import com.bracketbird.client.gui.rtc.RTC;
-import com.bracketbird.client.model.tournament.PrintStateTree;
 
 /**
  *
@@ -37,7 +36,7 @@ public abstract class REventHandler<E extends REvent<?,?>> {
 
     protected void executeEvent(E event) {
         try {
-            System.out.println("Before ----- : "+event.getClass().getSimpleName());
+            //System.out.println("Before ----- : "+event.getClass().getSimpleName());
 
             if (event.isFromClient()) {
                 EventManager manager = RTC.getInstance().getSync();
@@ -48,9 +47,9 @@ public abstract class REventHandler<E extends REvent<?,?>> {
                 updateTournament(event);
             }
 
-            System.out.println("After ------: "+event.getClass().getSimpleName());
-            PrintStateTree printStateTree = new PrintStateTree();
-            printStateTree.print(RTC.getInstance().getTournament());
+           //System.out.println("After ------: "+event.getClass().getSimpleName());
+           //PrintStateTree printStateTree = new PrintStateTree();
+           //printStateTree.print(RTC.getInstance().getTournament());
 
         }
         catch (Exception e) {

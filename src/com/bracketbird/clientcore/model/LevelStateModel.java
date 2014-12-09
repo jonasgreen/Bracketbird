@@ -20,7 +20,6 @@ public abstract class LevelStateModel<ID extends EntityId> extends Model<ID> imp
     }
 
     public void updateState(boolean fromClient){
-        System.out.println("UPDATE STATE: "+this.getClass().getSimpleName());
         setNewState(calculateState(), fromClient);
     }
 

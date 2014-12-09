@@ -33,8 +33,6 @@ public class SettingsPageController extends PageController<SettingsPage> {
 
     @Override
     public void afterFirstLoad() {
-        System.out.println("FIRST LOAD");
-
         for (Stage level : RTC.getInstance().getTournament().getStages()) {
             addLevel(level);
         }
