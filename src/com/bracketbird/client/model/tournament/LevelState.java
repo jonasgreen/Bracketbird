@@ -56,6 +56,11 @@ public abstract class LevelState{
         return this.getValue() > state.getValue();
     }
 
+    public boolean isAboveOrEquals(LevelState state) {
+        return this.getValue() >= state.getValue();
+    }
+
+
     public abstract void handle(StateCounter col);
 
     public boolean isBeyondReady() {

@@ -11,7 +11,7 @@ import com.bracketbird.client.model.keys.MatchId;
 import com.bracketbird.client.model.keys.StageId;
 import com.bracketbird.client.model.keys.TeamId;
 import com.bracketbird.client.model.tournament.*;
-import com.bracketbird.client.pages.livescores.LiveScoresPageController;
+import com.bracketbird.client.pages.scores.ScoresPageController;
 import com.bracketbird.client.pages.matches.MatchesPageController;
 import com.bracketbird.client.pages.settings.SettingsPageController;
 import com.bracketbird.client.pages.teams.TeamsPageController;
@@ -115,7 +115,7 @@ public class RTC {
             TeamsPageController.getInstance().getPage();
             SettingsPageController.getInstance().getPage();
             MatchesPageController.getInstance().getPage();
-            LiveScoresPageController.getInstance().getPage();
+            ScoresPageController.getInstance().getPage();
         }
         RankingViewPageController.getInstance().getPage();
     }

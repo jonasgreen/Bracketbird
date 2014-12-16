@@ -424,6 +424,10 @@ public class Tournament extends LevelStateModel<TournamentId> {
         endingTeams = new ArrayList<List<Team>>();
         updateState(event.isFromClient());
     }
+
+    public Stage getStage(int index) {
+        return getStages().get(index);
+    }
 }
 
 

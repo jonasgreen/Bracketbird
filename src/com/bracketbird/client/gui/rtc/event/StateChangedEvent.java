@@ -34,4 +34,9 @@ public class StateChangedEvent {
     public StateCrossing crosses(LevelState toBeCrossed){
         return new StateCrossing(oldState, newState, toBeCrossed);
     }
+
+    public StateCrossing crossesOrEquals(LevelState toBeCrossed){
+        return new StateCrossing(oldState, newState, toBeCrossed);
+    }
+
 }

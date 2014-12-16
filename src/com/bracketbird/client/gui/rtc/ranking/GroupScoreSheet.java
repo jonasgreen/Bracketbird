@@ -20,6 +20,7 @@ public class GroupScoreSheet extends VerticalComponent {
         super();
         this.group = gr;
         this.positions = positions;
+        gr.getStatistics().getRanking();
     }
 
 
