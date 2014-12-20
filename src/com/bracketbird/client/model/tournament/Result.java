@@ -18,6 +18,10 @@ public class Result implements Serializable {
     private List<Integer> scoresHome;
     private List<Integer> scoresOut;
 
+    private Integer totalScoreHome;
+    private Integer totalScoreOut;
+
+
     private int setWonByHome;
     private int setWonByOut;
 
@@ -87,6 +91,26 @@ public class Result implements Serializable {
 
     public List<Integer> getScoresOut() {
         return scoresOut;
+    }
+
+    public Integer getTotalScoreHome() {
+        if (totalScoreHome == null) {
+            totalScoreHome = 0;
+            for (Integer score : scoresHome) {
+                totalScoreHome += score;
+            }
+        }
+        return totalScoreHome;
+    }
+
+    public Integer getTotalScoreOut() {
+        if (totalScoreOut == null) {
+            totalScoreOut = 0;
+            for (Integer score : scoresOut) {
+                totalScoreOut += score;
+            }
+        }
+        return totalScoreOut;
     }
 
 

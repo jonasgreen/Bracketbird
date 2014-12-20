@@ -1,5 +1,7 @@
 package com.bracketbird.client.model.tournament;
 
+import com.bracketbird.client.ranking.TeamStatistics;
+
 import java.util.ArrayList;
 import java.util.List;
 

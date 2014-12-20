@@ -1,6 +1,6 @@
 package com.bracketbird.client.model.ranking;
 
-import com.bracketbird.client.model.tournament.TeamStatistics;
+import com.bracketbird.client.ranking.TeamStatistics;
 
 public class InterMatchLadder extends RankingLadder {
 
@@ -10,7 +10,7 @@ public class InterMatchLadder extends RankingLadder {
     }
 
     protected Integer getValue(TeamStatistics stat){
-        return stat.getGoalDifference();//TODO
+        return -1;//TODO
     }
 
 

@@ -1,6 +1,7 @@
 package com.bracketbird.client.model.tournament;
 
 import com.bracketbird.client.model.Team;
+import com.bracketbird.client.ranking.TeamStatistics;
 
 import java.util.*;
 import java.util.Set;
@@ -89,7 +90,7 @@ public class RankingSheet {
 
     private void initTeamResultMap(List<Team> teams) {
         for (Team team : teams) {
-            teamResultMap.put(team, new TeamStatistics(settings, team));
+            teamResultMap.put(team, new TeamStatistics(team));
         }
     }
 
@@ -154,7 +155,7 @@ public class RankingSheet {
     private TeamStatistics getTeamResultSum(Team t) {
         TeamStatistics p = teamResultMap.get(t);
         if (p == null) {
-            p = new TeamStatistics(settings, t);
+            p = new TeamStatistics(t);
             teamResultMap.put(t, p);
         }
 

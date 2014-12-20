@@ -6,6 +6,10 @@ import com.bracketbird.client.gui.rtc.event.ModelHandlerList;
 import com.bracketbird.client.gui.rtc.event.UpdateModelEvent;
 import com.bracketbird.client.model.Team;
 import com.bracketbird.client.model.ranking.*;
+import com.bracketbird.client.ranking.MatchScoreSheets;
+import com.bracketbird.client.ranking.ScoreSheet;
+import com.bracketbird.client.ranking.ScoreSheetFactory;
+import com.bracketbird.client.ranking.TeamStatistics;
 import com.google.gwt.event.shared.HandlerRegistration;
 
 import java.util.HashMap;
@@ -16,14 +20,19 @@ public class GroupRanking {
 
     private RankingLadderType[] rankingTypes = new RankingLadderType[]{RankingLadderType.point, RankingLadderType.scoreDifference, RankingLadderType.scoreTotal};
 
-    private Map<Team, TeamStatistics> statisticsMap = new HashMap<Team, TeamStatistics>();
     private Group group;
     private ModelHandlerList<Match> onChangeHandlers = new ModelHandlerList<Match>();
+
+    private ScoreSheetFactory scoreSheetFactory;
+    private Map<Team, TeamStatistics> statisticsMap = new HashMap<Team, TeamStatistics>();
 
     private RankingLadder ranking;
 
     public GroupRanking(Group group, List<Match> matches) {
         this.group = group;
+
+        StageSettings settings = group.getStage().getSettings();
+        this.scoreSheetFactory = new ScoreSheetFactory(settings.getPointsOfVictory(), settings.getPointsOfDraw());
 
         LadderFactory ladderFactory = AbstractLadderFactory.get().getLinkedFactories(rankingTypes);
         ranking = ladderFactory.create(null, null);
@@ -46,29 +55,30 @@ public class GroupRanking {
 
 
     private void resultChanged(Match match, ModelEvent<Result> e) {
-        updateRanking(match.getTeamHome(), match, e.getOldValue(), e.getNewValue());
-        updateRanking(match.getTeamOut(), match, e.getOldValue(), e.getNewValue());
+        MatchScoreSheets mss = scoreSheetFactory.createScoreSheets(match);
+        updateRanking(match, match.getTeamHome(), mss.getHomeScoreSheet());
+        updateRanking(match, match.getTeamOut(), mss.getOutScoreSheet());
 
         //new PrintRanking().print(this);
         //new PrintRankingLadder().print(this.ranking);
-        onChangeHandlers.fireEvent(new UpdateModelEvent<Match>(e.isFromClient(), match, match));
+        onChangeHandlers.fireEvent(new UpdateModelEvent<>(e.isFromClient(), match, match));
     }
 
-    private void updateRanking(Team team, Match match, Result oldResult, Result newResult){
+    private void updateRanking(Match match, Team team, ScoreSheet scoreSheet){
         TeamStatistics stat = get(team);
         if(stat == null){
             return;
         }
 
         ranking.remove(stat);
-        stat.update(match, oldResult, newResult);
+        stat.update(match, scoreSheet);
         ranking.add(stat);
     }
 
     private TeamStatistics get(Team t){
         TeamStatistics stats = statisticsMap.get(t);
         if(stats == null){
-            stats = new TeamStatistics(group.getStage().getSettings(), t);
+            stats = new TeamStatistics(t);
             statisticsMap.put(t, stats);
         }
         return stats;

@@ -2,6 +2,7 @@ package com.bracketbird.client.gui.rtc;
 
 
 import com.bracketbird.client.Bracketbird;
+import com.bracketbird.client.Printer;
 import com.bracketbird.client.gui.rtc.event.*;
 import com.bracketbird.client.gui.rtc.health.LogPageController;
 import com.bracketbird.client.gui.rtc.ranking.RankingViewPageController;
@@ -11,8 +12,8 @@ import com.bracketbird.client.model.keys.MatchId;
 import com.bracketbird.client.model.keys.StageId;
 import com.bracketbird.client.model.keys.TeamId;
 import com.bracketbird.client.model.tournament.*;
-import com.bracketbird.client.pages.scores.ScoresPageController;
 import com.bracketbird.client.pages.matches.MatchesPageController;
+import com.bracketbird.client.pages.scores.ScoresPageController;
 import com.bracketbird.client.pages.settings.SettingsPageController;
 import com.bracketbird.client.pages.teams.TeamsPageController;
 import com.bracketbird.client.service.TournamentResult;
@@ -161,8 +162,11 @@ public class RTC {
 
 
     public void createTeam(String teamName, int seeding) {
+        Printer.println("CreateTeam: ", teamName);
         executeEvent(new CreateTeamEvent(teamName, seeding, new TeamId(nextUUID())));
     }
+
+
 
     public void updateTeamName(TeamId id, String name) {
         executeEvent(new UpdateTeamNameEvent(null, id, name));

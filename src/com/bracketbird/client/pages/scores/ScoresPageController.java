@@ -54,7 +54,7 @@ public class ScoresPageController extends PageController<ScoresPage> {
 
 
     private Stage getLastStageInAction() {
-        //Iterating backwards - If a stage exists in the correct state - show it.
+        //Iterating backwards - If a stage exists in the correct state - return it.
         int i = RTC.getInstance().getTournament().getStages().size()-1;
         while (i >= 0){
             Stage stage = RTC.getInstance().getTournament().getStage(i);

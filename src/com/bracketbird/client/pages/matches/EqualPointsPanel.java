@@ -2,7 +2,7 @@ package com.bracketbird.client.pages.matches;
 
 
 import com.bracketbird.client.model.Team;
-import com.bracketbird.client.model.tournament.TeamStatistics;
+import com.bracketbird.client.ranking.TeamStatistics;
 import com.bracketbird.clientcore.util.StringUtil;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;

@@ -74,7 +74,7 @@
 
     onMessage = function(m) {
         messageRecieved(m.data);
-    }
+    };
 
     onError = function() {
         errorRecieved();
@@ -91,7 +91,7 @@
     		'onopen': onOpened,
     		'onmessage': onMessage,
     		'onerror': onError,
-    		'onclose': onClose,
+    		'onclose': onClose
     	};
     	var socket = channel.open(handler);
     }

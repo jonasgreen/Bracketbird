@@ -30,7 +30,7 @@ public class MenuPanel extends FlowPanel{
         content.add(new MenuItem("TEAMS", TeamsPageController.getInstance()));
         content.add(new MenuItem("SETTINGS", SettingsPageController.getInstance()));
         content.add(new MenuItem("MATCHES", MatchesPageController.getInstance()));
-        content.add(new MenuItem("LIVE SCORES", ScoresPageController.getInstance()));
+        content.add(new MenuItem("SCORES", ScoresPageController.getInstance()));
 
         //secondary menu items to the right
         FlowPanel sp = Css.style(new FlowPanel(), "menuPanel_secondaryPanel");

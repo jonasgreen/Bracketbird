@@ -1,6 +1,7 @@
 package com.bracketbird.client.gui.rtc.ranking;
 
 import com.bracketbird.client.model.tournament.*;
+import com.bracketbird.client.ranking.TeamStatistics;
 import com.bracketbird.clientcore.gui.*;
 import com.bracketbird.clientcore.style.*;
 
@@ -122,15 +123,15 @@ public class GroupScoreSheet extends VerticalComponent {
         sb.append("<tr>");
 
         appendTD(sb, tlTeam, trs.getTeam().getName());
-        appendTD(sb, tlM, trs.getPlayedMatches());
+        appendTD(sb, tlM, trs.getTotalScoreSheet().getPlayedMatches());
         //appendTD(sb, tl, trs.getWonMatches());
         //appendTD(sb, tl, trs.getDrawMatches());
         //appendTD(sb, tl, trs.getLostMatches());
 
 
 
-        appendTD(sb, tl.clone().colorGrey(), trs.getScoredGoals() - trs.getReceivedGoals());
-        appendTD(sb, tl, trs.getPoints());
+        appendTD(sb, tl.clone().colorGrey(), trs.getTotalScoreSheet().getScoredGoals() - trs.getTotalScoreSheet().getReceivedGoals());
+        appendTD(sb, tl, trs.getTotalScoreSheet().getPoints());
         sb.append("</tr>");
 
     }

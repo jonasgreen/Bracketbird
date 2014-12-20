@@ -19,6 +19,20 @@ public class ScoresPage extends Page<ScoresPageController> {
 
 
     public void show(Stage stage) {
+        clear();
+        if(stage.isGroupStage()){
+            showGroupStage(stage);
+        }
+        else{
+            showKnockoutStage(stage);
+        }
+    }
+
+    private void showKnockoutStage(Stage stage) {
+
+    }
+
+    private void showGroupStage(Stage stage) {
 
     }
 
@@ -27,6 +41,6 @@ public class ScoresPage extends Page<ScoresPageController> {
     }
 
     public void showNothing() {
-
+        clear();
     }
 }

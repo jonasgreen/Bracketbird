@@ -2,6 +2,7 @@ package com.bracketbird.client.model.tournament;
 
 
 import com.bracketbird.client.model.ranking.RankingStep;
+import com.bracketbird.client.ranking.TeamStatistics;
 
 import java.util.List;
 

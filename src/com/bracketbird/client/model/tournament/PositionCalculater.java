@@ -1,6 +1,7 @@
 package com.bracketbird.client.model.tournament;
 
 
+import com.bracketbird.client.ranking.TeamStatistics;
 import com.bracketbird.clientcore.appcontrol.*;
 import com.bracketbird.clientcore.model.*;
 
