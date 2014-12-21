@@ -1,6 +1,6 @@
 package com.bracketbird.client.pages.teams;
 
-import com.bracketbird.client.gui.rtc.RTC;
+import com.bracketbird.client.rtc.RTC;
 import com.bracketbird.client.model.Team;
 import com.google.gwt.user.client.ui.Label;
 

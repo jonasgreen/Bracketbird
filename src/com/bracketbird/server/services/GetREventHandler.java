@@ -3,9 +3,9 @@ package com.bracketbird.server.services;
 import com.bracketbird.client.service.FinderFac;
 import com.bracketbird.client.service.rtc.GetREventAction;
 import com.bracketbird.client.service.rtc.GetREventResult;
-import com.bracketbird.clientcore.appcontrol.ApplicationException;
+import com.bracketbird.client.appcontrol.ApplicationException;
 import com.bracketbird.server.dao.Dao;
-import com.bracketbird.server.jdo.club.RTCEventJDO;
+import com.bracketbird.server.jdo.RTCEventJDO;
 import com.bracketbird.server.repository.RTCEventConverter;
 
 import java.util.Collection;

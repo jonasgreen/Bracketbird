@@ -1,13 +1,10 @@
 package com.bracketbird.server.repository;
 
-import com.bracketbird.client.gui.rtc.event.REvent;
+import com.bracketbird.client.rtc.event.REvent;
 import com.bracketbird.client.model.keys.TournamentId;
-import com.bracketbird.client.service.rtc.*;
+import com.bracketbird.server.jdo.RTCEventJDO;
 import com.bracketbird.server.jdo.club.*;
 import com.google.appengine.api.datastore.*;
-import com.bracketbird.clientcore.appcontrol.*;
-import com.bracketbird.clientcore.model.*;
-import com.bracketbird.clientcore.model.keys.*;
 
 import java.util.*;
 

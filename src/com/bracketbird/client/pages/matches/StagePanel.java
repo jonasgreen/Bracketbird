@@ -1,7 +1,7 @@
 package com.bracketbird.client.pages.matches;
 
-import com.bracketbird.client.gui.rtc.event.StateChangedEvent;
-import com.bracketbird.client.gui.rtc.event.StateHandler;
+import com.bracketbird.client.rtc.event.StateChangedEvent;
+import com.bracketbird.client.rtc.event.StateHandler;
 import com.bracketbird.client.model.tournament.GroupStage;
 import com.bracketbird.client.model.tournament.LevelState;
 import com.bracketbird.client.model.tournament.Stage;

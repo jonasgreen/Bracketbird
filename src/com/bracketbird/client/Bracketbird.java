@@ -1,25 +1,26 @@
 package com.bracketbird.client;
 
 
-import com.bracketbird.client.gui.main.ErrorPageController;
+import com.bracketbird.client.appcontrol.AppEntry;
+import com.bracketbird.client.rtc.RTC;
 import com.bracketbird.client.pages.front.FrontPageController;
-import com.bracketbird.client.gui.rtc.RTC;
 import com.bracketbird.client.service.BBService;
 import com.bracketbird.client.service.TournamentResult;
-import com.bracketbird.clientcore.appcontrol.Application;
-import com.bracketbird.clientcore.service.CallBack;
-import com.bracketbird.clientcore.util.GlobalKeyboardHandler;
+import com.bracketbird.client.appcontrol.Application;
+import com.bracketbird.client.util.GlobalKeyboardHandler;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 
 /**
  * Entry point
  * classes define <code>onModuleLoad()</code>.
  */
 
-public class Bracketbird extends com.bracketbird.clientcore.appcontrol.AppEntry {
+public class Bracketbird extends AppEntry {
 
 
     protected GlobalKeyboardHandler gh = new GlobalKeyboardHandler();
@@ -27,6 +28,8 @@ public class Bracketbird extends com.bracketbird.clientcore.appcontrol.AppEntry 
     public static String tournamentUrl = "";
 
     public void onModuleLoad() {
+        setupExceptionHandling();
+
 
         String token = History.getToken();
         History.newItem("");
@@ -53,6 +56,15 @@ public class Bracketbird extends com.bracketbird.clientcore.appcontrol.AppEntry 
         loadPage(token);
     }
 
+    private void setupExceptionHandling() {
+        GWT.setUncaughtExceptionHandler(new GWT.UncaughtExceptionHandler() {
+            @Override
+            public void onUncaughtException(Throwable e) {
+                Printer.println(e);
+            }
+        });
+    }
+
     private void loadPage(String token) {
         if (token == null || token.isEmpty()) {
             Application.show(FrontPageController.getInstance());
@@ -65,14 +77,13 @@ public class Bracketbird extends com.bracketbird.clientcore.appcontrol.AppEntry 
 
 
     private void loadErrorPage(String token) {
-        ErrorPageController.get().tokenError(token);
-        Application.show(ErrorPageController.get());
+        //TODO
     }
 
     private void loadTournamentPage(final String token) {
-        BBService.getTournament(token, true, new CallBack<TournamentResult>() {
+        BBService.getTournament(token, new AsyncCallback<TournamentResult>() {
             @Override
-            public void success(TournamentResult r) {
+            public void onSuccess(TournamentResult r) {
                 if (r.getTournamentId() == null) {
                     loadErrorPage(token);
                 }
@@ -82,7 +93,7 @@ public class Bracketbird extends com.bracketbird.clientcore.appcontrol.AppEntry 
             }
 
             @Override
-            public void fail(Throwable t) {
+            public void onFailure(Throwable t) {
                 t.printStackTrace();
             }
         });

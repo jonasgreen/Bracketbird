@@ -1,10 +1,10 @@
 package com.bracketbird.client.pages.matches;
 
-import com.bracketbird.client.gui.rtc.RTC;
+import com.bracketbird.client.rtc.RTC;
 import com.bracketbird.client.model.tournament.KnockoutMatch;
 import com.bracketbird.client.model.tournament.Match;
-import com.bracketbird.clientcore.appcontrol.TournamentContext;
-import com.bracketbird.clientcore.util.StringUtil;
+import com.bracketbird.client.appcontrol.TournamentContext;
+import com.bracketbird.client.util.StringUtil;
 import com.google.gwt.event.dom.client.*;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;

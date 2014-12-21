@@ -1,9 +1,9 @@
 package com.bracketbird.client.model.tournament;
 
-import com.bracketbird.client.gui.rtc.RTC;
-import com.bracketbird.client.gui.rtc.event.InitEvent;
-import com.bracketbird.client.gui.rtc.event.REvent;
-import com.bracketbird.client.gui.rtc.event.REventHandler;
+import com.bracketbird.client.rtc.RTC;
+import com.bracketbird.client.rtc.event.InitEvent;
+import com.bracketbird.client.rtc.event.REvent;
+import com.bracketbird.client.rtc.event.REventHandler;
 import com.bracketbird.client.model.keys.TournamentId;
 import com.bracketbird.client.service.TournamentResult;
 

@@ -1,13 +1,13 @@
 package com.bracketbird.server.services;
 
 
-import com.bracketbird.client.gui.rtc.event.REvent;
+import com.bracketbird.client.rtc.event.REvent;
 import com.bracketbird.client.model.tournament.Tournament;
 import com.bracketbird.client.service.GetTournamentAction;
 import com.bracketbird.client.service.TournamentResult;
-import com.bracketbird.clientcore.appcontrol.ApplicationException;
-import com.bracketbird.clientcore.service.SingleFinder;
-import com.bracketbird.clientcore.service.StringSingleFinder;
+import com.bracketbird.client.appcontrol.ApplicationException;
+import com.bracketbird.client.service.SingleFinder;
+import com.bracketbird.client.service.StringSingleFinder;
 import com.bracketbird.server.repository.TournamentRepository;
 
 import java.util.Collection;

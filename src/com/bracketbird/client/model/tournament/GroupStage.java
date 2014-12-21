@@ -1,6 +1,6 @@
 package com.bracketbird.client.model.tournament;
 
-import com.bracketbird.client.gui.rtc.event.StateChangedEvent;
+import com.bracketbird.client.rtc.event.StateChangedEvent;
 import com.bracketbird.client.model.GroupStageRoundsFactory;
 import com.bracketbird.client.model.Team;
 import com.bracketbird.client.model.keys.GroupId;

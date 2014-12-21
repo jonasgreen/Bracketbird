@@ -1,9 +1,10 @@
 package com.bracketbird.client.pages.scores;
 
 
+import com.bracketbird.client.model.tournament.GroupStage;
 import com.bracketbird.client.model.tournament.Stage;
 import com.bracketbird.client.model.tournament.Tournament;
-import com.bracketbird.clientcore.appcontrol.Page;
+import com.bracketbird.client.appcontrol.Page;
 
 
 /**
@@ -33,7 +34,7 @@ public class ScoresPage extends Page<ScoresPageController> {
     }
 
     private void showGroupStage(Stage stage) {
-
+        add(new GroupStageScoresPanel((GroupStage) stage));
     }
 
     public void showTournamentFinished(Tournament tournament) {

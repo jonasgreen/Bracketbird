@@ -1,13 +1,19 @@
 package com.bracketbird.server.services;
 
-import com.bracketbird.server.*;
-import com.bracketbird.server.repository.*;
-import com.bracketbird.clientcore.appcontrol.*;
-import com.bracketbird.clientcore.service.*;
+import com.bracketbird.client.appcontrol.ApplicationException;
+import com.bracketbird.client.appcontrol.SystemException;
+import com.bracketbird.client.service.Action;
+import com.bracketbird.client.service.FindIn;
+import com.bracketbird.client.service.Result;
+import com.bracketbird.server.Logger;
+import com.bracketbird.server.repository.Repository;
+import com.bracketbird.server.repository.TournamentChannelRepository;
+import com.bracketbird.server.repository.TournamentRepository;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-import java.util.*;
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -18,7 +24,6 @@ public class ActionHandlerRegistry {
     //Obs - for performance issues this class could be converted to a relative singleton (relativ to each servlet)
     // because of the synchronization in the bottom at set- and getRequest methods.
 
-    private static ServletContext context;
     private static Map<FindIn, Repository> repos = new HashMap<FindIn, Repository>();
     private static String baseUrl;
 
@@ -29,7 +34,6 @@ public class ActionHandlerRegistry {
         if (isLoaded) {
             return;
         }
-        context = servletContext;
         Logger.init(servletContext);
 
         //loading constants - a bit ugly
@@ -45,21 +49,11 @@ public class ActionHandlerRegistry {
 
 
     private static void initHandlers() {
-
-        add(new GetUUIDHandler());
-
-        add(new GetHandler());
-        add(new FindByHandler());
-        add(new DeleteHandler());
-        add(new UpdateHandler());
-
-
         //TOURNAMENT
-        add(new GetTournamentChangesHandler());
         add(new CreateTournamentHandler());
         add(new GetTournamentHandler());
 
-        //TOURNAMNT CHANNEL
+        //TOURNAMENT CHANNEL
         add(new CreateChannelTokenHandler());
 
         //RTC (Running tournament control)
@@ -67,12 +61,6 @@ public class ActionHandlerRegistry {
         add(new GetREventHandler());
 
         //EMAIL - SUBSCRIPTIONS
-
-        //LOG
-        add(new LogHandler());
-
-       //CRON
-        add(new RefreshHandler());
 
     }
 
@@ -110,22 +98,6 @@ public class ActionHandlerRegistry {
             throw new SystemException("ActionHandler not setup for Action: " + a.getClass());
         }
         return handler;
-    }
-
-    public static Repository getRepos(FindIn f) {
-        Repository r = repos.get(f);
-        if (r == null) {
-            throw new SystemException("Repository not setup for FindIn:" + f);
-        }
-        return r;
-    }
-
-    public static ServletContext getContext() {
-        return context;
-    }
-
-    public static String getBaseUrl() {
-        return baseUrl;
     }
 
     public static void setRequestSettings(HttpServletRequest r) {

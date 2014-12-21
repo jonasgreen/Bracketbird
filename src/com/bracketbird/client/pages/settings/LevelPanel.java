@@ -1,6 +1,6 @@
 package com.bracketbird.client.pages.settings;
 
-import com.bracketbird.client.gui.rtc.RTC;
+import com.bracketbird.client.rtc.RTC;
 import com.bracketbird.client.model.tournament.Stage;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.ClickEvent;

@@ -1,9 +1,9 @@
 package com.bracketbird.client.model;
 
 
-import com.bracketbird.client.gui.rtc.event.*;
 import com.bracketbird.client.model.keys.*;
-import com.bracketbird.clientcore.model.*;
+import com.bracketbird.client.rtc.event.ModelHandlerList;
+import com.bracketbird.client.rtc.event.UpdateModelEvent;
 
 /**
  *

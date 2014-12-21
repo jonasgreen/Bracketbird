@@ -1,11 +1,11 @@
 package com.bracketbird.client.pages.scores;
 
-import com.bracketbird.client.gui.rtc.RTC;
-import com.bracketbird.client.gui.rtc.event.StateChangedEvent;
-import com.bracketbird.client.gui.rtc.event.StateHandler;
+import com.bracketbird.client.rtc.RTC;
+import com.bracketbird.client.rtc.event.StateChangedEvent;
+import com.bracketbird.client.rtc.event.StateHandler;
 import com.bracketbird.client.model.tournament.LevelState;
 import com.bracketbird.client.model.tournament.Stage;
-import com.bracketbird.clientcore.appcontrol.PageController;
+import com.bracketbird.client.appcontrol.PageController;
 
 /**
  *
@@ -57,7 +57,7 @@ public class ScoresPageController extends PageController<ScoresPage> {
         //Iterating backwards - If a stage exists in the correct state - return it.
         int i = RTC.getInstance().getTournament().getStages().size()-1;
         while (i >= 0){
-            Stage stage = RTC.getInstance().getTournament().getStage(i);
+            Stage stage = RTC.getInstance().getTournament().getStage(i--);
             if(stage.getState().isAboveOrEquals(LevelState.ready)){
                 return stage;
             }

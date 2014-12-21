@@ -1,9 +1,9 @@
 package com.bracketbird.server.dao;
 
-import com.bracketbird.clientcore.appcontrol.SystemException;
-import com.bracketbird.clientcore.model.keys.EntityId;
-import com.bracketbird.clientcore.service.Finder;
-import com.bracketbird.clientcore.service.SingleFinder;
+import com.bracketbird.client.appcontrol.SystemException;
+import com.bracketbird.client.model.keys.EntityId;
+import com.bracketbird.client.service.Finder;
+import com.bracketbird.client.service.SingleFinder;
 import com.bracketbird.server.Logger;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;

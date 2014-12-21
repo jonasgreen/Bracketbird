@@ -1,6 +1,6 @@
 package com.bracketbird.client.model.tournament;
 
-import com.bracketbird.clientcore.model.LevelStateModel;
+import com.bracketbird.client.model.LevelStateModel;
 
 import java.util.List;
 

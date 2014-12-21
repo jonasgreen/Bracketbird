@@ -2,8 +2,8 @@ package com.bracketbird.client.pages.teams;
 
 
 import com.bracketbird.client.model.Team;
-import com.bracketbird.clientcore.appcontrol.Page;
-import com.bracketbird.clientcore.appcontrol.TournamentContext;
+import com.bracketbird.client.appcontrol.Page;
+import com.bracketbird.client.appcontrol.TournamentContext;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.KeyCodes;

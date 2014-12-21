@@ -2,14 +2,11 @@ package com.bracketbird.client.service;
 
 
 import com.bracketbird.client.ServerWrapper;
-import com.bracketbird.client.gui.util.UID;
+import com.bracketbird.client.UID;
 import com.bracketbird.client.model.keys.TournamentChannelId;
 import com.bracketbird.client.model.keys.TournamentId;
-import com.bracketbird.client.model.tournament.Tournament;
 import com.bracketbird.client.service.rtc.*;
-import com.bracketbird.clientcore.model.Model;
-import com.bracketbird.clientcore.model.keys.EntityId;
-import com.bracketbird.clientcore.service.*;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 
 /**
  *
@@ -20,50 +17,31 @@ public class BBService {
     private static ServerWrapper server = new ServerWrapper();
 
 
-
-    public static void getTournament(String url, boolean progressBar, CallBack<TournamentResult> cb) {
-        if (progressBar) {
-            cb.startProgressBar("getting tournament on server");
-        }
+    public static void getTournament(String url, AsyncCallback<TournamentResult> cb) {
         executeWithRetry(new GetTournamentAction(url), cb);
     }
 
-    public static void createChannelToken(TournamentChannelId tournamentChannelId, CallBack<CreateChannelTokenResult> cb) {
-        cb.startProgressBar("Creating token");
+    public static void createChannelToken(TournamentChannelId tournamentChannelId, AsyncCallback<CreateChannelTokenResult> cb) {
         executeWithRetry(new CreateChannelTokenAction(UID.getUID(), tournamentChannelId), cb);
     }
 
-    public static void createTournament(CallBack<TournamentResult> cb) {
+    public static void createTournament(AsyncCallback<TournamentResult> cb) {
         executeWithRetry(new CreateTournamentAction(), cb);
     }
 
-    public static void updateRunningTournament(RTCAction action, CallBack<RTCResult> back) {
+    public static void updateRunningTournament(RTCAction action, AsyncCallback<RTCResult> back) {
         //back.startProgressBar("Synchronizing tournament data...");
         executeWithRetry(action, back);
     }
 
-    public static void getRunningTournamentEvent(TournamentId tournamentId, Long eventId, CallBack<GetREventResult> cb) {
+    public static void getRunningTournamentEvent(TournamentId tournamentId, Long eventId, AsyncCallback<GetREventResult> cb) {
         executeWithRetry(new GetREventAction(tournamentId, eventId), cb);
     }
 
 
-    public static void log(String msg) {
-        executeWithRetry(new LogAction(msg), new SilentCallBack() {
-            public void success(Object result) {
-                //ignore
-            }
-
-            public void fail(Throwable t) {
-                //ignore
-            }
-        });
-    }
-
-
-    public static void executeWithRetry(Action a, CallBack cb) {
+    public static void executeWithRetry(Action a, AsyncCallback cb) {
         server.execute(a, cb);
     }
-
 
 
 }

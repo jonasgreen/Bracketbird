@@ -1,13 +1,16 @@
 package com.bracketbird.server.repository;
 
-import com.bracketbird.server.dao.*;
-import com.google.appengine.api.datastore.*;
-import com.bracketbird.clientcore.appcontrol.*;
-import com.bracketbird.clientcore.model.*;
-import com.bracketbird.clientcore.model.keys.*;
-import com.bracketbird.clientcore.service.*;
+import com.bracketbird.client.appcontrol.ApplicationException;
+import com.bracketbird.client.model.Model;
+import com.bracketbird.client.model.keys.EntityId;
+import com.bracketbird.client.service.Finder;
+import com.bracketbird.client.service.SingleFinder;
+import com.bracketbird.server.dao.Dao;
+import com.bracketbird.server.dao.JDO;
+import com.google.appengine.api.datastore.Key;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
 
 /**
  *

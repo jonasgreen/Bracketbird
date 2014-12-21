@@ -1,8 +1,8 @@
 package com.bracketbird.server.repository;
 
 
+import com.bracketbird.client.model.Model;
 import com.bracketbird.server.dao.*;
-import com.bracketbird.clientcore.model.*;
 
 import java.util.*;
 

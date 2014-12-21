@@ -1,6 +1,6 @@
 package com.bracketbird.client.pages.settings;
 
-import com.bracketbird.client.gui.rtc.RTC;
+import com.bracketbird.client.rtc.RTC;
 import com.bracketbird.client.model.StageType;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;

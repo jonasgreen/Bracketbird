@@ -1,14 +1,13 @@
 package com.bracketbird.server.dao;
 
-import com.google.appengine.api.datastore.*;
-import com.bracketbird.clientcore.util.*;
+import com.google.appengine.api.datastore.Key;
 
-import java.util.*;
+import java.util.Date;
 
 /**
  *
  */
-public abstract class JDO implements ToString{
+public abstract class JDO {
 
     public abstract void setCreatedDate(Date createdDate);
 
@@ -23,10 +22,6 @@ public abstract class JDO implements ToString{
     public abstract void setKey(Key key);
 
 
-    public void toString(StringBuffer sb, int tab){
-        WriterIt.appendTab(sb, tab);
-        sb.append(this.toString());
-    }
 
 
 }

@@ -1,7 +1,8 @@
 package com.bracketbird.client.pages.matches;
 
-import com.bracketbird.client.gui.rtc.event.*;
 import com.bracketbird.client.model.tournament.Match;
+import com.bracketbird.client.rtc.event.ModelEvent;
+import com.bracketbird.client.rtc.event.ModelEventHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.FlowPanel;

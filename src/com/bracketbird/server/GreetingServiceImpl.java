@@ -1,9 +1,10 @@
 package com.bracketbird.server;
 
 import com.bracketbird.client.*;
+import com.bracketbird.client.service.Action;
+import com.bracketbird.client.service.Result;
 import com.bracketbird.server.services.*;
 import com.google.gwt.user.server.rpc.*;
-import com.bracketbird.clientcore.service.*;
 
 
 /**

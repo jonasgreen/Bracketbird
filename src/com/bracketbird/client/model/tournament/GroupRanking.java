@@ -1,9 +1,9 @@
 package com.bracketbird.client.model.tournament;
 
-import com.bracketbird.client.gui.rtc.event.ModelEvent;
-import com.bracketbird.client.gui.rtc.event.ModelEventHandler;
-import com.bracketbird.client.gui.rtc.event.ModelHandlerList;
-import com.bracketbird.client.gui.rtc.event.UpdateModelEvent;
+import com.bracketbird.client.rtc.event.ModelEvent;
+import com.bracketbird.client.rtc.event.ModelEventHandler;
+import com.bracketbird.client.rtc.event.ModelHandlerList;
+import com.bracketbird.client.rtc.event.UpdateModelEvent;
 import com.bracketbird.client.model.Team;
 import com.bracketbird.client.model.ranking.*;
 import com.bracketbird.client.ranking.MatchScoreSheets;

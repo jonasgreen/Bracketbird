@@ -1,15 +1,13 @@
 package com.bracketbird.client.pages.front;
 
-import com.bracketbird.client.gui.rtc.RTC;
+import com.bracketbird.client.rtc.RTC;
 import com.bracketbird.client.pages.teams.TeamsPageController;
 import com.bracketbird.client.service.BBService;
 import com.bracketbird.client.service.TournamentResult;
-import com.bracketbird.clientcore.appcontrol.Application;
-import com.bracketbird.clientcore.appcontrol.PageController;
-import com.bracketbird.clientcore.appcontrol.TournamentContext;
-import com.bracketbird.clientcore.gui.MenuComponent;
-import com.bracketbird.clientcore.gui.MenuLinkComponent;
-import com.bracketbird.clientcore.service.CallBack;
+import com.bracketbird.client.appcontrol.Application;
+import com.bracketbird.client.appcontrol.PageController;
+import com.bracketbird.client.appcontrol.TournamentContext;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 
 /**
  *
@@ -27,15 +25,15 @@ public class FrontPageController extends PageController<FrontPage> {
     public static FrontPageController getInstance() {
         if (instance == null) {
             instance = new FrontPageController();
-            BBService.createTournament(new CallBack<TournamentResult>() {
+            BBService.createTournament(new AsyncCallback<TournamentResult>() {
                 @Override
-                public void success(TournamentResult r) {
+                public void onSuccess(TournamentResult r) {
                     instance.tournamentResult = r;
                     instance.handleTournamentCreation();
                 }
 
                 @Override
-                public void fail(Throwable t) {
+                public void onFailure(Throwable t) {
                     t.printStackTrace();
                 }
             });
@@ -69,15 +67,6 @@ public class FrontPageController extends PageController<FrontPage> {
     public FrontPage newInstance() {
         return new FrontPage();
     }
-
-    public boolean makeHistory() {
-        return true;
-    }
-
-    public MenuComponent newMenuInstance() {
-        return new MenuLinkComponent("");
-    }
-
 
     public void createTournament() {
         createTournamentCalled = true;

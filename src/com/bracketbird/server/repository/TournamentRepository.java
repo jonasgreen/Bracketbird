@@ -1,15 +1,14 @@
 package com.bracketbird.server.repository;
 
-import com.bracketbird.client.gui.rtc.event.InitEvent;
-import com.bracketbird.client.gui.rtc.event.REvent;
+import com.bracketbird.client.rtc.event.InitEvent;
+import com.bracketbird.client.rtc.event.REvent;
 import com.bracketbird.client.model.keys.TournamentId;
-import com.bracketbird.client.model.tournament.CreateTournament;
 import com.bracketbird.client.model.tournament.Tournament;
 import com.bracketbird.client.service.FinderFac;
-import com.bracketbird.clientcore.appcontrol.ApplicationException;
+import com.bracketbird.client.appcontrol.ApplicationException;
 import com.bracketbird.server.dao.Dao;
-import com.bracketbird.server.jdo.club.RTCEventJDO;
-import com.bracketbird.server.jdo.club.TournamentJDO;
+import com.bracketbird.server.jdo.RTCEventJDO;
+import com.bracketbird.server.jdo.TournamentJDO;
 import com.google.appengine.api.datastore.Key;
 
 import java.util.Collection;

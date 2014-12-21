@@ -14,6 +14,7 @@ public class TeamStatistics {
     private final Team team;
     private Map<Match, ScoreSheet> scoreSheetMap = new HashMap<>();
 
+
     private ScoreSheet totalScoreSheet = new EmptyScoreSheet();
 
     public TeamStatistics(Team team) {

@@ -1,6 +1,6 @@
 package com.bracketbird.client.pages;
 
-import com.bracketbird.clientcore.appcontrol.*;
+import com.bracketbird.client.appcontrol.*;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.FlowPanel;

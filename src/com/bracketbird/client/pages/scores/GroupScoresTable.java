@@ -1,7 +1,7 @@
 package com.bracketbird.client.pages.scores;
 
-import com.bracketbird.client.gui.rtc.event.ModelEvent;
-import com.bracketbird.client.gui.rtc.event.ModelEventHandler;
+import com.bracketbird.client.rtc.event.ModelEvent;
+import com.bracketbird.client.rtc.event.ModelEventHandler;
 import com.bracketbird.client.model.Team;
 import com.bracketbird.client.model.ranking.RankingStep;
 import com.bracketbird.client.model.tournament.Group;
@@ -36,7 +36,9 @@ public class GroupScoresTable extends FlowPanel {
     private void buildScoresTable(Group group) {
         for (RankingStep step : group.getStatistics().getRanking()) {
             for (TeamStatistics stat : step.getTeamStatistics()) {
-
+                GroupScoresRow row = new GroupScoresRow(stat);
+                rowMap.put(stat.getTeam(), row);
+                add(row);
             }
         }
     }

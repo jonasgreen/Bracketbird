@@ -1,10 +1,8 @@
 package com.bracketbird.client.service.rtc;
 
-import com.bracketbird.client.model.keys.TournamentChannelId;
 import com.bracketbird.client.model.keys.TournamentId;
-import com.bracketbird.clientcore.model.keys.UserId;
-import com.bracketbird.clientcore.service.AbstractAction;
-import com.bracketbird.clientcore.service.Action;
+import com.bracketbird.client.service.AbstractAction;
+import com.bracketbird.client.service.Action;
 
 /**
  *

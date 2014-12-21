@@ -5,10 +5,7 @@
 
   <entry-point class='com.bracketbird.client.Bracketbird'/>
 
-  <!-- Specify the paths for translatable code                    -->
   <source path='client'/>
-  <source path='clientcore'/>
-  <public path='client.resources'></public>
 
 
 </module>

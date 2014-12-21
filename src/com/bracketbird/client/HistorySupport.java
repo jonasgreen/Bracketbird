@@ -1,6 +1,6 @@
 package com.bracketbird.client;
 
-import com.bracketbird.clientcore.appcontrol.PageController;
+import com.bracketbird.client.appcontrol.PageController;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.History;

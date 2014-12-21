@@ -1,9 +1,9 @@
 package com.bracketbird.client;
 
-import com.bracketbird.client.gui.rtc.health.LogPageController;
+import com.bracketbird.client.service.Action;
+import com.bracketbird.client.service.Result;
 import com.google.gwt.core.client.*;
 import com.google.gwt.user.client.rpc.*;
-import com.bracketbird.clientcore.service.*;
 
 /**
  *
@@ -22,7 +22,6 @@ public class ServerWrapper implements ServerWrapperAsync {
         server.execute( action, new AsyncCallback<Result>() {
             public void onFailure( Throwable caught ) {
                 if(!inFailure){
-                    LogPageController.getInstance().log(action.getClass().getName(), caught);
                     inFailure = true;
                 }
                 callback.onFailure( caught );

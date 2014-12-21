@@ -1,6 +1,6 @@
 package com.bracketbird.client;
 
-import com.bracketbird.client.gui.rtc.Handler;
+import com.bracketbird.client.rtc.Handler;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;

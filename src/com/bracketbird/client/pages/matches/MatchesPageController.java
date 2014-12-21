@@ -1,10 +1,10 @@
 package com.bracketbird.client.pages.matches;
 
-import com.bracketbird.client.gui.rtc.RTC;
-import com.bracketbird.client.gui.rtc.event.ModelEvent;
-import com.bracketbird.client.gui.rtc.event.ModelEventHandler;
+import com.bracketbird.client.rtc.RTC;
+import com.bracketbird.client.rtc.event.ModelEvent;
+import com.bracketbird.client.rtc.event.ModelEventHandler;
 import com.bracketbird.client.model.tournament.Stage;
-import com.bracketbird.clientcore.appcontrol.PageController;
+import com.bracketbird.client.appcontrol.PageController;
 
 /**
  *

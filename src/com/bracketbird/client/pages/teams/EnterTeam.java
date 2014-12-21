@@ -1,7 +1,7 @@
 package com.bracketbird.client.pages.teams;
 
 import com.bracketbird.client.Css;
-import com.bracketbird.client.gui.rtc.RTC;
+import com.bracketbird.client.rtc.RTC;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.*;
 import com.google.gwt.user.client.ui.Button;

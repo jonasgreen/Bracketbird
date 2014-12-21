@@ -1,12 +1,12 @@
 package com.bracketbird.client.model.tournament;
 
-import com.bracketbird.client.gui.rtc.event.StateChangedEvent;
+import com.bracketbird.client.rtc.event.StateChangedEvent;
 import com.bracketbird.client.model.GroupRoundsFactory;
 import com.bracketbird.client.model.Team;
 import com.bracketbird.client.model.keys.GroupId;
 import com.bracketbird.client.model.keys.TeamId;
 import com.bracketbird.client.pages.matches.GroupPositions;
-import com.bracketbird.clientcore.model.LevelStateModel;
+import com.bracketbird.client.model.LevelStateModel;
 
 import java.util.ArrayList;
 import java.util.List;

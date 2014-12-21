@@ -1,7 +1,7 @@
 package com.bracketbird.client.pages.matches;
 
 import com.bracketbird.client.model.tournament.Result;
-import com.bracketbird.clientcore.util.KeyUtil;
+import com.bracketbird.client.util.KeyUtil;
 import com.google.gwt.event.dom.client.*;
 import com.google.gwt.user.client.ui.TextBox;
 

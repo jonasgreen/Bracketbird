@@ -1,9 +1,9 @@
 package com.bracketbird.client.pages.matches;
 
 
-import com.bracketbird.client.gui.rtc.RTC;
-import com.bracketbird.client.gui.rtc.event.StateChangedEvent;
-import com.bracketbird.client.gui.rtc.event.StateHandler;
+import com.bracketbird.client.rtc.RTC;
+import com.bracketbird.client.rtc.event.StateChangedEvent;
+import com.bracketbird.client.rtc.event.StateHandler;
 import com.bracketbird.client.model.Team;
 import com.bracketbird.client.model.keys.TeamId;
 import com.bracketbird.client.model.tournament.*;

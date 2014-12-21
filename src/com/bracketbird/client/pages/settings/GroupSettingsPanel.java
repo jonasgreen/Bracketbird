@@ -1,7 +1,7 @@
 package com.bracketbird.client.pages.settings;
 
 
-import com.bracketbird.client.gui.rtc.RTC;
+import com.bracketbird.client.rtc.RTC;
 import com.bracketbird.client.model.tournament.StageSettings;
 import com.bracketbird.client.model.tournament.Stage;
 import com.bracketbird.client.rules.AtLeast;

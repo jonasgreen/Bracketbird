@@ -1,13 +1,10 @@
 package com.bracketbird.client.pages;
 
 import com.bracketbird.client.Css;
-import com.bracketbird.client.gui.rtc.RTC;
-import com.bracketbird.client.gui.rtc.ShareComponent;
-import com.bracketbird.client.pages.scores.ScoresPageController;
 import com.bracketbird.client.pages.matches.MatchesPageController;
+import com.bracketbird.client.pages.scores.ScoresPageController;
 import com.bracketbird.client.pages.settings.SettingsPageController;
 import com.bracketbird.client.pages.teams.TeamsPageController;
-import com.bracketbird.clientcore.gui.PopupManager;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -55,14 +52,6 @@ public class MenuPanel extends FlowPanel{
 
     private Label shareMenuItem(){
         Label share = createSecondaryMenuItem("Share");
-        share.addClickHandler(new ClickHandler() {
-            @Override
-            public void onClick(ClickEvent event) {
-                ShareComponent gc = new ShareComponent(RTC.getInstance().getTournament().getViewUrl(), RTC.getInstance().getTournament().getUrl());
-                PopupManager.show(gc, null);
-                gc.getCloseButton().getButton().setFocus(true);
-            }
-        });
 
         return share;
     }

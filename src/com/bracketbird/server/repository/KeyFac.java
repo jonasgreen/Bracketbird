@@ -2,12 +2,12 @@ package com.bracketbird.server.repository;
 
 import com.bracketbird.client.model.keys.TournamentChannelId;
 import com.bracketbird.client.model.keys.TournamentId;
-import com.bracketbird.clientcore.appcontrol.SystemException;
-import com.bracketbird.clientcore.model.keys.EntityId;
+import com.bracketbird.client.appcontrol.SystemException;
+import com.bracketbird.client.model.keys.EntityId;
 import com.bracketbird.server.dao.CounterDao;
-import com.bracketbird.server.jdo.club.RTCEventJDO;
-import com.bracketbird.server.jdo.club.TournamentChannelJDO;
-import com.bracketbird.server.jdo.club.TournamentJDO;
+import com.bracketbird.server.jdo.RTCEventJDO;
+import com.bracketbird.server.jdo.TournamentChannelJDO;
+import com.bracketbird.server.jdo.TournamentJDO;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 

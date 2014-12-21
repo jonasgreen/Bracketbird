@@ -1,11 +1,13 @@
 package com.bracketbird.client.model.tournament;
 
 import com.bracketbird.client.EqualsUtil;
-import com.bracketbird.client.gui.rtc.event.*;
 import com.bracketbird.client.model.*;
 import com.bracketbird.client.model.keys.*;
-import com.bracketbird.clientcore.model.*;
-import com.bracketbird.clientcore.util.StringUtil;
+import com.bracketbird.client.rtc.event.ModelEventHandler;
+import com.bracketbird.client.rtc.event.ModelHandlerList;
+import com.bracketbird.client.rtc.event.StateChangedEvent;
+import com.bracketbird.client.rtc.event.UpdateModelEvent;
+import com.bracketbird.client.util.StringUtil;
 import com.google.gwt.event.shared.HandlerRegistration;
 
 /**

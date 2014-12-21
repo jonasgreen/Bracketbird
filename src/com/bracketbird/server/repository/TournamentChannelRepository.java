@@ -3,6 +3,7 @@ package com.bracketbird.server.repository;
 
 import com.bracketbird.client.model.*;
 import com.bracketbird.server.dao.*;
+import com.bracketbird.server.jdo.TournamentChannelJDO;
 import com.bracketbird.server.jdo.club.*;
 
 /**

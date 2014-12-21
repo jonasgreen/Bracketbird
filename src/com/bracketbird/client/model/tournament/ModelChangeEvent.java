@@ -1,6 +1,6 @@
 package com.bracketbird.client.model.tournament;
 
-import com.bracketbird.clientcore.model.*;
+import com.bracketbird.client.model.Model;
 
 /**
  *

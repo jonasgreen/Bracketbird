@@ -1,9 +1,8 @@
 package com.bracketbird.client.service;
 
-import com.bracketbird.client.gui.rtc.event.REvent;
+import com.bracketbird.client.rtc.event.REvent;
 import com.bracketbird.client.model.keys.TournamentChannelId;
 import com.bracketbird.client.model.keys.TournamentId;
-import com.bracketbird.clientcore.service.Result;
 
 import java.util.List;
 

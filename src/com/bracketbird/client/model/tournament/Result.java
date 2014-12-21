@@ -1,7 +1,7 @@
 package com.bracketbird.client.model.tournament;
 
 
-import com.bracketbird.clientcore.appcontrol.SystemException;
+import com.bracketbird.client.appcontrol.SystemException;
 
 import java.io.Serializable;
 import java.util.ArrayList;

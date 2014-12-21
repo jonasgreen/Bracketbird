@@ -1,7 +1,7 @@
 package com.bracketbird.client.pages.settings;
 
 
-import com.bracketbird.clientcore.appcontrol.Page;
+import com.bracketbird.client.appcontrol.Page;
 
 
 /**

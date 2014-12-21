@@ -2,7 +2,6 @@ package com.bracketbird.client.model;
 
 
 import com.bracketbird.client.model.keys.TournamentChannelId;
-import com.bracketbird.clientcore.model.Model;
 
 import java.io.Serializable;
 import java.util.ArrayList;

@@ -2,7 +2,7 @@ package com.bracketbird.client.pages.matches;
 
 
 import com.bracketbird.client.model.tournament.Stage;
-import com.bracketbird.clientcore.appcontrol.Page;
+import com.bracketbird.client.appcontrol.Page;
 
 import java.util.ArrayList;
 import java.util.Iterator;

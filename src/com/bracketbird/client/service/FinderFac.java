@@ -2,11 +2,7 @@ package com.bracketbird.client.service;
 
 
 import com.bracketbird.client.model.keys.TournamentId;
-import com.bracketbird.clientcore.model.keys.EntityId;
-import com.bracketbird.clientcore.service.EntityIdSingleFinder;
-import com.bracketbird.clientcore.service.Finder;
-import com.bracketbird.clientcore.service.LongSingleFinder;
-import com.bracketbird.clientcore.service.SingleFinder;
+import com.bracketbird.client.model.keys.EntityId;
 
 /**
  *

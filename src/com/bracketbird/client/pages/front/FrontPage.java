@@ -2,7 +2,7 @@ package com.bracketbird.client.pages.front;
 
 
 import com.bracketbird.client.browser.Browser;
-import com.bracketbird.clientcore.appcontrol.Page;
+import com.bracketbird.client.appcontrol.Page;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.FlowPanel;

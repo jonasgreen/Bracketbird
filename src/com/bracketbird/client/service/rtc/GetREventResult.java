@@ -1,7 +1,7 @@
 package com.bracketbird.client.service.rtc;
 
-import com.bracketbird.client.gui.rtc.event.REvent;
-import com.bracketbird.clientcore.service.Result;
+import com.bracketbird.client.rtc.event.REvent;
+import com.bracketbird.client.service.Result;
 
 
 /**

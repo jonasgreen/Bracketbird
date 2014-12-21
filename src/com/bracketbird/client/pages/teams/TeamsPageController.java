@@ -1,13 +1,11 @@
 package com.bracketbird.client.pages.teams;
 
 
-import com.bracketbird.client.gui.rtc.RTC;
-import com.bracketbird.client.gui.rtc.event.ModelEvent;
-import com.bracketbird.client.gui.rtc.event.ModelEventHandler;
+import com.bracketbird.client.rtc.RTC;
+import com.bracketbird.client.rtc.event.ModelEvent;
+import com.bracketbird.client.rtc.event.ModelEventHandler;
 import com.bracketbird.client.model.Team;
-import com.bracketbird.clientcore.appcontrol.PageController;
-import com.bracketbird.clientcore.gui.MenuComponent;
-import com.bracketbird.clientcore.gui.MenuImageAndTextComponent;
+import com.bracketbird.client.appcontrol.PageController;
 
 /**
  *
@@ -34,18 +32,6 @@ public class TeamsPageController extends PageController<TeamsPage> {
 
     public TeamsPage newInstance() {
         return new TeamsPage();
-    }
-
-    public boolean makeHistory() {
-        return false;
-    }
-
-    public MenuComponent newMenuInstance() {
-        return new MenuImageAndTextComponent("img/Teams.png", "Add teams");
-    }
-
-    private void teamCreated(Team team, boolean isClient) {
-
     }
 
 

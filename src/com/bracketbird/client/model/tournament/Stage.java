@@ -1,12 +1,12 @@
 package com.bracketbird.client.model.tournament;
 
-import com.bracketbird.client.gui.rtc.event.UpdateMatchFieldEvent;
+import com.bracketbird.client.rtc.event.UpdateMatchFieldEvent;
 import com.bracketbird.client.model.SeedingTeam;
 import com.bracketbird.client.model.Team;
 import com.bracketbird.client.model.keys.MatchId;
 import com.bracketbird.client.model.keys.StageId;
 import com.bracketbird.client.model.keys.TeamId;
-import com.bracketbird.clientcore.model.LevelStateModel;
+import com.bracketbird.client.model.LevelStateModel;
 
 import java.util.ArrayList;
 import java.util.List;

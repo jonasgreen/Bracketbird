@@ -1,8 +1,8 @@
 package com.bracketbird.client.model.tournament;
 
 import com.bracketbird.client.model.StageType;
-import com.bracketbird.clientcore.appcontrol.SystemException;
-import com.bracketbird.clientcore.model.FindingRankingConstant;
+import com.bracketbird.client.appcontrol.SystemException;
+import com.bracketbird.client.model.FindingRankingConstant;
 
 import java.util.ArrayList;
 import java.util.List;
