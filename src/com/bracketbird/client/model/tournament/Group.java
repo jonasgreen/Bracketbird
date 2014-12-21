@@ -1,12 +1,12 @@
 package com.bracketbird.client.model.tournament;
 
-import com.bracketbird.client.rtc.event.StateChangedEvent;
 import com.bracketbird.client.model.GroupRoundsFactory;
+import com.bracketbird.client.model.LevelStateModel;
 import com.bracketbird.client.model.Team;
 import com.bracketbird.client.model.keys.GroupId;
 import com.bracketbird.client.model.keys.TeamId;
 import com.bracketbird.client.pages.matches.GroupPositions;
-import com.bracketbird.client.model.LevelStateModel;
+import com.bracketbird.client.rtc.event.UpdateEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -142,7 +142,7 @@ public class Group extends LevelStateModel<GroupId> {
 
     //Called from a child - ie. round.
     @Override
-    public void onChange(StateChangedEvent event) {
+    public void onUpdate(UpdateEvent<LevelState> event) {
         endingTeams = new ArrayList<Team>();
         updateState(event.isFromClient());
     }

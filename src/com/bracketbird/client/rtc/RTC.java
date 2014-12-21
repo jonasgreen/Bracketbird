@@ -195,8 +195,8 @@ public class RTC {
     }
 
     //MATCHES
-    public void layoutMatches(StageId levelId) {
-        Stage previousLevel = getTournament().getPreviousStage(getTournament().getLevel(levelId));
+    public void layoutMatches(StageId stageId) {
+        Stage previousLevel = getTournament().getPreviousStage(getTournament().getStage(stageId));
         if(RTC.getInstance().getTournament().getTeams().size() < 2){
             OkWarning gc = new OkWarning("Please add some teams", "There has to be at least two teams to createGroupMatch a tournament.");
             gc.center();
@@ -206,7 +206,7 @@ public class RTC {
             gc.center();
         }
         else {
-            executeEvent(new LayoutMatchesEvent(null, levelId));
+            executeEvent(new LayoutMatchesEvent(null, stageId));
         }
     }
 

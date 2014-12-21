@@ -1,8 +1,7 @@
 package com.bracketbird.client.pages.settings;
 
 import com.bracketbird.client.rtc.RTC;
-import com.bracketbird.client.rtc.event.ModelEvent;
-import com.bracketbird.client.rtc.event.ModelEventHandler;
+import com.bracketbird.client.rtc.event.*;
 import com.bracketbird.client.model.tournament.Stage;
 import com.bracketbird.client.appcontrol.PageController;
 
@@ -37,15 +36,16 @@ public class SettingsPageController extends PageController<SettingsPage> {
             addLevel(level);
         }
 
-        RTC.getInstance().getTournament().stagesEventHandlers.addHandler(new ModelEventHandler<Stage>() {
+
+        RTC.getInstance().getTournament().stagesDispatcher.addHandler(new CreateDeleteHandler<Stage>() {
             @Override
-            public void handleEvent(ModelEvent<Stage> event) {
-                if (event.isCreate()) {
-                    addLevel(event.getNewValue());
-                }
-                else if (event.isDelete()) {
-                    removeLevel(event.getOldValue());
-                }
+            public void onCreate(CreateEvent<Stage> event) {
+                addLevel(event.getValue());
+            }
+
+            @Override
+            public void onDelete(DeleteEvent<Stage> event) {
+                removeLevel(event.getValue());
             }
         });
     }

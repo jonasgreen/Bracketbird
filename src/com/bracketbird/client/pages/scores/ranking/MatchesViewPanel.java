@@ -1,10 +1,10 @@
 package com.bracketbird.client.pages.scores.ranking;
 
-import com.bracketbird.client.rtc.event.ModelEvent;
-import com.bracketbird.client.rtc.event.ModelEventHandler;
 import com.bracketbird.client.model.tournament.GroupStage;
 import com.bracketbird.client.model.tournament.Match;
 import com.bracketbird.client.model.tournament.Stage;
+import com.bracketbird.client.rtc.event.UpdateEvent;
+import com.bracketbird.client.rtc.event.UpdateHandler;
 import com.google.gwt.event.logical.shared.ResizeEvent;
 import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.user.client.Window;
@@ -25,11 +25,11 @@ public class MatchesViewPanel extends FlowPanel{
     private NotFinishedMatches notFinishedMatches;
     private FlowPanel matchesPlayedPanel = new FlowPanel();
 
-    public MatchesViewPanel(final GroupStage level) {
+    public MatchesViewPanel(final GroupStage stage) {
         add(matchesPlayedPanel);
         final List<MatchView> finishedList = new ArrayList<MatchView>();
         final List<MatchView> notFinishedList = new ArrayList<MatchView>();
-        for (Match match : level.getMatches()) {
+        for (Match match : stage.getMatches()) {
             final MatchView v = new MatchView(match);
             add(v);
             if(match.isFinish()){
@@ -52,16 +52,16 @@ public class MatchesViewPanel extends FlowPanel{
 
 
         matchesPlayedPanel.setStyleName("matchesPlayedPanel");
-        for (Match m : level.getMatches()) {
-            m.matchHandlers.addHandler(new ModelEventHandler<Match>() {
+        for (Match m : stage.getMatches()) {
+            m.matchHandlers.addHandler(new UpdateHandler<Match>() {
                 @Override
-                public void handleEvent(ModelEvent<Match> event) {
-                    updateMatchesPlayedPanel(level);
+                public void onUpdate(UpdateEvent<Match> event) {
+                    updateMatchesPlayedPanel(stage);
                 }
             });
         }
 
-        updateMatchesPlayedPanel(level);
+        updateMatchesPlayedPanel(stage);
     }
 
     private void updateMatchesPlayedPanel(Stage level) {

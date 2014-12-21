@@ -3,10 +3,7 @@ package com.bracketbird.client.model.tournament;
 import com.bracketbird.client.EqualsUtil;
 import com.bracketbird.client.model.*;
 import com.bracketbird.client.model.keys.*;
-import com.bracketbird.client.rtc.event.ModelEventHandler;
-import com.bracketbird.client.rtc.event.ModelHandlerList;
-import com.bracketbird.client.rtc.event.StateChangedEvent;
-import com.bracketbird.client.rtc.event.UpdateModelEvent;
+import com.bracketbird.client.rtc.event.*;
 import com.bracketbird.client.util.StringUtil;
 import com.google.gwt.event.shared.HandlerRegistration;
 
@@ -16,8 +13,8 @@ import com.google.gwt.event.shared.HandlerRegistration;
 public class Match extends LevelStateModel<MatchId> {
     private static final long serialVersionUID = -8624209794497350221L;
 
-    public ModelHandlerList<Match> matchHandlers = new ModelHandlerList<Match>();
-    public ModelHandlerList<Result> resultHandlers = new ModelHandlerList<Result>();
+    public UpdateDispatcher<Match> matchHandlers = new UpdateDispatcher<>();
+    public UpdateDispatcher<Result> resultDispatcher = new UpdateDispatcher<>();
 
 
     //the order of the match in a subtournament
@@ -63,7 +60,7 @@ public class Match extends LevelStateModel<MatchId> {
 
 
     private void fireMatchChangedEvent(boolean fromClient) {
-        matchHandlers.fireEvent(new UpdateModelEvent<Match>(fromClient, this, this));
+        matchHandlers.fireEvent(this, this, fromClient);
     }
 
 
@@ -139,7 +136,7 @@ public class Match extends LevelStateModel<MatchId> {
         Result oldResult = this.result;
         this.result = newResult;
 
-        resultHandlers.fireEvent(new UpdateModelEvent<Result>(fromClient, oldResult, result));
+        resultDispatcher.fireEvent(oldResult, result, fromClient);
         fireMatchChangedEvent(fromClient);
         updateState(fromClient);
     }
@@ -190,7 +187,7 @@ public class Match extends LevelStateModel<MatchId> {
 
 
     @Override
-    public void onChange(StateChangedEvent event) {
+    public void onUpdate(UpdateEvent<LevelState> event) {
         //Ignore - never called
     }
 
@@ -232,7 +229,7 @@ public class Match extends LevelStateModel<MatchId> {
         return team.equals(teamHome);
     }
 
-    public HandlerRegistration addResultHandler(ModelEventHandler<Result> handler){
-        return resultHandlers.addHandler(handler);
+    public HandlerRegistration addResultHandler(UpdateHandler<Result> handler){
+        return resultDispatcher.addHandler(handler);
     }
 }

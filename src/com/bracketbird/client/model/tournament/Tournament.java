@@ -20,10 +20,10 @@ import java.util.Map;
  */
 public class Tournament extends LevelStateModel<TournamentId> {
 
-    public transient ModelHandlerList<String> nameEventHandlers = new ModelHandlerList<String>();
-    public transient ModelHandlerList<Stage> stagesEventHandlers = new ModelHandlerList<Stage>();
-    public transient ModelHandlerList<Team> teamsEventHandlers = new ModelHandlerList<Team>();
-    public transient ModelHandlerList<List<TeamId>> seedingHandlers = new ModelHandlerList<List<TeamId>>();
+    public transient UpdateDispatcher<String> nameDispatcher = new UpdateDispatcher<>();
+    public transient CreateDeleteDispatcher<Stage> stagesDispatcher = new CreateDeleteDispatcher<>();
+    public transient CreateDeleteDispatcher<Team> teamsDispatcher = new CreateDeleteDispatcher<>();
+    public transient UpdateDispatcher<List<TeamId>> seedingDispatcher = new UpdateDispatcher<>();
 
     private String name;
     private String url;
@@ -87,7 +87,7 @@ public class Tournament extends LevelStateModel<TournamentId> {
     public void updateName(String name, boolean fromClient) {
         String oldName = this.name;
         this.name = name;
-        nameEventHandlers.fireEvent(new UpdateModelEvent<String>(fromClient, oldName, name));
+        nameDispatcher.fireEvent(oldName, name, fromClient);
     }
 
 
@@ -135,7 +135,7 @@ public class Tournament extends LevelStateModel<TournamentId> {
         team.setEventLogId(eventId);
         team.setSeeding(getNextSeeding());
         teams.add(team);
-        teamsEventHandlers.fireEvent(new CreateModelEvent<Team>(fromClient, team));
+        teamsDispatcher.fireCreateEvent(team, fromClient);
         updateState(fromClient);
     }
 
@@ -147,7 +147,7 @@ public class Tournament extends LevelStateModel<TournamentId> {
         }
         teams.remove(team);
         updateSeeding(getTeamIds(), fromClient);
-        teamsEventHandlers.fireEvent(new DeleteModelEvent<Team>(fromClient, team));
+        teamsDispatcher.fireDeleteEvent(team, fromClient);
 
         clearAllStages(fromClient);
         updateState(fromClient);
@@ -176,31 +176,23 @@ public class Tournament extends LevelStateModel<TournamentId> {
         return null;
     }
 
-    public Stage getLevel(StageId id) {
-        for (Stage level : stages) {
-            if (level.getId().equals(id)) {
-                return level;
-            }
-        }
-        return null;
-    }
 
     public void createStage(StageType type, StageId id, Long eventId, boolean fromClient) {
-        Stage tl = TournamentLevelFac.create(this, type);
-        tl.setId(id);
-        tl.setEventLogId(eventId);
-        stages.add(tl);
-        stagesEventHandlers.fireEvent(new CreateModelEvent<Stage>(fromClient, tl));
+        Stage stage = TournamentLevelFac.create(this, type);
+        stage.setId(id);
+        stage.setEventLogId(eventId);
+        stages.add(stage);
+        stagesDispatcher.fireCreateEvent(stage, fromClient);
         updateState(fromClient);
     }
 
-    public void deleteLevel(StageId levelId, boolean fromClient) {
-        Stage level = getLevel(levelId);
-        if (level == null) {
+    public void deleteLevel(StageId id, boolean fromClient) {
+        Stage stage = getStage(id);
+        if (stage == null) {
             return;
         }
-        stages.remove(level);
-        stagesEventHandlers.fireEvent(new DeleteModelEvent<Stage>(fromClient, level));
+        stages.remove(stage);
+        stagesDispatcher.fireDeleteEvent(stage, fromClient);
         updateState(fromClient);
     }
 
@@ -303,7 +295,7 @@ public class Tournament extends LevelStateModel<TournamentId> {
         List<TeamId> oldSeedingList = getSeedingList();
         changeTeamsAccordingToSeeding(seedingList);
 
-        seedingHandlers.fireEvent(new UpdateModelEvent<List<TeamId>>(fromClient, oldSeedingList, seedingList));
+        seedingDispatcher.fireEvent(oldSeedingList, seedingList, fromClient);
     }
 
     private List<TeamId> getSeedingList() {
@@ -425,7 +417,7 @@ public class Tournament extends LevelStateModel<TournamentId> {
     }
 
     @Override
-    public void onChange(StateChangedEvent event) {
+    public void onUpdate(UpdateEvent<LevelState> event) {
         endingTeams = new ArrayList<List<Team>>();
         updateState(event.isFromClient());
     }

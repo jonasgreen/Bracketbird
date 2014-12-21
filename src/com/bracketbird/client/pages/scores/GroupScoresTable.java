@@ -1,12 +1,12 @@
 package com.bracketbird.client.pages.scores;
 
-import com.bracketbird.client.rtc.event.ModelEvent;
-import com.bracketbird.client.rtc.event.ModelEventHandler;
 import com.bracketbird.client.model.Team;
 import com.bracketbird.client.model.ranking.RankingStep;
 import com.bracketbird.client.model.tournament.Group;
 import com.bracketbird.client.model.tournament.Match;
 import com.bracketbird.client.ranking.TeamStatistics;
+import com.bracketbird.client.rtc.event.UpdateEvent;
+import com.bracketbird.client.rtc.event.UpdateHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
 
 import java.util.HashMap;
@@ -17,9 +17,9 @@ public class GroupScoresTable extends FlowPanel {
     private Map<Team, GroupScoresRow> rowMap = new HashMap<>();
 
     public GroupScoresTable(Group group){
-        group.getStatistics().addOnChangeHandler(new ModelEventHandler<Match>() {
+        group.getStatistics().addOnChangeHandler(new UpdateHandler<Match>() {
             @Override
-            public void handleEvent(ModelEvent<Match> event) {
+            public void onUpdate(UpdateEvent<Match> event) {
                 Team teamHome = event.getNewValue().getTeamHome();
                 Team teamOut = event.getNewValue().getTeamOut();
 
@@ -29,6 +29,7 @@ public class GroupScoresTable extends FlowPanel {
                 updateTable(teamHome, teamOut);
             }
         });
+
 
         buildScoresTable(group);
     }

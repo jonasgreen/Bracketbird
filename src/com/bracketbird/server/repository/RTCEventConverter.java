@@ -3,7 +3,6 @@ package com.bracketbird.server.repository;
 import com.bracketbird.client.rtc.event.REvent;
 import com.bracketbird.client.model.keys.TournamentId;
 import com.bracketbird.server.jdo.RTCEventJDO;
-import com.bracketbird.server.jdo.club.*;
 import com.google.appengine.api.datastore.*;
 
 import java.util.*;

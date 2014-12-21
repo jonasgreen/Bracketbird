@@ -1,15 +1,12 @@
 package com.bracketbird.client.model.tournament;
 
-import com.bracketbird.client.rtc.event.ModelEvent;
-import com.bracketbird.client.rtc.event.ModelEventHandler;
-import com.bracketbird.client.rtc.event.ModelHandlerList;
-import com.bracketbird.client.rtc.event.UpdateModelEvent;
 import com.bracketbird.client.model.Team;
 import com.bracketbird.client.model.ranking.*;
 import com.bracketbird.client.ranking.MatchScoreSheets;
 import com.bracketbird.client.ranking.ScoreSheet;
 import com.bracketbird.client.ranking.ScoreSheetFactory;
 import com.bracketbird.client.ranking.TeamStatistics;
+import com.bracketbird.client.rtc.event.*;
 import com.google.gwt.event.shared.HandlerRegistration;
 
 import java.util.HashMap;
@@ -21,7 +18,7 @@ public class GroupRanking {
     private RankingLadderType[] rankingTypes = new RankingLadderType[]{RankingLadderType.point, RankingLadderType.scoreDifference, RankingLadderType.scoreTotal};
 
     private Group group;
-    private ModelHandlerList<Match> onChangeHandlers = new ModelHandlerList<Match>();
+    private UpdateDispatcher<Match> matchDispatcher = new UpdateDispatcher<>();
 
     private ScoreSheetFactory scoreSheetFactory;
     private Map<Team, TeamStatistics> statisticsMap = new HashMap<Team, TeamStatistics>();
@@ -38,9 +35,9 @@ public class GroupRanking {
         ranking = ladderFactory.create(null, null);
 
         for (final Match match : matches) {
-            match.addResultHandler(new ModelEventHandler<Result>() {
+            match.addResultHandler(new UpdateHandler<Result>() {
                 @Override
-                public void handleEvent(ModelEvent<Result> event) {
+                public void onUpdate(UpdateEvent<Result> event) {
                     resultChanged(match, event);
                 }
             });
@@ -61,7 +58,7 @@ public class GroupRanking {
 
         //new PrintRanking().print(this);
         //new PrintRankingLadder().print(this.ranking);
-        onChangeHandlers.fireEvent(new UpdateModelEvent<>(e.isFromClient(), match, match));
+        matchDispatcher.fireEvent(match, match, e.isFromClient());
     }
 
     private void updateRanking(Match match, Team team, ScoreSheet scoreSheet){
@@ -84,8 +81,8 @@ public class GroupRanking {
         return stats;
     }
 
-    public HandlerRegistration addOnChangeHandler(ModelEventHandler<Match> handler){
-        return onChangeHandlers.addHandler(handler);
+    public HandlerRegistration addOnChangeHandler(UpdateHandler<Match> handler){
+        return matchDispatcher.addHandler(handler);
     }
 
     public Group getGroup() {

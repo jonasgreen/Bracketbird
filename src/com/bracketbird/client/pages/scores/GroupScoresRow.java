@@ -1,9 +1,9 @@
 package com.bracketbird.client.pages.scores;
 
 import com.bracketbird.client.Css;
-import com.bracketbird.client.rtc.event.ModelEvent;
-import com.bracketbird.client.rtc.event.ModelEventHandler;
 import com.bracketbird.client.ranking.TeamStatistics;
+import com.bracketbird.client.rtc.event.UpdateEvent;
+import com.bracketbird.client.rtc.event.UpdateHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 
@@ -26,9 +26,9 @@ public class GroupScoresRow extends FlowPanel{
         if (teamLabel == null) {
             teamLabel = new Label(teamStatistics.getTeam().getName());
             Css.style(teamLabel, "teamLabel");
-            teamStatistics.getTeam().nameHandlers.addHandler(new ModelEventHandler<String>() {
+            teamStatistics.getTeam().nameDispatcher.addHandler(new UpdateHandler<String>() {
                 @Override
-                public void handleEvent(ModelEvent<String> event) {
+                public void onUpdate(UpdateEvent<String> event) {
                     teamLabel.setText(event.getNewValue());
                 }
             });

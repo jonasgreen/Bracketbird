@@ -1,8 +1,8 @@
 package com.bracketbird.client.model.tournament;
 
-import com.bracketbird.client.rtc.event.StateChangedEvent;
 import com.bracketbird.client.model.KnockoutRoundsBuilder;
 import com.bracketbird.client.model.Team;
+import com.bracketbird.client.rtc.event.UpdateEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,8 +44,8 @@ public class KnockoutStage extends Stage {
     }
 
     @Override
-    public void onChange(StateChangedEvent event) {
-        endingTeams = new ArrayList<List<Team>>();
+    public void onUpdate(UpdateEvent<LevelState> event) {
+        endingTeams = new ArrayList<>();
         updateState(event.isFromClient());
     }
 

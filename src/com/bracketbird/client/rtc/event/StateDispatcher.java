@@ -10,11 +10,11 @@ import java.util.List;
 /**
  *
  */
-public class StateHandlerList {
+public class StateDispatcher {
 
     private String name;
 
-    public StateHandlerList(String name) {
+    public StateDispatcher(String name) {
         this.name = name;
     }
 

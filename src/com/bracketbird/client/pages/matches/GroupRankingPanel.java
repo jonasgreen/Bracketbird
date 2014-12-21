@@ -1,12 +1,12 @@
 package com.bracketbird.client.pages.matches;
 
 
-import com.bracketbird.client.rtc.event.StateChangedEvent;
-import com.bracketbird.client.rtc.event.StateHandler;
 import com.bracketbird.client.model.Team;
 import com.bracketbird.client.model.tournament.Group;
 import com.bracketbird.client.model.tournament.LevelState;
 import com.bracketbird.client.model.tournament.Position;
+import com.bracketbird.client.rtc.event.UpdateEvent;
+import com.bracketbird.client.rtc.event.UpdateHandler;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
@@ -34,10 +34,10 @@ public class GroupRankingPanel extends FlowPanel {
         add(content);
 
 
-        group.addStateHandler(new StateHandler() {
+        group.addStateHandler(new UpdateHandler<LevelState>() {
             @Override
-            public void onChange(StateChangedEvent event) {
-                handleStateChange(event.getNewState());
+            public void onUpdate(UpdateEvent<LevelState> event) {
+                handleStateChange(event.getNewValue());
             }
         });
 

@@ -16,7 +16,7 @@ public class UpdateStageEventHandler extends REventHandler<UpdateStageEvent> {
 
     @Override
     protected boolean shouldWarn(UpdateStageEvent event) {
-        return RTC.getInstance().getTournament().getLevel(event.getModelId()).isInProgress();
+        return RTC.getInstance().getTournament().getStage(event.getModelId()).isInProgress();
     }
 
     @Override

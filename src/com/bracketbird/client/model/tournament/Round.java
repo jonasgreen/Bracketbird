@@ -1,8 +1,8 @@
 package com.bracketbird.client.model.tournament;
 
-import com.bracketbird.client.rtc.event.StateChangedEvent;
-import com.bracketbird.client.model.keys.RoundId;
 import com.bracketbird.client.model.LevelStateModel;
+import com.bracketbird.client.model.keys.RoundId;
+import com.bracketbird.client.rtc.event.UpdateEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +55,7 @@ public class Round extends LevelStateModel<RoundId> {
 
     //called from a child (match)
     @Override
-    public void onChange(StateChangedEvent event) {
+    public void onUpdate(UpdateEvent<LevelState> event) {
         updateState(event.isFromClient());
     }
 

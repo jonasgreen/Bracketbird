@@ -1,8 +1,8 @@
 package com.bracketbird.client.pages.matches;
 
 import com.bracketbird.client.model.tournament.Match;
-import com.bracketbird.client.rtc.event.ModelEvent;
-import com.bracketbird.client.rtc.event.ModelEventHandler;
+import com.bracketbird.client.rtc.event.UpdateEvent;
+import com.bracketbird.client.rtc.event.UpdateHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -38,9 +38,9 @@ public class MatchRow extends FlowPanel {
         add(getResultTextBox());
         //add(getFieldTextBox());
 
-        match.matchHandlers.addHandler(new ModelEventHandler<Match>() {
+        match.matchHandlers.addHandler(new UpdateHandler<Match>() {
             @Override
-            public void handleEvent(ModelEvent<Match> event) {
+            public void onUpdate(UpdateEvent<Match> event) {
                 onMatchChange();
             }
         });
@@ -74,9 +74,9 @@ public class MatchRow extends FlowPanel {
             teamHomeLabel.setStyleName("matchRow_team");
             teamHomeLabel.addStyleName("flex_grow_1");
 
-            match.getTeamHome().nameHandlers.addHandler(new ModelEventHandler<String>() {
+            match.getTeamHome().nameDispatcher.addHandler(new UpdateHandler<String>() {
                 @Override
-                public void handleEvent(ModelEvent<String> event) {
+                public void onUpdate(UpdateEvent<String> event) {
                     teamHomeLabel.setText(event.getNewValue());
                 }
             });
@@ -98,9 +98,9 @@ public class MatchRow extends FlowPanel {
             teamOutLabel.setStyleName("matchRow_team");
             teamOutLabel.addStyleName("flex_grow_1");
 
-            match.getTeamOut().nameHandlers.addHandler(new ModelEventHandler<String>() {
+            match.getTeamOut().nameDispatcher.addHandler(new UpdateHandler<String>() {
                 @Override
-                public void handleEvent(ModelEvent<String> event) {
+                public void onUpdate(UpdateEvent<String> event) {
                     teamOutLabel.setText(event.getNewValue());
                 }
             });

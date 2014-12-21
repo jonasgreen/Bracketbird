@@ -1,8 +1,8 @@
 package com.bracketbird.client.pages.scores.ranking;
 
-import com.bracketbird.client.rtc.event.ModelEvent;
-import com.bracketbird.client.rtc.event.ModelEventHandler;
-import com.bracketbird.client.model.tournament.*;
+import com.bracketbird.client.model.tournament.Match;
+import com.bracketbird.client.rtc.event.UpdateEvent;
+import com.bracketbird.client.rtc.event.UpdateHandler;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
@@ -36,9 +36,9 @@ public class MatchView extends FlowPanel {
         this.match = match;
         setStyleName("aMatchView");
 
-        match.matchHandlers.addHandler(new ModelEventHandler<Match>() {
+        match.matchHandlers.addHandler(new UpdateHandler<Match>() {
             @Override
-            public void handleEvent(ModelEvent<Match> event) {
+            public void onUpdate(UpdateEvent<Match> event) {
                 matchChanged(event.getNewValue());
             }
         });

@@ -1,8 +1,6 @@
 package com.bracketbird.client.model;
 
-import com.bracketbird.client.rtc.event.StateChangedEvent;
-import com.bracketbird.client.rtc.event.StateHandler;
-import com.bracketbird.client.rtc.event.StateHandlerList;
+import com.bracketbird.client.rtc.event.*;
 import com.bracketbird.client.model.tournament.LevelState;
 import com.bracketbird.client.model.keys.EntityId;
 import com.google.gwt.event.shared.HandlerRegistration;
@@ -10,13 +8,12 @@ import com.google.gwt.event.shared.HandlerRegistration;
 /**
  *
  */
-public abstract class LevelStateModel<ID extends EntityId> extends Model<ID> implements StateHandler {
+public abstract class LevelStateModel<ID extends EntityId> extends Model<ID> implements UpdateHandler<LevelState> {
 
     protected LevelState state = LevelState.notReady;
-    protected StateHandlerList stateHandlers;
+    protected UpdateDispatcher<LevelState> stateDispatcher = new UpdateDispatcher<>();
 
     public LevelStateModel() {
-        stateHandlers = new StateHandlerList(this.getClass().getSimpleName());
     }
 
     public void updateState(boolean fromClient){
@@ -28,7 +25,7 @@ public abstract class LevelStateModel<ID extends EntityId> extends Model<ID> imp
         this.state = newState;
 
         //Always fire event.
-        stateHandlers.fireEvent(new StateChangedEvent(fromClient, oldState, newState));
+        stateDispatcher.fireEvent(oldState, newState, fromClient);
     }
 
     public abstract LevelState calculateState();
@@ -57,8 +54,8 @@ public abstract class LevelStateModel<ID extends EntityId> extends Model<ID> imp
         return state;
     }
 
-    public HandlerRegistration addStateHandler(StateHandler handler){
-        return stateHandlers.addHandler(handler);
+    public HandlerRegistration addStateHandler(UpdateHandler<LevelState> handler){
+        return stateDispatcher.addHandler(handler);
     }
 
 

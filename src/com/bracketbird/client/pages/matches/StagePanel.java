@@ -1,10 +1,10 @@
 package com.bracketbird.client.pages.matches;
 
-import com.bracketbird.client.rtc.event.StateChangedEvent;
-import com.bracketbird.client.rtc.event.StateHandler;
 import com.bracketbird.client.model.tournament.GroupStage;
 import com.bracketbird.client.model.tournament.LevelState;
 import com.bracketbird.client.model.tournament.Stage;
+import com.bracketbird.client.rtc.event.UpdateEvent;
+import com.bracketbird.client.rtc.event.UpdateHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 
@@ -26,32 +26,32 @@ public class StagePanel extends FlowPanel {
             matchesPanelHolder.add(new LevelEmptyPanel(stage));
         }
 
-        stage.addStateHandler(new StateHandler() {
+        stage.addStateHandler(new UpdateHandler<LevelState>() {
             @Override
-            public void onChange(StateChangedEvent event) {
+            public void onUpdate(UpdateEvent<LevelState> event) {
                 handleStateChange(event);
             }
         });
 
 
         if (stage.isGroupStage()) {
-            stage.addStateHandler(new StateHandler() {
+            stage.addStateHandler(new UpdateHandler<LevelState>() {
                 @Override
-                public void onChange(StateChangedEvent event) {
-                    getRankingPanel().setVisible(event.getNewState().isBeyondInProgress());
+                public void onUpdate(UpdateEvent<LevelState> event) {
+                    getRankingPanel().setVisible(event.getNewValue().isBeyondInProgress());
                 }
             });
             add(getRankingPanel());
         }
     }
 
-    private void handleStateChange(StateChangedEvent event) {
+    private void handleStateChange(UpdateEvent<LevelState> event) {
         //StateCrossing crossing = event.crosses(LevelState.ready);
 
-        if (event.getOldState().isNotReady()) {
+        if (event.getOldValue().isNotReady()) {
             matchesPanelHolder.clear();
             matchesPanelHolder.add(new MatchesTablePanel(stage));
-        } else if (event.getNewState().isNotReady()) {
+        } else if (event.getNewValue().isNotReady()) {
             matchesPanelHolder.clear();
             matchesPanelHolder.add(new LevelEmptyPanel(stage));
         }

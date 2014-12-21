@@ -1,17 +1,16 @@
 package com.bracketbird.client.model;
 
 
-import com.bracketbird.client.model.keys.*;
-import com.bracketbird.client.rtc.event.ModelHandlerList;
-import com.bracketbird.client.rtc.event.UpdateModelEvent;
+import com.bracketbird.client.model.keys.TeamId;
+import com.bracketbird.client.rtc.event.UpdateDispatcher;
 
 /**
  *
  */
 public class Team extends Model<TeamId> {
 
-    public ModelHandlerList<String> nameHandlers = new ModelHandlerList<String>();
-    public ModelHandlerList<Integer> seedingHandlers = new ModelHandlerList<Integer>();
+    public UpdateDispatcher<String> nameDispatcher = new UpdateDispatcher<>();
+    public UpdateDispatcher<Integer> seedingDispatcher = new UpdateDispatcher<>();
 
     protected String name;
     protected Integer seeding;
@@ -43,14 +42,14 @@ public class Team extends Model<TeamId> {
         Integer oldSeeding = this.seeding;
         this.seeding = seeding;
 
-        seedingHandlers.fireEvent(new UpdateModelEvent<Integer>(fromClient, oldSeeding, seeding));
+        seedingDispatcher.fireEvent(oldSeeding, seeding, fromClient);
     }
 
     public void updateName(String name, boolean fromClient) {
         String oldName = this.name;
         this.name = name;
 
-        nameHandlers.fireEvent(new UpdateModelEvent<String>(fromClient, oldName, name));
+        nameDispatcher.fireEvent(oldName, name, fromClient);
     }
 
     public boolean isEmpty() {

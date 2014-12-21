@@ -1,10 +1,10 @@
 package com.bracketbird.client.pages.teams;
 
-import com.bracketbird.client.rtc.RTC;
-import com.bracketbird.client.model.Team;
-import com.bracketbird.client.rtc.event.ModelEvent;
-import com.bracketbird.client.rtc.event.ModelEventHandler;
 import com.bracketbird.client.appcontrol.TournamentContext;
+import com.bracketbird.client.model.Team;
+import com.bracketbird.client.rtc.RTC;
+import com.bracketbird.client.rtc.event.UpdateEvent;
+import com.bracketbird.client.rtc.event.UpdateHandler;
 import com.bracketbird.client.util.StringUtil;
 import com.google.gwt.event.dom.client.*;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
@@ -31,9 +31,9 @@ public class TeamCell extends TextBox{
         setStyleName("teamsRow_team");
         setText(team.getName());
 
-        team.nameHandlers.addHandler(new ModelEventHandler<String>() {
+        team.nameDispatcher.addHandler(new UpdateHandler<String>() {
             @Override
-            public void handleEvent(ModelEvent<String> event) {
+            public void onUpdate(UpdateEvent<String> event) {
                 setText(event.getNewValue());
             }
         });

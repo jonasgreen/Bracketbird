@@ -3,8 +3,7 @@ package com.bracketbird.client.pages.matches;
 
 import com.bracketbird.client.Css;
 import com.bracketbird.client.rtc.RTC;
-import com.bracketbird.client.rtc.event.ModelEvent;
-import com.bracketbird.client.rtc.event.ModelEventHandler;
+import com.bracketbird.client.rtc.event.*;
 import com.bracketbird.client.model.tournament.Stage;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -25,9 +24,14 @@ public class LevelEmptyPanel extends FlowPanel {
         setStyleName("levelEmptyPanel");
 
 
-        RTC.getInstance().getTournament().stagesEventHandlers.addHandler(new ModelEventHandler<Stage>() {
+        RTC.getInstance().getTournament().stagesDispatcher.addHandler(new CreateDeleteHandler<Stage>() {
             @Override
-            public void handleEvent(ModelEvent<Stage> event) {
+            public void onCreate(CreateEvent<Stage> event) {
+                getButton().setText(getButtonName());
+            }
+
+            @Override
+            public void onDelete(DeleteEvent<Stage> event) {
                 getButton().setText(getButtonName());
             }
         });

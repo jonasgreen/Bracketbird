@@ -2,8 +2,7 @@ package com.bracketbird.client.pages.teams;
 
 
 import com.bracketbird.client.rtc.RTC;
-import com.bracketbird.client.rtc.event.ModelEvent;
-import com.bracketbird.client.rtc.event.ModelEventHandler;
+import com.bracketbird.client.rtc.event.*;
 import com.bracketbird.client.model.Team;
 import com.bracketbird.client.appcontrol.PageController;
 
@@ -38,15 +37,15 @@ public class TeamsPageController extends PageController<TeamsPage> {
     @Override
     public void afterFirstLoad() {
 
-        RTC.getInstance().getTournament().teamsEventHandlers.addHandler(new ModelEventHandler<Team>() {
+        RTC.getInstance().getTournament().teamsDispatcher.addHandler(new CreateDeleteHandler<Team>() {
             @Override
-            public void handleEvent(ModelEvent<Team> event) {
-                if (event.isCreate()) {
-                    getPage().addTeam(event.getNewValue(), event.isFromClient());
-                }
-                else if (event.isDelete()) {
-                    getPage().deleteTeam(event.getOldValue(), event.isFromClient());
-                }
+            public void onCreate(CreateEvent<Team> event) {
+                getPage().addTeam(event.getValue(), event.isFromClient());
+            }
+
+            @Override
+            public void onDelete(DeleteEvent<Team> event) {
+                getPage().deleteTeam(event.getValue(), event.isFromClient());
             }
         });
 

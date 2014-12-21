@@ -1,11 +1,11 @@
 package com.bracketbird.client.pages.scores;
 
-import com.bracketbird.client.rtc.RTC;
-import com.bracketbird.client.rtc.event.StateChangedEvent;
-import com.bracketbird.client.rtc.event.StateHandler;
+import com.bracketbird.client.appcontrol.PageController;
 import com.bracketbird.client.model.tournament.LevelState;
 import com.bracketbird.client.model.tournament.Stage;
-import com.bracketbird.client.appcontrol.PageController;
+import com.bracketbird.client.rtc.RTC;
+import com.bracketbird.client.rtc.event.UpdateEvent;
+import com.bracketbird.client.rtc.event.UpdateHandler;
 
 /**
  *
@@ -33,9 +33,9 @@ public class ScoresPageController extends PageController<ScoresPage> {
 
     @Override
     public void afterFirstLoad() {
-        RTC.getInstance().getTournament().addStateHandler(new StateHandler() {
+        RTC.getInstance().getTournament().addStateHandler(new UpdateHandler<LevelState>() {
             @Override
-            public void onChange(StateChangedEvent event) {
+            public void onUpdate(UpdateEvent<LevelState> event) {
                 showPage();
             }
         });
