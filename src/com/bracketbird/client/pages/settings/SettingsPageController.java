@@ -1,7 +1,9 @@
 package com.bracketbird.client.pages.settings;
 
+import com.bracketbird.client.model.event.CreateDeleteHandler;
+import com.bracketbird.client.model.event.CreateEvent;
+import com.bracketbird.client.model.event.DeleteEvent;
 import com.bracketbird.client.rtc.RTC;
-import com.bracketbird.client.rtc.event.*;
 import com.bracketbird.client.model.tournament.Stage;
 import com.bracketbird.client.appcontrol.PageController;
 
@@ -24,11 +26,6 @@ public class SettingsPageController extends PageController<SettingsPage> {
         return instance;
     }
 
-    public void afterLoad() {
-    }
-
-    public void beforeUnload() {
-    }
 
     @Override
     public void afterFirstLoad() {

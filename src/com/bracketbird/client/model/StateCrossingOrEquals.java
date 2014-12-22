@@ -1,4 +1,4 @@
-package com.bracketbird.client.rtc.event;
+package com.bracketbird.client.model;
 
 import com.bracketbird.client.model.tournament.LevelState;
 

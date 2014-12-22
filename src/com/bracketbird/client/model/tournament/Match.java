@@ -2,8 +2,10 @@ package com.bracketbird.client.model.tournament;
 
 import com.bracketbird.client.EqualsUtil;
 import com.bracketbird.client.model.*;
+import com.bracketbird.client.model.event.UpdateDispatcher;
+import com.bracketbird.client.model.event.UpdateEvent;
+import com.bracketbird.client.model.event.UpdateHandler;
 import com.bracketbird.client.model.keys.*;
-import com.bracketbird.client.rtc.event.*;
 import com.bracketbird.client.util.StringUtil;
 import com.google.gwt.event.shared.HandlerRegistration;
 

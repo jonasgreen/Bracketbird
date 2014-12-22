@@ -1,5 +1,6 @@
 package com.bracketbird.client.rtc.event;
 
+import com.bracketbird.client.Printer;
 import com.bracketbird.client.rtc.EventManager;
 import com.bracketbird.client.rtc.Handler;
 import com.bracketbird.client.rtc.ProceedOrCancelWarning;
@@ -62,9 +63,8 @@ public abstract class REventHandler<E extends REvent<?,?>> {
 
     private void handleFailure(Throwable t, E event) {
         if (t != null) {
-            t.printStackTrace();
+            Printer.printException(t, event.getEventName());
         }
-
     }
 
 

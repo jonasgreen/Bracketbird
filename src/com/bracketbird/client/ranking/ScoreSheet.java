@@ -1,5 +1,9 @@
 package com.bracketbird.client.ranking;
 
+import com.bracketbird.client.util.MathOperation;
+import com.bracketbird.client.util.Minus;
+import com.bracketbird.client.util.Plus;
+
 /**
  *  Immutable
  */
@@ -20,33 +24,34 @@ public class ScoreSheet {
     }
 
     public ScoreSheet add(ScoreSheet s){
-        ScoreSheet toUse = s == null ? new EmptyScoreSheet() : s;
+        if(s == null){
+            return this;
+        }
 
-        ScoreSheet sheet = new ScoreSheet();
-        sheet.points += toUse.points;
-        sheet.scoredGoals += toUse.scoredGoals;
-        sheet.receivedGoals += toUse.receivedGoals;
-        sheet.playedMatches += toUse.playedMatches;
-        sheet.wonMatches += toUse.wonMatches;
-        sheet.lostMatches += toUse.wonMatches;
-        sheet.drawMatches += toUse.drawMatches;
-
-        return sheet;
+        return mathOperation(Plus.get(), this, s);
     }
 
     public ScoreSheet subtract(ScoreSheet s){
-        ScoreSheet toUse = s == null ? new EmptyScoreSheet() : s;
+        if(s == null){
+            return this;
+        }
 
-        ScoreSheet sheet = new ScoreSheet();
-        sheet.points -= toUse.points;
-        sheet.scoredGoals -= toUse.scoredGoals;
-        sheet.receivedGoals -= toUse.receivedGoals;
-        sheet.playedMatches -= toUse.playedMatches;
-        sheet.wonMatches -= toUse.wonMatches;
-        sheet.lostMatches -= toUse.wonMatches;
-        sheet.drawMatches -= toUse.drawMatches;
+        return mathOperation(Minus.get(), this, s);
+    }
 
-        return sheet;
+
+
+    private ScoreSheet mathOperation(MathOperation m, ScoreSheet s1, ScoreSheet s2){
+        ScoreSheet result = new ScoreSheet();
+        result.points = m.operate(s1.points, s2.points);
+        result.scoredGoals = m.operate(s1.scoredGoals, s2.scoredGoals);
+        result.receivedGoals = m.operate(receivedGoals, s2.receivedGoals);
+        result.playedMatches = m.operate(playedMatches, s2.playedMatches);
+        result.wonMatches = m.operate(wonMatches, s2.wonMatches);
+        result.lostMatches = m.operate(lostMatches, s2.wonMatches);
+        result.drawMatches = m.operate(drawMatches, s2.drawMatches);
+
+        return result;
     }
 
 
@@ -83,6 +88,7 @@ public class ScoreSheet {
         return scoredGoals - receivedGoals;
     }
 
+
     void setPoints(int points) {
         this.points = points;
     }
@@ -110,7 +116,6 @@ public class ScoreSheet {
     void setDrawMatches(int drawMatches) {
         this.drawMatches = drawMatches;
     }
-
 
 
 }

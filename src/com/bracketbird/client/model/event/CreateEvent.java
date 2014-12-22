@@ -1,14 +1,14 @@
-package com.bracketbird.client.rtc.event;
+package com.bracketbird.client.model.event;
 
 
 /**
  *
  */
-public class DeleteEvent<T> extends ModelEvent<T>{
+public class CreateEvent<T> extends ModelEvent<T> {
 
     private final T value;
 
-    public DeleteEvent(boolean fromClient, T model) {
+    public CreateEvent(boolean fromClient, T model) {
         super(fromClient);
         this.value = model;
     }

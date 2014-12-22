@@ -2,7 +2,7 @@ package com.bracketbird.client.model;
 
 
 import com.bracketbird.client.model.keys.TeamId;
-import com.bracketbird.client.rtc.event.UpdateDispatcher;
+import com.bracketbird.client.model.event.UpdateDispatcher;
 
 /**
  *

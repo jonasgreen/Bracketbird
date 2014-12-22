@@ -1,8 +1,10 @@
 package com.bracketbird.client.pages.teams;
 
 
+import com.bracketbird.client.model.event.CreateDeleteHandler;
+import com.bracketbird.client.model.event.CreateEvent;
+import com.bracketbird.client.model.event.DeleteEvent;
 import com.bracketbird.client.rtc.RTC;
-import com.bracketbird.client.rtc.event.*;
 import com.bracketbird.client.model.Team;
 import com.bracketbird.client.appcontrol.PageController;
 
@@ -25,6 +27,7 @@ public class TeamsPageController extends PageController<TeamsPage> {
         return instance;
     }
 
+    @Override
     public void afterLoad() {
         getPage().getEnterTeamBox().setFocus(true);
     }

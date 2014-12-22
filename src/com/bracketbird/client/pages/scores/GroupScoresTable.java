@@ -5,8 +5,8 @@ import com.bracketbird.client.model.ranking.RankingStep;
 import com.bracketbird.client.model.tournament.Group;
 import com.bracketbird.client.model.tournament.Match;
 import com.bracketbird.client.ranking.TeamStatistics;
-import com.bracketbird.client.rtc.event.UpdateEvent;
-import com.bracketbird.client.rtc.event.UpdateHandler;
+import com.bracketbird.client.model.event.UpdateEvent;
+import com.bracketbird.client.model.event.UpdateHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
 
 import java.util.HashMap;

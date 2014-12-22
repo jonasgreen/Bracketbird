@@ -1,7 +1,9 @@
 package com.bracketbird.client.pages.matches;
 
+import com.bracketbird.client.model.event.CreateDeleteHandler;
+import com.bracketbird.client.model.event.CreateEvent;
+import com.bracketbird.client.model.event.DeleteEvent;
 import com.bracketbird.client.rtc.RTC;
-import com.bracketbird.client.rtc.event.*;
 import com.bracketbird.client.model.tournament.Stage;
 import com.bracketbird.client.appcontrol.PageController;
 
@@ -21,10 +23,6 @@ public class MatchesPageController extends PageController<MatchesPage> {
         }
         return instance;
     }
-
-    public void afterLoad() {}
-
-    public void beforeUnload() {}
 
     @Override
     public void afterFirstLoad() {

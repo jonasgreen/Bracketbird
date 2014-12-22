@@ -1,8 +1,8 @@
 package com.bracketbird.client.pages.scores.ranking;
 
 import com.bracketbird.client.model.tournament.Match;
-import com.bracketbird.client.rtc.event.UpdateEvent;
-import com.bracketbird.client.rtc.event.UpdateHandler;
+import com.bracketbird.client.model.event.UpdateEvent;
+import com.bracketbird.client.model.event.UpdateHandler;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;

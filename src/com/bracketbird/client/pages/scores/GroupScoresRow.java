@@ -1,9 +1,10 @@
 package com.bracketbird.client.pages.scores;
 
 import com.bracketbird.client.Css;
+import com.bracketbird.client.ranking.ScoreSheet;
 import com.bracketbird.client.ranking.TeamStatistics;
-import com.bracketbird.client.rtc.event.UpdateEvent;
-import com.bracketbird.client.rtc.event.UpdateHandler;
+import com.bracketbird.client.model.event.UpdateEvent;
+import com.bracketbird.client.model.event.UpdateHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 
@@ -19,6 +20,24 @@ public class GroupScoresRow extends FlowPanel{
 
         add(getTeamLabel());
         add(getScoreLabel());
+
+        teamStatistics.getTeam().nameDispatcher.addHandler(new UpdateHandler<String>() {
+            @Override
+            public void onUpdate(UpdateEvent<String> event) {
+                getTeamLabel().setText(event.getNewValue());
+            }
+        });
+
+        stat.scoreSheetDispatcher.addHandler(new UpdateHandler<ScoreSheet>() {
+            @Override
+            public void onUpdate(UpdateEvent<ScoreSheet> event) {
+                updateRow(event);
+            }
+        });
+    }
+
+    private void updateRow(UpdateEvent<ScoreSheet> event) {
+        getScoreLabel().setText(event.getNewValue().getPoints()+"");
     }
 
 
@@ -26,12 +45,6 @@ public class GroupScoresRow extends FlowPanel{
         if (teamLabel == null) {
             teamLabel = new Label(teamStatistics.getTeam().getName());
             Css.style(teamLabel, "teamLabel");
-            teamStatistics.getTeam().nameDispatcher.addHandler(new UpdateHandler<String>() {
-                @Override
-                public void onUpdate(UpdateEvent<String> event) {
-                    teamLabel.setText(event.getNewValue());
-                }
-            });
         }
         return teamLabel;
     }

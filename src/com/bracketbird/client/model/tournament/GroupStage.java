@@ -4,7 +4,7 @@ import com.bracketbird.client.model.GroupStageRoundsFactory;
 import com.bracketbird.client.model.Team;
 import com.bracketbird.client.model.keys.GroupId;
 import com.bracketbird.client.pages.matches.FinalGroupStageRanker;
-import com.bracketbird.client.rtc.event.UpdateEvent;
+import com.bracketbird.client.model.event.UpdateEvent;
 
 import java.util.ArrayList;
 import java.util.List;

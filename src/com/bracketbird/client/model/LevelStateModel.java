@@ -1,6 +1,7 @@
 package com.bracketbird.client.model;
 
-import com.bracketbird.client.rtc.event.*;
+import com.bracketbird.client.model.event.UpdateDispatcher;
+import com.bracketbird.client.model.event.UpdateHandler;
 import com.bracketbird.client.model.tournament.LevelState;
 import com.bracketbird.client.model.keys.EntityId;
 import com.google.gwt.event.shared.HandlerRegistration;

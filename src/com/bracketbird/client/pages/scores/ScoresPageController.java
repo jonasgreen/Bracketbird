@@ -4,8 +4,8 @@ import com.bracketbird.client.appcontrol.PageController;
 import com.bracketbird.client.model.tournament.LevelState;
 import com.bracketbird.client.model.tournament.Stage;
 import com.bracketbird.client.rtc.RTC;
-import com.bracketbird.client.rtc.event.UpdateEvent;
-import com.bracketbird.client.rtc.event.UpdateHandler;
+import com.bracketbird.client.model.event.UpdateEvent;
+import com.bracketbird.client.model.event.UpdateHandler;
 
 /**
  *
@@ -25,11 +25,6 @@ public class ScoresPageController extends PageController<ScoresPage> {
         return instance;
     }
 
-    public void afterLoad() {
-    }
-
-    public void beforeUnload() {
-    }
 
     @Override
     public void afterFirstLoad() {

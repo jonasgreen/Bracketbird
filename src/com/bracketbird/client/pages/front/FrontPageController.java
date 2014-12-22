@@ -1,5 +1,6 @@
 package com.bracketbird.client.pages.front;
 
+import com.bracketbird.client.Printer;
 import com.bracketbird.client.rtc.RTC;
 import com.bracketbird.client.pages.teams.TeamsPageController;
 import com.bracketbird.client.service.BBService;
@@ -34,7 +35,7 @@ public class FrontPageController extends PageController<FrontPage> {
 
                 @Override
                 public void onFailure(Throwable t) {
-                    t.printStackTrace();
+                    Printer.printException(t);
                 }
             });
 
@@ -57,12 +58,6 @@ public class FrontPageController extends PageController<FrontPage> {
     }
 
 
-    public void afterLoad() {
-
-    }
-
-    public void beforeUnload() {
-    }
 
     public FrontPage newInstance() {
         return new FrontPage();

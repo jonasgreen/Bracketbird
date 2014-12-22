@@ -267,7 +267,7 @@ public class RTC {
 
     public void handleFailure(Throwable t) {
         if (t != null) {
-            t.printStackTrace();
+            Printer.printException(t);
         }
 
     }

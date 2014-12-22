@@ -1,6 +1,7 @@
 package com.bracketbird.client.ranking;
 
 import com.bracketbird.client.model.Team;
+import com.bracketbird.client.model.event.UpdateDispatcher;
 import com.bracketbird.client.model.tournament.Match;
 
 import java.util.HashMap;
@@ -14,25 +15,27 @@ public class TeamStatistics {
     private final Team team;
     private Map<Match, ScoreSheet> scoreSheetMap = new HashMap<>();
 
-
     private ScoreSheet totalScoreSheet = new EmptyScoreSheet();
+
+    public UpdateDispatcher<ScoreSheet> scoreSheetDispatcher = new UpdateDispatcher<>();
+
 
     public TeamStatistics(Team team) {
         this.team = team;
     }
 
-    public void update(Match match, ScoreSheet scoreSheet) {
-        removeOldScores(match);
-        addNewScores(match, scoreSheet);
-    }
+    public void update(Match match, ScoreSheet scoreSheet, boolean isFromClient) {
+        ScoreSheet old = totalScoreSheet;
 
-    private void addNewScores(Match match, ScoreSheet scoreSheet) {
+        //remove old score sheet
+        ScoreSheet s = scoreSheetMap.get(match);
+        totalScoreSheet = totalScoreSheet.subtract(s);
+
+        //add new score sheet
         totalScoreSheet = totalScoreSheet.add(scoreSheet);
         scoreSheetMap.put(match, scoreSheet);
-    }
 
-    private void removeOldScores(Match match) {
-        totalScoreSheet = totalScoreSheet.subtract(scoreSheetMap.get(match));
+        scoreSheetDispatcher.fireEvent(old, totalScoreSheet, isFromClient);
     }
 
     public Team getTeam() {

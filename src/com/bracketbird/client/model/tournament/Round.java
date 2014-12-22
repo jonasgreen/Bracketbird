@@ -2,7 +2,7 @@ package com.bracketbird.client.model.tournament;
 
 import com.bracketbird.client.model.LevelStateModel;
 import com.bracketbird.client.model.keys.RoundId;
-import com.bracketbird.client.rtc.event.UpdateEvent;
+import com.bracketbird.client.model.event.UpdateEvent;
 
 import java.util.ArrayList;
 import java.util.List;

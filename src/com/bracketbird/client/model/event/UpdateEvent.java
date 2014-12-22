@@ -1,10 +1,10 @@
-package com.bracketbird.client.rtc.event;
+package com.bracketbird.client.model.event;
 
 
 /**
  *
  */
-public class UpdateEvent<T> extends ModelEvent<T>{
+public class UpdateEvent<T> extends ModelEvent<T> {
 
     private final T oldValue;
     private final T newValue;

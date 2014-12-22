@@ -1,12 +1,15 @@
 package com.bracketbird.client.model.tournament;
 
 import com.bracketbird.client.model.Team;
+import com.bracketbird.client.model.event.ModelEvent;
+import com.bracketbird.client.model.event.UpdateDispatcher;
+import com.bracketbird.client.model.event.UpdateEvent;
+import com.bracketbird.client.model.event.UpdateHandler;
 import com.bracketbird.client.model.ranking.*;
 import com.bracketbird.client.ranking.MatchScoreSheets;
 import com.bracketbird.client.ranking.ScoreSheet;
 import com.bracketbird.client.ranking.ScoreSheetFactory;
 import com.bracketbird.client.ranking.TeamStatistics;
-import com.bracketbird.client.rtc.event.*;
 import com.google.gwt.event.shared.HandlerRegistration;
 
 import java.util.HashMap;
@@ -53,22 +56,20 @@ public class GroupRanking {
 
     private void resultChanged(Match match, ModelEvent<Result> e) {
         MatchScoreSheets mss = scoreSheetFactory.createScoreSheets(match);
-        updateRanking(match, match.getTeamHome(), mss.getHomeScoreSheet());
-        updateRanking(match, match.getTeamOut(), mss.getOutScoreSheet());
+
+        updateRanking(match, match.getTeamHome(), mss.getHomeScoreSheet(), e.isFromClient());
+        updateRanking(match, match.getTeamOut(), mss.getOutScoreSheet(), e.isFromClient());
 
         //new PrintRanking().print(this);
         //new PrintRankingLadder().print(this.ranking);
         matchDispatcher.fireEvent(match, match, e.isFromClient());
     }
 
-    private void updateRanking(Match match, Team team, ScoreSheet scoreSheet){
+    private void updateRanking(Match match, Team team, ScoreSheet scoreSheet, boolean isFromClient){
         TeamStatistics stat = get(team);
-        if(stat == null){
-            return;
-        }
 
         ranking.remove(stat);
-        stat.update(match, scoreSheet);
+        stat.update(match, scoreSheet, isFromClient);
         ranking.add(stat);
     }
 

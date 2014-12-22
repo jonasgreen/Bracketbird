@@ -1,4 +1,4 @@
-package com.bracketbird.client.rtc.event;
+package com.bracketbird.client.model.event;
 
 
 /**

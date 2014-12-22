@@ -19,6 +19,10 @@ public class ScoreSheetFactory {
     }
 
     private ScoreSheet createOutScoreSheet(Result r) {
+        if(r == null){
+            return new EmptyScoreSheet();
+        }
+
         ScoreSheet sheet = new ScoreSheet();
         sheet.setPlayedMatches(1);
         sheet.setScoredGoals(r.getTotalScoreOut());
@@ -41,6 +45,9 @@ public class ScoreSheetFactory {
     }
 
     private ScoreSheet createHomeScoreSheet(Result r) {
+        if(r == null){
+            return new EmptyScoreSheet();
+        }
         ScoreSheet sheet = new ScoreSheet();
         sheet.setPlayedMatches(1);
         sheet.setScoredGoals(r.getTotalScoreHome());

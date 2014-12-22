@@ -1,5 +1,6 @@
 package com.bracketbird.client.rtc;
 
+import com.bracketbird.client.Printer;
 import com.bracketbird.client.rtc.event.REvent;
 import com.bracketbird.client.model.keys.TournamentChannelId;
 import com.bracketbird.client.service.BBService;
@@ -39,12 +40,13 @@ public class FromServer {
                     sync.start(eventLog, justCreated);
                 }
                 catch (Exception e) {
+                    Printer.printException(e);
                 }
             }
 
             @Override
             public void onFailure(Throwable t) {
-                t.printStackTrace();
+                Printer.printException(t, "Unable to open channel");
             }
         });
     }
@@ -62,7 +64,7 @@ public class FromServer {
 
             @Override
             public void onFailure(Throwable t) {
-                t.printStackTrace();
+                Printer.printException(t, "Unable to create channelToken");
             }
         });
     }
@@ -96,7 +98,7 @@ public class FromServer {
 
             @Override
             public void onFailure(Throwable t) {
-                t.printStackTrace();
+                Printer.printException(t, "HandleNotificationFromServer:");
             }
         });
     }

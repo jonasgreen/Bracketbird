@@ -60,7 +60,7 @@ public class Bracketbird extends AppEntry {
         GWT.setUncaughtExceptionHandler(new GWT.UncaughtExceptionHandler() {
             @Override
             public void onUncaughtException(Throwable e) {
-                Printer.println(e);
+                Printer.printException(e);
             }
         });
     }
@@ -94,7 +94,7 @@ public class Bracketbird extends AppEntry {
 
             @Override
             public void onFailure(Throwable t) {
-                t.printStackTrace();
+                Printer.printException(t);
             }
         });
 
