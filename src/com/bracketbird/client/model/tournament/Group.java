@@ -22,7 +22,7 @@ public class Group extends LevelStateModel<GroupId> {
 
     private GroupPositions groupPositions;
     private List<Team> endingTeams = new ArrayList<Team>();
-    private GroupRanking statistics;
+    private GroupRanking ranking;
 
 
     private GroupStage stage;
@@ -92,7 +92,7 @@ public class Group extends LevelStateModel<GroupId> {
 
     void layoutMatches() {
         this.rounds = new GroupRoundsFactory(this).getRounds();
-        this.statistics = new GroupRanking(this, getMatches());
+        this.ranking = new GroupRanking(this, getMatches());
 
     }
 
@@ -147,8 +147,8 @@ public class Group extends LevelStateModel<GroupId> {
         updateState(event.isFromClient());
     }
 
-    public GroupRanking getStatistics() {
-        return statistics;
+    public GroupRanking getRanking() {
+        return ranking;
     }
 }
 

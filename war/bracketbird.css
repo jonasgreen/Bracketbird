@@ -493,34 +493,3 @@ input:focus, select:focus, textarea:focus, button:focus {
     font-weight: bold;
 }
 
-.scoresPage {
-
-}
-
-.groupScoresRow {
-
-}
-
-.groupScoreRow_team {
-    width: 20px;
-}
-
-.groupScoreRow_matches {
-    width: 20px;
-
-}
-
-.groupScoreRow_score {
-    width: 20px;
-
-}
-
-.groupScoreRow_points {
-    width: 20px;
-
-}
-
-.groupScoreRow_position {
-    width: 20px;
-
-}

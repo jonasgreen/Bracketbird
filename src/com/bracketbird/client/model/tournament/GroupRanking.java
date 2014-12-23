@@ -12,6 +12,7 @@ import com.bracketbird.client.ranking.ScoreSheetFactory;
 import com.bracketbird.client.ranking.TeamStatistics;
 import com.google.gwt.event.shared.HandlerRegistration;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -92,5 +93,14 @@ public class GroupRanking {
 
     public List<RankingStep> getRanking(){
         return ranking.getTotalRanking();
+    }
+
+    public List<Team> getRankingTeams() {
+        List<Team> teams = new ArrayList<>();
+        for (RankingStep step : getRanking()) {
+            teams.addAll(step.getTeams());
+        }
+
+        return teams;
     }
 }

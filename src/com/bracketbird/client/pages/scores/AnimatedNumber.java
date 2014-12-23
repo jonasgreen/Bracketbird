@@ -29,7 +29,35 @@ public class AnimatedNumber extends Label {
     }
 
     private void animateDown(Integer value) {
+        long intervalToUse = calculateIntervalToUse(value);
+        animateDown(intervalToUse, value);
 
+    }
+
+    private long calculateIntervalToUse(Integer value) {
+        long intervalToUse = interval;
+        if(number-value > 3){
+            intervalToUse = maxInterval/(number-value);
+        }
+        return intervalToUse;
+    }
+
+    private void animateDown(final long intervalToUse, final Integer value) {
+        if (number > value) {
+            Timer timer = new Timer() {
+                @Override
+                public void run() {
+                    Scheduler.get().scheduleDeferred(new Scheduler.ScheduledCommand() {
+                        @Override
+                        public void execute() {
+                            setText("" + --number);
+                            animateDown(intervalToUse, value);
+                        }
+                    });
+                }
+            };
+            timer.schedule((int) intervalToUse);
+        }
     }
 
     private void animateUp(Integer value) {
@@ -40,31 +68,21 @@ public class AnimatedNumber extends Label {
         animateUp(intervalToUse, value);
     }
 
-    private void animateUp(final long interval, final int value) {
-
-
-        Scheduler.ScheduledCommand cmd = new Scheduler.ScheduledCommand() {
-            @Override
-            public void execute() {
-
-            }
-        };
-
-
-        if (number <= value) {
+    private void animateUp(final long intervalToUse, final int value) {
+        if (number < value) {
             Timer timer = new Timer() {
                 @Override
                 public void run() {
                     Scheduler.get().scheduleDeferred(new Scheduler.ScheduledCommand() {
                         @Override
                         public void execute() {
-                            setText("" + number++);
-                            animateUp(interval, value);
+                            setText("" + ++number);
+                            animateUp(intervalToUse, value);
                         }
                     });
                 }
             };
-            timer.schedule((int) interval);
+            timer.schedule((int) intervalToUse);
         }
     }
 

@@ -1,5 +1,6 @@
 package com.bracketbird.client.model.ranking;
 
+import com.bracketbird.client.model.Team;
 import com.bracketbird.client.ranking.TeamStatistics;
 
 import java.util.ArrayList;
@@ -16,6 +17,15 @@ public class RankingStep extends Ranking {
     public List<TeamStatistics> getTeamStatistics() {
         return teamStatistics;
     }
+
+    public List<Team> getTeams() {
+        List<Team> teams = new ArrayList<>();
+        for (TeamStatistics stat : teamStatistics) {
+            teams.add(stat.getTeam());
+        }
+        return teams;
+    }
+
 
     @Override
     protected void appendStepsToList(List<RankingStep> steps) {

@@ -1,0 +1,44 @@
+.scoresPage {
+    padding-top: 50px;
+}
+
+.groupScoresRow {
+    height: 30px;
+}
+
+.groupScoreRow_team {
+    width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.groupScoreRow_matches {
+    font-size: 10px;
+    opacity: 0.5;
+    text-align: right;
+    width: 30px;
+
+}
+
+.groupScoreRow_score {
+    font-size: 10px;
+    opacity: 0.5;
+    text-align: right;
+    width: 30px;
+
+}
+
+.groupScoreRow_points {
+    text-align: right;
+    width: 30px;
+
+}
+
+.groupScoreRow_position {
+    font-size: 10px;
+    opacity: 0.5;
+    text-align: left;
+    width: 20px;
+
+}
