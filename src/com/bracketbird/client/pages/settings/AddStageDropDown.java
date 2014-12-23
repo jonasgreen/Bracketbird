@@ -19,10 +19,10 @@ public class AddStageDropDown extends PopupPanel{
 
     public AddStageDropDown() {
         super(true, true);
-        setStyleName("addSettingsDropDown");
+        setStyleName("settingsPage_addStageDropDown");
 
         FlowPanel innerPanel = new FlowPanel();
-        innerPanel.setStyleName("addSettingsDropDown_innerPanel");
+        innerPanel.setStyleName("settingsPage_addStageDropDown_innerPanel");
         add(innerPanel);
 
         innerPanel.add(getGroupPanel());
@@ -34,7 +34,7 @@ public class AddStageDropDown extends PopupPanel{
     public FlowPanel getGroupPanel() {
         if (groupPanel == null) {
             groupPanel = new FlowPanel();
-            groupPanel.setStyleName("addSettingsDropDown_item");
+            groupPanel.setStyleName("settingsPage_addStageDropDown_item");
             groupPanel.addStyleName("addSettingsDropDown_item_group");
 
             groupPanel.add(new Label("Group"));
@@ -52,7 +52,7 @@ public class AddStageDropDown extends PopupPanel{
     public FlowPanel getKnockoutPanel() {
         if (knockoutPanel == null) {
             knockoutPanel = new FlowPanel();
-            knockoutPanel.setStyleName("addSettingsDropDown_item");
+            knockoutPanel.setStyleName("settingsPage_addStageDropDown_item");
             knockoutPanel.addStyleName("addSettingsDropDown_item_knockout");
 
             knockoutPanel.add(new Label("Knockout"));

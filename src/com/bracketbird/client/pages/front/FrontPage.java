@@ -1,8 +1,8 @@
 package com.bracketbird.client.pages.front;
 
 
-import com.bracketbird.client.browser.Browser;
 import com.bracketbird.client.appcontrol.Page;
+import com.bracketbird.client.browser.Browser;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -19,6 +19,7 @@ public class FrontPage extends Page<FrontPageController> {
 
     public void init() {
         setStyleName("frontPage");
+        addStyleName("flex_columns");
 
         addLogo();
         addCreateTournamentPanel();

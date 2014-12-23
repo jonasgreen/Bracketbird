@@ -273,7 +273,7 @@ public class RTC {
     }
 
     protected String nextUUID(){
-        return UID.getUID();
+        return UID.next();
     }
 
 }

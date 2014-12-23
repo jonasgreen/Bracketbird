@@ -1,0 +1,146 @@
+.settingsPage {
+    padding-top: 50px;
+}
+
+.settingsPage_stageComp_innerPanel {
+    border: 2px solid #73BCD4;
+    border-radius: 5px 5px 5px 5px;
+    height: 0px;
+    position: relative;
+    width: 0px;
+    -webkit-transition: width 0.25s linear, height 0.25s linear;
+    -moz-transition: width 0.25s linear, height 0.25s linear;
+    transition: width 0.25s linear, height 0.25s linear;
+}
+
+.settingsPage_stageComp_mouseOver {
+    cursor: pointer;
+}
+
+.settingsPage_stageComp_innerPanel_edit {
+    background: #73BCD4;
+    border-radius: 5px 5px 5px 5px;
+}
+
+.settingsPage_stageComp_innerPanel_edit .settingsPage_stageComp_name {
+    color: white;
+}
+
+.settingsPage_stageComp_deleteIcon {
+    cursor: pointer;
+    font-size: 10px;
+    height: 20px;
+    left: 84px;
+    opacity: 0.5;
+    position: absolute;
+    top: 0px;
+    width: 20px;
+}
+
+.settingsPage_stageComp_deleteIcon:hover {
+    color: #3B9EBF;
+    opacity: 1;
+    cursor: pointer;
+}
+
+.settingsPage_beginComponent_innerPanel {
+    border: 2px solid #73BCD4;
+    border-radius: 30px 5px 5px 30px;
+    height: 50px;
+    width: 55px;
+}
+
+.settingsPage_endComponent_innerPanel {
+    border: 2px solid #73BCD4;
+    border-radius: 5px 30px 30px 5px;
+    height: 50px;
+    width: 55px;
+}
+
+.settingsPage_stageComp_ear {
+    height: 8px;
+    width: 3px;
+    background-color: #73BCD4;
+}
+
+.settingsPage_stageComp_leftEar {
+    border-radius: 8px 0 0 8px;
+    margin-right: -2px;
+}
+
+.settingsPage_stageComp_rightEar {
+    border-radius: 0px 8px 8px 0px;
+    margin-left: -2px;
+}
+
+.settingsPage_stageComp_allEmpty {
+    border-color: transparent;
+    background-color: transparent;
+}
+
+.settingsPage_stageComp_allEmpty_innerPanel {
+    border-color: transparent;
+    background-color: transparent;
+    width: 40px;
+}
+
+.settingsPage_stageComp_beginArrow {
+    width: 0;
+    height: 0;
+    border-left: 8px solid #73BCD4;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    margin-right: -2px;
+    margin-left: -1px;
+}
+
+.settingsPage_stageComp_sep {
+    height: 2px;
+    width: 20px;
+    background-color: #73BCD4;
+
+    -webkit-transition: width 0.25s linear;
+    -moz-transition: width 0.25s linear;
+    transition: width 0.25s linear;
+}
+
+.settingsPage_stageComp_name {
+    text-align: center;
+    color: #4CA9C8;
+    font-size: 16px;
+}
+
+.settingsPage_addStageDropDown {
+    border: 1px solid rgba(55, 71, 79, 0.5);
+    background-color: white;
+}
+
+.settingsPage_addStageDropDown_innerPanel {
+    width: 180px;
+}
+
+.settingsPage_addStageDropDown_item {
+    font-size: 16px;
+    width: 100%;
+}
+
+.settingsPage_addStageDropDown_item:hover {
+    background-color: lightblue;
+    cursor: pointer;
+}
+
+.settingsPage_addStageDropDown_item div {
+    padding: 10px;
+    padding-bottom: 6px;
+}
+
+
+.settingsPage_emptyLine {
+    height: 15px;
+}
+
+.settingsPage_groupSettingsPanel {
+}
+
+.settingsPage_knockoutSettingsPanel {
+}

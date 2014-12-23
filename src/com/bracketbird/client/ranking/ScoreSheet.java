@@ -42,16 +42,16 @@ public class ScoreSheet {
 
 
     private ScoreSheet mathOperation(MathOperation m, ScoreSheet s1, ScoreSheet s2){
-        ScoreSheet result = new ScoreSheet();
-        result.points = m.operate(s1.points, s2.points);
-        result.scoredGoals = m.operate(s1.scoredGoals, s2.scoredGoals);
-        result.receivedGoals = m.operate(receivedGoals, s2.receivedGoals);
-        result.playedMatches = m.operate(playedMatches, s2.playedMatches);
-        result.wonMatches = m.operate(wonMatches, s2.wonMatches);
-        result.lostMatches = m.operate(lostMatches, s2.wonMatches);
-        result.drawMatches = m.operate(drawMatches, s2.drawMatches);
+        ScoreSheet r = new ScoreSheet();
+        r.points = m.operate(s1.points, s2.points);
+        r.scoredGoals = m.operate(s1.scoredGoals, s2.scoredGoals);
+        r.receivedGoals = m.operate(receivedGoals, s2.receivedGoals);
+        r.playedMatches = m.operate(playedMatches, s2.playedMatches);
+        r.wonMatches = m.operate(wonMatches, s2.wonMatches);
+        r.lostMatches = m.operate(lostMatches, s2.wonMatches);
+        r.drawMatches = m.operate(drawMatches, s2.drawMatches);
 
-        return result;
+        return r;
     }
 
 

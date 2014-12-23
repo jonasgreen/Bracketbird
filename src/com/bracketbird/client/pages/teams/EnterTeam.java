@@ -1,6 +1,5 @@
 package com.bracketbird.client.pages.teams;
 
-import com.bracketbird.client.Css;
 import com.bracketbird.client.rtc.RTC;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.*;
@@ -22,7 +21,8 @@ public class EnterTeam extends FlowPanel {
 
     public EnterTeam(TeamsPage page) {
         this.page = page;
-        Css.style(this, "enterTeam", "flex_alignItems_baseline");
+        setStyleName("teamsPage_enterTeam");
+        addStyleName("flex_alignItems_baseline");
 
         textBox.addKeyDownHandler(new KeyDownHandler() {
             @Override
@@ -64,7 +64,7 @@ public class EnterTeam extends FlowPanel {
         if (addTeamButton == null) {
             addTeamButton = new Button("Add Team");
             addTeamButton.setStyleName("primaryButton");
-            addTeamButton.addStyleName("enterTeam_addButton");
+            addTeamButton.addStyleName("teamsPage_addTeamButton");
             addTeamButton.addClickHandler(new ClickHandler() {
                 @Override
                 public void onClick(ClickEvent event) {

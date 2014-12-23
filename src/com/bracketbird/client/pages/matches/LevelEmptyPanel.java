@@ -1,12 +1,11 @@
 package com.bracketbird.client.pages.matches;
 
 
-import com.bracketbird.client.Css;
 import com.bracketbird.client.model.event.CreateDeleteHandler;
 import com.bracketbird.client.model.event.CreateEvent;
 import com.bracketbird.client.model.event.DeleteEvent;
-import com.bracketbird.client.rtc.RTC;
 import com.bracketbird.client.model.tournament.Stage;
+import com.bracketbird.client.rtc.RTC;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
@@ -44,7 +43,9 @@ public class LevelEmptyPanel extends FlowPanel {
 
     public Button getButton() {
         if (button == null) {
-            button = Css.style(new Button(getButtonName()), "primaryButton");
+            button = new Button(getButtonName());
+            button.setStyleName("primaryButton");
+
             button.addClickHandler(new ClickHandler() {
                 public void onClick(ClickEvent event) {
                     RTC.getInstance().layoutMatches(level.getId());

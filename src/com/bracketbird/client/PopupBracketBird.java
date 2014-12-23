@@ -69,7 +69,8 @@ public abstract class PopupBracketBird extends PopupPanel {
 
     public FlowPanel getHeaderPanel() {
         if (headerPanel == null) {
-            headerPanel = Css.style(new FlowPanel(), "popupBracketBird_headerPanel");
+            headerPanel = new FlowPanel();
+            headerPanel.setStyleName("popupBracketBird_headerPanel");
             headerPanel.add(getHeaderLabel());
         }
         return headerPanel;
@@ -77,7 +78,8 @@ public abstract class PopupBracketBird extends PopupPanel {
 
     public FlowPanel getContentPanel() {
         if (contentPanel == null) {
-            contentPanel = Css.style(new FlowPanel(), "popupBracketBird_contentPanel");
+            contentPanel = new FlowPanel();
+            contentPanel.setStyleName("popupBracketBird_contentPanel");
         }
         return contentPanel;
     }
@@ -107,7 +109,9 @@ public abstract class PopupBracketBird extends PopupPanel {
 
     protected FlowPanel getButtonsPanel() {
         if (buttonsPanel == null) {
-            buttonsPanel = Css.style(new FlowPanel(), "popupBracketBird_buttonsPanel", "flex_center_end");
+            buttonsPanel = new FlowPanel();
+            buttonsPanel.setStyleName("popupBracketBird_buttonsPanel");
+            buttonsPanel.addStyleName("flex_center_end");
 
             buttonsPanel.add(getCancelButton());
             buttonsPanel.add(getOkButton());
@@ -118,7 +122,10 @@ public abstract class PopupBracketBird extends PopupPanel {
 
     public Label getCancelButton() {
         if (cancelButton == null) {
-            cancelButton = Css.style(new Label("Cancel"), "secondaryButton", "settingsPanelButton");
+            cancelButton = new Label("Cancel");
+            cancelButton.setStyleName("secondaryButton");
+            cancelButton.addStyleName("settingsPanelButton");
+
             cancelButton.addClickHandler(new ClickHandler() {
                 @Override
                 public void onClick(ClickEvent event) {
@@ -131,7 +138,9 @@ public abstract class PopupBracketBird extends PopupPanel {
 
     public Button getOkButton() {
         if (okButton == null) {
-            okButton = Css.style(new Button("Save"), "primaryButton", "settingsPanelButton");
+            okButton = new Button("Save");
+            okButton.setStyleName("primaryButton");
+            okButton.addStyleName("settingsPanelButton");
             okButton.addClickHandler(new ClickHandler() {
                 @Override
                 public void onClick(ClickEvent event) {

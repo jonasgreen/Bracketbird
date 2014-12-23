@@ -8,9 +8,9 @@ public class AllEmptyLevelComponent extends LevelComponent{
 
     public AllEmptyLevelComponent() {
         super(null);
-        getInnerPanel().addStyleName("allEmpty_Component_innerPanel");
-        getLeftEar().addStyleName("levelComponent_allEmpty");
-        getRightEar().addStyleName("levelComponent_allEmpty");
+        getInnerPanel().addStyleName("settingsPage_stageComp_allEmpty_innerPanel");
+        getLeftEar().addStyleName("settingsPage_stageComp_allEmpty");
+        getRightEar().addStyleName("settingsPage_stageComp_allEmpty");
     }
 
 

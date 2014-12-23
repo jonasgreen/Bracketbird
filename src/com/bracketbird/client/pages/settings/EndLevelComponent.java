@@ -12,16 +12,16 @@ public class EndLevelComponent extends FlowPanel{
         setStyleName("flex_center_center");
 
         FlowPanel leftEar = new FlowPanel();
-        leftEar.setStyleName("levelComponent_ear");
-        leftEar.addStyleName("levelComponent_leftEar");
+        leftEar.setStyleName("settingsPage_stageComp_ear");
+        leftEar.addStyleName("settingsPage_stageComp_leftEar");
         add(leftEar);
 
         FlowPanel innerPanel = new FlowPanel();
         innerPanel.setStyleName("flex_center_center");
-        innerPanel.addStyleName("endComponent_innerPanel");
+        innerPanel.addStyleName("settingsPage_endComponent_innerPanel");
 
         Label l = new Label("End");
-        l.setStyleName("levelComponent_name");
+        l.setStyleName("settingsPage_stageComp_name");
         innerPanel.add(l);
         add(innerPanel);
 

@@ -51,7 +51,7 @@ public abstract class SettingsPanel extends PopupBracketBird {
 
     protected void addEmptyLine(){
         FlowPanel fl = new FlowPanel();
-        fl.setStyleName("emptyLine");
+        fl.setStyleName("settingsPage_emptyLine");
         fl.add(new Label(""));
         getContentPanel().add(fl);
     }

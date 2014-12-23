@@ -24,7 +24,7 @@ public class KnockoutSettingsPanel extends SettingsPanel {
     public KnockoutSettingsPanel(Stage l) {
         super(l);
 
-        addStyleName("knockoutSettingsPanel");
+        addStyleName("settingsPage_knockoutSettingsPanel");
         addRow(eliminationTypeLabel, getEliminationType());
         addRow(getMaxTeamsLabel(), getMaxTeamsTextBox());
     }

@@ -50,12 +50,12 @@ public class LevelComponent extends FlowPanel {
 
     protected void onMouseOut() {
         getDeleteIcon().setVisible(false);
-        removeStyleName("levelComponent_mouseOver");
+        removeStyleName("settingsPage_stageComp_mouseOver");
     }
 
     protected void onMouseOver() {
         getDeleteIcon().setVisible(true);
-        addStyleName("levelComponent_mouseOver");
+        addStyleName("settingsPage_stageComp_mouseOver");
     }
 
 
@@ -63,7 +63,7 @@ public class LevelComponent extends FlowPanel {
         if (innerPanel == null) {
             innerPanel = new FlowPanel();
             innerPanel.setStyleName("flex_center_center");
-            innerPanel.addStyleName("levelComponent_innerPanel");
+            innerPanel.addStyleName("settingsPage_stageComp_innerPanel");
             innerPanel.add(getNameLabel());
             innerPanel.add(getDeleteIcon());
             innerPanel.addDomHandler(new ClickHandler() {
@@ -84,14 +84,14 @@ public class LevelComponent extends FlowPanel {
                 @Override
                 public void onClose(CloseEvent event) {
                     getInnerPanel().setWidth("80px");
-                    getInnerPanel().removeStyleName("levelComponent_innerPanel_edit");
+                    getInnerPanel().removeStyleName("settingsPage_stageComp_innerPanel_edit");
                 }
             };
 
             final SettingsPanel p = level.isKnockoutStage() ? new KnockoutSettingsPanel(level) : new GroupSettingsPanel(level);
             p.addCloseHandler(onClose);
             getInnerPanel().setWidth("340px");
-            getInnerPanel().addStyleName("levelComponent_innerPanel_edit");
+            getInnerPanel().addStyleName("settingsPage_stageComp_innerPanel_edit");
 
             Timer t = new Timer() {
                 @Override
@@ -113,7 +113,7 @@ public class LevelComponent extends FlowPanel {
     public Label getNameLabel() {
         if (nameLabel == null) {
             nameLabel = new Label();
-            nameLabel.setStyleName("levelComponent_name");
+            nameLabel.setStyleName("settingsPage_stageComp_name");
         }
         return nameLabel;
     }
@@ -121,7 +121,7 @@ public class LevelComponent extends FlowPanel {
     public FlowPanel getSeparationLine() {
         if (separationLine == null) {
             separationLine = new FlowPanel();
-            separationLine.setStyleName("levelComponent_sep");
+            separationLine.setStyleName("settingsPage_stageComp_sep");
             separationLine.add(new Label(""));
         }
         return separationLine;
@@ -130,8 +130,8 @@ public class LevelComponent extends FlowPanel {
     public FlowPanel getRightEar() {
         if (rightEar == null) {
             rightEar = new FlowPanel();
-            rightEar.setStyleName("levelComponent_ear");
-            rightEar.addStyleName("levelComponent_rightEar");
+            rightEar.setStyleName("settingsPage_stageComp_ear");
+            rightEar.addStyleName("settingsPage_stageComp_rightEar");
         }
         return rightEar;
     }
@@ -139,8 +139,8 @@ public class LevelComponent extends FlowPanel {
     public FlowPanel getLeftEar() {
         if (leftEar == null) {
             leftEar = new FlowPanel();
-            leftEar.setStyleName("levelComponent_ear");
-            leftEar.addStyleName("levelComponent_leftEar");
+            leftEar.setStyleName("settingsPage_stageComp_ear");
+            leftEar.addStyleName("settingsPage_stageComp_leftEar");
         }
         return leftEar;
     }
@@ -150,7 +150,7 @@ public class LevelComponent extends FlowPanel {
         if (deleteIcon == null) {
             deleteIcon = new FlowPanel();
             deleteIcon.setStyleName("icon-uniE600");
-            deleteIcon.addStyleName("level_deleteIcon");
+            deleteIcon.addStyleName("settingsPage_stageComp_deleteIcon");
             deleteIcon.setVisible(false);
             deleteIcon.setTitle("Delete stage");
             deleteIcon.addDomHandler(new ClickHandler() {

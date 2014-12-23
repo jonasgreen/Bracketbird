@@ -13,7 +13,7 @@ public class SeedingCell extends Label {
 
     public SeedingCell(Team team){
         this.team = team;
-        setStyleName("teamsRow_seeding");
+        setStyleName("teamsPage_teamsRow_seeding");
         setText("" + (RTC.getInstance().getTournament().getTeams().size()));
         //setEnabled(false);
     }

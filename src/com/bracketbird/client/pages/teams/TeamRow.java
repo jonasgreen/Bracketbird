@@ -1,8 +1,7 @@
 package com.bracketbird.client.pages.teams;
 
-import com.bracketbird.client.Css;
-import com.bracketbird.client.rtc.RTC;
 import com.bracketbird.client.model.Team;
+import com.bracketbird.client.rtc.RTC;
 import com.google.gwt.event.dom.client.*;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -22,7 +21,9 @@ public class TeamRow extends FlowPanel {
 
     public TeamRow(Team team) {
         this.team = team;
-        Css.style(this, "teamsRow", "flex_alignItems_center");
+        setStyleName("teamsPage_teamsRow");
+        addStyleName("flex_alignItems_center");
+
         add(getSeedingCell());
 
         add(getDeleteIconHolder());
@@ -55,7 +56,7 @@ public class TeamRow extends FlowPanel {
     public FlowPanel getDeleteIconHolder() {
         if (deleteIconHolder == null) {
             deleteIconHolder = new FlowPanel();
-            deleteIconHolder.setStyleName("teamsRow_deleteIconHolder");
+            deleteIconHolder.setStyleName("teamsPage_teamsRow_deleteIconHolder");
             deleteIconHolder.add(getDeleteIcon());
             deleteIconHolder.addDomHandler(new MouseOverHandler() {
                 @Override
@@ -78,7 +79,7 @@ public class TeamRow extends FlowPanel {
         if (deleteIcon == null) {
             deleteIcon = new FlowPanel();
             deleteIcon.setStyleName("icon-uniE600");
-            deleteIcon.addStyleName("teamsRow_deleteIcon");
+            deleteIcon.addStyleName("teamsPage_teamsRow_deleteIcon");
             deleteIcon.setVisible(false);
             deleteIcon.setTitle("Delete team");
             deleteIcon.addDomHandler(new ClickHandler() {

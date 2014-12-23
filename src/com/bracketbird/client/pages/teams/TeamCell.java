@@ -28,7 +28,7 @@ public class TeamCell extends TextBox{
     public TeamCell(TeamRow row, Team team) {
         this.row = row;
         this.team = team;
-        setStyleName("teamsRow_team");
+        setStyleName("teamsPage_teamsRow_team");
         setText(team.getName());
 
         team.nameDispatcher.addHandler(new UpdateHandler<String>() {

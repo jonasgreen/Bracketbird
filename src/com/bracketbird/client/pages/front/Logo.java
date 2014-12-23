@@ -9,10 +9,10 @@ public class Logo extends HTML {
 
     public Logo() {
         super();
-        setStyleName("logo");
+        setStyleName("frontPage_logo");
         //addStyleName("flex_alignItems_center");
-        String top = "<div class='logoTop'><span class='logoTopLeft'>BRACKET</span><span class='logoTopRight'>BIRD</span></div>";
-        String bottom = "<div class='logoBottom'><span class='logoBottomLeft'>MORE TIME</span><span class='logoBottomRight'> TO PLAY</span></div>";
+        String top = "<div class='frontPage_logo_top'><span class='frontPage_logo_topLeft'>BRACKET</span><span class='frontPage_logo_topRight'>BIRD</span></div>";
+        String bottom = "<div class='frontPage_logo_bottom'><span class='frontPage_logo_bottomLeft'>MORE TIME</span><span class='frontPage_logo_bottomRight'> TO PLAY</span></div>";
 
         setHTML(top);
     }

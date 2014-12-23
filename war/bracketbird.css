@@ -1,0 +1,526 @@
+@font-face {
+    font-family: "klavika";
+    src: url("font/Klavika-Light.otf");
+}
+
+html {
+
+}
+
+body {
+    height: 100%;
+    font-family: "klavika";
+    font-size: 16px;
+    font-stretch: normal;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1.25;
+    color: rgb(55, 71, 79);
+}
+
+input {
+    background: transparent;
+    border: 1px solid rgb(192, 192, 192);
+    border-top-color: rgb(192, 192, 192);
+    border-right-color: rgb(217, 217, 217);
+    border-bottom-color: rgb(217, 217, 217);
+    border-left-color: rgb(217, 217, 217);
+
+    color: #37474F;
+    font-family: "klavika";
+    font-size: 16px;
+    font-stretch: normal;
+    font-style: normal;
+    font-weight: normal;
+    height: 22px;
+    line-height: 1.25;
+    padding: 2px 2px 0;
+}
+
+input:focus, select:focus, textarea:focus, button:focus {
+    outline: none;
+}
+
+::-webkit-input-placeholder {
+    color: #37474f;
+    font-style: italic;
+    opacity: 0.5;
+}
+
+::-moz-placeholder {
+    color: #37474f;
+    font-style: italic;
+    opacity: 0.5;
+
+}
+
+:-ms-input-placeholder {
+    color: #37474f;
+    font-style: italic;
+    opacity: 0.5;
+
+}
+
+
+.tournamentContext_scrollPanel {
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+.shadow {
+    -moz-box-shadow: 0px 3px 3px rgba(55, 71, 79, 0.4);
+    -webkit-box-shadow: 0px 3px 3px rgba(55, 71, 79, 0.4);
+    box-shadow: 0px 3px 3px rgba(55, 71, 79, 0.4);
+}
+
+.primaryButton, .primaryButton:link {
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    background: #3B9EBF;
+    color: white;
+    display: inline-block;
+    font-size: 16px;
+    padding-top: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 3px;
+    font-family: klavika;
+    border: 1px solid #0097BF;
+    border-radius: 2px;
+    white-space: nowrap;
+    z-index: 20;
+}
+
+.primaryButton:hover, .primaryButton:visited {
+    cursor: pointer;
+    -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+}
+
+.primaryButton:active {
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.largeButton, .largeButton:link {
+    font-size: 24px;
+    padding-top: 10px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-bottom: 6px;
+}
+
+.secondaryButton, .secondaryButton:link {
+    color: #3B9EBF;
+    display: inline-block;
+    font-size: 16px;
+    padding-top: 5px;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-bottom: 3px;
+    font-family: klavika;
+    border: 1px solid transparent;
+    border-radius: 2px;
+    white-space: nowrap;
+}
+
+.secondaryButton:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+
+
+
+
+
+.notFinishedMathesTopLine {
+    position: fixed;
+    top: 0;
+    right: 0px;
+    height: 1px;
+    width: 404px;
+    border-top: 1px solid gray;
+    color: #979797;
+    font-family: klavika, Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    font-stretch: normal;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    line-height: 1.25;
+    -webkit-transition: top 3s ease-in-out;
+    -moz-transition: top 3s ease-in-out;
+    -o-transition: top 3s ease-in-out;
+    transition: top 3s ease-in-out;
+}
+
+.matchesPlayedPanel {
+    position: fixed;
+    top: 0;
+    padding-top: 15px;
+    padding-left: 4px;
+    right: 0px;
+    width: 414px;
+    z-index: 1000000;
+    background-color: black;
+    font-family: klavika, Arial, Helvetica, sans-serif;
+    font-size: 38px;
+    font-stretch: normal;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    line-height: 1.25;
+    color: white;
+    border-bottom: 1px solid #333333;
+}
+
+.aMatchView {
+    position: fixed;
+    top: 0;
+    right: 0px;
+    height: 40px;
+    width: 400px;
+    white-space: nowrap;
+    color: #979797;
+    font-family: klavika, Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    font-stretch: normal;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
+    line-height: 1.25;
+    -webkit-transition: top 3s ease-in-out;
+    -moz-transition: top 3s ease-in-out;
+    -o-transition: top 3s ease-in-out;
+    transition: top 3s ease-in-out;
+    padding-right: 10px;
+}
+
+.aMatchView_teamPanel {
+    width: 300px;
+    float: right;
+    overflow: hidden;
+}
+
+.aMatchView_teamPanel_finished {
+    color: gray;
+}
+
+.aMatchView_teamPanel_inProgress {
+    color: orange;
+}
+
+.aMatchView_teamPanel_upcoming {
+    color: #c9c9c9;
+}
+
+.aMatchView_infoPanel {
+    width: 100px;
+    float: left;
+}
+
+.aMatchView_infoPanel_finished {
+    color: gray;
+}
+
+.aMatchView_infoPanel_inProgress {
+    color: orange;
+}
+
+
+.popupBracketBird {
+    background-color: white;
+    border: 1px solid rgba(55, 71, 79, 0.4);
+    z-index: 50;
+}
+
+.popupBracketBird_contentPanel {
+    padding: 30px 20px;
+}
+
+.popupBracketBird_headerPanel {
+    padding: 20px;
+    font-size: 22px;
+    background: orange;
+}
+
+.popupBracketBird_buttonsPanel {
+    padding: 20px;
+}
+
+.proceedWarning {
+    width: 400px;
+}
+
+.settingsPanel {
+    border: 2px solid #73BCD4;
+    border-radius: 0px 0px 5px 5px;
+}
+
+
+
+.settingsValue {
+    white-space: nowrap;
+}
+
+.settingsValue:focus {
+    border: 1px solid #3B9EBF;
+}
+
+.noneEditableValue {
+    font-size: 16px;
+    text-align: left;
+    opacity: 0.7;
+}
+
+.settingsLabel {
+}
+
+.settingsPanelButton {
+    margin-left: 10px;
+}
+
+.labelValueRow {
+    height: 30px;
+}
+
+.errorPanel {
+    background: rgb(176, 0, 0);
+    padding: 8px;
+    color: white;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.error_label {
+    color: rgb(176, 0, 0);
+}
+
+.error_value {
+    border-color: rgb(176, 0, 0);
+}
+
+.settingsIntegerInput {
+    width: 50px;
+    text-align: right;
+}
+
+.matchesPage {
+    padding-top: 50px;
+}
+
+.matchRow {
+    height: 30px;
+    padding-right: 2px;
+    padding-left: 4px;
+}
+
+.matchRow_focus {
+    background-color: lightblue;
+}
+
+.matchRow_no {
+    min-width: 40px;
+    width: 40px;
+    font-size: 10px;
+    opacity: 0.5;
+}
+
+.matchRow_sep {
+    min-width: 20px;
+    width: 20px;
+}
+
+.matchRow_team {
+    min-width: 200px;
+    width: 200px;
+}
+
+.matchRow_team_winner {
+    font-weight: bold;
+}
+
+.matchRow_team_loser {
+
+}
+
+.matchRow_result {
+    border: 1px solid transparent;
+    width: 150px;
+    min-width: 150px;
+}
+
+.matchRow_result:hover {
+    cursor: pointer;
+}
+
+.matchRow_result:focus {
+    background-color: white;
+    border: 1px solid rgb(217, 217, 217);
+    border-top-color: rgb(192, 192, 192);
+
+}
+
+.matchRow_result_error {
+    border-color: rgb(176, 0, 0);
+}
+
+.matchRow_result_readOnly {
+    background-color: lightblue;
+    opacity: 0.5;
+}
+
+.matchRow_result::-moz-placeholder {
+    color: #3B9EBF;
+    font-style: normal;
+    opacity: 1.0;
+}
+
+.matchRow_result::-webkit-input-placeholder {
+    color: #3B9EBF;
+    font-style: normal;
+    opacity: 1.0;
+}
+
+.matchRow_result:-ms-input-placeholder {
+    color: #3B9EBF;
+    font-style: normal;
+    opacity: 1.0;
+}
+
+.matchRow_field {
+    border: 1px solid transparent;
+    width: 150px;
+    min-width: 150px;
+}
+
+.matchRow_field:focus {
+    border: 1px solid #3B9EBF;
+}
+
+.levelMatchesHeader {
+    padding-bottom: 10px;
+}
+
+.levelMatchesHeader_label {
+    opacity: 0.5;
+}
+
+.matches_emptyLine {
+    height: 20px;
+    position: relative;
+}
+
+.matchesTable_roundPanel {
+    height: 45px;
+    padding-right: 2px;
+    padding-left: 4px;
+}
+
+.matches_roundName {
+    font-size: 10px;
+    opacity: 0.5;
+}
+
+.levelEmptyPanel {
+    padding-bottom: 40px;
+}
+
+.matchesTablePanel {
+    padding-bottom: 40px;
+}
+
+.finalRanking_row {
+    width: 260px;
+    height: 30px;
+}
+
+.finalRanking_teamName {
+    float: right;
+    width: 200px;
+}
+
+.finalRanking_rank {
+    float: left;
+    width: 40px;
+}
+
+.finalRanking_button {
+    clear: both;
+    float: left;
+}
+
+.allGroupsRankingPanel {
+    float: left;
+    width: 100%;
+}
+
+.rankingPanel {
+    float: left;
+    border: 2px solid #73BCD4;
+    border-radius: 5px 5px 5px 5px;
+    margin-right: 40px;
+    margin-bottom: 20px;
+    padding: 20px;
+}
+
+.finalRanking_decisionPanel {
+    background: yellow;
+    float: left;
+}
+
+.equalPointsPanel_RowsPanel {
+    float: left;
+}
+
+.equalPointsPanel_title {
+    color: #3B9EBF;
+    font-size: 10px;
+}
+
+.equalPointsPanel_RowsPanel {
+}
+
+.equalPointsPanel_Row {
+    height: 30px;
+}
+
+.finalRanking_groupName {
+    font-weight: bold;
+}
+
+.scoresPage {
+
+}
+
+.groupScoresRow {
+
+}
+
+.groupScoreRow_team {
+    width: 20px;
+}
+
+.groupScoreRow_matches {
+    width: 20px;
+
+}
+
+.groupScoreRow_score {
+    width: 20px;
+
+}
+
+.groupScoreRow_points {
+    width: 20px;
+
+}
+
+.groupScoreRow_position {
+    width: 20px;
+
+}

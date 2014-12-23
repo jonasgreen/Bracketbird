@@ -1,6 +1,5 @@
 package com.bracketbird.client.pages;
 
-import com.bracketbird.client.Css;
 import com.bracketbird.client.pages.matches.MatchesPageController;
 import com.bracketbird.client.pages.scores.ScoresPageController;
 import com.bracketbird.client.pages.settings.SettingsPageController;
@@ -18,9 +17,12 @@ public class MenuPanel extends FlowPanel{
 
     public MenuPanel() {
 
-        Css.style(this, "menuPanel_outer", "flex_alignItems_center");
+        setStyleName("menuPanel_outer");
+        addStyleName("flex_alignItems_center");
 
-        FlowPanel content = Css.style(new FlowPanel(), "menuPanel_inner", "flex_alignItems_baseline");
+        FlowPanel content = new FlowPanel();
+        content.setStyleName("menuPanel_inner");
+        content.addStyleName("flex_alignItems_baseline");
         add(content);
 
         //primary menu items to the left
@@ -30,7 +32,8 @@ public class MenuPanel extends FlowPanel{
         content.add(new MenuItem("SCORES", ScoresPageController.getInstance()));
 
         //secondary menu items to the right
-        FlowPanel sp = Css.style(new FlowPanel(), "menuPanel_secondaryPanel");
+        FlowPanel sp = new FlowPanel();
+        sp.setStyleName("menuPanel_secondaryPanel");
         content.add(sp);
         sp.add(helpMenuItem());
         sp.add(shareMenuItem());

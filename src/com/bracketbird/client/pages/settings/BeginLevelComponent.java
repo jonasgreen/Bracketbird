@@ -14,20 +14,20 @@ public class BeginLevelComponent extends FlowPanel{
 
         FlowPanel innerPanel = new FlowPanel();
         innerPanel.setStyleName("flex_center_center");
-        innerPanel.addStyleName("beginComponent_innerPanel");
+        innerPanel.addStyleName("settingsPage_beginComponent_innerPanel");
 
         Label l = new Label("Begin");
-        l.setStyleName("levelComponent_name");
+        l.setStyleName("settingsPage_stageComp_name");
         innerPanel.add(l);
         add(innerPanel);
 
         FlowPanel rightEar = new FlowPanel();
-        rightEar.setStyleName("levelComponent_ear");
-        rightEar.addStyleName("levelComponent_rightEar");
+        rightEar.setStyleName("settingsPage_stageComp_ear");
+        rightEar.addStyleName("settingsPage_stageComp_rightEar");
         add(rightEar);
 
         FlowPanel separationLine = new FlowPanel();
-        separationLine.setStyleName("levelComponent_sep");
+        separationLine.setStyleName("settingsPage_stageComp_sep");
         separationLine.add(new Label(""));
         add(separationLine);
 

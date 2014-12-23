@@ -4,6 +4,17 @@
     display: flex;             /* NEW, Spec - Opera 12.1, Firefox 20+ */
 }
 
+.flex_columns {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+
+    flex-direction: column;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+}
+
+
 
 /*  ALIGNING - Items are ALIGNED around the horizontal axis - like items on a wire */
 

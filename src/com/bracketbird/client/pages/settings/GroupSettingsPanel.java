@@ -31,7 +31,7 @@ public class GroupSettingsPanel extends SettingsPanel {
     public GroupSettingsPanel(Stage l) {
         super(l);
 
-        addStyleName("groupSettingsPanel");
+        addStyleName("settingsPage_groupSettingsPanel");
         addRow(getNumberOfGroupsLabel(), getNumberOfGroupsTextBox());
         addRow(getPointsWinningLabel(), getPointsWinningTextBox());
         addRow(getPointsDrawLabel(), getPointsDrawTextBox());

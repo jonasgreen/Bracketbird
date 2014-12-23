@@ -22,7 +22,7 @@ public class BBService {
     }
 
     public static void createChannelToken(TournamentChannelId tournamentChannelId, AsyncCallback<CreateChannelTokenResult> cb) {
-        executeWithRetry(new CreateChannelTokenAction(UID.getUID(), tournamentChannelId), cb);
+        executeWithRetry(new CreateChannelTokenAction(UID.next(), tournamentChannelId), cb);
     }
 
     public static void createTournament(AsyncCallback<TournamentResult> cb) {

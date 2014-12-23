@@ -1,6 +1,5 @@
 package com.bracketbird.client.pages.scores;
 
-import com.bracketbird.client.Css;
 import com.bracketbird.client.ranking.ScoreSheet;
 import com.bracketbird.client.ranking.TeamStatistics;
 import com.bracketbird.client.model.event.UpdateEvent;
@@ -11,15 +10,24 @@ import com.google.gwt.user.client.ui.Label;
 public class GroupScoresRow extends FlowPanel{
 
     private TeamStatistics teamStatistics;
+
+    private AnimatedNumber positionLabel;
     private Label teamLabel;
-    private Label scoreLabel;
+    private AnimatedNumber matchesLabel;
+    private AnimatedNumber scoreLabel;
+    private AnimatedNumber pointsLabel;
+
 
     public GroupScoresRow(TeamStatistics stat) {
         this.teamStatistics = stat;
-        Css.style(this, "groupScoresRow", "flex_alignItems_center");
+        setStyleName("groupScoresRow");
+        addStyleName("flex_alignItems_center");
 
+        add(getPositionLabel());
         add(getTeamLabel());
+        add(getMatchesLabel());
         add(getScoreLabel());
+        add(getPointsLabel());
 
         teamStatistics.getTeam().nameDispatcher.addHandler(new UpdateHandler<String>() {
             @Override
@@ -37,24 +45,50 @@ public class GroupScoresRow extends FlowPanel{
     }
 
     private void updateRow(UpdateEvent<ScoreSheet> event) {
-        getScoreLabel().setText(event.getNewValue().getPoints()+"");
+        getMatchesLabel().setValue(event.getNewValue().getPlayedMatches());
+        getScoreLabel().setValue(event.getNewValue().getScoredGoals());
+        getPointsLabel().setValue(event.getNewValue().getPoints());
     }
 
 
     public Label getTeamLabel() {
         if (teamLabel == null) {
             teamLabel = new Label(teamStatistics.getTeam().getName());
-            Css.style(teamLabel, "teamLabel");
+            teamLabel.setStyleName("groupScoreRow_team");
         }
         return teamLabel;
     }
 
-    public Label getScoreLabel() {
+    public AnimatedNumber getMatchesLabel() {
+        if (matchesLabel == null) {
+            matchesLabel = new AnimatedNumber(teamStatistics.getTotalScoreSheet().getPlayedMatches());
+            matchesLabel.setStyleName("groupScoreRow_matches");
+        }
+        return matchesLabel;
+    }
+
+    public AnimatedNumber getScoreLabel() {
         if (scoreLabel == null) {
-            scoreLabel = new Label(teamStatistics.getTotalScoreSheet().getPoints() + "");
-            Css.style(teamLabel, "scoreLabel");
+            scoreLabel = new AnimatedNumber(teamStatistics.getTotalScoreSheet().getScoredGoals());
+            scoreLabel.setStyleName("groupScoreRow_score");
         }
         return scoreLabel;
+    }
+
+    public AnimatedNumber getPointsLabel() {
+        if (pointsLabel == null) {
+            pointsLabel = new AnimatedNumber(teamStatistics.getTotalScoreSheet().getPoints());
+            pointsLabel.setStyleName("groupScoreRow_points");
+        }
+        return pointsLabel;
+    }
+
+    public AnimatedNumber getPositionLabel() {
+        if (positionLabel == null) {
+            positionLabel = new AnimatedNumber(0);
+            positionLabel.setStyleName("groupScoreRow_position");
+        }
+        return positionLabel;
     }
 
 }
