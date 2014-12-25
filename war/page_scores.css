@@ -8,9 +8,13 @@
     float: left;
     border: 2px solid #009688;
     border-radius: 3px;
+    margin-right: 50px;
+    margin-bottom: 50px;
+
 }
 
 .groupScoresHeaderRow {
+    font-size: 10px;
     width: 272px;
     height: 30px;
     color: white;
@@ -44,7 +48,7 @@
 
 .groupScoreHeaderRow_score {
     color: white;
-    width: 34px;
+    width: 30px;
     text-align: right;
 }
 
@@ -72,7 +76,6 @@
 }
 
 .groupScoreRow_matches {
-    font-size: 10px;
     opacity: 0.5;
     text-align: right;
     width: 30px;
@@ -80,7 +83,6 @@
 }
 
 .groupScoreRow_score {
-    font-size: 10px;
     opacity: 0.5;
     text-align: right;
     width: 30px;
@@ -89,7 +91,7 @@
 
 .groupScoreRow_points {
     text-align: right;
-    width: 34px;
+    width: 30px;
 
 }
 

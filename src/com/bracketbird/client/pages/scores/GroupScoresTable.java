@@ -21,6 +21,8 @@ public class GroupScoresTable extends FlowPanel {
 
     private Map<Team, GroupScoresRow> rowMap = new HashMap<>();
     private Group group;
+    private GroupScoresHeaderRow headerRow;
+
 
 
     public GroupScoresTable(Group group) {
@@ -68,7 +70,7 @@ public class GroupScoresTable extends FlowPanel {
     }
 
     private void buildScoresTable(Group group) {
-        add(new GroupScoresHeaderRow(group));
+        add(getHeaderRow());
         for (RankingStep step : group.getRanking().getRanking()) {
             for (TeamStatistics stat : step.getTeamStatistics()) {
                 GroupScoresRow row = new GroupScoresRow(stat);
@@ -88,6 +90,15 @@ public class GroupScoresTable extends FlowPanel {
             top += rowHeight;
         }
     }
+
+
+    public GroupScoresHeaderRow getHeaderRow() {
+        if (headerRow == null) {
+            headerRow = new GroupScoresHeaderRow(group);
+        }
+        return headerRow;
+    }
+
 
 
 }
