@@ -2,12 +2,70 @@
     padding-top: 50px;
 }
 
-.groupScoresRow {
+.groupScoresTable{
+    width: 278px;
+    position: relative;
+    float: left;
+    border: 2px solid #009688;
+    border-radius: 3px;
+}
+
+.groupScoresHeaderRow {
+    width: 272px;
     height: 30px;
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+
+    background-color: #009688;
+    padding-left: 6px;
+
+    top: 0;
+    left: 0;
+    position: absolute;
+
+}
+
+
+.groupScoreHeaderRow_groupName {
+    width: 170px;
+    padding-top: 10px;
+}
+
+.groupScoreHeaderRow_playedMatches {
+    width: 30px;
+    text-align: right;
+}
+
+.groupScoreHeaderRow_points {
+    width: 30px;
+    text-align: right;
+}
+
+.groupScoreHeaderRow_score {
+    color: white;
+    width: 34px;
+    text-align: right;
+}
+
+
+.groupScoresRow {
+    width: 272px;
+    height: 30px;
+    padding-left: 6px;
+    padding-top: 2px;
+
+    top: 0;
+    left: 0;
+    position: absolute;
+
+    -webkit-transition: top 1.0s linear, left 0.25s linear;
+    -moz-transition: top 1.0s linear, left 0.25s linear;
+    transition: top 1.0s linear, left 0.25s linear;
 }
 
 .groupScoreRow_team {
-    width: 150px;
+    width: 170px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -31,7 +89,7 @@
 
 .groupScoreRow_points {
     text-align: right;
-    width: 30px;
+    width: 34px;
 
 }
 
@@ -40,5 +98,11 @@
     opacity: 0.5;
     text-align: left;
     width: 20px;
+    position: absolute;
+    left: -16px;
+    top: 11px;
+}
 
+.groupScoreRow_move{
+    z-index: 10;
 }

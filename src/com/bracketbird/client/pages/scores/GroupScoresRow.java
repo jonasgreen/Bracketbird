@@ -69,7 +69,7 @@ public class GroupScoresRow extends FlowPanel{
 
     public AnimatedNumber getScoreLabel() {
         if (scoreLabel == null) {
-            scoreLabel = new AnimatedNumber(teamStatistics.getTotalScoreSheet().getScoredGoals());
+            scoreLabel = new AnimatedNumber(teamStatistics.getTotalScoreSheet().getGoalDifference());
             scoreLabel.setStyleName("groupScoreRow_score");
         }
         return scoreLabel;
@@ -87,6 +87,7 @@ public class GroupScoresRow extends FlowPanel{
         if (positionLabel == null) {
             positionLabel = new AnimatedNumber(0);
             positionLabel.setStyleName("groupScoreRow_position");
+
         }
         return positionLabel;
     }

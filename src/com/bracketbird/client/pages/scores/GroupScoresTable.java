@@ -7,6 +7,9 @@ import com.bracketbird.client.model.ranking.RankingStep;
 import com.bracketbird.client.model.tournament.Group;
 import com.bracketbird.client.model.tournament.Match;
 import com.bracketbird.client.ranking.TeamStatistics;
+import com.bracketbird.client.util.ScheduleUtil;
+import com.google.gwt.dom.client.Style;
+import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.ui.FlowPanel;
 
 import java.util.HashMap;
@@ -14,11 +17,14 @@ import java.util.Map;
 
 public class GroupScoresTable extends FlowPanel {
 
+    private static int rowHeight = 30;
+
     private Map<Team, GroupScoresRow> rowMap = new HashMap<>();
     private Group group;
-    
 
-    public GroupScoresTable(Group group){
+
+    public GroupScoresTable(Group group) {
+        setStyleName("groupScoresTable");
         this.group = group;
         group.getRanking().addOnChangeHandler(new UpdateHandler<Match>() {
             @Override
@@ -26,16 +32,43 @@ public class GroupScoresTable extends FlowPanel {
                 Team teamHome = event.getNewValue().getTeamHome();
                 Team teamOut = event.getNewValue().getTeamOut();
 
-                updateTable(teamHome, teamOut);
+
+                final GroupScoresRow row1 = rowMap.get(teamHome);
+                final GroupScoresRow row2 = rowMap.get(teamOut);
+
+                addMoveEffects(row1, row2);
+                updateTable();
+
+                ScheduleUtil.get().executeLater(1000, new Command() {
+                    @Override
+                    public void execute() {
+                        removeMoveEffects(row1, row2);
+                    }
+                });
             }
         });
 
 
         buildScoresTable(group);
-        updateTable(null);
+        updateTable();
+
+        this.getElement().getStyle().setHeight(rowHeight + (rowHeight * rowMap.size()), Style.Unit.PX);
+    }
+
+    private void addMoveEffects(GroupScoresRow... rows) {
+        for (GroupScoresRow r : rows) {
+            r.addStyleName("groupScoreRow_move");
+        }
+    }
+
+    private void removeMoveEffects(GroupScoresRow... rows) {
+        for (GroupScoresRow r : rows) {
+            r.removeStyleName("groupScoreRow_move");
+        }
     }
 
     private void buildScoresTable(Group group) {
+        add(new GroupScoresHeaderRow(group));
         for (RankingStep step : group.getRanking().getRanking()) {
             for (TeamStatistics stat : step.getTeamStatistics()) {
                 GroupScoresRow row = new GroupScoresRow(stat);
@@ -45,10 +78,14 @@ public class GroupScoresTable extends FlowPanel {
         }
     }
 
-    private void updateTable(Team ... involvedTeams) {
+    private void updateTable() {
+        int top = rowHeight; //size of header
         int i = 1;
         for (Team team : group.getRanking().getRankingTeams()) {
-            rowMap.get(team).getPositionLabel().setValue(i++);
+            GroupScoresRow row = rowMap.get(team);
+            row.getPositionLabel().setValue(i++);
+            row.getElement().getStyle().setTop(top, Style.Unit.PX);
+            top += rowHeight;
         }
     }
 

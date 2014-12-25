@@ -61,7 +61,6 @@ input:focus, select:focus, textarea:focus, button:focus {
 
 }
 
-
 .tournamentContext_scrollPanel {
     padding-left: 100px;
     padding-right: 100px;
@@ -131,11 +130,6 @@ input:focus, select:focus, textarea:focus, button:focus {
     cursor: pointer;
     text-decoration: underline;
 }
-
-
-
-
-
 
 .notFinishedMathesTopLine {
     position: fixed;
@@ -231,7 +225,6 @@ input:focus, select:focus, textarea:focus, button:focus {
     color: orange;
 }
 
-
 .popupBracketBird {
     background-color: white;
     border: 1px solid rgba(55, 71, 79, 0.4);
@@ -260,8 +253,6 @@ input:focus, select:focus, textarea:focus, button:focus {
     border: 2px solid #73BCD4;
     border-radius: 0px 0px 5px 5px;
 }
-
-
 
 .settingsValue {
     white-space: nowrap;

@@ -1,6 +1,7 @@
 package com.bracketbird.client.pages.scores;
 
 
+import com.bracketbird.client.model.tournament.Group;
 import com.bracketbird.client.model.tournament.GroupStage;
 import com.bracketbird.client.model.tournament.Stage;
 import com.bracketbird.client.model.tournament.Tournament;
@@ -22,7 +23,7 @@ public class ScoresPage extends Page<ScoresPageController> {
     public void show(Stage stage) {
         clear();
         if(stage.isGroupStage()){
-            showGroupStage(stage);
+            showGroupStage((GroupStage) stage);
         }
         else{
             showKnockoutStage(stage);
@@ -33,8 +34,11 @@ public class ScoresPage extends Page<ScoresPageController> {
 
     }
 
-    private void showGroupStage(Stage stage) {
-        add(new GroupStageScoresPanel((GroupStage) stage));
+    private void showGroupStage(GroupStage stage) {
+        for (Group group : stage.getGroups()) {
+            add(new GroupScoresTable(group));
+        }
+
     }
 
     public void showTournamentFinished(Tournament tournament) {
