@@ -1,5 +1,6 @@
 package com.bracketbird.client.pages.settings;
 
+import com.bracketbird.client.model.tournament.GroupStage;
 import com.bracketbird.client.rtc.RTC;
 import com.bracketbird.client.model.tournament.Stage;
 import com.google.gwt.dom.client.Style;
@@ -99,7 +100,7 @@ public class LevelPanel extends FlowPanel {
                 Timer t = new Timer() {
                     @Override
                     public void run() {
-                        lc.getNameLabel().setText(level.getName());
+                        lc.getNameLabel().setText(level instanceof GroupStage ? "Group" : "Knockout");
                     }
                 };
                 t.schedule(300);

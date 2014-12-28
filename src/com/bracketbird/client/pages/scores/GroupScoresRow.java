@@ -11,7 +11,7 @@ public class GroupScoresRow extends FlowPanel{
 
     private TeamStatistics teamStatistics;
 
-    private AnimatedNumber positionLabel;
+    private Label positionLabel;
     private Label teamLabel;
     private AnimatedNumber matchesLabel;
     private AnimatedNumber scoreLabel;
@@ -46,7 +46,7 @@ public class GroupScoresRow extends FlowPanel{
 
     private void updateRow(UpdateEvent<ScoreSheet> event) {
         getMatchesLabel().setValue(event.getNewValue().getPlayedMatches());
-        getScoreLabel().setValue(event.getNewValue().getScoredGoals());
+        getScoreLabel().setValue(event.getNewValue().getGoalDifference());
         getPointsLabel().setValue(event.getNewValue().getPoints());
     }
 
@@ -83,9 +83,9 @@ public class GroupScoresRow extends FlowPanel{
         return pointsLabel;
     }
 
-    public AnimatedNumber getPositionLabel() {
+    public Label getPositionLabel() {
         if (positionLabel == null) {
-            positionLabel = new AnimatedNumber(0);
+            positionLabel = new Label("0");
             positionLabel.setStyleName("groupScoreRow_position");
 
         }

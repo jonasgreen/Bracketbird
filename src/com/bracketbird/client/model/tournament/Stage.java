@@ -1,12 +1,13 @@
 package com.bracketbird.client.model.tournament;
 
-import com.bracketbird.client.rtc.event.UpdateMatchFieldEvent;
+import com.bracketbird.client.model.LevelStateModel;
 import com.bracketbird.client.model.SeedingTeam;
 import com.bracketbird.client.model.Team;
+import com.bracketbird.client.model.event.UpdateDispatcher;
 import com.bracketbird.client.model.keys.MatchId;
 import com.bracketbird.client.model.keys.StageId;
 import com.bracketbird.client.model.keys.TeamId;
-import com.bracketbird.client.model.LevelStateModel;
+import com.bracketbird.client.rtc.event.UpdateMatchFieldEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,8 @@ public abstract class Stage extends LevelStateModel<StageId> {
 
     protected List<Team> startingTeams = new ArrayList<Team>();
     protected List<List<Team>> endingTeams = new ArrayList<List<Team>>();
+
+    public UpdateDispatcher<StageSettings> updateSettingsDispatcher = new UpdateDispatcher<>();
 
     protected Tournament tournament;
 
@@ -157,8 +160,10 @@ public abstract class Stage extends LevelStateModel<StageId> {
     }
 
     public void updateSettings(StageSettings stageSettings, boolean fromClient) {
+        StageSettings oldSettings = this.settings;
         this.settings = stageSettings;
         clear();
+        updateSettingsDispatcher.fireEvent(oldSettings, settings, fromClient);
         updateState(fromClient);
     }
 

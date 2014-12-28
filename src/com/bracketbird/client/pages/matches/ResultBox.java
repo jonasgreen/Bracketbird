@@ -9,7 +9,7 @@ import com.google.gwt.event.dom.client.*;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 
-public class ResultBox extends SetEditor2 {
+public class ResultBox extends SetEditor {
 
     private Match match;
     private MatchRow row;

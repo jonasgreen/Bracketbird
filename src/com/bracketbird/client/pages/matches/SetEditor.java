@@ -12,12 +12,12 @@ import java.util.List;
 /**
  *
  */
-public class SetEditor2 extends TextBox {
+public class SetEditor extends TextBox {
 
     public static final char SET_SEP = ' ';
     public static final char SCORE_SEP = '-';
 
-    public SetEditor2() {
+    public SetEditor() {
         super();
 
         addKeyUpHandler(new KeyUpHandler() {

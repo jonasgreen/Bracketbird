@@ -59,6 +59,14 @@ public class Tournament extends LevelStateModel<TournamentId> {
 
     }
 
+    public Stage getNextStage(Stage stage) {
+        int index = getIndexOf(stage);
+        if (stages.size() == index + 1 || index == -1) {
+            return null;
+        }
+        return getStage(index + 1);
+    }
+
     public int getIndexOf(Stage st) {
         int index = 0;
         for (Stage stTemp : stages) {
@@ -118,7 +126,7 @@ public class Tournament extends LevelStateModel<TournamentId> {
     public LevelState calculateState() {
         LevelState childrenState = new LevelStateCalculator().stateBasedOnChildren(getStages());
 
-        if(childrenState.isFinished()){
+        if (childrenState.isFinished()) {
             endingTeams = getLastStage().getEndingTeams();
         }
         return childrenState;
@@ -127,7 +135,7 @@ public class Tournament extends LevelStateModel<TournamentId> {
     }
 
     private Stage getLastStage() {
-        return getStages().get(getStages().size()-1);
+        return getStages().get(getStages().size() - 1);
     }
 
 
@@ -366,10 +374,7 @@ public class Tournament extends LevelStateModel<TournamentId> {
     }
 
 
-
-
-
-        @Override
+    @Override
     public String toString() {
         return "Tournament{" +
                 "\n  subtournaments=" + StringUtil.toString(stages) +
@@ -399,7 +404,7 @@ public class Tournament extends LevelStateModel<TournamentId> {
 
     public void updateMatchResult(MatchId matchId, int[] homeScores, int[] outScores, boolean fromClient) {
         Match match = RTC.getInstance().getTournament().findMatch(matchId);
-        if(match == null) {
+        if (match == null) {
             return;
         }
         clearFollowingStages(fromClient, match.getRound().getStage());
@@ -408,9 +413,9 @@ public class Tournament extends LevelStateModel<TournamentId> {
 
     public Group getGroup(GroupId modelId) {
         for (Stage stage : stages) {
-            if(stage.isGroupStage()){
+            if (stage.isGroupStage()) {
                 Group g = ((GroupStage) stage).getGroup(modelId);
-                if(g != null){
+                if (g != null) {
                     return g;
                 }
             }
