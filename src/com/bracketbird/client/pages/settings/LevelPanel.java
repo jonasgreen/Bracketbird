@@ -60,11 +60,11 @@ public class LevelPanel extends FlowPanel {
                 public void onClick(ClickEvent event) {
                     if (popup == null) {
                         popup = new AddStageDropDown();
-                        popup.setWidth(button.getOffsetWidth()-4 + "px");
+                        popup.setWidth(button.getOffsetWidth() - 4 + "px");
                         popup.show();
                         popup.getElement().getStyle().setZIndex(10);
-                        popup.getElement().getStyle().setTop(button.getAbsoluteTop() + button.getOffsetHeight() -2, Style.Unit.PX);
-                        popup.getElement().getStyle().setLeft(button.getAbsoluteLeft()+1, Style.Unit.PX);
+                        popup.getElement().getStyle().setTop(button.getAbsoluteTop() + button.getOffsetHeight() - 2, Style.Unit.PX);
+                        popup.getElement().getStyle().setLeft(button.getAbsoluteLeft() + 1, Style.Unit.PX);
                         popup.addCloseHandler(new CloseHandler<PopupPanel>() {
                             @Override
                             public void onClose(CloseEvent<PopupPanel> event) {
@@ -72,7 +72,8 @@ public class LevelPanel extends FlowPanel {
                             }
                         });
                         popup.addAutoHidePartner(button.getElement());
-                    } else {
+                    }
+                    else {
                         popup.hide();
                     }
                 }
@@ -125,11 +126,11 @@ public class LevelPanel extends FlowPanel {
 
         if (found != null) {
             final LevelComponent finalLevel = found;
-            if(levelComponents.size() > 1){
+            if (levelComponents.size() > 1) {
                 finalLevel.getInnerPanel().setWidth("0px");
                 finalLevel.getSeparationLine().setWidth("0px");
             }
-            else{
+            else {
                 finalLevel.getInnerPanel().setWidth("40px");//same size as '? component'
             }
 
@@ -141,7 +142,7 @@ public class LevelPanel extends FlowPanel {
                 public void run() {
                     finalLevel.removeFromParent();
                     levelComponents.remove(finalLevel);
-                    
+
                     if (levelComponents.isEmpty()) {
                         getLevelHolder().add(new AllEmptyLevelComponent());
                     }

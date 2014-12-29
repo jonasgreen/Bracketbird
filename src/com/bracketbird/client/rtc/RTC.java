@@ -211,6 +211,8 @@ public class RTC {
     }
 
     public void updateMatchResult(MatchId id, Result result) {
+        String s = result == null ? "Null" : result.toString();
+        Printer.println("update match result: " + s);
         if (result == null) {
             executeEvent(new UpdateMatchResultEvent(null, id, null, null));
         }

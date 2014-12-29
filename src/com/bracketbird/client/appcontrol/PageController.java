@@ -19,6 +19,14 @@ public abstract class PageController<P extends Page> {
     public abstract P newInstance();
 
 
+    public void handleBeforeLoad(){
+        if(firstLoad){
+            beforeFirstLoad();
+        }
+        beforeLoad();
+    }
+
+
     public void handleAfterLoad(){
         if(firstLoad){
             firstLoad = false;
@@ -27,10 +35,19 @@ public abstract class PageController<P extends Page> {
         afterLoad();
     }
 
+
     public void afterLoad() {
     }
 
     public void afterFirstLoad() {
+    }
+
+    public void beforeLoad(){
+
+    }
+
+    public void beforeFirstLoad() {
+
     }
 
 

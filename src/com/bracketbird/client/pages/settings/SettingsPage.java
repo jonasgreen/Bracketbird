@@ -18,7 +18,6 @@ public class SettingsPage extends Page<SettingsPageController> {
     public void init() {
         setStyleName("settingsPage");
         add(getLevelPanel());
-
     }
 
 

@@ -27,6 +27,7 @@ public class SettingsPageController extends PageController<SettingsPage> {
     }
 
 
+
     @Override
     public void afterFirstLoad() {
         for (Stage level : RTC.getInstance().getTournament().getStages()) {

@@ -52,6 +52,8 @@ public abstract class ApplicationContext<PAGE_CONTAINER extends Panel> {
 
 
     private void loadNewPage(PageController pc) {
+        pc.handleBeforeLoad();
+
         PageChangedEvent event = new PageChangedEvent(activePageController, pc);
 
         activePageController = pc;

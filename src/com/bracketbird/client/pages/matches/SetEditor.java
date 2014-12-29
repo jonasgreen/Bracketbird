@@ -1,5 +1,6 @@
 package com.bracketbird.client.pages.matches;
 
+import com.bracketbird.client.Printer;
 import com.bracketbird.client.model.tournament.Result;
 import com.bracketbird.client.util.KeyUtil;
 import com.google.gwt.event.dom.client.*;
@@ -30,11 +31,12 @@ public class SetEditor extends TextBox {
     private void handleKeyUp(KeyUpEvent event) {
         int key = event.getNativeKeyCode();
         if(KeyCodes.KEY_SPACE == key){
-            formatText();
+            setText(formatText(getText()));
         }
     }
 
-    public void formatText() {
+    public String formatText(String text) {
+        Printer.println("formatText: " + getText());
         int cursorPos = getCursorPos();
 
 
@@ -43,7 +45,7 @@ public class SetEditor extends TextBox {
 
         StringBuilder sb = new StringBuilder();
 
-        for (Integer number : getNumbers()) {
+        for (Integer number : getNumbers(text)) {
             if(addDel){
                 sb.append(useScoreDel ? SCORE_SEP : SET_SEP);
                 useScoreDel = !useScoreDel;
@@ -52,24 +54,26 @@ public class SetEditor extends TextBox {
             addDel = true;
         }
 
-        if(!lastCharIsDigit(getText())){
+        if(!lastCharIsDigit(text)){
             sb.append(useScoreDel ? "-" : " ");
         }
 
-        setText(sb.toString());
+        String newText = sb.toString();
+        Printer.println("formatText - newText: " + getText());
         if(cursorPos < getText().length()){
             setCursorPos(cursorPos);
         }
+        return newText;
     }
 
-    protected List<Integer> getNumbers() {
-        List<Integer> list = new ArrayList<Integer>();
-        for (String s : getText().split("[^\\d]+")) {
+    protected List<Integer> getNumbers(String text) {
+        List<Integer> list = new ArrayList<>();
+        for (String s : text.split("[^\\d]+")) {
             try{
                 list.add(new Integer(s));
             }
             catch (NumberFormatException e){
-                //ignore
+                Printer.printException(e);
             }
         }
         return list;
@@ -103,5 +107,10 @@ public class SetEditor extends TextBox {
         return s.length() > 0 && KeyUtil.isDigit(s.charAt(s.length()-1));
     }
 
+    @Override
+    public void setText(String text){
+        Printer.println("setText: "+text);
+        super.setText(text);
+    }
 
 }

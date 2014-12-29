@@ -1,9 +1,11 @@
 package com.bracketbird.client.pages.matches;
 
-import com.bracketbird.client.rtc.RTC;
+import com.bracketbird.client.EqualsUtil;
+import com.bracketbird.client.Printer;
+import com.bracketbird.client.appcontrol.TournamentContext;
 import com.bracketbird.client.model.tournament.KnockoutMatch;
 import com.bracketbird.client.model.tournament.Match;
-import com.bracketbird.client.appcontrol.TournamentContext;
+import com.bracketbird.client.rtc.RTC;
 import com.bracketbird.client.util.StringUtil;
 import com.google.gwt.event.dom.client.*;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
@@ -28,6 +30,7 @@ public class ResultBox extends SetEditor {
         addKeyDownHandler(new KeyDownHandler() {
             @Override
             public void onKeyDown(KeyDownEvent event) {
+                Printer.println("KeyDown");
                 handleKeyEvent(event);
             }
         });
@@ -35,35 +38,45 @@ public class ResultBox extends SetEditor {
         addFocusHandler(new FocusHandler() {
             @Override
             public void onFocus(FocusEvent event) {
+                Printer.println("Focus");
                 handleFocus();
             }
         });
         addBlurHandler(new BlurHandler() {
             @Override
             public void onBlur(BlurEvent event) {
+                Printer.println("Blur");
                 handleBlur();
             }
         });
         addValueChangeHandler(new ValueChangeHandler<String>() {
             @Override
             public void onValueChange(ValueChangeEvent<String> event) {
+                Printer.println("ValueChanged");
                 handleValueChanged();
             }
         });
-        handleBlur();
+
+        updateStyle();
     }
 
     public void handleValueChanged() {
-        if (StringUtil.isEmpty(getText())) {
+        Printer.println("ValueChanged");
+        String text = getText();
+        if (StringUtil.isEmpty(text)) {
             removeStyleName("matchRow_result_error");
-            RTC.getInstance().updateMatchResult(match.getId(), null);
+            if(match.getResult() != null) {
+                RTC.getInstance().updateMatchResult(match.getId(), null);
+            }
         }
         else {
-            formatText();
-            ResultValidator val = ResultValidator.create(getNumbers(), !(match instanceof KnockoutMatch));
+            ResultValidator val = ResultValidator.create(getNumbers(text), !(match instanceof KnockoutMatch));
             if (val.isValid()) {
                 removeStyleName("matchRow_result_error");
-                RTC.getInstance().updateMatchResult(match.getId(), val.getResult());
+                //ensuring event is not fired twice
+                if(!EqualsUtil.equals(match.getResult(), val.getResult())) {
+                    RTC.getInstance().updateMatchResult(match.getId(), val.getResult());
+                }
             }
             else {
                 addStyleName("matchRow_result_error");
@@ -73,6 +86,12 @@ public class ResultBox extends SetEditor {
     }
 
     private void handleBlur() {
+        handleValueChanged();
+        updateStyle();
+
+    }
+
+    private void updateStyle() {
         if (match.getResult() == null) {
             getElement().setAttribute("placeholder", "Result");
         }
@@ -90,6 +109,7 @@ public class ResultBox extends SetEditor {
     }
 
     private void handleKeyEvent(KeyDownEvent event) {
+        Printer.println("KeyDown");
         int keyCode = event.getNativeKeyCode();
         if (KeyCodes.KEY_UP == keyCode && !event.isShiftKeyDown()) {
             table.up(row);
