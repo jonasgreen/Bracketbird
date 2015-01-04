@@ -167,7 +167,7 @@ public class LevelMatchesPanel extends FlowPanel {
 
     public void showLevelEmptyPanel() {
         reset();
-        levelEmptyPanelHolder.add(new LevelEmptyPanel(level));
+        levelEmptyPanelHolder.add(new LayoutMatchesButtonPanel(level));
     }
 
 

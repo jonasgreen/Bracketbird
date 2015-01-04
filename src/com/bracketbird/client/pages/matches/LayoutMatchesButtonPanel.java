@@ -14,12 +14,12 @@ import com.google.gwt.user.client.ui.FlowPanel;
 /**
  *
  */
-public class LevelEmptyPanel extends FlowPanel {
+public class LayoutMatchesButtonPanel extends FlowPanel {
 
     private Stage level;
     private Button button;
 
-    public LevelEmptyPanel(Stage tl) {
+    public LayoutMatchesButtonPanel(Stage tl) {
         super();
         this.level = tl;
         setStyleName("levelEmptyPanel");

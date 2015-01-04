@@ -1,67 +1,88 @@
 package com.bracketbird.client.pages.matches;
 
-import com.bracketbird.client.model.tournament.GroupStage;
-import com.bracketbird.client.model.tournament.LevelState;
-import com.bracketbird.client.model.tournament.Stage;
 import com.bracketbird.client.model.event.UpdateEvent;
 import com.bracketbird.client.model.event.UpdateHandler;
+import com.bracketbird.client.model.tournament.GroupStage;
+import com.bracketbird.client.model.tournament.KnockoutStage;
+import com.bracketbird.client.model.tournament.LevelState;
+import com.bracketbird.client.model.tournament.Stage;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.SimplePanel;
+import com.google.gwt.user.client.ui.Widget;
 
 public class StagePanel extends FlowPanel {
 
     private Stage stage;
 
-    private SimplePanel matchesPanelHolder = new SimplePanel();
-    private GroupStageRankingPanel rankingPanel;
+    private LayoutMatchesButtonPanel layoutMatchesPanel;
+    private MatchesTablePanel matchesPanel;
+    private RankingPanel rankingPanel;
+
 
     public StagePanel(Stage stage) {
         this.stage = stage;
 
-        add(matchesPanelHolder);
-
-        if (stage.getState().isAbove(LevelState.notReady)) {
-            matchesPanelHolder.add(new MatchesTablePanel(stage));
-        } else {
-            matchesPanelHolder.add(new LevelEmptyPanel(stage));
-        }
-
         stage.addStateHandler(new UpdateHandler<LevelState>() {
             @Override
             public void onUpdate(UpdateEvent<LevelState> event) {
-                handleStateChange(event);
+                updatePanels(event.getNewValue());
             }
         });
 
+        updatePanels(stage.getState());
+    }
 
-        if (stage.isGroupStage()) {
-            stage.addStateHandler(new UpdateHandler<LevelState>() {
-                @Override
-                public void onUpdate(UpdateEvent<LevelState> event) {
-                    getRankingPanel().setVisible(event.getNewValue().isBeyondInProgress());
+    private void updatePanels(LevelState state) {
+        removeFromParent(layoutMatchesPanel);
+
+        if(state.isNotReady()){
+            removeFromParent(matchesPanel);
+            matchesPanel = null;
+
+            removeFromParent(rankingPanel);
+            rankingPanel = null;
+
+            layoutMatchesPanel = new LayoutMatchesButtonPanel(stage);
+            add(layoutMatchesPanel);
+        }
+        else {
+            if(matchesPanel == null){
+                matchesPanel = new MatchesTablePanel(stage);
+                add(matchesPanel);
+            }
+
+            if(state.isAbove(LevelState.inProgress)){
+                if(rankingPanel == null){
+                    rankingPanel = createRankingPanel();
+                    add(rankingPanel);
                 }
-            });
-            add(getRankingPanel());
+            }
+            else{
+                if(rankingPanel != null){
+                    rankingPanel.removeFromParent();
+                    rankingPanel = null;
+                }
+            }
+
+
         }
+
+
+
+
+        //new MatchesTablePanel(stage);
+
+
+
     }
 
-    private void handleStateChange(UpdateEvent<LevelState> event) {
-        //StateCrossing crossing = event.crosses(LevelState.ready);
-
-        if (event.getOldValue().isNotReady()) {
-            matchesPanelHolder.clear();
-            matchesPanelHolder.add(new MatchesTablePanel(stage));
-        } else if (event.getNewValue().isNotReady()) {
-            matchesPanelHolder.clear();
-            matchesPanelHolder.add(new LevelEmptyPanel(stage));
-        }
+    private RankingPanel createRankingPanel() {
+        return stage instanceof GroupStage ? new GroupStageRankingPanel((GroupStage) stage) : new KnockoutStageRankingPanel((KnockoutStage) stage);
     }
 
-    public GroupStageRankingPanel getRankingPanel() {
-        if (rankingPanel == null) {
-            rankingPanel = new GroupStageRankingPanel((GroupStage) stage);
+    private void removeFromParent(Widget w) {
+        if(w != null){
+            w.removeFromParent();
         }
-        return rankingPanel;
     }
 
 

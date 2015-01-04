@@ -69,6 +69,7 @@ public class ScoresPageController extends PageController<ScoresPage> {
     private void show(Stage stage) {
         if(stage == null){
             getPage().showNothing();
+            showingStage = null;
         }
         else if(!stage.equals(showingStage)){
             showingStage = stage;
